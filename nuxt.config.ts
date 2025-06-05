@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   devtools: { enabled: false }, // Disable in production
   css: ["vuetify/lib/styles/main.sass", "@mdi/font/css/materialdesignicons.min.css"],
   build: {
-    transpile: ["vuetify", "firebase"],
+    transpile: ["vuetify", "firebase", "tslib"],
   },
   vite: {
     define: {
