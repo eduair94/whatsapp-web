@@ -209,6 +209,7 @@ const phoneApi = usePhoneApi({
 const loading = computed(() => localLoading.value || phoneApi.loading.value);
 
 const phoneValid = computed(() => {
+  if (!phoneCode.value || !phoneNumber.value) return false;
   const phoneNumberFull = phoneCode.value.code + phoneNumber.value.trim();
   const phone = parsePhoneNumber("+" + phoneNumberFull);
   if (!phone) return false;
