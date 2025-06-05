@@ -132,6 +132,8 @@
   "auth.confirmPassword": "पासवर्ड पुष्टि करें",
   "auth.signIn": "साइन इन",
   "auth.signUp": "साइन अप",
+  "auth.signInWithGoogle": "गूगल से साइन इन करें",
+  "auth.orDivider": "या",
   "auth.forgotPassword": "पासवर्ड भूल गए?",
   "auth.resetPassword": "पासवर्ड रीसेट करें",
   "auth.resetPassword.title": "अपना पासवर्ड रीसेट करें",

@@ -8,6 +8,8 @@
   "nav.api": "API",
   "nav.getAccess": "รับสิทธิ์เข้าถึง API",
   "nav.home": "หน้าหลัก",
+  "nav.tools": "เครื่องมือ",
+  "nav.checkNumber": "ตรวจสอบหมายเลข",
   "nav.pricingFull": "ราคา - $99/เดือน",
   "nav.pricingSubtitle": "รวม 500K คำขอ",
   "lookup.random": "หมายเลขสุ่ม",

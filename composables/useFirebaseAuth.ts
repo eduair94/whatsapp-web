@@ -5,7 +5,7 @@ const user = ref<User | null>(null);
 const loading = ref(true);
 const error = ref<string | null>(null);
 let authInitialized = false;
-const isSSR = typeof window === 'undefined';
+const isSSR = typeof window === "undefined";
 
 export const useFirebaseAuth = () => {
   const { $firebase } = useNuxtApp();
