@@ -239,7 +239,9 @@ export default defineNuxtConfig({
     experimental: {
       wasm: true,
     },
-  }, // Route rules for optimal caching and security
+  },
+
+  // Route rules for optimal caching and security
   routeRules: {
     "/": {
       prerender: true,
@@ -254,9 +256,21 @@ export default defineNuxtConfig({
       ssr: false, // Disable SSR for verification pages that use client-side only features
       headers: { "cache-control": "no-cache" },
     },
+    "/api/phone/limits": {
+      headers: {
+        "cache-control": "no-cache, no-store, must-revalidate, max-age=0",
+        pragma: "no-cache",
+        expires: "0",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "DENY",
+      },
+      cors: true,
+    },
     "/api/**": {
       headers: {
-        "cache-control": "max-age=300",
+        "cache-control": "no-cache, no-store, must-revalidate, max-age=0",
+        pragma: "no-cache",
+        expires: "0",
         "X-Content-Type-Options": "nosniff",
         "X-Frame-Options": "DENY",
       },

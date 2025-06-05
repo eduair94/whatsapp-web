@@ -3,6 +3,13 @@ import { IpRateLimiterService } from "../../services/ipRateLimiterService";
 import { authenticateUser } from "../../utils/auth-middleware";
 
 export default defineEventHandler(async (event) => {
+  // Set cache control headers to prevent caching
+  setResponseHeaders(event, {
+    'Cache-Control': 'no-cache, no-store, must-revalidate, max-age=0',
+    'Pragma': 'no-cache',
+    'Expires': '0'
+  });
+
   try {
     // Get the client's IP address
     const ip = event.node.req.headers["x-forwarded-for"]?.toString().split(",")[0] || event.node.req.socket.remoteAddress || "unknown";
