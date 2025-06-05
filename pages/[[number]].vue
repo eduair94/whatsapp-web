@@ -238,7 +238,11 @@ onMounted(async () => {
     };
     const phoneCodeL = localStorage.getItem("phoneCode");
     if (phoneCodeL) {
-      phoneCode.value = phoneCodesWithCountry.value.find((el) => el.code === JSON.parse(phoneCodeL).code) || defaultVal;
+      try {
+        phoneCode.value = phoneCodesWithCountry.value.find((el) => el.code === JSON.parse(phoneCodeL).code) || defaultVal;
+      } catch (error) {
+        phoneCode.value = defaultVal;
+      }
     } else {
       phoneCode.value = defaultVal;
     }
@@ -323,6 +327,7 @@ watch(
 );
 
 watch(phoneCode, (val) => {
+  if (!val) return;
   if (import.meta.client) localStorage.setItem("phoneCode", JSON.stringify(val));
 });
 
