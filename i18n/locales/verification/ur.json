@@ -1,0 +1,14 @@
+{
+  "verification.title": "تصدیق کا ٹیسٹ",
+  "verification.inputLabel": "فون نمبر",
+  "verification.button": "تصدیق کریں / اسٹیٹس دیکھیں",
+  "verification.verifyLink": "اپنا نمبر تصدیق کریں",
+  "verification.reset": "تصدیق ری سیٹ کریں",
+  "verification.statusTitle": "موجودہ حیثیت",
+  "verification.responseTitle": "تصدیق کا جواب",
+  "verification.statusResponseTitle": "اسٹیٹس کا جواب",
+  "verification.infoMessage": "درست فون نمبر درج کرنے پر بٹن فعال ہو جائے گا۔",
+  "verification.status.unknown": "نامعلوم",
+  "meta.verification.title": "تصدیق کا ٹیسٹ | WhatsApp پروفائل API",
+  "meta.verification.description": "درست فون نمبر درج کرنے پر بٹن فعال ہو جائے گا۔ تصدیق کا ٹیسٹ - WhatsApp پروفائل API."
+}

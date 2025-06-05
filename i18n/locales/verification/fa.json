@@ -1,0 +1,14 @@
+{
+  "verification.title": "آزمون تأیید",
+  "verification.inputLabel": "شماره تلفن",
+  "verification.button": "تأیید / بررسی وضعیت",
+  "verification.verifyLink": "شماره خود را تأیید کنید",
+  "verification.reset": "بازنشانی تأیید",
+  "verification.statusTitle": "وضعیت فعلی",
+  "verification.responseTitle": "پاسخ تأیید",
+  "verification.statusResponseTitle": "پاسخ وضعیت",
+  "verification.infoMessage": "دکمه زمانی فعال می‌شود که شماره تلفن صحیح وارد کنید.",
+  "verification.status.unknown": "نامشخص",
+  "meta.verification.title": "آزمون تأیید | API پروفایل واتساپ",
+  "meta.verification.description": "دکمه زمانی فعال می‌شود که شماره تلفن صحیح وارد کنید. آزمون تأیید - API پروفایل واتساپ."
+}

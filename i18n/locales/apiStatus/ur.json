@@ -1,0 +1,16 @@
+{
+  "status.currentStatus": "موجودہ حیثیت",
+  "status.online": "آن لائن",
+  "status.offline": "آف لائن",
+  "status.isWorking": "کیا کام کر رہا ہے؟",
+  "status.yes": "ہاں",
+  "status.no": "نہیں",
+  "status.lastChecked": "آخری چیک",
+  "status.requestsPerMinute": "درخواستیں فی منٹ",
+  "status.success": "کامیابی",
+  "status.error": "خرابی",
+  "status.checking": "API کی حیثیت چیک کی جا رہی ہے...",
+  "status.reload": "حیثیت دوبارہ لوڈ کریں",
+  "status.title": "API حیثیت - WhatsApp پروفائل API",
+  "status.desc": "WhatsApp پروفائل API کی موجودہ حیثیت اور اپ ٹائم چیک کریں۔"
+}

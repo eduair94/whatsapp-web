@@ -1,0 +1,14 @@
+{
+  "verification.title": "စစ်ဆေးမှု စမ်းသပ်ခြင်း",
+  "verification.inputLabel": "ဖုန်းနံပါတ်",
+  "verification.button": "စစ်ဆေး / အခြေအနေစစ်ဆေးရန်",
+  "verification.verifyLink": "သင့်နံပါတ်ကို စစ်ဆေးပါ",
+  "verification.reset": "စစ်ဆေးမှု ပြန်လည်သတ်မှတ်ရန်",
+  "verification.statusTitle": "လက်ရှိအခြေအနေ",
+  "verification.responseTitle": "စစ်ဆေးမှု အဖြေ",
+  "verification.statusResponseTitle": "အခြေအနေ အဖြေ",
+  "verification.infoMessage": "မှန်ကန်သော ဖုန်းနံပါတ် ထည့်သွင်းပါက ခလုတ်ကို အသုံးပြုနိုင်ပါသည်။",
+  "verification.status.unknown": "မသိရ",
+  "meta.verification.title": "စစ်ဆေးမှု စမ်းသပ်ခြင်း | WhatsApp ပရိုဖိုင် API",
+  "meta.verification.description": "မှန်ကန်သော ဖုန်းနံပါတ် ထည့်သွင်းပါက ခလုတ်ကို အသုံးပြုနိုင်ပါသည်။ စစ်ဆေးမှု စမ်းသပ်ခြင်း - WhatsApp ပရိုဖိုင် API."
+}

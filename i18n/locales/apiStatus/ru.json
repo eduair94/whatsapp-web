@@ -1,0 +1,16 @@
+{
+  "status.currentStatus": "Текущий статус",
+  "status.online": "Онлайн",
+  "status.offline": "Оффлайн",
+  "status.isWorking": "Работает?",
+  "status.yes": "Да",
+  "status.no": "Нет",
+  "status.lastChecked": "Последняя проверка",
+  "status.requestsPerMinute": "Запросов в минуту",
+  "status.success": "Успех",
+  "status.error": "Ошибка",
+  "status.checking": "Проверка статуса API...",
+  "status.reload": "Обновить статус",
+  "status.title": "Статус API - Профиль WhatsApp API",
+  "status.desc": "Проверьте текущий статус и аптайм Профиль WhatsApp API."
+}

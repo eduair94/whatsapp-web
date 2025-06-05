@@ -1,0 +1,16 @@
+{
+  "status.currentStatus": "وضعیت فعلی",
+  "status.online": "آنلاین",
+  "status.offline": "آفلاین",
+  "status.isWorking": "آیا کار می‌کند؟",
+  "status.yes": "بله",
+  "status.no": "خیر",
+  "status.lastChecked": "آخرین بررسی",
+  "status.requestsPerMinute": "درخواست در دقیقه",
+  "status.success": "موفقیت",
+  "status.error": "خطا",
+  "status.checking": "در حال بررسی وضعیت API...",
+  "status.reload": "بارگذاری مجدد وضعیت",
+  "status.title": "وضعیت API - API پروفایل واتساپ",
+  "status.desc": "وضعیت فعلی و زمان کارکرد API پروفایل واتساپ را بررسی کنید."
+}

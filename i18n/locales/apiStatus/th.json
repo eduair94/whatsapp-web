@@ -1,0 +1,16 @@
+{
+  "status.currentStatus": "สถานะปัจจุบัน",
+  "status.online": "ออนไลน์",
+  "status.offline": "ออฟไลน์",
+  "status.isWorking": "ใช้งานได้หรือไม่",
+  "status.yes": "ใช่",
+  "status.no": "ไม่ใช่",
+  "status.lastChecked": "ตรวจสอบล่าสุด",
+  "status.requestsPerMinute": "คำขอต่อนาที",
+  "status.success": "สำเร็จ",
+  "status.error": "ข้อผิดพลาด",
+  "status.checking": "กำลังตรวจสอบสถานะ API...",
+  "status.reload": "โหลดสถานะใหม่",
+  "status.title": "สถานะ API - WhatsApp Profile API",
+  "status.desc": "ตรวจสอบสถานะปัจจุบันและเวลาออนไลน์ของ WhatsApp Profile API"
+}

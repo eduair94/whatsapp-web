@@ -1,0 +1,14 @@
+{
+  "verification.title": "Тест Верификации",
+  "verification.inputLabel": "Номер телефона",
+  "verification.button": "Проверить / Статус",
+  "verification.verifyLink": "Проверьте свой номер",
+  "verification.reset": "Сбросить Верификацию",
+  "verification.statusTitle": "Текущий статус",
+  "verification.responseTitle": "Ответ на верификацию",
+  "verification.statusResponseTitle": "Ответ статуса",
+  "verification.infoMessage": "Кнопка будет активна после ввода корректного номера телефона.",
+  "verification.status.unknown": "Неизвестно",
+  "meta.verification.title": "Тест Верификации | Профиль WhatsApp API",
+  "meta.verification.description": "Кнопка будет активна после ввода корректного номера телефона. Тест Верификации - Профиль WhatsApp API."
+}

@@ -1,0 +1,27 @@
+{
+  "name": "WhatsApp Profile API",
+  "short_name": "WP API",
+  "description": "Professional WhatsApp Profile API service for developers",
+  "theme_color": "#25D366",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ],
+  "categories": ["developer", "utilities", "business"],
+  "lang": "en",
+  "dir": "ltr"
+}

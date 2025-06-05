@@ -1,0 +1,16 @@
+{
+  "status.currentStatus": "Status atual",
+  "status.online": "Online",
+  "status.offline": "Offline",
+  "status.isWorking": "Está funcionando",
+  "status.yes": "Sim",
+  "status.no": "Não",
+  "status.lastChecked": "Última verificação",
+  "status.requestsPerMinute": "Requisições por minuto",
+  "status.success": "Sucesso",
+  "status.error": "Erro",
+  "status.checking": "Verificando status da API...",
+  "status.reload": "Recarregar status",
+  "status.title": "Status da API - API de Perfil do WhatsApp",
+  "status.desc": "Veja o status atual e o tempo de atividade da API de Perfil do WhatsApp."
+}

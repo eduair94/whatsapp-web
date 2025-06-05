@@ -1,0 +1,14 @@
+{
+  "verification.title": "सत्यापन परीक्षण",
+  "verification.inputLabel": "फ़ोन नंबर",
+  "verification.button": "सत्यापित करें / स्थिति जांचें",
+  "verification.verifyLink": "अपना नंबर सत्यापित करें",
+  "verification.reset": "सत्यापन रीसेट करें",
+  "verification.statusTitle": "वर्तमान स्थिति",
+  "verification.responseTitle": "सत्यापन प्रतिक्रिया",
+  "verification.statusResponseTitle": "स्थिति प्रतिक्रिया",
+  "verification.infoMessage": "सही फ़ोन नंबर दर्ज करने पर बटन सक्रिय हो जाएगा।",
+  "verification.status.unknown": "अज्ञात",
+  "meta.verification.title": "सत्यापन परीक्षण | WhatsApp प्रोफ़ाइल API",
+  "meta.verification.description": "सही फ़ोन नंबर दर्ज करने पर बटन सक्रिय हो जाएगा। सत्यापन परीक्षण - WhatsApp प्रोफ़ाइल API."
+}

@@ -1,0 +1,14 @@
+{
+  "verification.title": "ทดสอบการยืนยัน",
+  "verification.inputLabel": "หมายเลขโทรศัพท์",
+  "verification.button": "ยืนยัน / ตรวจสอบสถานะ",
+  "verification.verifyLink": "ยืนยันหมายเลขของคุณ",
+  "verification.reset": "รีเซ็ตการยืนยัน",
+  "verification.statusTitle": "สถานะปัจจุบัน",
+  "verification.responseTitle": "ผลการยืนยัน",
+  "verification.statusResponseTitle": "ผลสถานะ",
+  "verification.infoMessage": "ปุ่มจะใช้งานได้เมื่อคุณกรอกหมายเลขโทรศัพท์ที่ถูกต้อง",
+  "verification.status.unknown": "ไม่ทราบ",
+  "meta.verification.title": "ทดสอบการยืนยัน | WhatsApp Profile API",
+  "meta.verification.description": "ปุ่มจะใช้งานได้เมื่อคุณกรอกหมายเลขโทรศัพท์ที่ถูกต้อง ทดสอบการยืนยัน - WhatsApp Profile API."
+}

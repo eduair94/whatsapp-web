@@ -1,0 +1,14 @@
+{
+  "verification.title": "Verifikationstest",
+  "verification.inputLabel": "Telefonnummer",
+  "verification.button": "Verifizieren / Status prüfen",
+  "verification.verifyLink": "Nummer verifizieren",
+  "verification.reset": "Verifikation zurücksetzen",
+  "verification.statusTitle": "Aktueller Status",
+  "verification.responseTitle": "Verifikationsantwort",
+  "verification.statusResponseTitle": "Statusantwort",
+  "verification.infoMessage": "Die Schaltfläche wird aktiviert, sobald Sie eine korrekte Telefonnummer eingeben.",
+  "verification.status.unknown": "Unbekannt",
+  "meta.verification.title": "Verifikationstest | WhatsApp Profil API",
+  "meta.verification.description": "Die Schaltfläche wird aktiviert, sobald Sie eine korrekte Telefonnummer eingeben. Verifikationstest - WhatsApp Profil API."
+}

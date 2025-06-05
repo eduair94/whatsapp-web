@@ -1,0 +1,16 @@
+{
+  "status.currentStatus": "वर्तमान स्थिति",
+  "status.online": "ऑनलाइन",
+  "status.offline": "ऑफलाइन",
+  "status.isWorking": "क्या काम कर रहा है?",
+  "status.yes": "हाँ",
+  "status.no": "नहीं",
+  "status.lastChecked": "अंतिम जाँच",
+  "status.requestsPerMinute": "प्रति मिनट अनुरोध",
+  "status.success": "सफलता",
+  "status.error": "त्रुटि",
+  "status.checking": "API स्थिति की जाँच हो रही है...",
+  "status.reload": "स्थिति पुनः लोड करें",
+  "status.title": "API स्थिति - WhatsApp प्रोफ़ाइल API",
+  "status.desc": "WhatsApp प्रोफ़ाइल API की वर्तमान स्थिति और अपटाइम देखें।"
+}

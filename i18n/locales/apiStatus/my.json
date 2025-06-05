@@ -1,0 +1,16 @@
+{
+  "status.currentStatus": "လက်ရှိအခြေအနေ",
+  "status.online": "အွန်လိုင်း",
+  "status.offline": "အော့ဖ်လိုင်း",
+  "status.isWorking": "အလုပ်လုပ်နေပါသလား",
+  "status.yes": "ဟုတ်ကဲ့",
+  "status.no": "မဟုတ်ပါ",
+  "status.lastChecked": "နောက်ဆုံးစစ်ဆေးချိန်",
+  "status.requestsPerMinute": "တစ်မိနစ်လျှင်တောင်းဆိုမှုများ",
+  "status.success": "အောင်မြင်သည်",
+  "status.error": "အမှား",
+  "status.checking": "API အခြေအနေ စစ်ဆေးနေသည်...",
+  "status.reload": "အခြေအနေ ပြန်လည်ဖတ်ရှုမည်",
+  "status.title": "API အခြေအနေ - WhatsApp ပရိုဖိုင် API",
+  "status.desc": "WhatsApp ပရိုဖိုင် API ၏ လက်ရှိအခြေအနေနှင့် အလုပ်လုပ်ချိန်ကို စစ်ဆေးပါ။"
+}

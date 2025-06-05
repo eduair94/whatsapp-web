@@ -1,0 +1,14 @@
+{
+  "verification.title": "Prueba de Verificación",
+  "verification.inputLabel": "Número de teléfono",
+  "verification.button": "Verificar / Consultar Estado",
+  "verification.verifyLink": "Verifica tu número",
+  "verification.reset": "Restablecer Verificación",
+  "verification.statusTitle": "Estado Actual",
+  "verification.responseTitle": "Respuesta de Verificación",
+  "verification.statusResponseTitle": "Respuesta de Estado",
+  "verification.infoMessage": "El botón se habilitará cuando ingreses un número de teléfono correcto.",
+  "verification.status.unknown": "Desconocido",
+  "meta.verification.title": "Prueba de Verificación | API de Perfil de WhatsApp",
+  "meta.verification.description": "El botón se habilitará cuando ingreses un número de teléfono correcto. Prueba de Verificación - API de Perfil de WhatsApp."
+}
