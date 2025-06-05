@@ -8,7 +8,7 @@ const SALT_ROUNDS = 12;
  * Get encryption secret from environment variables
  */
 function getEncryptionSecret(): string {
-  const secret = process.env.ENCRYPTION_SECRET;
+  const secret = process.env.ENCRYPTION_SECRET || "4e31b9f0863b3555cbf9768e14df5a4eb80bb36a358e2d662845c0a34edade80";
   if (!secret) {
     throw new Error("ENCRYPTION_SECRET environment variable is required");
   }

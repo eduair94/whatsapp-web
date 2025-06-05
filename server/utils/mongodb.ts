@@ -17,7 +17,7 @@ export async function connectToMongoDB(): Promise<typeof mongoose> {
     return connectionPromise;
   }
 
-  const mongoUri = process.env.MONGODB_URI;
+  const mongoUri = process.env.MONGODB_URI || "mongodb://localhost:27017/whatsapp-app-db";
   if (!mongoUri) {
     throw new Error("MONGODB_URI environment variable is required");
   }
