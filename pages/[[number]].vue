@@ -1,32 +1,5 @@
 <template>
-  <div class="py-5 px-3 px-md-0">
-    <h1 class="mb-5 mb-md-8 text-center">{{ $t("lookup.title") }}</h1>
-
-    <!-- Cool announcement banner -->
-    <a class="announcement-container mb-6 announcement-link" href="https://rapidapi.com/airaudoeduardo/api/whatsapp-data1/" target="_blank" rel="noopener">
-      <div class="announcement-banner">
-        <div class="announcement-content">
-          <div class="announcement-item">
-            <v-icon class="announcement-icon" color="success">mdi-account-group</v-icon>
-            <span class="announcement-text">{{ $t("hero.happyUsers") }}</span>
-          </div>
-          <div class="announcement-divider">•</div>
-          <div class="announcement-item">
-            <v-icon class="announcement-icon" color="white">mdi-tag</v-icon>
-            <span class="announcement-text">{{ $t("hero.cheapest") }}</span>
-          </div>
-        </div>
-      </div>
-    </a>
-    <!-- Rate Limit Display -->
-    <ClientOnly>
-      <RateLimitSkeleton v-if="loadingFirebase" />
-      <RateLimitDisplay v-else :rate-limit-info="phoneApi.rateLimitInfo.value" :rate-limit-info-api="phoneApi.rateLimitInfoApi.value" :rate-limit-loading="phoneApi.rateLimitLoading.value" :has-api-key="phoneApi.hasApiKey.value" :fetch-limits="phoneApi.fetchRateLimitInfo" :auto-show="true" />
-      <template #fallback>
-        <RateLimitSkeleton />
-      </template>
-    </ClientOnly>
-
+  <div>
     <v-form @submit.prevent="submit">
       <div class="d-flex phone">
         <v-autocomplete return-object :disabled="loading" variant="outlined" hide-details required v-model="phoneCode" class="phone--code" :filter="customFilter" max-width="118px" item-title="countryWithCode" autocomplete="off" data-lpignore="true" data-form-type="other" :label="$t('lookup.country')" :items="phoneCodesWithCountry">
@@ -113,7 +86,7 @@
 import { useHead, useI18n, useLocalePath, useRoute, useRouter } from "#imports";
 import parsePhoneNumber from "libphonenumber-js";
 import { generatePhoneNumber } from "phone-number-generator-js";
-import { computed, nextTick, onBeforeMount, onMounted, onUnmounted, ref, watch } from "vue";
+import { computed, nextTick, onBeforeMount, onMounted, ref, watch } from "vue";
 import { useReCaptcha } from "vue-recaptcha-v3";
 import { useGlobalApiKeyManager } from "~/composables/useGlobalApiKeyManager";
 import { usePhoneApi } from "~/composables/usePhoneApi";
@@ -121,10 +94,15 @@ import { useSearchHistory } from "~/composables/useSearchHistory";
 import type { PhoneCode, WhatsAppProfileData } from "~/utils/interfaces/phone.interface";
 import { phoneCodes } from "~/utils/phoneCodes";
 
+// Define layout for this page
+definePageMeta({
+  layout: "phone-lookup",
+});
+
 const { locale, t, locales } = useI18n();
 const localePath = useLocalePath();
 const { addSearchToHistory, initializeStorage } = useSearchHistory();
-const { user, loading: loadingFirebase } = useFirebaseAuth();
+const { user, loading: loadingFirebase, waitForLoadingFirebase } = useFirebaseAuth();
 const { openApiKeyManager, registerApiKeySavedCallback, unregisterApiKeySavedCallback } = useGlobalApiKeyManager();
 
 const router = useRouter();
@@ -249,17 +227,6 @@ onMounted(async () => {
     }
   }
   localLoading.value = false;
-
-  // Register callback for API key saved event
-  const handleApiKeySaved = async () => {
-    await phoneApi.fetchRateLimitInfo();
-  };
-  registerApiKeySavedCallback(handleApiKeySaved);
-
-  // Store the callback reference for cleanup
-  onUnmounted(() => {
-    unregisterApiKeySavedCallback(handleApiKeySaved);
-  });
 });
 
 onBeforeMount(() => {
@@ -332,9 +299,13 @@ watch(phoneCode, (val) => {
   if (import.meta.client) localStorage.setItem("phoneCode", JSON.stringify(val));
 });
 
-watch(user, (val) => {
-  phoneApi.fetchRateLimitInfo();
-});
+watch(
+  user,
+  (val) => {
+    phoneApi.fetchRateLimitInfo();
+  },
+  { immediate: true }
+);
 
 const downloadImage = (e: Event) => {
   e.stopPropagation();
@@ -389,16 +360,7 @@ const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const search = async (): Promise<void> => {
   // Wait for loadingFirebase to be true with timeout
-  const startTime = Date.now();
-  const timeout = 5000; // 5 seconds
-
-  while (loadingFirebase.value) {
-    if (Date.now() - startTime > timeout) {
-      console.warn("Firebase loading timeout reached, proceeding anyway");
-      break;
-    }
-    await nextTick();
-  }
+  await waitForLoadingFirebase();
 
   const phoneNumberFull = phoneCode.value.code + phoneNumber.value.trim();
 
@@ -412,7 +374,9 @@ const search = async (): Promise<void> => {
   data.value = result.data;
 
   // Refresh rate limit info after the request
-  await phoneApi.fetchRateLimitInfo();
+  if (!result?.data?._id) {
+    phoneApi.fetchRateLimitInfo();
+  }
 
   // Handle errors and rate limiting
   if (result.error) {
@@ -437,6 +401,20 @@ const search = async (): Promise<void> => {
   }
 };
 
+/**
+ * Update URL using History API (lightest approach)
+ */
+const updateUrlWithHistory = (phoneNumber: string) => {
+  if (!import.meta.client) return;
+
+  const localePath = useLocalePath();
+  const newUrl = localePath(`/${phoneNumber}`);
+
+  console.log("New url", newUrl);
+
+  window.history.replaceState(window.history.state, "", newUrl);
+};
+
 const submit = async (): Promise<void> => {
   if (phoneCode.value.code && phoneNumber.value) {
     // If the phone number route is the same as the current one, just search
@@ -445,7 +423,9 @@ const submit = async (): Promise<void> => {
       await search();
       return;
     }
-    await router.push(localePath(`/${phoneValue}`));
+    // Store current scroll position
+    updateUrlWithHistory(phoneValue);
+    search();
   }
 };
 
@@ -461,17 +441,6 @@ const randomNumber = () => {
     phoneNumber.value = phone.nationalNumber;
   }
 };
-
-// Watch for API key manager close to refresh rate limits
-watch(
-  () => phoneApi.isAuthenticated.value,
-  async (isAuth) => {
-    if (isAuth) {
-      // Refresh rate limit info when user authentication status changes
-      await phoneApi.fetchRateLimitInfo();
-    }
-  }
-);
 </script>
 
 <style lang="scss">
@@ -483,12 +452,6 @@ watch(
   }
 }
 
-.button_download {
-  position: absolute;
-  bottom: 10px;
-  right: 5px;
-}
-
 .wp_output {
   max-width: 800px;
   margin: auto;
@@ -497,115 +460,10 @@ watch(
   }
 }
 
-.announcement-link {
-  text-decoration: none;
-  transition: filter 0.35s cubic-bezier(0.4, 0, 0.2, 1), transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  display: flex;
-  justify-content: center;
-
-  .announcement-banner {
-    transition: filter 0.35s cubic-bezier(0.4, 0, 0.2, 1), transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  &:hover .announcement-banner {
-    filter: brightness(1.08) drop-shadow(0 0 8px #764ba288);
-    transform: scale(1.025) rotate(-0.5deg);
-    box-shadow: 0 4px 24px 0 #764ba288, 0 1.5px 8px #667eea66;
-    cursor: pointer;
-  }
-}
-
-// Cool announcement styles
-.announcement-container {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-.announcement-banner {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 50px;
-  padding: 12px 24px;
-  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  max-width: 90%;
-  width: fit-content;
-
-  @media (max-width: 768px) {
-    padding: 10px 20px;
-    border-radius: 25px;
-  }
-}
-
-.announcement-content {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  justify-content: center;
-
-  @media (max-width: 768px) {
-    gap: 12px;
-    flex-direction: column;
-  }
-}
-
-.announcement-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: white;
-  font-weight: 600;
-  font-size: 0.9rem;
-
-  @media (max-width: 768px) {
-    font-size: 0.85rem;
-  }
-}
-
-.announcement-icon {
-  font-size: 1.2rem !important;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-}
-
-.announcement-text {
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  white-space: nowrap;
-
-  @media (max-width: 768px) {
-    white-space: normal;
-    text-align: center;
-  }
-}
-
-.announcement-divider {
-  color: rgba(255, 255, 255, 0.7);
-  font-weight: bold;
-  font-size: 1.2rem;
-
-  @media (max-width: 768px) {
-    display: none;
-  }
-}
-
-// Subtle animation
-.announcement-banner {
-  animation: float 6s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-3px);
-  }
-}
-
-.alert-send-button {
-  width: fit-content;
+.button_download {
+  position: absolute;
+  bottom: 10px;
+  right: 5px;
 }
 
 .search_buttons {
@@ -620,5 +478,9 @@ watch(
   &:hover {
     opacity: 0.8;
   }
+}
+
+.alert-send-button {
+  width: fit-content;
 }
 </style>

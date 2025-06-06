@@ -5,9 +5,9 @@ import { authenticateUser } from "../../utils/auth-middleware";
 export default defineEventHandler(async (event) => {
   // Set cache control headers to prevent caching
   setResponseHeaders(event, {
-    'Cache-Control': 'no-cache, no-store, must-revalidate, max-age=0',
-    'Pragma': 'no-cache',
-    'Expires': '0'
+    "Cache-Control": "no-cache, no-store, must-revalidate, max-age=0",
+    Pragma: "no-cache",
+    Expires: "0",
   });
 
   try {

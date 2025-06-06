@@ -7,6 +7,7 @@ export interface WhatsAppProfileData {
   profilePic?: string;
   urlImage?: string;
   error?: string;
+  _id?: string;
 }
 
 export interface PhoneCode {

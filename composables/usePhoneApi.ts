@@ -289,14 +289,13 @@ export const usePhoneApi = (options: PhoneApiOptions = {}) => {
    * Fetch current rate limit information from the server
    */
   const fetchRateLimitInfo = async (): Promise<RateLimitResponse | null> => {
+    if (!import.meta.client) return null;
     rateLimitLoading.value = true;
 
     try {
       const { $api } = useNuxtApp();
-
-      // Get auth token if authentication is enabled and user is logged in
-      const authToken = await getAuthToken();
-
+      const { waitForLoadingFirebase } = useFirebaseAuth();
+      await waitForLoadingFirebase();
       // Build URL with auth token if available
       const url = "/api/phone/limits";
       const headers = await getAuthHeaders();

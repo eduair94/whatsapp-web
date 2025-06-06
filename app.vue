@@ -117,8 +117,8 @@
       <v-container fluid class="pa-0">
         <NuxtPage />
       </v-container>
-      <Footer></Footer>
     </NuxtLayout>
+    <Footer></Footer>
     <!-- API Key Manager Component -->
     <ApiKeyManager />
   </v-app>

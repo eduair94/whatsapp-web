@@ -25,6 +25,21 @@ export const useFirebaseAuth = () => {
     }
   };
 
+  const waitForLoading = async () => {
+    if (!import.meta.client) return;
+    const startTime = Date.now();
+    const timeout = 15000; // 5 seconds
+
+    while (loading.value) {
+      if (Date.now() - startTime > timeout) {
+        console.warn("Firebase loading timeout reached, proceeding anyway");
+        break;
+      }
+      await nextTick();
+    }
+    return;
+  };
+
   // Sign up with email and password
   const signUp = async (email: string, password: string, displayName?: string) => {
     try {
@@ -190,6 +205,7 @@ export const useFirebaseAuth = () => {
 
   return {
     user,
+    waitForLoadingFirebase: waitForLoading,
     loading: loading,
     error: error,
     signIn,
