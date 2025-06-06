@@ -404,7 +404,7 @@ const search = async (): Promise<void> => {
 /**
  * Update URL using History API (lightest approach)
  */
-const updateUrlWithHistory = (phoneNumber: string) => {
+const updateUrlWithHistory = async (phoneNumber: string) => {
   if (!import.meta.client) return;
 
   const localePath = useLocalePath();
@@ -412,9 +412,21 @@ const updateUrlWithHistory = (phoneNumber: string) => {
 
   console.log("New url", newUrl);
 
-  window.history.replaceState(window.history.state, "", newUrl);
-};
+  try {
+    // Method 1: Update Vue Router state first, then browser history
+    await router.replace({
+      path: newUrl,
+      query: route.query, // Preserve any query parameters
+    });
 
+    // Update browser history to ensure consistency
+    window.history.replaceState({ ...window.history.state, phoneNumber }, "", newUrl);
+  } catch (error) {
+    console.error("Failed to update route:", error);
+    // Fallback to just history API
+    window.history.replaceState(window.history.state, "", newUrl);
+  }
+};
 const submit = async (): Promise<void> => {
   if (phoneCode.value.code && phoneNumber.value) {
     // If the phone number route is the same as the current one, just search

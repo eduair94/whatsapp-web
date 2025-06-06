@@ -126,6 +126,8 @@ const loadCurrentApiKey = async () => {
         apiKey: response.apiKey!,
         linkedAt: response.lastSaved!,
       };
+      const { setApiKeyValue } = usePhoneApi();
+      setApiKeyValue(true);
     }
   } catch (err) {
     console.error("Error loading API key:", err);

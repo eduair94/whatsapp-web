@@ -91,6 +91,10 @@ export const usePhoneApi = (options: PhoneApiOptions = {}) => {
     }
   };
 
+  const setApiKeyValue = (value: boolean) => {
+    hasApiKey.value = value;
+  };
+
   /**
    * Check if we're rate limited (considering both IP and API key limits)
    */
@@ -363,6 +367,7 @@ export const usePhoneApi = (options: PhoneApiOptions = {}) => {
     rateLimitInfoApi,
     rateLimitLoading,
     hasApiKey,
+    setApiKeyValue,
 
     // Methods
     searchProfile,

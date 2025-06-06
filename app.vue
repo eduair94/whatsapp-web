@@ -106,7 +106,7 @@
           </v-btn>
         </template>
         <v-list>
-          <v-list-item v-for="locale in availableLocales" :key="locale.code" :to="switchLocalePath(locale.code)">
+          <v-list-item v-for="locale in availableLocales" :key="locale.code" @click.prevent="switchLocaleWithHistory(locale.code)" :to="switchLocalePath(locale.code)">
             <v-list-item-title>{{ locale.name }}</v-list-item-title>
           </v-list-item>
         </v-list>
@@ -131,13 +131,61 @@ import { useFirebaseAuth } from "~/composables/useFirebaseAuth";
 import { useGlobalApiKeyManager } from "~/composables/useGlobalApiKeyManager";
 
 const localePath = useLocalePath();
-const { locale, locales, t, loadLocaleMessages } = useI18n();
+const { locale, locales, t, setLocale } = useI18n();
 const switchLocalePath = useSwitchLocalePath();
 const { openApiKeyManager } = useGlobalApiKeyManager();
 
 const availableLocales = computed(() => {
   return locales.value.filter((i) => i.code !== locale.value);
 });
+
+/**
+ * Switch locale using History API with correct current path detection
+ */
+const switchLocaleWithHistory = async (newLocale: string) => {
+  if (!import.meta.client) return;
+
+  try {
+    // Get the actual current path from browser URL, not from Vue Router
+    const currentPath = window.location.pathname;
+    const currentLocale = locale.value;
+
+    console.log("Switching to locale:", newLocale, "Current path:", currentPath);
+
+    // Remove current locale from path and add new locale
+    let newPath = currentPath;
+
+    // If current path starts with locale prefix, remove it
+    if (currentPath.startsWith(`/${currentLocale}/`)) {
+      newPath = currentPath.substring(`/${currentLocale}`.length);
+    } else if (currentPath === `/${currentLocale}`) {
+      newPath = "/";
+    }
+
+    // Add new locale prefix
+    const newUrl = `/${newLocale}${newPath === "/" ? "" : newPath}`;
+
+    console.log("Current path:", currentPath, "New path:", newPath, "New URL:", newUrl);
+
+    // Update browser URL first
+    window.history.replaceState({ ...window.history.state, locale: newLocale }, "", newUrl);
+
+    // Directly update the locale value (prevents navigation)
+    locale.value = newLocale as any;
+
+    // Update document language attribute
+    document.documentElement.lang = newLocale;
+
+    // Update any locale-dependent storage
+    if (import.meta.client) {
+      localStorage.setItem("nuxt-i18n-locale", newLocale);
+    }
+  } catch (error) {
+    console.error("Failed to switch locale:", error);
+    // Fallback to default navigation
+    await navigateTo(switchLocalePath(newLocale as any));
+  }
+};
 
 // Reactive data for mobile drawer
 const drawer = ref(false);
