@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema } from "mongoose";
+import { Document, Schema } from "mongoose";
 
 export interface IIpRequest extends Document {
   ip: string;
@@ -41,4 +41,4 @@ const IpRequestSchema = new Schema<IIpRequest>(
 // Create TTL index to automatically remove old documents after 2 hours
 IpRequestSchema.index({ lastRequest: 1 }, { expireAfterSeconds: 7200 });
 
-export const IpRequest = mongoose.model<IIpRequest>("IpRequest", IpRequestSchema);
+export { IpRequestSchema };

@@ -256,6 +256,15 @@ export default defineNuxtConfig({
       ssr: false, // Disable SSR for verification pages that use client-side only features
       headers: { "cache-control": "no-cache" },
     },
+    "/api/search": {
+      headers: {
+        "cache-control": "max-age=60, s-maxage=60", // 1 minute cache
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "DENY",
+        Vary: "Accept-Encoding, Accept-Language", // Cache varies by query parameters
+      },
+      cors: true,
+    },
     "/api/phone/limits": {
       headers: {
         "cache-control": "no-cache, no-store, must-revalidate, max-age=0",

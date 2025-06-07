@@ -1,7 +1,8 @@
-import { IpRequest } from "../models/IpRequest";
+import mongoose from "mongoose";
+import { IIpRequest, IpRequestSchema } from "../models/IpRequest";
 import { connectToMongoDB } from "../utils/mongodb";
 
-const WINDOW = 60 * 60 * 1000; // 1 hour window
+let ipModels: any = {};
 
 export class IpRateLimiterService {
   /**
@@ -11,9 +12,17 @@ export class IpRateLimiterService {
    */
 
   public RATE_LIMIT = 20;
+  public WINDOW = 60 * 60 * 1000;
+  public IpRequest: mongoose.Model<IIpRequest>;
 
-  constructor(isAuth: boolean) {
+  constructor(isAuth: boolean, collection: string = "IpRequest") {
     this.RATE_LIMIT = isAuth ? 25 : 5;
+    if (ipModels[collection]) {
+      this.IpRequest = ipModels[collection];
+      return;
+    }
+    this.IpRequest = mongoose.model<IIpRequest>(collection, IpRequestSchema);
+    ipModels[collection] = this.IpRequest;
   }
 
   async checkRateLimit(ip: string): Promise<boolean> {
@@ -21,14 +30,14 @@ export class IpRateLimiterService {
       await connectToMongoDB();
 
       const now = new Date();
-      const windowStart = new Date(now.getTime() - WINDOW);
+      const windowStart = new Date(now.getTime() - this.WINDOW);
 
       // Try to find existing record for this IP
-      let ipRecord = await IpRequest.findOne({ ip });
+      let ipRecord = await this.IpRequest.findOne({ ip });
 
       if (!ipRecord) {
         // First request from this IP
-        ipRecord = new IpRequest({
+        ipRecord = new this.IpRequest({
           ip,
           count: 1,
           lastRequest: now,
@@ -73,21 +82,21 @@ export class IpRateLimiterService {
     try {
       await connectToMongoDB();
 
-      const ipRecord = await IpRequest.findOne({ ip });
+      const ipRecord = await this.IpRequest.findOne({ ip });
 
       if (!ipRecord) {
         return resp;
       }
 
       const now = new Date();
-      const windowStart = new Date(now.getTime() - WINDOW);
+      const windowStart = new Date(now.getTime() - this.WINDOW);
 
       // If record is outside current window, return 0
       if (ipRecord.windowStart < windowStart) {
         return resp;
       }
 
-      const restartsIn = Math.max(0, Math.ceil((ipRecord.windowStart.getTime() + WINDOW - now.getTime()) / 1000));
+      const restartsIn = Math.max(0, Math.ceil((ipRecord.windowStart.getTime() + this.WINDOW - now.getTime()) / 1000));
 
       return { count: ipRecord.count, max: this.RATE_LIMIT, restartsIn };
     } catch (error) {
@@ -107,14 +116,14 @@ export class IpRateLimiterService {
       await connectToMongoDB();
 
       const now = new Date();
-      const windowStart = new Date(now.getTime() - WINDOW);
+      const windowStart = new Date(now.getTime() - this.WINDOW);
 
       // Find existing record for this IP
-      let ipRecord = await IpRequest.findOne({ ip });
+      let ipRecord = await this.IpRequest.findOne({ ip });
 
       if (!ipRecord) {
         // First successful request from this IP
-        ipRecord = new IpRequest({
+        ipRecord = new this.IpRequest({
           ip,
           count: 1,
           lastRequest: now,
@@ -157,10 +166,10 @@ export class IpRateLimiterService {
       await connectToMongoDB();
 
       const now = new Date();
-      const windowStart = new Date(now.getTime() - WINDOW);
+      const windowStart = new Date(now.getTime() - this.WINDOW);
 
       // Try to find existing record for this IP
-      const ipRecord = await IpRequest.findOne({ ip });
+      const ipRecord = await this.IpRequest.findOne({ ip });
 
       if (!ipRecord) {
         // First request from this IP - allow it
@@ -193,9 +202,9 @@ export class IpRateLimiterService {
     try {
       await connectToMongoDB();
 
-      const cutoff = new Date(Date.now() - 2 * WINDOW); // Clean records older than 2 hours
+      const cutoff = new Date(Date.now() - 2 * this.WINDOW); // Clean records older than 2 hours
 
-      const result = await IpRequest.deleteMany({
+      const result = await this.IpRequest.deleteMany({
         lastRequest: { $lt: cutoff },
       });
     } catch (error) {

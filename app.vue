@@ -7,7 +7,8 @@
         <v-list-item prepend-icon="mdi-home" :title="$t('nav.checkNumber')" :to="localePath('/')" @click="drawer = false"></v-list-item>
         <v-list-item prepend-icon="mdi-history" :title="$t('nav.searchHistory')" :to="localePath('/history')" @click="drawer = false"></v-list-item>
         <v-list-item prepend-icon="mdi-api" :title="$t('nav.apiStatus')" :to="localePath('/api-status')" @click="drawer = false"></v-list-item>
-        <v-list-item prepend-icon="mdi-shield-check" :title="$t('nav.testVerification')" :to="localePath('/verification')" @click="drawer = false"></v-list-item>
+        <v-list-item prepend-icon="mdi-chart-line" :title="$t('nav.stats')" :to="localePath('/stats')" @click="drawer = false"></v-list-item> <v-list-item prepend-icon="mdi-shield-check" :title="$t('nav.testVerification')" :to="localePath('/verification')" @click="drawer = false"></v-list-item>
+        <v-list-item prepend-icon="mdi-database" :title="$t('nav.database')" :to="localePath('/database')" @click="drawer = false"></v-list-item>
         <v-list-item v-if="user" prepend-icon="mdi-key" :title="$t('nav.apiKeyManager')" @click="openApiKeyManager" @click.stop="drawer = false"></v-list-item>
 
         <v-list-item v-if="!user" prepend-icon="mdi-account" :title="$t('nav.auth')" :to="localePath('/auth')" @click="drawer = false"></v-list-item>
@@ -56,8 +57,14 @@
             <v-list-item :to="localePath('/api-status')" prepend-icon="mdi-api">
               <v-list-item-title>{{ $t("nav.apiStatus") }}</v-list-item-title>
             </v-list-item>
+            <v-list-item :to="localePath('/stats')" prepend-icon="mdi-chart-line">
+              <v-list-item-title>{{ $t("nav.stats") }}</v-list-item-title>
+            </v-list-item>
             <v-list-item :to="localePath('/verification')" prepend-icon="mdi-shield-check">
               <v-list-item-title>{{ $t("nav.testVerification") }}</v-list-item-title>
+            </v-list-item>
+            <v-list-item :to="localePath('/database')" prepend-icon="mdi-database">
+              <v-list-item-title>{{ $t("nav.database") }}</v-list-item-title>
             </v-list-item>
             <v-list-item v-if="user" @click="openApiKeyManager" prepend-icon="mdi-key">
               <v-list-item-title>{{ $t("nav.apiKeyManager") }}</v-list-item-title>
