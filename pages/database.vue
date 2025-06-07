@@ -583,8 +583,6 @@ const performSearch = async (resetPage = false) => {
         currentPage.value = currentPage.value - 1;
         hasMorePages.value = false; // No more pages after this
         updateQueryParams();
-        // Retry with previous page
-        await performSearch();
         return;
       }
 
@@ -817,7 +815,7 @@ watch(
         try {
           // Clear any previous error messages
           errorMessage.value = null;
-          
+
           const token = await user.value?.getIdToken();
 
           const params = {
