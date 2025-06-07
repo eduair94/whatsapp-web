@@ -41,63 +41,78 @@
 
       <!-- Database Content (only show when authenticated) -->
       <div v-if="isAuthenticated && !authLoading">
+        <!-- Error Alert -->
+        <v-alert v-if="errorMessage" type="error" dismissible class="mb-6" @input="errorMessage = null">
+          <v-icon class="mr-2">mdi-alert-circle</v-icon>
+          <strong>Error:</strong> {{ errorMessage }}
+        </v-alert>
+
         <!-- Search and Filters Card -->
-        <v-card class="mb-6" elevation="4">
-          <v-card-title class="pb-2">
-            <v-icon class="mr-2">mdi-filter</v-icon>
-            {{ t("database.searchAndFilters") }}
-            <v-spacer></v-spacer>
-            <!-- Rate Limit Info -->
-            <v-chip v-if="rateLimitInfo" color="info" variant="outlined" size="small"> {{ rateLimitInfo.current }}/{{ rateLimitInfo.limit }} {{ t("database.requests") }} </v-chip>
-          </v-card-title>
-          <v-card-text>
-            <v-row>
-              <!-- Main Search -->
-              <v-col cols="12" md="6">
-                <v-text-field v-model="searchQuery" :label="t('database.searchPlaceholder')" prepend-inner-icon="mdi-magnify" variant="outlined" clearable></v-text-field>
-              </v-col>
+        <v-form @submit.prevent="submitSearch(true)">
+          <v-card class="mb-6" elevation="4">
+            <v-card-title class="pb-2">
+              <v-icon class="mr-2">mdi-filter</v-icon>
+              {{ t("database.searchAndFilters") }}
+              <v-spacer></v-spacer>
+              <!-- Rate Limit Info -->
+              <v-chip v-if="rateLimitInfo" color="info" variant="outlined" size="small"> {{ rateLimitInfo.current }}/{{ rateLimitInfo.limit }} {{ t("database.requests") }} </v-chip>
+            </v-card-title>
+            <v-card-text>
+              <v-row>
+                <!-- Main Search -->
+                <v-col cols="12" md="6">
+                  <v-text-field v-model="searchQuery" :label="t('database.searchPlaceholder')" prepend-inner-icon="mdi-magnify" variant="outlined" clearable @click:clear="clearSearchQuery"></v-text-field>
+                </v-col>
 
-              <!-- Phone Number Filter -->
-              <v-col cols="12" md="6">
-                <v-text-field v-model="filters.number" :label="t('database.phoneNumber')" prepend-inner-icon="mdi-phone" variant="outlined" clearable></v-text-field>
-              </v-col>
+                <!-- Phone Number Filter -->
+                <v-col cols="12" md="6">
+                  <v-text-field v-model="filters.number" :label="t('database.phoneNumber')" prepend-inner-icon="mdi-phone" variant="outlined" clearable @click:clear="clearNumberFilter"></v-text-field>
+                </v-col>
 
-              <!-- Country Code Filter -->
-              <v-col cols="12" md="3">
-                <v-text-field v-model="filters.countryCode" :label="t('database.countryCode')" prepend-inner-icon="mdi-flag" variant="outlined" clearable placeholder="e.g. CN, US, GB"></v-text-field>
-              </v-col>
+                <!-- Country Code Filter -->
+                <v-col cols="12" md="3">
+                  <v-autocomplete v-model="filters.countryCode" :label="t('database.countryCode')" :items="phoneCodes" item-title="country" item-value="iso" prepend-inner-icon="mdi-flag" variant="outlined" clearable auto-select-first>
+                    <template v-slot:item="{ props, item }">
+                      <v-list-item v-bind="props" :title="`${item.raw.flag} ${item.raw.country} (${item.raw.iso})`"></v-list-item>
+                    </template>
+                    <template v-slot:selection="{ item }">
+                      <span>{{ item.raw.flag }} {{ item.raw.country }}</span>
+                    </template>
+                  </v-autocomplete>
+                </v-col>
 
-              <!-- Business Profile Filter -->
-              <v-col cols="12" md="3">
-                <v-select v-model="filters.isBusiness" :items="businessOptions" :label="t('database.businessProfile')" prepend-inner-icon="mdi-briefcase" variant="outlined" clearable></v-select>
-              </v-col>
+                <!-- Business Profile Filter -->
+                <v-col cols="12" md="3">
+                  <v-select v-model="filters.isBusiness" :items="businessOptions" :label="t('database.businessProfile')" prepend-inner-icon="mdi-briefcase" variant="outlined" clearable></v-select>
+                </v-col>
 
-              <!-- Profile Picture Filter -->
-              <v-col cols="12" md="3">
-                <v-select v-model="filters.hasProfilePic" :items="profilePicOptions" :label="t('database.hasProfilePic')" prepend-inner-icon="mdi-account-circle" variant="outlined" clearable></v-select>
-              </v-col>
+                <!-- Profile Picture Filter -->
+                <v-col cols="12" md="3">
+                  <v-select v-model="filters.hasProfilePic" :items="profilePicOptions" :label="t('database.hasProfilePic')" prepend-inner-icon="mdi-account-circle" variant="outlined" clearable></v-select>
+                </v-col>
 
-              <!-- Date Range -->
-              <v-col cols="12" md="3">
-                <v-text-field v-model="filters.dateFrom" :label="t('database.dateFrom')" type="date" prepend-inner-icon="mdi-calendar-start" variant="outlined" clearable></v-text-field>
-              </v-col>
-            </v-row>
+                <!-- Date Range -->
+                <v-col cols="12" md="3">
+                  <v-text-field v-model="filters.dateFrom" :label="t('database.dateFrom')" type="date" prepend-inner-icon="mdi-calendar-start" variant="outlined" clearable></v-text-field>
+                </v-col>
+              </v-row>
 
-            <!-- Action Buttons -->
-            <v-row>
-              <v-col cols="12" class="text-right">
-                <v-btn color="secondary" variant="outlined" class="mr-3" @click="clearFilters">
-                  <v-icon class="mr-2">mdi-filter-off</v-icon>
-                  {{ t("database.clearFilters") }}
-                </v-btn>
-                <v-btn color="primary" :loading="loading" @click="performSearch">
-                  <v-icon class="mr-2">mdi-magnify</v-icon>
-                  {{ t("database.search") }}
-                </v-btn>
-              </v-col>
-            </v-row>
-          </v-card-text>
-        </v-card>
+              <!-- Action Buttons -->
+              <v-row>
+                <v-col cols="12" class="text-right">
+                  <v-btn type="button" color="secondary" variant="outlined" class="mr-3" @click="clearFilters">
+                    <v-icon class="mr-2">mdi-filter-off</v-icon>
+                    {{ t("database.clearFilters") }}
+                  </v-btn>
+                  <v-btn type="submit" color="primary" :loading="loading">
+                    <v-icon class="mr-2">mdi-magnify</v-icon>
+                    {{ t("database.search") }}
+                  </v-btn>
+                </v-col>
+              </v-row>
+            </v-card-text>
+          </v-card>
+        </v-form>
 
         <!-- Results Data Table -->
         <v-card elevation="4">
@@ -105,10 +120,9 @@
             <v-icon class="mr-2">mdi-table</v-icon>
             {{ t("database.results") }}
             <v-spacer></v-spacer>
-            <v-chip v-if="totalResults !== null" color="primary" variant="outlined"> {{ formatNumber(totalResults) }} {{ t("database.totalResults") }} </v-chip>
           </v-card-title>
 
-          <v-data-table-server v-model:items-per-page="itemsPerPage" v-model:page="currentPage" :headers="headers" :items="searchResults" :items-length="totalResults || 0" :loading="loading" class="elevation-1" item-value="_id" show-current-page @update:options="loadItems">
+          <v-data-table-server v-model:items-per-page="itemsPerPage" v-model:page="currentPage" :headers="headers" :items="searchResults" :items-length="hasMorePages ? currentPage * itemsPerPage + 1 : (currentPage - 1) * itemsPerPage + searchResults.length" :loading="loading" class="elevation-1" item-value="_id" show-current-page @update:options="loadItems">
             <!-- Profile Picture Column -->
             <template v-slot:item.profilePic="{ item }">
               <div class="d-flex align-center py-2">
@@ -326,10 +340,10 @@
                         <div v-if="selectedItem.businessProfile.email">
                           <strong>{{ t("database.email") }}:</strong> {{ selectedItem.businessProfile.email }}
                         </div>
-                        <div v-if="selectedItem.businessProfile.website">
+                        <div v-if="selectedItem.businessProfile.website?.length">
                           <strong>{{ t("database.website") }}:</strong>
-                          <a :href="selectedItem.businessProfile.website" target="_blank" class="text-primary">
-                            {{ selectedItem.businessProfile.website }}
+                          <a :href="selectedItem.businessProfile.website[0]" target="_blank" class="text-primary">
+                            {{ selectedItem.businessProfile.website[0] }}
                           </a>
                         </div>
                       </v-list-item-subtitle>
@@ -410,6 +424,10 @@ definePageMeta({
 const { isAuthenticated, loading: authLoading, user } = useFirebaseAuth();
 const { $firebase } = useNuxtApp();
 
+// Router and route for query parameters
+const route = useRoute();
+const router = useRouter();
+
 // Rate limit tracking
 const rateLimitInfo = ref<{ current: number; limit: number; restartsIn: number } | null>(null);
 
@@ -434,26 +452,27 @@ interface PhoneDataItem {
   };
 }
 
-// Reactive data
-const searchQuery = ref("");
+// Reactive data - initialize from query parameters
+const searchQuery = ref((route.query.search as string) || "");
 const loading = ref(false);
 const searchResults = ref<PhoneDataItem[]>([]);
-const totalResults = ref<number | null>(null);
-const currentPage = ref(1);
-const itemsPerPage = ref(10);
+const currentPage = ref(parseInt(route.query.page as string) || 1);
+const itemsPerPage = ref(parseInt(route.query.limit as string) || 10);
+const hasMorePages = ref(true); // Track if there are more pages available
+const errorMessage = ref<string | null>(null); // Track error messages
 
 // Details dialog
 const detailsDialog = ref(false);
 const selectedItem = ref<PhoneDataItem | null>(null);
 
-// Filters
+// Filters - initialize from query parameters
 const filters = ref({
-  number: "",
-  countryCode: "",
-  hasProfilePic: "",
-  isBusiness: "",
-  dateFrom: "",
-  dateTo: "",
+  number: (route.query.number as string) || "",
+  countryCode: (route.query.countryCode as string) || "",
+  hasProfilePic: (route.query.hasProfilePic as string) || "",
+  isBusiness: (route.query.isBusiness as string) || "",
+  dateFrom: (route.query.dateFrom as string) || "",
+  dateTo: (route.query.dateTo as string) || "",
   includeCount: true,
 });
 
@@ -484,15 +503,61 @@ const { t } = useI18n();
 const localePath = useLocalePath();
 
 // Methods
-const performSearch = async () => {
+const updateQueryParams = () => {
+  const query: Record<string, string> = {};
+
+  // Add search query if not empty
+  if (searchQuery.value) {
+    query.search = searchQuery.value;
+  }
+
+  // Add pagination
+  if (currentPage.value > 1) {
+    query.page = currentPage.value.toString();
+  }
+  if (itemsPerPage.value !== 10) {
+    query.limit = itemsPerPage.value.toString();
+  }
+
+  // Add filters if not empty
+  Object.entries(filters.value).forEach(([key, value]) => {
+    if (value && key !== "includeCount") {
+      query[key] = value.toString();
+    }
+  });
+
+  // Update URL without triggering navigation
+  router.replace({ query });
+};
+
+const submitSearch = (resetPage = false) => {
+  if (resetPage) {
+    currentPage.value = 1;
+  }
+  if (!isAuthenticated.value) {
+    return;
+  }
+  // Update query parameters first
+  updateQueryParams();
+};
+
+const performSearch = async (resetPage = false) => {
   // Don't search if not authenticated
   if (!isAuthenticated.value) {
     return;
   }
 
+  // Reset to page 1 if explicitly requested (when search button is clicked)
+  if (resetPage) {
+    currentPage.value = 1;
+  }
+
   loading.value = true;
 
   try {
+    // Clear any previous error messages
+    errorMessage.value = null;
+
     // Get Firebase ID token for authentication
     const token = await user.value?.getIdToken();
 
@@ -500,7 +565,7 @@ const performSearch = async () => {
       page: currentPage.value,
       limit: itemsPerPage.value,
       search: searchQuery.value,
-      includeCount: "true",
+      includeCount: "false", // Don't include count to hide total results
       ...Object.fromEntries(Object.entries(filters.value).filter(([_, value]) => value !== "" && value !== null)),
     };
 
@@ -510,18 +575,46 @@ const performSearch = async () => {
         Authorization: `Bearer ${token}`,
       },
     });
-
     if (response.success) {
-      searchResults.value = response.data.docs || [];
-      totalResults.value = response.data.totalDocs;
+      const docs = response.data.docs || [];
+
+      // If current page is empty and we're not on page 1, go back to previous page
+      if (docs.length === 0 && currentPage.value > 1) {
+        currentPage.value = currentPage.value - 1;
+        hasMorePages.value = false; // No more pages after this
+        updateQueryParams();
+        // Retry with previous page
+        await performSearch();
+        return;
+      }
+
+      searchResults.value = docs;
+
+      // Determine if there are more pages by checking if we got a full page
+      // If we got fewer items than requested, there are no more pages
+      hasMorePages.value = docs.length === itemsPerPage.value;
+
+      // For the data table, we need to provide a total that allows navigation
+      // but doesn't show the actual count. We'll use a dynamic calculation
+      // that enables next page if there are more pages, or shows current position if last page
+      // This effectively hides the total count from users while maintaining pagination functionality
+      if (hasMorePages.value) {
+        // If there are more pages, we don't need to set totalResults here
+        // The data table items-length will be calculated dynamically
+      } else {
+        // If this is the last page, we don't need totalResults either
+        // The dynamic calculation in the template handles this
+      }
+
       // Update rate limit info if provided
       if (response.rateLimit) {
         rateLimitInfo.value = response.rateLimit;
       }
     } else {
       console.error("Search failed:", response.error);
+      errorMessage.value = response.error || "Search failed. Please try again.";
       searchResults.value = [];
-      totalResults.value = 0;
+      hasMorePages.value = false;
 
       // Handle rate limit errors
       if (response.statusCode === 429 && response.rateLimit) {
@@ -536,8 +629,9 @@ const performSearch = async () => {
     }
   } catch (error: any) {
     console.error("Search error:", error);
+    errorMessage.value = error.message || error.statusText || "An unexpected error occurred. Please try again.";
     searchResults.value = [];
-    totalResults.value = 0;
+    hasMorePages.value = false;
 
     // Handle authentication errors from fetch
     if (error.statusCode === 401) {
@@ -558,6 +652,7 @@ const loadItems = ({ page, itemsPerPage: perPage }: { page: number; itemsPerPage
 
 const clearFilters = () => {
   searchQuery.value = "";
+  errorMessage.value = null; // Clear any error messages
   filters.value = {
     number: "",
     countryCode: "",
@@ -567,7 +662,23 @@ const clearFilters = () => {
     dateTo: "",
     includeCount: true,
   };
-  performSearch();
+  currentPage.value = 1;
+  itemsPerPage.value = 10;
+
+  // Clear query parameters
+  router.replace({ query: {} });
+
+  performSearch(true);
+};
+
+const clearSearchQuery = () => {
+  searchQuery.value = "";
+  updateQueryParams();
+};
+
+const clearNumberFilter = () => {
+  filters.value.number = "";
+  updateQueryParams();
 };
 
 const getCountryFlag = (countryCode: string) => {
@@ -672,6 +783,102 @@ onMounted(async () => {
     performSearch();
   }
 });
+
+// Watch for route query changes (for browser back/forward navigation)
+watch(
+  () => route.query,
+  (newQuery, oldQuery) => {
+    // Only update if the query actually changed (prevent infinite loops)
+    if (JSON.stringify(newQuery) === JSON.stringify(oldQuery)) {
+      return;
+    }
+
+    // Update reactive state from query parameters
+    searchQuery.value = (newQuery.search as string) || "";
+    currentPage.value = parseInt(newQuery.page as string) || 1;
+    itemsPerPage.value = parseInt(newQuery.limit as string) || 10;
+
+    filters.value = {
+      number: (newQuery.number as string) || "",
+      countryCode: (newQuery.countryCode as string) || "",
+      hasProfilePic: (newQuery.hasProfilePic as string) || "",
+      isBusiness: (newQuery.isBusiness as string) || "",
+      dateFrom: (newQuery.dateFrom as string) || "",
+      dateTo: (newQuery.dateTo as string) || "",
+      includeCount: true,
+    };
+
+    // Perform search if authenticated (but don't update query params again)
+    if (isAuthenticated.value) {
+      loading.value = true;
+
+      // Perform search without updating query params to avoid infinite loop
+      const performSearchWithoutUrlUpdate = async () => {
+        try {
+          // Clear any previous error messages
+          errorMessage.value = null;
+          
+          const token = await user.value?.getIdToken();
+
+          const params = {
+            page: currentPage.value,
+            limit: itemsPerPage.value,
+            search: searchQuery.value,
+            includeCount: "false",
+            ...Object.fromEntries(Object.entries(filters.value).filter(([_, value]) => value !== "" && value !== null)),
+          };
+
+          const response = await $fetch("/api/search", {
+            query: params,
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          if (response.success) {
+            searchResults.value = response.data.docs || [];
+
+            // Determine if there are more pages by checking if we got a full page
+            hasMorePages.value = (response.data.docs || []).length === itemsPerPage.value;
+
+            if (response.rateLimit) {
+              rateLimitInfo.value = response.rateLimit;
+            }
+          } else {
+            console.error("Search failed:", response.error);
+            errorMessage.value = response.error || "Search failed. Please try again.";
+            searchResults.value = [];
+            hasMorePages.value = false;
+
+            if (response.statusCode === 429 && response.rateLimit) {
+              rateLimitInfo.value = response.rateLimit;
+            }
+
+            if (response.authRequired || response.statusCode === 401) {
+              console.warn("Authentication required for database access");
+            }
+          }
+        } catch (error: any) {
+          console.error("Search error:", error);
+          errorMessage.value = error.message || error.statusText || "An unexpected error occurred. Please try again.";
+          searchResults.value = [];
+          hasMorePages.value = false;
+
+          if (error.statusCode === 401) {
+            console.warn("Authentication required for database access");
+          } else if (error.statusCode === 429) {
+            console.warn("Rate limit exceeded");
+          }
+        } finally {
+          loading.value = false;
+        }
+      };
+
+      performSearchWithoutUrlUpdate();
+    }
+  },
+  { deep: true }
+);
 </script>
 
 <style scoped>
