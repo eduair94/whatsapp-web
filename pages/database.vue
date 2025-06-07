@@ -169,12 +169,8 @@
             <template v-slot:item.actions="{ item }">
               <div class="d-flex">
                 <v-btn icon size="small" variant="text" @click="showDetails(item)">
-                  <v-icon>mdi-information</v-icon>
-                  <v-tooltip activator="parent">{{ t("database.showDetails") }}</v-tooltip>
-                </v-btn>
-                <v-btn icon size="small" variant="text" :to="`/${item.phone}`" target="_blank">
                   <v-icon>mdi-open-in-new</v-icon>
-                  <v-tooltip activator="parent">{{ t("database.viewProfile") }}</v-tooltip>
+                  <v-tooltip activator="parent">{{ t("database.showDetails") }}</v-tooltip>
                 </v-btn>
                 <v-btn icon size="small" variant="text" @click="copyToClipboard(item.phone)">
                   <v-icon>mdi-content-copy</v-icon>
