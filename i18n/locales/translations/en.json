@@ -280,5 +280,10 @@
   "database.signUp": "Sign Up",
   "database.checkingAuth": "Checking authentication...",
   "database.requests": "requests",
-  "database.meta.description": "Search and browse our comprehensive WhatsApp phone number database with advanced filtering options."
+  "database.meta.description": "Search and browse our comprehensive WhatsApp phone number database with advanced filtering options.",
+  "review.popupTitle": "Enjoying our service?",
+  "review.popupMessage": "Help others discover our WhatsApp lookup service by leaving a review!",
+  "review.later": "Maybe later",
+  "review.leaveReview": "Leave a review",
+  "review.doNotShowAgain": "Do not show this again"
 }

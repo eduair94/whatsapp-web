@@ -280,5 +280,10 @@
   "database.signUp": "Registrarse",
   "database.checkingAuth": "Verificando autenticación...",
   "database.requests": "solicitudes",
-  "database.meta.description": "Busca y navega por nuestra base de datos completa de números de teléfono de WhatsApp con opciones de filtrado avanzadas."
+  "database.meta.description": "Busca y navega por nuestra base de datos completa de números de teléfono de WhatsApp con opciones de filtrado avanzadas.",
+  "review.popupTitle": "¿Te gusta nuestro servicio?",
+  "review.popupMessage": "¡Ayuda a otros a descubrir nuestro servicio de búsqueda de WhatsApp dejando una reseña!",
+  "review.later": "Quizás más tarde",
+  "review.leaveReview": "Dejar una reseña",
+  "review.doNotShowAgain": "No mostrar esto de nuevo"
 }

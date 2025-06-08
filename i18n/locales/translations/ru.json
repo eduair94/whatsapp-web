@@ -248,5 +248,10 @@
   "database.signUp": "Зарегистрироваться",
   "database.checkingAuth": "Проверка аутентификации...",
   "database.requests": "запросов",
-  "database.meta.description": "Ищите и исследуйте нашу полную базу данных номеров телефонов WhatsApp с расширенными возможностями фильтрации."
+  "database.meta.description": "Ищите и исследуйте нашу полную базу данных номеров телефонов WhatsApp с расширенными возможностями фильтрации.",
+  "review.popupTitle": "Нравится наш сервис?",
+  "review.popupMessage": "Помогите другим узнать о нашем сервисе поиска WhatsApp, оставив отзыв!",
+  "review.later": "Может быть позже",
+  "review.leaveReview": "Оставить отзыв",
+  "review.doNotShowAgain": "Больше не показывать"
 }

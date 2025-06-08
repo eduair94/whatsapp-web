@@ -168,9 +168,7 @@ const ApiKeyManager = defineAsyncComponent(() => import("~/components/ApiKeyMana
 }
 
 .v-footer {
-  max-height: 50px;
-  align-self: flex-end;
-  margin-top: auto;
+  max-height: 120px;
   width: 100%;
 }
 
@@ -178,6 +176,10 @@ const ApiKeyManager = defineAsyncComponent(() => import("~/components/ApiKeyMana
 @media (max-width: 960px) {
   .v-app-bar-title {
     font-size: 1rem !important;
+  }
+
+  .v-footer {
+    max-height: 100%;
   }
 
   .v-btn {

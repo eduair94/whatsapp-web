@@ -242,5 +242,10 @@
   "database.copyRawData": "คัดลอกข้อมูลดิบ",
   "database.close": "ปิด",
   "database.searchAgain": "ค้นหาอีกครั้ง",
-  "database.meta.description": "ค้นหาและสำรวจฐานข้อมูลหมายเลขโทรศัพท์ WhatsApp ที่ครอบคลุมของเราพร้อมตัวเลือกการกรองขั้นสูง"
+  "database.meta.description": "ค้นหาและสำรวจฐานข้อมูลหมายเลขโทรศัพท์ WhatsApp ที่ครอบคลุมของเราพร้อมตัวเลือกการกรองขั้นสูง",
+  "review.popupTitle": "พอใจกับบริการของเราหรือไม่?",
+  "review.popupMessage": "ช่วยให้ผู้อื่นค้นพบบริการค้นหา WhatsApp ของเราโดยการให้คะแนนรีวิว!",
+  "review.later": "ไว้ทีหลัง",
+  "review.leaveReview": "ให้คะแนนรีวิว",
+  "review.doNotShowAgain": "ไม่ต้องแสดงอีก"
 }

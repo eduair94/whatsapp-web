@@ -79,6 +79,8 @@
         </v-col>
       </v-row>
     </div>
+    <!-- Review Popup Component -->
+    <ReviewPopup ref="reviewPopupRef" />
   </div>
 </template>
 
@@ -175,6 +177,15 @@ const phoneCode = ref({
 } as PhoneCode);
 const data = ref<WhatsAppProfileData | null>(null);
 const recaptchaInstance = useReCaptcha();
+const reviewPopupRef = ref<{
+  open: () => void;
+  showPopup: () => void;
+  closePopup: () => void;
+  hasBeenShown: () => boolean;
+} | null>(null);
+
+// Review popup state
+const hasPerformedFirstSearch = ref(false);
 
 // Initialize phone API composable with Firebase auth integration
 const phoneApi = usePhoneApi({
@@ -349,6 +360,16 @@ const customFilter = (item: any, queryText: string): boolean => {
   return item.countryWithCode.toLowerCase().includes(searchText) || item.countryTranslated.toLowerCase().includes(searchText) || item.code.includes(searchText);
 };
 
+const scheduleReviewPopup = (): void => {
+  // Show popup after 10 seconds
+  setTimeout(() => {
+    console.log("Attempting to open review popup");
+    if (reviewPopupRef.value) {
+      reviewPopupRef.value.open();
+    }
+  }, 3000); // 10 seconds
+};
+
 const stringify = (data: WhatsAppProfileData | null): string => {
   return JSON.stringify(data, null, 2);
 };
@@ -394,10 +415,12 @@ const search = async (): Promise<void> => {
 
     return;
   }
-
   // Save successful search to history (only if we have valid data and no errors)
   if (data.value && !data.value.error) {
     await addSearchToHistory(phoneNumberFull, data.value);
+
+    // Schedule review popup for first-time users
+    scheduleReviewPopup();
   }
 };
 

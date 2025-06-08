@@ -199,5 +199,10 @@
   "apiKey.update": "कुंजी अपडेट करें",
   "apiKey.remove": "कुंजी हटाएं",
   "apiKey.confirmRemove": "क्या आप वाकई API कुंजी को हटाना चाहते हैं?",
-  "apiKey.linkSuggestion": "उच्च दर सीमा और बेहतर सुविधाओं के लिए अपनी API कुंजी लिंक करें"
+  "apiKey.linkSuggestion": "उच्च दर सीमा और बेहतर सुविधाओं के लिए अपनी API कुंजी लिंक करें",
+  "review.popupTitle": "हमारी सेवा पसंद आ रही है?",
+  "review.popupMessage": "रिव्यू छोड़कर दूसरों को हमारी व्हाट्सऐप लुकअप सेवा खोजने में मदद करें!",
+  "review.later": "शायद बाद में",
+  "review.leaveReview": "रिव्यू छोड़ें",
+  "review.doNotShowAgain": "यह फिर से न दिखाएं"
 }

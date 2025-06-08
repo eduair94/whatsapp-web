@@ -280,5 +280,10 @@
   "database.signUp": "Registrieren",
   "database.checkingAuth": "Authentifizierung prüfen...",
   "database.requests": "Anfragen",
-  "database.meta.description": "Durchsuchen und erkunden Sie unsere umfassende WhatsApp-Telefonnummern-Datenbank mit erweiterten Filteroptionen."
+  "database.meta.description": "Durchsuchen und erkunden Sie unsere umfassende WhatsApp-Telefonnummern-Datenbank mit erweiterten Filteroptionen.",
+  "review.popupTitle": "Gefällt Ihnen unser Service?",
+  "review.popupMessage": "Helfen Sie anderen, unseren WhatsApp-Lookup-Service zu entdecken, indem Sie eine Bewertung hinterlassen!",
+  "review.later": "Vielleicht später",
+  "review.leaveReview": "Bewertung abgeben",
+  "review.doNotShowAgain": "Dies nicht mehr anzeigen"
 }

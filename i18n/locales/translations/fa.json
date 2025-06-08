@@ -243,5 +243,10 @@
   "database.copyRawData": "کپی داده‌های خام",
   "database.close": "بستن",
   "database.searchAgain": "جستجوی مجدد",
-  "database.meta.description": "پایگاه داده جامع شماره‌های تلفن واتساپ ما را با گزینه‌های فیلترینگ پیشرفته جستجو و کاوش کنید."
+  "database.meta.description": "پایگاه داده جامع شماره‌های تلفن واتساپ ما را با گزینه‌های فیلترینگ پیشرفته جستجو و کاوش کنید.",
+  "review.popupTitle": "از سرویس ما راضی هستید؟",
+  "review.popupMessage": "به دیگران کمک کنید تا سرویس جستجوی واتساپ ما را با گذاشتن نظر کشف کنند!",
+  "review.later": "شاید بعداً",
+  "review.leaveReview": "نظر بگذارید",
+  "review.doNotShowAgain": "دیگر نشان نده"
 }
