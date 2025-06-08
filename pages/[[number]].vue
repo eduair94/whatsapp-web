@@ -255,6 +255,7 @@ onBeforeMount(() => {
         phoneNumber.value = phone.nationalNumber;
         // Trigger search after values are set
         nextTick(() => {
+          console.log("Reload search");
           search();
         });
       }
@@ -380,6 +381,7 @@ const stringify = (data: WhatsAppProfileData | null): string => {
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const search = async (): Promise<void> => {
+  console.log("Search");
   // Wait for loadingFirebase to be true with timeout
   await waitForLoadingFirebase();
 
@@ -455,12 +457,12 @@ const submit = async (): Promise<void> => {
     // If the phone number route is the same as the current one, just search
     const phoneValue = `${phoneCode.value.code}${phoneNumber.value}`;
     if ((route.params.number as string) === phoneValue) {
+      console.log("Submit search");
       await search();
       return;
     }
     // Store current scroll position
     updateUrlWithHistory(phoneValue);
-    search();
   }
 };
 
