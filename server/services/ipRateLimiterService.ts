@@ -32,52 +32,22 @@ export class IpRateLimiterService {
       const now = new Date();
       const windowStart = new Date(now.getTime() - this.WINDOW);
 
-      // Use atomic findOneAndUpdate with upsert to handle race conditions
-      const result = await this.IpRequest.findOneAndUpdate(
-        { ip },
-        [
-          {
-            $set: {
-              // If record doesn't exist or is outside current window, reset to 1
-              // Otherwise, keep existing count (don't increment here)
-              count: {
-                $cond: {
-                  if: {
-                    $or: [
-                      { $not: ["$windowStart"] }, // Record doesn't exist
-                      { $lt: ["$windowStart", windowStart] } // Outside current window
-                    ]
-                  },
-                  then: 1,
-                  else: "$count" // Keep existing count
-                }
-              },
-              windowStart: {
-                $cond: {
-                  if: {
-                    $or: [
-                      { $not: ["$windowStart"] }, // Record doesn't exist
-                      { $lt: ["$windowStart", windowStart] } // Outside current window
-                    ]
-                  },
-                  then: now,
-                  else: "$windowStart" // Keep existing windowStart
-                }
-              },
-              lastRequest: now,
-              ip: ip // Ensure IP is set for new records
-            }
-          }
-        ],
-        {
-          upsert: true,
-          new: true,
-          setDefaultsOnInsert: true
-        }
-      );
+      // Find existing record for this IP (read-only check)
+      const ipRecord = await this.IpRequest.findOne({ ip });
 
-      // Check if the current count exceeds rate limit
-      if (result && result.count > this.RATE_LIMIT) {
+      if (!ipRecord) {
+        // First request from this IP - allow it
+        return true;
+      }
+
+      // Check if we're in a new window
+      if (ipRecord.windowStart < windowStart) {
+        // New window - allow the request
+        return true;
+      }
+
+      // Check if current count exceeds rate limit
+      if (ipRecord.count >= this.RATE_LIMIT) {
         return false;
       }
 
@@ -147,34 +117,34 @@ export class IpRateLimiterService {
                   if: {
                     $or: [
                       { $not: ["$windowStart"] }, // Record doesn't exist
-                      { $lt: ["$windowStart", windowStart] } // Outside current window
-                    ]
+                      { $lt: ["$windowStart", windowStart] }, // Outside current window
+                    ],
                   },
                   then: 1,
-                  else: { $add: ["$count", 1] } // Increment existing count
-                }
+                  else: { $add: ["$count", 1] }, // Increment existing count
+                },
               },
               windowStart: {
                 $cond: {
                   if: {
                     $or: [
                       { $not: ["$windowStart"] }, // Record doesn't exist
-                      { $lt: ["$windowStart", windowStart] } // Outside current window
-                    ]
+                      { $lt: ["$windowStart", windowStart] }, // Outside current window
+                    ],
                   },
                   then: now,
-                  else: "$windowStart" // Keep existing windowStart
-                }
+                  else: "$windowStart", // Keep existing windowStart
+                },
               },
               lastRequest: now,
-              ip: ip // Ensure IP is set for new records
-            }
-          }
+              ip: ip, // Ensure IP is set for new records
+            },
+          },
         ],
         {
           upsert: true,
           new: true,
-          setDefaultsOnInsert: true
+          setDefaultsOnInsert: true,
         }
       );
 

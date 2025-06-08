@@ -205,6 +205,9 @@
   "apiKey.remove": "Rimuovi Chiave",
   "apiKey.confirmRemove": "Sei sicuro di voler rimuovere la Chiave API?",
   "apiKey.linkSuggestion": "Collega la tua Chiave API per limiti di richieste più elevati e funzionalità migliori",
+  "stats.title": "Statistiche di Utilizzo Globali",
+  "stats.subtitle": "Informazioni in tempo reale sulle ricerche di numeri di telefono in tutto il mondo",
+  "stats.loading": "Caricamento statistiche...",
   "database.title": "Database Numeri di Telefono",
   "database.subtitle": "Cerca ed esplora il nostro database completo di numeri di telefono",
   "database.searchAndFilters": "Ricerca e Filtri",
@@ -248,5 +251,6 @@
   "database.copyRawData": "Copia Dati Grezzi",
   "database.close": "Chiudi",
   "database.searchAgain": "Cerca di nuovo",
-  "database.meta.description": "Cerca ed esplora il nostro database completo di numeri di telefono WhatsApp con opzioni di filtro avanzate."
+  "database.meta.description": "Cerca ed esplora il nostro database completo di numeri di telefono WhatsApp con opzioni di filtro avanzate.",
+  "database.checkingAuth": "Verifica autenticazione..."
 }
