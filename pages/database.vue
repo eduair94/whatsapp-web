@@ -665,8 +665,6 @@ const clearFilters = () => {
 
   // Clear query parameters
   router.push({ query: {} });
-
-  performSearch(true);
 };
 
 const clearSearchQuery = () => {
