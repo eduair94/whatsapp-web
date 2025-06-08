@@ -439,7 +439,7 @@ const updateUrlWithHistory = async (phoneNumber: string) => {
 
   try {
     // Method 1: Update Vue Router state first, then browser history
-    await router.replace({
+    await router.push({
       path: newUrl,
       query: route.query, // Preserve any query parameters
     });

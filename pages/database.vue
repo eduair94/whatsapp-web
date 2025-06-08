@@ -527,7 +527,7 @@ const updateQueryParams = () => {
   });
 
   // Update URL without triggering navigation
-  router.replace({ query });
+  router.push({ query });
 };
 
 const submitSearch = (resetPage = false) => {
@@ -664,7 +664,7 @@ const clearFilters = () => {
   itemsPerPage.value = 10;
 
   // Clear query parameters
-  router.replace({ query: {} });
+  router.push({ query: {} });
 
   performSearch(true);
 };
