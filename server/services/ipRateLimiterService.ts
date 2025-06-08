@@ -15,7 +15,7 @@ export class IpRateLimiterService {
   public WINDOW = 60 * 60 * 1000;
   public IpRequest: mongoose.Model<IIpRequest>;
 
-  constructor(isAuth: boolean, collection: string = "IpRequest") {
+  constructor(isAuth: boolean, collection: string = "ip_requests") {
     this.RATE_LIMIT = isAuth ? 25 : 5;
     if (ipModels[collection]) {
       this.IpRequest = ipModels[collection];
@@ -32,38 +32,55 @@ export class IpRateLimiterService {
       const now = new Date();
       const windowStart = new Date(now.getTime() - this.WINDOW);
 
-      // Try to find existing record for this IP
-      let ipRecord = await this.IpRequest.findOne({ ip });
+      // Use atomic findOneAndUpdate with upsert to handle race conditions
+      const result = await this.IpRequest.findOneAndUpdate(
+        { ip },
+        [
+          {
+            $set: {
+              // If record doesn't exist or is outside current window, reset to 1
+              // Otherwise, keep existing count (don't increment here)
+              count: {
+                $cond: {
+                  if: {
+                    $or: [
+                      { $not: ["$windowStart"] }, // Record doesn't exist
+                      { $lt: ["$windowStart", windowStart] } // Outside current window
+                    ]
+                  },
+                  then: 1,
+                  else: "$count" // Keep existing count
+                }
+              },
+              windowStart: {
+                $cond: {
+                  if: {
+                    $or: [
+                      { $not: ["$windowStart"] }, // Record doesn't exist
+                      { $lt: ["$windowStart", windowStart] } // Outside current window
+                    ]
+                  },
+                  then: now,
+                  else: "$windowStart" // Keep existing windowStart
+                }
+              },
+              lastRequest: now,
+              ip: ip // Ensure IP is set for new records
+            }
+          }
+        ],
+        {
+          upsert: true,
+          new: true,
+          setDefaultsOnInsert: true
+        }
+      );
 
-      if (!ipRecord) {
-        // First request from this IP
-        ipRecord = new this.IpRequest({
-          ip,
-          count: 1,
-          lastRequest: now,
-          windowStart: now,
-        });
-        await ipRecord.save();
-        return true;
-      }
-
-      // Check if we're in a new window
-      if (ipRecord.windowStart < windowStart) {
-        // Reset the window
-        ipRecord.count = 1;
-        ipRecord.windowStart = now;
-        ipRecord.lastRequest = now;
-        await ipRecord.save();
-        return true;
-      }
-
-      // Check if exceeds rate limit
-      if (ipRecord.count > this.RATE_LIMIT) {
-        await ipRecord.save();
+      // Check if the current count exceeds rate limit
+      if (result && result.count > this.RATE_LIMIT) {
         return false;
       }
 
-      await ipRecord.save();
       return true;
     } catch (error) {
       console.error("Error checking rate limit:", error);
@@ -118,35 +135,48 @@ export class IpRateLimiterService {
       const now = new Date();
       const windowStart = new Date(now.getTime() - this.WINDOW);
 
-      // Find existing record for this IP
-      let ipRecord = await this.IpRequest.findOne({ ip });
-
-      if (!ipRecord) {
-        // First successful request from this IP
-        ipRecord = new this.IpRequest({
-          ip,
-          count: 1,
-          lastRequest: now,
-          windowStart: now,
-        });
-        await ipRecord.save();
-        return true;
-      }
-
-      // Check if we're in a new window
-      if (ipRecord.windowStart < windowStart) {
-        // Reset the window for new successful request
-        ipRecord.count = 1;
-        ipRecord.windowStart = now;
-        ipRecord.lastRequest = now;
-        await ipRecord.save();
-        return true;
-      }
-
-      // We're in the same window, increment count for successful request
-      ipRecord.count += 1;
-      ipRecord.lastRequest = now;
-      await ipRecord.save();
+      // Use atomic findOneAndUpdate with upsert to handle race conditions
+      const result = await this.IpRequest.findOneAndUpdate(
+        { ip },
+        [
+          {
+            $set: {
+              // If record doesn't exist or is outside current window, reset
+              count: {
+                $cond: {
+                  if: {
+                    $or: [
+                      { $not: ["$windowStart"] }, // Record doesn't exist
+                      { $lt: ["$windowStart", windowStart] } // Outside current window
+                    ]
+                  },
+                  then: 1,
+                  else: { $add: ["$count", 1] } // Increment existing count
+                }
+              },
+              windowStart: {
+                $cond: {
+                  if: {
+                    $or: [
+                      { $not: ["$windowStart"] }, // Record doesn't exist
+                      { $lt: ["$windowStart", windowStart] } // Outside current window
+                    ]
+                  },
+                  then: now,
+                  else: "$windowStart" // Keep existing windowStart
+                }
+              },
+              lastRequest: now,
+              ip: ip // Ensure IP is set for new records
+            }
+          }
+        ],
+        {
+          upsert: true,
+          new: true,
+          setDefaultsOnInsert: true
+        }
+      );
 
       return true;
     } catch (error) {

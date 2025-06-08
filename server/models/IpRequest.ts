@@ -34,7 +34,6 @@ const IpRequestSchema = new Schema<IIpRequest>(
   },
   {
     timestamps: true,
-    collection: "ip_requests",
   }
 );
 
