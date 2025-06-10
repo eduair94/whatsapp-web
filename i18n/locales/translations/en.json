@@ -114,6 +114,7 @@
   "nav.searchHistory": "Search History",
   "nav.stats": "Statistics",
   "nav.history": "History",
+  "nav.telegramBot": "Telegram Bot",
   "nav.auth": "Login / Register",
   "nav.user": "User",
   "nav.logout": "Logout",

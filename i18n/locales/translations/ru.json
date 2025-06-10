@@ -113,6 +113,7 @@
   "nav.searchHistory": "История поиска",
   "nav.stats": "Статистика",
   "nav.history": "История",
+  "nav.telegramBot": "Telegram Бот",
   "nav.auth": "Вход / Регистрация",
   "nav.user": "Пользователь",
   "nav.logout": "Выйти",
