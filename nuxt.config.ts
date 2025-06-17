@@ -117,7 +117,7 @@ export default defineNuxtConfig({
         { rel: "mask-icon", href: "/favicon.svg", color: "#25D366" },
         { rel: "shortcut icon", href: "/favicon.ico" },
         { rel: "manifest", href: "/manifest.json" },
-        { rel: "manifest", href: "/site.webmanifest" }, // SEO and performance - optimized loading
+        { rel: "manifest", href: "/manifest.webmanifest" }, //
         { rel: "preconnect", href: "https://fonts.googleapis.com" },
         { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "anonymous" },
         { rel: "dns-prefetch", href: "https://www.google.com" },
@@ -227,6 +227,7 @@ export default defineNuxtConfig({
   }, // Nitro configuration for better performance
   nitro: {
     prerender: {
+      ignore: ["/manifest.json"],
       routes: ["/sitemap.xml", "/robots.txt", "/"],
       crawlLinks: true,
     },
