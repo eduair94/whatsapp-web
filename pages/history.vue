@@ -201,7 +201,6 @@ const fullImageDialog = ref(false);
 const fullImageData = ref({ url: "", phoneNumber: "" });
 
 // SEO
-const baseUrl = process.env.NODE_ENV === "production" ? "https://whatsapp.checkleaked.cc" : "http://localhost:3000";
 const pageUrl = `${baseUrl}/${locale}/history`;
 
 useHead({

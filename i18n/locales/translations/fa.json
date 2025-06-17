@@ -253,5 +253,10 @@
   "review.popupMessage": "به دیگران کمک کنید تا سرویس جستجوی واتساپ ما را با گذاشتن نظر کشف کنند!",
   "review.later": "شاید بعداً",
   "review.leaveReview": "نظر بگذارید",
-  "review.doNotShowAgain": "دیگر نشان نده"
+  "review.doNotShowAgain": "دیگر نشان نده",
+  "faq.title": "سوالات متداول",
+  "faq.subtitle": "پاسخ‌هایی برای سوالات رایج درباره سرویس تأیید شماره واتساپ ما پیدا کنید",
+  "faq.stillHaveQuestions": "هنوز سوال دارید؟",
+  "faq.contactDescription": "نمی‌توانید پاسخ مورد نظرتان را پیدا کنید؟ تیم پشتیبانی ما آماده کمک است.",
+  "faq.contactUs": "تماس با پشتیبانی"
 }

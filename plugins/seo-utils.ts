@@ -57,7 +57,6 @@ export default defineNuxtPlugin(() => {
 
     // Generate canonical URL with proper formatting
     generateCanonicalUrl(path: string): string {
-      const baseUrl = "https://whatsapp.checkleaked.cc"; // Replace with your actual domain
       // Ensure no double slashes and proper formatting
       const cleanPath = path.startsWith("/") ? path : `/${path}`;
       return `${baseUrl}${cleanPath}`;
@@ -102,7 +101,7 @@ export default defineNuxtPlugin(() => {
         "@type": "WebApplication",
         name: $i18n.t("seo.structuredData.webAppName"),
         description: $i18n.t("seo.structuredData.webAppDescription"),
-        url: "https://whatsapp.checkleaked.cc", // Replace with your actual domain
+        url: baseUrl, // Replace with your actual domain
         applicationCategory: "UtilitiesApplication",
         operatingSystem: "All",
         browserRequirements: "HTML5, CSS3, JavaScript",
@@ -116,7 +115,7 @@ export default defineNuxtPlugin(() => {
         author: {
           "@type": "Organization",
           name: "CheckLeaked",
-          url: "https://whatsapp.checkleaked.cc", // Replace with your actual domain
+          url: baseUrl, // Replace with your actual domain
         },
         creator: {
           "@type": "Person",
@@ -125,7 +124,7 @@ export default defineNuxtPlugin(() => {
           jobTitle: $i18n.t("seo.structuredData.webAppCreatorJobTitle"),
         },
         featureList: [$i18n.t("seo.structuredData.webAppFeature1"), $i18n.t("seo.structuredData.webAppFeature2"), $i18n.t("seo.structuredData.webAppFeature3"), $i18n.t("seo.structuredData.webAppFeature4"), $i18n.t("seo.structuredData.webAppFeature5"), $i18n.t("seo.structuredData.webAppFeature6")],
-        screenshot: "https://whatsapp.checkleaked.cc/img/screenshot.png", // Replace with your actual image
+        screenshot: baseUrl + "/img/screenshot.png", // Replace with your actual image
       };
     },
 
@@ -171,7 +170,7 @@ export default defineNuxtPlugin(() => {
         "og:title": title,
         "og:description": description,
         "og:url": url,
-        "og:image": image || "https://whatsapp.checkleaked.cc/img/favicon.png", // Replace with your actual image
+        "og:image": image || baseUrl + "/img/favicon.png", // Replace with your actual image
         "og:image:width": "1200",
         "og:image:height": "630",
         "og:image:alt": title,
@@ -187,7 +186,7 @@ export default defineNuxtPlugin(() => {
         "twitter:creator": "checkleaked",
         "twitter:title": title,
         "twitter:description": description,
-        "twitter:image": image || "https://whatsapp.checkleaked.cc/img/favicon.png", // Replace with your actual image
+        "twitter:image": image || baseUrl + "/img/favicon.png", // Replace with your actual image
         "twitter:image:alt": title,
       };
     },
@@ -234,16 +233,16 @@ export default defineNuxtPlugin(() => {
         provider: {
           "@type": "Organization",
           name: $i18n.t("seo.structuredData.webAppAuthorName"),
-          url: "https://whatsapp.checkleaked.cc", // Replace with your actual domain
+          url: baseUrl, // Replace with your actual domain
         },
         serviceType: $i18n.t("seo.structuredData.databaseServiceType"),
         areaServed: $i18n.t("seo.structuredData.databaseServiceAreaServed"),
         availableChannel: {
           "@type": "ServiceChannel",
-          serviceUrl: "https://whatsapp.checkleaked.cc/database", // Replace with your actual URL
+          serviceUrl: baseUrl + "/database", // Replace with your actual URL
           serviceType: "API",
         },
-        termsOfService: "https://whatsapp.checkleaked.cc/terms", // Replace with your actual URL
+        termsOfService: baseUrl + "/terms", // Replace with your actual URL
         offers: {
           "@type": "Offer",
           description: $i18n.t("seo.structuredData.databaseServiceOfferDescription"),

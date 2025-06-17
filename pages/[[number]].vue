@@ -110,7 +110,6 @@ const { openApiKeyManager, registerApiKeySavedCallback, unregisterApiKeySavedCal
 const router = useRouter();
 const route = useRoute();
 
-const baseUrl = process.env.NODE_ENV === "production" ? "https://whatsapp.checkleaked.cc" : "http://localhost:3000";
 const pageUrl = computed(() => `${baseUrl}${route.path}`);
 
 // Format phone number for meta tags

@@ -1,8 +1,10 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { baseUrl } from "./utils/pageUrl";
+console.log("base url", baseUrl);
 export default defineNuxtConfig({
   devtools: { enabled: false }, // Disable in production
   site: {
-    url: process.env.NUXT_PUBLIC_SITE_URL || (process.env.NODE_ENV === "production" ? "https://whatsapp.checkleaked.cc" : "http://localhost:3000"),
+    url: baseUrl,
   },
   css: ["vuetify/lib/styles/main.sass", "@mdi/font/css/materialdesignicons.min.css"],
   build: {
@@ -77,7 +79,7 @@ export default defineNuxtConfig({
         { property: "og:image:height", content: "512" },
         { property: "og:image:type", content: "image/png" },
         { property: "og:locale", content: "en_US" },
-        { property: "og:url", content: process.env.NODE_ENV === "production" ? "https://whatsapp.checkleaked.cc" : "http://localhost:3000" },
+        { property: "og:url", content: baseUrl },
 
         // Twitter Card
         { name: "twitter:card", content: "summary_large_image" },
@@ -125,7 +127,7 @@ export default defineNuxtConfig({
         { rel: "dns-prefetch", href: "https://www.google-analytics.com" },
         { rel: "dns-prefetch", href: "https://www.gstatic.com" },
         // Canonical URL
-        { rel: "canonical", href: process.env.NODE_ENV === "production" ? "https://whatsapp.checkleaked.cc" : "http://localhost:3000" },
+        { rel: "canonical", href: baseUrl },
       ],
       script: [
         // JSON-LD structured data for SEO
@@ -136,7 +138,7 @@ export default defineNuxtConfig({
             "@type": "SoftwareApplication",
             name: "WhatsApp Profile API",
             description: "Professional WhatsApp Profile API service for developers. Get user profile information, pictures, and business status.",
-            url: process.env.NODE_ENV === "production" ? "https://whatsapp.checkleaked.cc" : "http://localhost:3000",
+            url: baseUrl,
             applicationCategory: "DeveloperApplication",
             operatingSystem: "Web Browser",
             offers: {
@@ -156,7 +158,7 @@ export default defineNuxtConfig({
             provider: {
               "@type": "Organization",
               name: "WhatsApp Profile API",
-              url: process.env.NODE_ENV === "production" ? "https://whatsapp.checkleaked.cc" : "http://localhost:3000",
+              url: baseUrl,
             },
             aggregateRating: {
               "@type": "AggregateRating",
@@ -174,8 +176,8 @@ export default defineNuxtConfig({
             "@context": "https://schema.org",
             "@type": "Organization",
             name: "WhatsApp Profile API",
-            url: process.env.NODE_ENV === "production" ? "https://whatsapp.checkleaked.cc" : "http://localhost:3000",
-            logo: process.env.NODE_ENV === "production" ? "https://whatsapp.checkleaked.cc/web-app-manifest-512x512.png" : "http://localhost:3000/web-app-manifest-512x512.png",
+            url: baseUrl,
+            logo: baseUrl + "/web-app-manifest-512x512.png",
             description: "Professional WhatsApp Profile API service for developers",
             founder: {
               "@type": "Person",
@@ -227,8 +229,8 @@ export default defineNuxtConfig({
   }, // Nitro configuration for better performance
   nitro: {
     prerender: {
-      ignore: ["/manifest.json"],
       routes: ["/sitemap.xml", "/robots.txt", "/"],
+      ignore: ["/manifest.json"],
       crawlLinks: true,
     },
     compressPublicAssets: {
@@ -311,7 +313,7 @@ export default defineNuxtConfig({
   }, // Runtime configuration
   runtimeConfig: {
     public: {
-      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || (process.env.NODE_ENV === "production" ? "https://whatsapp.checkleaked.cc" : "http://localhost:3000"),
+      siteUrl: baseUrl,
       firebase: {
         apiKey: process.env.NUXT_PUBLIC_FIREBASE_API_KEY,
         authDomain: process.env.NUXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -358,7 +360,7 @@ export default defineNuxtConfig({
       "@nuxtjs/robots",
       {
         disallow: ["/admin/", "/_nuxt/", "/.nuxt/", "/server/"],
-        sitemap: "https://whatsapp.checkleaked.cc/sitemap.xml",
+        sitemap: baseUrl + "/sitemap.xml",
         credits: false,
       },
     ],

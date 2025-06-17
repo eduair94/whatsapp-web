@@ -32,9 +32,17 @@
       </v-row>
       <!-- Divider -->
       <v-divider class="mb-5 mt-2 opacity-20"></v-divider>
-
       <!-- Copyright Row -->
-      <p class="text-caption text-medium-emphasis mb-0">© {{ new Date().getFullYear() }} WhatsApp Mobile Checker. All rights reserved.</p>
+      <div class="d-flex flex-column flex-sm-row justify-space-between align-center">
+        <p class="text-caption text-center text-sm-left text-medium-emphasis mb-1 mb-sm-0">© {{ new Date().getFullYear() }} WhatsApp Mobile Checker. All rights reserved.</p>
+        <div class="d-flex align-center justify-center w-100 justify-md-end">
+          <span class="text-caption text-medium-emphasis mr-2">Developed by</span>
+          <v-btn href="https://www.linkedin.com/in/eduardo-airaudo" target="_blank" rel="noopener noreferrer" color="primary" variant="text" size="x-small" class="text-caption px-0">
+            <v-icon size="16" class="mr-1">mdi-linkedin</v-icon>
+            Eduardo Airaudo
+          </v-btn>
+        </div>
+      </div>
     </v-container>
   </v-footer>
 </template>

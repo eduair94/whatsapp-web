@@ -46,7 +46,6 @@
           <span class="d-inline d-sm-none">{{ $t("app.shortTitle") }}</span>
         </v-btn>
       </v-app-bar-title>
-      <v-spacer></v-spacer>
       <!-- Desktop Navigation Buttons -->
       <div class="d-none d-md-flex mr-lg-5">
         <!-- Tools Menu -->
@@ -127,7 +126,7 @@
       <!-- Language Selector -->
       <v-menu offset-y>
         <template #activator="{ props }">
-          <v-btn v-bind="props" color="primary" class="mr-0 mr-md-5">
+          <v-btn v-bind="props" color="primary" class="mr-0 mr-md-3">
             <v-icon>mdi-translate</v-icon>
             <span style="font-size: 0.95em; margin-left: 4px; min-width: 2ch">{{ locale.toUpperCase() }}</span>
           </v-btn>
@@ -138,6 +137,12 @@
           </v-list-item>
         </v-list>
       </v-menu>
+
+      <!-- LinkedIn Profile -->
+      <v-btn href="https://www.linkedin.com/in/eduardo-airaudo" target="_blank" rel="noopener noreferrer" color="primary" variant="text" size="small" class="mr-0 mr-md-2" title="Eduardo Airaudo - LinkedIn Profile">
+        <v-icon>mdi-linkedin</v-icon>
+        <span class="d-none d-lg-inline ml-1">Eduardo Airaudo</span>
+      </v-btn>
     </v-app-bar>
     <NuxtLayout>
       <LoadingOverlay />

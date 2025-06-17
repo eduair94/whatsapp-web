@@ -237,19 +237,12 @@ const statusColor = (status: string) => {
   }
 };
 
-const baseUrl = ref("");
 const runtimeConfig = ref<any>(null);
-
-// Computed properties that are safe for SSR
-const localizedPath = computed(() => `/${locale.value}${route.path}`);
-const pageUrl = computed(() => `${baseUrl.value}${localizedPath.value}`);
-
 // SEO meta tags
 useHead(() => {
   const title = t("verification.title") + " | WhatsApp Profile API";
   const description = t("verification.infoMessage") + " " + t("verification.title") + " - WhatsApp Profile API.";
-  const siteUrl = runtimeConfig.value?.public?.siteUrl || "https://whatsapp.checkleaked.cc";
-  const url = `${siteUrl}/verification/${route.params.number || ""}`;
+  const url = `${baseUrl}/verification/${route.params.number || ""}`;
   return {
     title,
     meta: [
@@ -281,7 +274,7 @@ useHead(() => {
           isPartOf: {
             "@type": "WebSite",
             name: "WhatsApp Profile API",
-            url: runtimeConfig.value?.public?.siteUrl || "https://whatsapp.checkleaked.cc",
+            url: runtimeConfig.value?.public?.siteUrl,
           },
           mainEntity: {
             "@type": "FAQPage",
@@ -307,16 +300,6 @@ onMounted(async () => {
   if (import.meta.client) {
     // Initialize search history storage
     await initializeStorage();
-
-    // Initialize client-side only dependencies
-    try {
-      runtimeConfig.value = useRuntimeConfig();
-      // Set base URL
-      baseUrl.value = runtimeConfig.value?.public?.siteUrl || (process.env.NODE_ENV === "production" ? "https://whatsapp.checkleaked.cc" : "http://localhost:3000");
-    } catch (error) {
-      console.error("Error initializing client-side dependencies:", error);
-    }
-
     // Parse phone number from route if available
     const phoneNumberParam = route.params.number as string;
     if (phoneNumberParam) {

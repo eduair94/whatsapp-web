@@ -107,7 +107,6 @@ const router = useRouter();
 const { user, error, loading, signIn, signUp, signInWithGoogle, resetPassword } = useFirebaseAuth();
 
 // SEO
-const baseUrl = process.env.NODE_ENV === "production" ? "https://whatsapp.checkleaked.cc" : "http://localhost:3000";
 const pageUrl = `${baseUrl}/${locale.value}/auth`;
 
 useHead({

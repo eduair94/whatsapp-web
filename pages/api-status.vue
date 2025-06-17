@@ -61,7 +61,6 @@ import { computed, onMounted, ref } from "vue";
 const { t, locale, locales } = useI18n();
 
 const route = useRoute();
-const baseUrl = process.env.NODE_ENV === "production" ? "https://whatsapp.checkleaked.cc" : "http://localhost:3000";
 const localizedPath = computed(() => `/${locale}${route.path}`);
 const pageUrl = computed(() => `${baseUrl}${localizedPath.value}`);
 
@@ -135,7 +134,6 @@ onMounted(() => {
 const { $seo } = useNuxtApp();
 
 const setupSEO = () => {
-  const baseUrl = process.env.NODE_ENV === "production" ? "https://whatsapp.checkleaked.cc" : "http://localhost:3000";
   const canonicalUrl = `${baseUrl}${route.path}`;
 
   const structuredData = [

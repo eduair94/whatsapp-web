@@ -235,7 +235,6 @@ const phoneData = ref({
   phoneNumber: "",
 });
 
-const baseUrl = process.env.NODE_ENV === "production" ? "https://whatsapp.checkleaked.cc" : "http://localhost:3000";
 const pageUrl = computed(() => `${baseUrl}${route.path}`);
 
 useHead({
