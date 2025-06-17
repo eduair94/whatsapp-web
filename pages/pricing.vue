@@ -236,8 +236,7 @@ const phoneData = ref({
 });
 
 const baseUrl = process.env.NODE_ENV === "production" ? "https://whatsapp.checkleaked.cc" : "http://localhost:3000";
-const localizedPath = computed(() => `/${locale}${route.path}`);
-const pageUrl = computed(() => `${baseUrl}${localizedPath.value}`);
+const pageUrl = computed(() => `${baseUrl}${route.path}`);
 
 useHead({
   title: computed(() => t("pricing.title")),
@@ -252,7 +251,6 @@ useHead({
     { name: "twitter:title", content: computed(() => t("pricing.title")) },
     { name: "twitter:description", content: computed(() => t("pricing.desc")) },
     { name: "twitter:card", content: "summary_large_image" },
-    { name: "twitter:site", content: "@whatsappapi" },
     { name: "robots", content: "index, follow" },
     { name: "language", content: computed(() => locale.value) },
   ],
@@ -274,6 +272,75 @@ const scrollToPricing = () => {
     section.scrollIntoView({ behavior: "smooth" });
   }
 };
+
+// SEO setup with translations and structured data
+const { $seo } = useNuxtApp();
+
+const setupSEO = () => {
+  const canonicalUrl = pageUrl.value;
+
+  const structuredData = [
+    $seo.generateWebApplicationData(),
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      name: "WhatsApp API Pricing",
+      description: t("seo.pricing.description"),
+      applicationCategory: "BusinessApplication",
+      operatingSystem: "Any",
+      offers: [
+        {
+          "@type": "Offer",
+          name: t("plan.basic"),
+          description: t("plan.basic.limit"),
+          price: "0",
+          priceCurrency: "USD",
+          priceValidUntil: "2025-12-31",
+        },
+        {
+          "@type": "Offer",
+          name: t("plan.pro"),
+          description: t("plan.pro.limit"),
+          price: "10",
+          priceCurrency: "USD",
+          priceValidUntil: "2025-12-31",
+        },
+        {
+          "@type": "Offer",
+          name: t("plan.ultra"),
+          description: t("plan.ultra.limit"),
+          price: "20",
+          priceCurrency: "USD",
+          priceValidUntil: "2025-12-31",
+        },
+        {
+          "@type": "Offer",
+          name: t("plan.mega"),
+          description: t("plan.mega.limit"),
+          price: "99",
+          priceCurrency: "USD",
+          priceValidUntil: "2025-12-31",
+        },
+      ],
+    },
+  ];
+
+  const breadcrumbs = [
+    { name: t("nav.home"), url: "/" },
+    { name: t("nav.pricing"), url: route.path },
+  ];
+
+  $seo.setupPageSEO({
+    title: t("seo.pricing.title"),
+    description: t("seo.pricing.description"),
+    keywords: t("seo.pricing.keywords"),
+    canonicalUrl,
+    structuredData,
+    breadcrumbs,
+  });
+};
+
+setupSEO();
 </script>
 
 <style scoped>

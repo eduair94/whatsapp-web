@@ -44,6 +44,7 @@ export default defineNuxtConfig({
   // SEO and Performance optimizations
   app: {
     head: {
+      titleTemplate: "%s - Whatsapp Checkleaked",
       htmlAttrs: {
         lang: "en",
       },
@@ -77,7 +78,7 @@ export default defineNuxtConfig({
 
         // Twitter Card
         { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:site", content: "@whatsappapi" },
+        { name: "twitter:site", content: "@checkleaked" },
         { name: "twitter:title", content: "WhatsApp Profile API - Only $99/month for 500K requests" },
         { name: "twitter:description", content: "Professional WhatsApp Profile API service. Get user profile information and pictures." },
         { name: "twitter:image", content: "/web-app-manifest-512x512.png" },
@@ -347,7 +348,118 @@ export default defineNuxtConfig({
         // imports: false, // Disable vue-i18n composable auto-imports (removed, not supported)
       },
     ],
+    "@nuxtjs/sitemap",
+    "@nuxtjs/seo",
+    [
+      "@nuxtjs/robots",
+      {
+        disallow: ["/admin/", "/_nuxt/", "/.nuxt/", "/server/"],
+        sitemap: "https://whatsapp.checkleaked.cc/sitemap.xml",
+        credits: false,
+      },
+    ],
+    [
+      "@vite-pwa/nuxt",
+      {
+        registerType: "autoUpdate",
+        workbox: {
+          navigateFallback: "/",
+          globPatterns: ["**/*.{js,css,html,png,svg,ico}"],
+          cleanupOutdatedCaches: true,
+          runtimeCaching: [
+            {
+              urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
+              handler: "CacheFirst",
+              options: {
+                cacheName: "google-fonts-cache",
+                expiration: {
+                  maxEntries: 10,
+                  maxAgeSeconds: 60 * 60 * 24 * 365, // 365 days
+                },
+              },
+            },
+            {
+              urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i,
+              handler: "CacheFirst",
+              options: {
+                cacheName: "gstatic-fonts-cache",
+                expiration: {
+                  maxEntries: 10,
+                  maxAgeSeconds: 60 * 60 * 24 * 365, // 365 days
+                },
+              },
+            },
+            {
+              urlPattern: /\/api\/.*/i,
+              handler: "NetworkFirst",
+              options: {
+                cacheName: "api-cache",
+                networkTimeoutSeconds: 10,
+                expiration: {
+                  maxEntries: 16,
+                  maxAgeSeconds: 300, // 5 minutes
+                },
+              },
+            },
+          ],
+        },
+        client: {
+          installPrompt: true,
+          periodicSyncForUpdates: 20,
+        },
+        devOptions: {
+          enabled: true,
+          suppressWarnings: true,
+          navigateFallbackAllowlist: [/^\/$/],
+          type: "module",
+        },
+        manifest: {
+          name: "WhatsApp Profile API",
+          short_name: "WP API",
+          description: "Professional WhatsApp Profile API service for developers",
+          theme_color: "#25D366",
+          background_color: "#ffffff",
+          display: "standalone",
+          orientation: "portrait",
+          scope: "/",
+          start_url: "/",
+          icons: [
+            {
+              src: "/web-app-manifest-192x192.png",
+              sizes: "192x192",
+              type: "image/png",
+              purpose: "any",
+            },
+            {
+              src: "/web-app-manifest-512x512.png",
+              sizes: "512x512",
+              type: "image/png",
+              purpose: "any",
+            },
+            {
+              src: "/web-app-manifest-512x512.png",
+              sizes: "512x512",
+              type: "image/png",
+              purpose: "maskable",
+            },
+            {
+              src: "/apple-touch-icon.png",
+              sizes: "180x180",
+              type: "image/png",
+            },
+          ],
+          categories: ["developer", "utilities", "business"],
+          lang: "en",
+          dir: "ltr",
+        },
+      },
+    ],
   ],
+
+  // Sitemap Configuration
+  sitemap: {
+    sources: ["/api/__sitemap__/urls"],
+  },
 
   // Performance and PWA optimizations
   ssr: true, // Ensure SSR is enabled for better SEO

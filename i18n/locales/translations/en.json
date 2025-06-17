@@ -118,6 +118,9 @@
   "nav.auth": "Login / Register",
   "nav.user": "User",
   "nav.logout": "Logout",
+  "pwa.installApp": "Install App",
+  "pwa.installTitle": "Install WhatsApp Profile API",
+  "pwa.installDescription": "Get quick access with our mobile app",
   "auth.title": "Authentication",
   "auth.login": "Login",
   "auth.login.title": "Login",
@@ -286,5 +289,10 @@
   "review.popupMessage": "Help others discover our WhatsApp lookup service by leaving a review!",
   "review.later": "Maybe later",
   "review.leaveReview": "Leave a review",
-  "review.doNotShowAgain": "Do not show this again"
+  "review.doNotShowAgain": "Do not show this again",
+  "faq.title": "Frequently Asked Questions",
+  "faq.subtitle": "Find answers to common questions about our WhatsApp number verification service",
+  "faq.stillHaveQuestions": "Still have questions?",
+  "faq.contactDescription": "Can't find the answer you're looking for? Our support team is here to help.",
+  "faq.contactUs": "Contact Support"
 }

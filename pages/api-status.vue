@@ -77,7 +77,6 @@ useHead({
     { name: "twitter:title", content: computed(() => t("status.title")) },
     { name: "twitter:description", content: computed(() => t("status.desc")) },
     { name: "twitter:card", content: "summary_large_image" },
-    { name: "twitter:site", content: "@whatsappapi" },
     { name: "robots", content: "index, follow" },
     { name: "language", content: computed(() => locale.value) },
   ],
@@ -128,7 +127,53 @@ const formatDistanceToNow = (date: Date): string => {
   return "just now";
 };
 
-onMounted(fetchApiStatus);
+onMounted(() => {
+  fetchApiStatus();
+});
+
+// SEO setup with translations and structured data
+const { $seo } = useNuxtApp();
+
+const setupSEO = () => {
+  const baseUrl = process.env.NODE_ENV === "production" ? "https://whatsapp.checkleaked.cc" : "http://localhost:3000";
+  const canonicalUrl = `${baseUrl}${route.path}`;
+
+  const structuredData = [
+    $seo.generateWebApplicationData(),
+    {
+      "@context": "https://schema.org",
+      "@type": "MonitoringService",
+      name: "WhatsApp API Status Monitor",
+      description: "Real-time monitoring of WhatsApp Profile API service status and performance",
+      provider: {
+        "@type": "Organization",
+        name: "CheckLeaked",
+      },
+      serviceType: "API Monitoring",
+      monitoredService: {
+        "@type": "WebAPI",
+        name: "WhatsApp Profile API",
+        description: "WhatsApp number verification and profile lookup API",
+      },
+    },
+  ];
+
+  const breadcrumbs = [
+    { name: t("nav.home"), url: "/" },
+    { name: t("nav.apiStatus"), url: route.path },
+  ];
+
+  $seo.setupPageSEO({
+    title: t("seo.apiStatus.title"),
+    description: t("seo.apiStatus.description"),
+    keywords: t("seo.apiStatus.keywords"),
+    canonicalUrl,
+    structuredData,
+    breadcrumbs,
+  });
+};
+
+setupSEO();
 </script>
 
 <style scoped>

@@ -10,13 +10,15 @@
             <span class="text-body-2 font-weight-bold text-primary">WhatsApp Checker</span>
           </div>
         </v-col>
-
         <!-- Quick Links -->
         <v-col cols="12" md="4" class="text-center py-1">
           <div class="d-flex flex-wrap justify-center ga-1">
             <v-btn variant="text" size="x-small" color="primary" to="/pricing" class="text-caption">Pricing</v-btn>
             <v-btn variant="text" size="x-small" color="primary" to="/database" class="text-caption">Database</v-btn>
             <v-btn variant="text" size="x-small" color="primary" to="/api-status" class="text-caption">Status</v-btn>
+            <v-btn variant="text" size="x-small" color="primary" to="/faqs" class="text-caption">FAQs</v-btn>
+            <v-btn variant="text" size="x-small" color="primary" to="/terms" class="text-caption">Terms</v-btn>
+            <v-btn variant="text" size="x-small" color="primary" to="/privacy" class="text-caption">Privacy</v-btn>
           </div>
         </v-col>
 

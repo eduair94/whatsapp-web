@@ -99,7 +99,7 @@
 
               <!-- Action Buttons -->
               <v-row>
-                <v-col cols="12" class="text-right">
+                <v-col cols="12" class="text-right d-flex ga-3 flex-wrap justify-end">
                   <v-btn type="button" color="secondary" variant="outlined" class="mr-3" @click="clearFilters">
                     <v-icon class="mr-2">mdi-filter-off</v-icon>
                     {{ t("database.clearFilters") }}
@@ -122,7 +122,7 @@
             <v-spacer></v-spacer>
           </v-card-title>
 
-          <v-data-table-server v-model:items-per-page="itemsPerPage" v-model:page="currentPage" :headers="headers" :items="searchResults" :items-length="hasMorePages ? currentPage * itemsPerPage + 1 : (currentPage - 1) * itemsPerPage + searchResults.length" :loading="loading" class="elevation-1" item-value="_id" show-current-page @update:options="loadItems">
+          <v-data-table-server :mobile="mobile" v-model:items-per-page="itemsPerPage" v-model:page="currentPage" :headers="headers" :items="searchResults" :items-length="hasMorePages ? currentPage * itemsPerPage + 1 : (currentPage - 1) * itemsPerPage + searchResults.length" :loading="loading" class="elevation-1" item-value="_id" show-current-page @update:options="loadItems">
             <!-- Profile Picture Column -->
             <template v-slot:item.profilePic="{ item }">
               <div class="d-flex align-center py-2">
@@ -413,6 +413,7 @@
 </template>
 
 <script setup lang="ts">
+import { useDisplay } from "vuetify";
 import { phoneCodes } from "~/utils/phoneCodes";
 
 definePageMeta({
@@ -423,6 +424,7 @@ definePageMeta({
 // Authentication
 const { isAuthenticated, loading: authLoading, user } = useFirebaseAuth();
 const { $firebase } = useNuxtApp();
+const { mobile } = useDisplay();
 
 // Router and route for query parameters
 const route = useRoute();

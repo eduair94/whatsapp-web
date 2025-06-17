@@ -6,10 +6,20 @@
         <!-- Tools submenu -->
         <v-list-item prepend-icon="mdi-home" :title="$t('nav.checkNumber')" :to="localePath('/')" @click="drawer = false"></v-list-item>
         <v-list-item prepend-icon="mdi-history" :title="$t('nav.searchHistory')" :to="localePath('/history')" @click="drawer = false"></v-list-item>
-        <v-list-item prepend-icon="mdi-api" :title="$t('nav.apiStatus')" :to="localePath('/api-status')" @click="drawer = false"></v-list-item>        <v-list-item prepend-icon="mdi-chart-line" :title="$t('nav.stats')" :to="localePath('/stats')" @click="drawer = false"></v-list-item> <v-list-item prepend-icon="mdi-shield-check" :title="$t('nav.testVerification')" :to="localePath('/verification')" @click="drawer = false"></v-list-item>
-        <v-list-item prepend-icon="mdi-database" :title="$t('nav.database')" :to="localePath('/database')" @click="drawer = false"></v-list-item>
-        <v-list-item prepend-icon="mdi-robot" :title="$t('nav.telegramBot')" href="https://t.me/WhatsappNumberSearch_bot" target="_blank" @click="drawer = false"></v-list-item>
+        <v-list-item prepend-icon="mdi-api" :title="$t('nav.apiStatus')" :to="localePath('/api-status')" @click="drawer = false"></v-list-item> <v-list-item prepend-icon="mdi-chart-line" :title="$t('nav.stats')" :to="localePath('/stats')" @click="drawer = false"></v-list-item> <v-list-item prepend-icon="mdi-shield-check" :title="$t('nav.testVerification')" :to="localePath('/verification')" @click="drawer = false"></v-list-item>
+        <v-list-item prepend-icon="mdi-database" :title="$t('nav.database')" :to="localePath('/database')" @click="drawer = false"></v-list-item> <v-list-item prepend-icon="mdi-robot" :title="$t('nav.telegramBot')" href="https://t.me/WhatsappNumberSearch_bot" target="_blank" @click="drawer = false"></v-list-item>
         <v-list-item v-if="user" prepend-icon="mdi-key" :title="$t('nav.apiKeyManager')" @click="openApiKeyManager" @click.stop="drawer = false"></v-list-item>
+
+        <!-- PWA Install Button for Mobile -->
+        <v-list-item
+          v-if="canInstall"
+          prepend-icon="mdi-download"
+          :title="$t('pwa.installApp')"
+          @click="
+            installPWA();
+            drawer = false;
+          "
+        ></v-list-item>
 
         <v-list-item v-if="!user" prepend-icon="mdi-account" :title="$t('nav.auth')" :to="localePath('/auth')" @click="drawer = false"></v-list-item>
         <v-list-item
@@ -62,7 +72,8 @@
             </v-list-item>
             <v-list-item :to="localePath('/verification')" prepend-icon="mdi-shield-check">
               <v-list-item-title>{{ $t("nav.testVerification") }}</v-list-item-title>
-            </v-list-item>            <v-list-item :to="localePath('/database')" prepend-icon="mdi-database">
+            </v-list-item>
+            <v-list-item :to="localePath('/database')" prepend-icon="mdi-database">
               <v-list-item-title>{{ $t("nav.database") }}</v-list-item-title>
             </v-list-item>
             <v-list-item href="https://t.me/WhatsappNumberSearch_bot" target="_blank" prepend-icon="mdi-robot">
@@ -97,6 +108,13 @@
               </div>
             </v-list-item>
             <v-divider v-if="user" />
+
+            <!-- PWA Install Button for Desktop -->
+            <v-list-item v-if="canInstall" @click="installPWA" prepend-icon="mdi-download">
+              <v-list-item-title>{{ $t("pwa.installApp") }}</v-list-item-title>
+            </v-list-item>
+            <v-divider v-if="canInstall" />
+
             <v-list-item v-if="user" @click="logout">
               <v-list-item-title>{{ $t("nav.logout") }}</v-list-item-title>
             </v-list-item>
@@ -143,6 +161,9 @@ const localePath = useLocalePath();
 const { locale, locales, t, setLocale } = useI18n();
 const switchLocalePath = useSwitchLocalePath();
 const { openApiKeyManager } = useGlobalApiKeyManager();
+
+// PWA functionality
+const { canInstall, install: installPWA } = usePWAWeb();
 
 const availableLocales = computed(() => {
   return locales.value.filter((i) => i.code !== locale.value);

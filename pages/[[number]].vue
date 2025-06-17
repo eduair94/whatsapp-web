@@ -85,7 +85,7 @@
 </template>
 
 <script setup lang="ts">
-import { useHead, useI18n, useLocalePath, useRoute, useRouter } from "#imports";
+import { useI18n, useLocalePath, useRoute, useRouter } from "#imports";
 import parsePhoneNumber from "libphonenumber-js";
 import { generatePhoneNumber } from "phone-number-generator-js";
 import { computed, nextTick, onBeforeMount, onMounted, ref, watch } from "vue";
@@ -111,8 +111,7 @@ const router = useRouter();
 const route = useRoute();
 
 const baseUrl = process.env.NODE_ENV === "production" ? "https://whatsapp.checkleaked.cc" : "http://localhost:3000";
-const localizedPath = computed(() => `/${locale}${route.path}`);
-const pageUrl = computed(() => `${baseUrl}${localizedPath.value}`);
+const pageUrl = computed(() => `${baseUrl}${route.path}`);
 
 // Format phone number for meta tags
 const phoneNumberParam = computed(() => route.params.number as string);
@@ -122,49 +121,10 @@ const formattedPhone = computed(() => {
       const phone = parsePhoneNumber("+" + phoneNumberParam.value);
       return phone?.formatInternational() || `+${phoneNumberParam.value}`;
     } catch {
-      return `+${phoneNumberParam.value}`;
+      return ``;
     }
   }
   return "";
-});
-
-useHead({
-  title: computed(() => t("number.titlePrefix") + " " + formattedPhone.value + " - " + t("meta.suffix")),
-  meta: [
-    { name: "description", content: computed(() => t("number.descPrefix") + " " + formattedPhone.value) },
-    { property: "og:type", content: "website" },
-    { property: "og:site_name", content: computed(() => t("meta.siteName")) },
-    { property: "og:title", content: computed(() => t("number.titlePrefix") + " " + formattedPhone.value + " - " + t("meta.suffix")) },
-    { property: "og:description", content: computed(() => t("number.descPrefix") + " " + formattedPhone.value) },
-    { property: "og:url", content: pageUrl },
-    { name: "twitter:title", content: computed(() => t("number.titlePrefix") + " " + formattedPhone.value + " - " + t("meta.suffix")) },
-    { name: "twitter:description", content: computed(() => t("number.descPrefix") + " " + formattedPhone.value) },
-    { name: "twitter:card", content: "summary_large_image" },
-    { name: "twitter:site", content: "@whatsappapi" },
-    { name: "robots", content: "index, follow" },
-    { name: "language", content: computed(() => locale.value) },
-  ],
-  ...getMeta(pageUrl, baseUrl, route, locales),
-  script: [
-    {
-      type: "application/ld+json",
-      innerHTML: computed(() =>
-        JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "WebPage",
-          name: t("number.titlePrefix") + " " + formattedPhone.value + " - " + t("meta.suffix"),
-          description: t("number.descPrefix") + " " + formattedPhone.value,
-          url: pageUrl.value,
-          inLanguage: locale.value,
-          isPartOf: {
-            "@type": "WebSite",
-            name: t("meta.siteName"),
-            url: baseUrl + "/" + locale.value,
-          },
-        })
-      ),
-    },
-  ],
 });
 
 const localLoading = ref(true);
@@ -478,6 +438,81 @@ const randomNumber = () => {
     phoneNumber.value = phone.nationalNumber;
   }
 };
+
+// SEO setup with enhanced translations and structured data
+const { $seo } = useNuxtApp();
+
+const setupSEO = () => {
+  const phoneNumber = formattedPhone.value;
+  const isSpecificNumber = phoneNumber && phoneNumber !== "";
+
+  let title, description, keywords;
+
+  if (isSpecificNumber) {
+    // SEO for specific phone number pages
+    const phoneData = data.value
+      ? {
+          number: phoneNumber,
+          country: phoneCode.value.countryTranslated || "Unknown",
+          verified: !data.value.error,
+          hasWhatsApp: !data.value.error,
+        }
+      : undefined;
+
+    const phoneMeta = $seo.generatePhoneSearchMeta(phoneNumber, phoneCode.value.countryTranslated);
+    title = phoneMeta.title;
+    description = phoneMeta.description;
+    keywords = phoneMeta.keywords;
+
+    // Enhanced structured data for phone number pages
+    const structuredData = [$seo.generateWebApplicationData(), ...(phoneData ? [$seo.generatePhoneNumberData(phoneNumber, phoneData)] : [])];
+
+    // Breadcrumb navigation
+    const breadcrumbs = [
+      { name: t("nav.home"), url: localePath("/") },
+      { name: `${t("lookup.phone")}: ${phoneNumber}`, url: pageUrl.value },
+    ];
+
+    $seo.setupPageSEO({
+      title,
+      description,
+      keywords,
+      canonicalUrl: pageUrl.value,
+      structuredData,
+      breadcrumbs,
+      phoneNumber,
+      phoneData,
+    });
+  } else {
+    // SEO for home page (when no specific number)
+    title = t("seo.home.title");
+    description = t("seo.home.description");
+    keywords = t("seo.home.keywords");
+
+    const structuredData = [$seo.generateWebApplicationData(), $seo.generateWhatsAppFAQData()];
+
+    $seo.setupPageSEO({
+      title,
+      description,
+      keywords,
+      canonicalUrl: pageUrl.value,
+      structuredData,
+    });
+  }
+};
+
+// Watch for data changes to update SEO
+watch(
+  [data, formattedPhone],
+  () => {
+    if (import.meta.client) {
+      setupSEO();
+    }
+  },
+  { deep: true }
+);
+
+setupSEO();
 </script>
 
 <style lang="scss">
