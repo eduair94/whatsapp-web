@@ -154,7 +154,6 @@ export class IpRateLimiterService {
       return false;
     }
   }
-
   /**
    * Check if IP can make a request without incrementing the count
    * Use this before processing a request, then call incrementSuccessfulRequest() only if the request succeeds
@@ -180,6 +179,13 @@ export class IpRateLimiterService {
       if (ipRecord.windowStart < windowStart) {
         // New window - allow the request
         return true;
+      }
+
+      // Max one request every 20 seconds
+      const timeSinceLastRequest = now.getTime() - ipRecord.lastRequest.getTime();
+      if (timeSinceLastRequest < 20000) {
+        // Less than 20 seconds since last request - deny
+        throw new Error("Max one request every 20 seconds due to spam");
       }
 
       // We're in the same window, check if adding one more would exceed the limit
