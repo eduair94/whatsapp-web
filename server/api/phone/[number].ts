@@ -70,7 +70,7 @@ export default defineEventHandler(async (event) => {
       const url = `https://www.google.com/recaptcha/api/siteverify?secret=${captchaSecret}&response=${token}`;
       const x = await axios.post(url).then((res) => res.data);
       if (x.success) {
-        const endpoint = `http://104.234.204.107:3728/number/${number}?bypass992=true`;
+        const endpoint = `http://104.234.204.107:3728/number/${number}?bypass992=true&ip=${ip}`;
         const data = await axios.get(endpoint).then((res) => res.data);
         if (!data?.error && !data?._id) {
           await ipRateLimit.incrementSuccessfulRequest(ip);
