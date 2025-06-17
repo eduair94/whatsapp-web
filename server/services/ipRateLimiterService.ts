@@ -181,13 +181,6 @@ export class IpRateLimiterService {
         return true;
       }
 
-      // Max one request every 20 seconds
-      const timeSinceLastRequest = now.getTime() - ipRecord.lastRequest.getTime();
-      if (timeSinceLastRequest < 20000) {
-        // Less than 20 seconds since last request - deny
-        throw new Error("Max one request every 20 seconds due to spam");
-      }
-
       // We're in the same window, check if adding one more would exceed the limit
       if (ipRecord.count >= this.RATE_LIMIT) {
         return false;
