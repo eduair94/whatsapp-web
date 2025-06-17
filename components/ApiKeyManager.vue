@@ -97,6 +97,7 @@ const { t } = useI18n();
 const { user } = useFirebaseAuth();
 const { loading, error, linkApiKey, getUserApiKey, removeApiKey } = useApiKeyManagement();
 const { isApiKeyManagerOpen, closeApiKeyManager } = useGlobalApiKeyManager();
+const { setApiKeyValue } = usePhoneApi(); // Move this to the top level
 
 // Component state
 const confirmRemove = ref(false);
@@ -126,7 +127,6 @@ const loadCurrentApiKey = async () => {
         apiKey: response.apiKey!,
         linkedAt: response.lastSaved!,
       };
-      const { setApiKeyValue } = usePhoneApi();
       setApiKeyValue(true);
     }
   } catch (err) {

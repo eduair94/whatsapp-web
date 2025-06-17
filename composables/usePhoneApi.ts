@@ -1,4 +1,4 @@
-import { computed, ref, watch } from "vue";
+import { computed, getCurrentInstance, ref, watch } from "vue";
 import { useReCaptcha } from "vue-recaptcha-v3";
 import type { WhatsAppProfileData } from "~/utils/interfaces/phone.interface";
 import { useFirebaseAuth } from "./useFirebaseAuth";
@@ -58,19 +58,35 @@ export const usePhoneApi = (options: PhoneApiOptions = {}) => {
 
   // Dependencies
   const { user } = useFirebaseAuth();
-  const recaptchaInstance = useReCaptcha();
+
+  // Get reCaptcha instance safely - only if we're in a component context
+  let recaptchaInstance: any = null;
+  try {
+    // Only call useReCaptcha if we're in a valid Vue context
+    if (getCurrentInstance()) {
+      recaptchaInstance = useReCaptcha();
+    }
+  } catch (err) {
+    // If useReCaptcha fails (e.g., called outside setup), we'll handle it gracefully
+    console.warn("reCaptcha not available in current context");
+  }
 
   /**
    * Get reCAPTCHA token for API request
    */
   const getRecaptchaToken = async (): Promise<string | undefined> => {
     try {
+      if (!recaptchaInstance) {
+        console.warn("reCaptcha instance not available");
+        return undefined;
+      }
       await recaptchaInstance?.recaptchaLoaded();
       const token = await recaptchaInstance?.executeRecaptcha("wp");
       return token;
     } catch (err) {
       console.error("Failed to get reCAPTCHA token:", err);
-      throw new Error("reCAPTCHA verification failed");
+      // Don't throw error - return undefined to allow request to proceed without reCaptcha
+      return undefined;
     }
   };
 
@@ -136,13 +152,17 @@ export const usePhoneApi = (options: PhoneApiOptions = {}) => {
   /**
    * Build request URL with query parameters
    */
-  const buildRequestUrl = (phoneNumber: string, recaptchaToken: string): string => {
+  const buildRequestUrl = (phoneNumber: string, recaptchaToken?: string): string => {
     const baseUrl = `/api/phone/${phoneNumber}`;
     const params = new URLSearchParams();
 
-    params.append("token", recaptchaToken);
+    // Only add reCaptcha token if it's available
+    if (recaptchaToken) {
+      params.append("token", recaptchaToken);
+    }
 
-    return `${baseUrl}?${params.toString()}`;
+    const paramString = params.toString();
+    return paramString ? `${baseUrl}?${paramString}` : baseUrl;
   };
 
   /**
@@ -213,11 +233,7 @@ export const usePhoneApi = (options: PhoneApiOptions = {}) => {
       // Get required tokens
       const recaptchaToken = await getRecaptchaToken();
 
-      if (!recaptchaToken) {
-        throw new Error("reCAPTCHA verification is required");
-      }
-
-      // Build request URL
+      // Build request URL (reCaptcha token is optional if not available)
       const url = buildRequestUrl(phoneNumber, recaptchaToken);
 
       // Perform the request

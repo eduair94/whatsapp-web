@@ -37,8 +37,7 @@ export default defineNuxtPlugin(() => {
       const { $i18n } = useNuxtApp();
 
       if (phoneNumber && country) {
-        const countryNameFromList = phoneCodes.find((code) => code.code === country)?.country || country;
-        const countryName = $i18n.t(`country.${countryNameFromList}`) || country;
+        const countryName = country;
         const countryLower = country.toLowerCase();
         const countryNameLower = countryName.toLowerCase();
 
@@ -182,12 +181,10 @@ export default defineNuxtPlugin(() => {
 
     // Generate Twitter Card meta tags
     generateTwitterMeta(title: string, description: string, image?: string): Record<string, string> {
-      const { $i18n } = useNuxtApp();
-
       return {
         "twitter:card": "summary_large_image",
-        "twitter:site": $i18n.t("seo.twitter.site"),
-        "twitter:creator": $i18n.t("seo.twitter.creator"),
+        "twitter:site": "checkleaked",
+        "twitter:creator": "checkleaked",
         "twitter:title": title,
         "twitter:description": description,
         "twitter:image": image || "https://whatsapp.checkleaked.cc/img/favicon.png", // Replace with your actual image
