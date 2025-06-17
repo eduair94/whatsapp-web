@@ -253,5 +253,10 @@
   "database.close": "Chiudi",
   "database.searchAgain": "Cerca di nuovo",
   "database.meta.description": "Cerca ed esplora il nostro database completo di numeri di telefono WhatsApp con opzioni di filtro avanzate.",
-  "database.checkingAuth": "Verifica autenticazione..."
+  "database.checkingAuth": "Verifica autenticazione...",
+  "faq.title": "Domande Frequenti",
+  "faq.subtitle": "Trova risposte alle domande più comuni sul nostro servizio di verifica del numero WhatsApp",
+  "faq.stillHaveQuestions": "Hai ancora domande?",
+  "faq.contactDescription": "Non trovi la risposta che cerchi? Il nostro team di supporto è a tua disposizione.",
+  "faq.contactUs": "Contatta il Supporto"
 }
