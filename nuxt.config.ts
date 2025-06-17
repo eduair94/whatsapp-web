@@ -1,6 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: false }, // Disable in production
+  site: {
+    url: process.env.NUXT_PUBLIC_SITE_URL || (process.env.NODE_ENV === "production" ? "https://whatsapp.checkleaked.cc" : "http://localhost:3000"),
+  },
   css: ["vuetify/lib/styles/main.sass", "@mdi/font/css/materialdesignicons.min.css"],
   build: {
     transpile: ["vuetify", "firebase", "tslib"],

@@ -257,5 +257,10 @@
   "review.popupMessage": "Помогите другим узнать о нашем сервисе поиска WhatsApp, оставив отзыв!",
   "review.later": "Может быть позже",
   "review.leaveReview": "Оставить отзыв",
-  "review.doNotShowAgain": "Больше не показывать"
+  "review.doNotShowAgain": "Больше не показывать",
+  "faq.title": "Часто Задаваемые Вопросы",
+  "faq.subtitle": "Найдите ответы на общие вопросы о нашем сервисе проверки номеров WhatsApp",
+  "faq.stillHaveQuestions": "Остались вопросы?",
+  "faq.contactDescription": "Не можете найти нужный ответ? Наша команда поддержки готова помочь.",
+  "faq.contactUs": "Связаться с Поддержкой"
 }

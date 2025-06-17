@@ -288,5 +288,10 @@
   "review.popupMessage": "Ajude outros a descobrir nosso serviço de busca do WhatsApp deixando uma avaliação!",
   "review.later": "Talvez mais tarde",
   "review.leaveReview": "Deixar uma avaliação",
-  "review.doNotShowAgain": "Não mostrar isso novamente"
+  "review.doNotShowAgain": "Não mostrar isso novamente",
+  "faq.title": "Perguntas Frequentes",
+  "faq.subtitle": "Encontre respostas para perguntas comuns sobre nosso serviço de verificação de números do WhatsApp",
+  "faq.stillHaveQuestions": "Ainda tem dúvidas?",
+  "faq.contactDescription": "Não encontrou a resposta que procura? Nossa equipe de suporte está aqui para ajudar.",
+  "faq.contactUs": "Entrar em Contato"
 }

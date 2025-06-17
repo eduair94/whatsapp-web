@@ -37,6 +37,7 @@ export default defineEventHandler(async (event) => {
         if (response.ok) {
           const data = await response.json();
           if (data.success && data.data && Array.isArray(data.data.docs)) {
+            console.log(`Fetched ${data.data.docs.length} phone numbers from page ${params.page}`);
             data.data.docs.forEach((item: any) => {
               if (item.number) {
                 if (item.number.includes("@")) {
