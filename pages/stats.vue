@@ -226,7 +226,7 @@ const fetchStats = async () => {
       // Handle fetch errors
       console.error("Fetch error:", e);
       if (e?.statusCode === 403) {
-        window.location.reload();
+        window.location.href = "/api/refresh";
       }
       return {
         success: false,

@@ -199,7 +199,7 @@ if (import.meta.client) {
     .catch((e) => {
       // $fetch throws an error for non-2xx status codes
       if (e?.statusCode === 403) {
-        window.location.reload();
+        window.location.href = "/api/refresh";
       }
     });
 }
