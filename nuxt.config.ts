@@ -251,16 +251,17 @@ export default defineNuxtConfig({
   // Route rules for optimal caching and security
   routeRules: {
     "/": {
-      prerender: true,
+      ssr: true,
+      prerender: false,
       headers: {
-        "cache-control": "s-maxage=3600",
+        "cache-control": "no-cache",
         "X-Frame-Options": "DENY",
         "X-Content-Type-Options": "nosniff",
         "Referrer-Policy": "strict-origin-when-cross-origin",
       },
     },
     "/verification/**": {
-      ssr: false, // Disable SSR for verification pages that use client-side only features
+      ssr: true, // Disable SSR for verification pages that use client-side only features
       headers: { "cache-control": "no-cache" },
     },
     "/api/search": {
@@ -270,7 +271,7 @@ export default defineNuxtConfig({
         "X-Frame-Options": "DENY",
         Vary: "Accept-Encoding, Accept-Language", // Cache varies by query parameters
       },
-      cors: true,
+      cors: false,
     },
     "/api/phone/limits": {
       headers: {
@@ -280,7 +281,7 @@ export default defineNuxtConfig({
         "X-Content-Type-Options": "nosniff",
         "X-Frame-Options": "DENY",
       },
-      cors: true,
+      cors: false,
     },
     "/api/**": {
       headers: {
@@ -290,7 +291,7 @@ export default defineNuxtConfig({
         "X-Content-Type-Options": "nosniff",
         "X-Frame-Options": "DENY",
       },
-      cors: true,
+      cors: false,
     },
     "/_nuxt/**": {
       headers: { "cache-control": "max-age=31536000, immutable" },
