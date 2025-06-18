@@ -225,7 +225,7 @@ const fetchStats = async () => {
     const response = await $fetch("/api/stats").catch((e) => {
       // Handle fetch errors
       console.error("Fetch error:", e);
-      if (e?.statusCode === 403) {
+      if (e?.response?.status === 403) {
         window.location.href = "/api/refresh";
       }
       return {

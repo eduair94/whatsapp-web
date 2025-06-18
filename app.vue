@@ -198,7 +198,7 @@ if (import.meta.client) {
     })
     .catch((e) => {
       // $fetch throws an error for non-2xx status codes
-      if (e?.statusCode === 403) {
+      if (e?.response?.status === 403) {
         window.location.href = "/api/refresh";
       }
     });

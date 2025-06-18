@@ -371,8 +371,16 @@ export default defineNuxtConfig({
         registerType: "autoUpdate",
         workbox: {
           navigateFallback: "/",
-          globPatterns: ["**/*.{js,css,html,png,svg,ico}"],
+          globPatterns: ["**/*.{js,css,html,png,svg,ico,json,woff2,woff}"],
+          globIgnores: [
+            "**/node_modules/**/*",
+            "sw.js",
+            "workbox-*.js",
+            "**/_payload.json", // Explicitly ignore payload files to avoid warnings
+          ],
           cleanupOutdatedCaches: true,
+          skipWaiting: true,
+          clientsClaim: true,
           runtimeCaching: [
             {
               urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
