@@ -293,5 +293,18 @@
   "faq.subtitle": "Encontre respostas para perguntas comuns sobre nosso serviço de verificação de números do WhatsApp",
   "faq.stillHaveQuestions": "Ainda tem dúvidas?",
   "faq.contactDescription": "Não encontrou a resposta que procura? Nossa equipe de suporte está aqui para ajudar.",
-  "faq.contactUs": "Entrar em Contato"
+  "faq.contactUs": "Entrar em Contato",
+  "reviews.title": "O Que Nossos Usuários Dizem",
+  "reviews.subtitle": "Avaliações reais de nossos clientes satisfeitos",
+  "reviews.review": "avaliação",
+  "reviews.reviews": "avaliações",
+  "reviews.loading": "Carregando avaliações...",
+  "reviews.failed": "Falha ao carregar avaliações",
+  "reviews.tryAgain": "Tentar Novamente",
+  "reviews.verified": "Verificado",
+  "reviews.viewAll": "Ver Todas as Avaliações",
+  "reviews.noReviews": "Nenhuma avaliação disponível ainda",
+  "reviews.daysAgo": "há {count} dia | há {count} dias",
+  "reviews.weeksAgo": "há {count} semana | há {count} semanas",
+  "reviews.monthsAgo": "há {count} mês | há {count} meses"
 }

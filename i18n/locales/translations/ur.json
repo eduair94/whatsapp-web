@@ -225,5 +225,18 @@
   "review.popupMessage": "ریویو چھوڑ کر دوسروں کو ہماری واٹس ایپ تلاش کی سروس دریافت کرنے میں مدد کریں!",
   "review.later": "شاید بعد میں",
   "review.leaveReview": "ریویو چھوڑیں",
-  "review.doNotShowAgain": "یہ دوبارہ نہ دکھائیں"
+  "review.doNotShowAgain": "یہ دوبارہ نہ دکھائیں",
+  "reviews.title": "ہمارے صارفین کیا کہتے ہیں",
+  "reviews.subtitle": "ہمارے مطمئن گاہکوں کی حقیقی جائزے",
+  "reviews.review": "جائزہ",
+  "reviews.reviews": "جائزے",
+  "reviews.loading": "جائزے لوڈ ہو رہے ہیں...",
+  "reviews.failed": "جائزے لوڈ کرنے میں ناکام",
+  "reviews.tryAgain": "دوبارہ کوشش کریں",
+  "reviews.verified": "تصدیق شدہ",
+  "reviews.viewAll": "تمام جائزے دیکھیں",
+  "reviews.noReviews": "ابھی تک کوئی جائزہ دستیاب نہیں",
+  "reviews.daysAgo": "{count} دن پہلے | {count} دن پہلے",
+  "reviews.weeksAgo": "{count} ہفتہ پہلے | {count} ہفتے پہلے",
+  "reviews.monthsAgo": "{count} مہینہ پہلے | {count} مہینے پہلے"
 }

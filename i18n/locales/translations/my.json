@@ -252,5 +252,18 @@
   "review.popupMessage": "သုံးသပ်ချက် ပေးထားခြင်းဖြင့် အခြားသူများကို ကျွန်ုပ်တို့၏ WhatsApp ရှာဖွေရေး ဝန်ဆောင်မှုကို ရှာတွေ့စေရန် ကူညီပါ!",
   "review.later": "နောက်မှ ပေးမည်",
   "review.leaveReview": "သုံးသပ်ချက် ပေးရန်",
-  "review.doNotShowAgain": "ဒါကို နောက်တစ်ကြိမ် မပြပါနဲ့"
+  "review.doNotShowAgain": "ဒါကို နောက်တစ်ကြိမ် မပြပါနဲ့",
+  "reviews.title": "ကျွန်ုပ်တို့ အသုံးပြုသူများ ပြောသည်များ",
+  "reviews.subtitle": "ကျွန်ုပ်တို့၏ ကျေနပ်သော ဖောက်သည်များမှ စစ်မှန်သော သုံးသပ်ချက်များ",
+  "reviews.review": "သုံးသပ်ချက်",
+  "reviews.reviews": "သုံးသပ်ချက်များ",
+  "reviews.loading": "သုံးသပ်ချက်များ လတ်ဆတ်နေပါသည်...",
+  "reviews.failed": "သုံးသပ်ချက်များ လတ်ဆတ်ရန် မအောင်မြင်ပါ",
+  "reviews.tryAgain": "ထပ်လုပ်ကြည့်ပါ",
+  "reviews.verified": "အတည်ပြုပြီး",
+  "reviews.viewAll": "သုံးသပ်ချက် အားလုံးကို ကြည့်ရန်",
+  "reviews.noReviews": "သုံးသပ်ချက်များ မရှိသေးပါ",
+  "reviews.daysAgo": "{count} ရက်အကြာ | {count} ရက်အကြာ",
+  "reviews.weeksAgo": "{count} ပတ်အကြာ | {count} ပတ်အကြာ",
+  "reviews.monthsAgo": "{count} လအကြာ | {count} လအကြာ"
 }

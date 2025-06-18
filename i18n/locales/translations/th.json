@@ -252,5 +252,18 @@
   "review.popupMessage": "ช่วยให้ผู้อื่นค้นพบบริการค้นหา WhatsApp ของเราโดยการให้คะแนนรีวิว!",
   "review.later": "ไว้ทีหลัง",
   "review.leaveReview": "ให้คะแนนรีวิว",
-  "review.doNotShowAgain": "ไม่ต้องแสดงอีก"
+  "review.doNotShowAgain": "ไม่ต้องแสดงอีก",
+  "reviews.title": "สิ่งที่ผู้ใช้ของเราพูด",
+  "reviews.subtitle": "รีวิวจริงจากลูกค้าที่พอใจของเรา",
+  "reviews.review": "รีวิว",
+  "reviews.reviews": "รีวิว",
+  "reviews.loading": "กำลังโหลดรีวิว...",
+  "reviews.failed": "โหลดรีวิวไม่สำเร็จ",
+  "reviews.tryAgain": "ลองอีกครั้ง",
+  "reviews.verified": "ยืนยันแล้ว",
+  "reviews.viewAll": "ดูรีวิวทั้งหมด",
+  "reviews.noReviews": "ยังไม่มีรีวิว",
+  "reviews.daysAgo": "{count} วันที่แล้ว | {count} วันที่แล้ว",
+  "reviews.weeksAgo": "{count} สัปดาห์ที่แล้ว | {count} สัปดาห์ที่แล้ว",
+  "reviews.monthsAgo": "{count} เดือนที่แล้ว | {count} เดือนที่แล้ว"
 }

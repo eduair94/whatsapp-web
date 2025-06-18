@@ -216,5 +216,18 @@
   "faq.subtitle": "हमारी व्हाट्सऐप नंबर सत्यापन सेवा के बारे में सामान्य प्रश्नों के उत्तर खोजें",
   "faq.stillHaveQuestions": "अभी भी प्रश्न हैं?",
   "faq.contactDescription": "आप जिस उत्तर की तलाश कर रहे हैं वह नहीं मिल रहा? हमारी सहायता टीम मदद के लिए यहाँ है।",
-  "faq.contactUs": "सहायता से संपर्क करें"
+  "faq.contactUs": "सहायता से संपर्क करें",
+  "reviews.title": "हमारे उपयोगकर्ता क्या कहते हैं",
+  "reviews.subtitle": "हमारे संतुष्ट ग्राहकों की वास्तविक समीक्षाएं",
+  "reviews.review": "समीक्षा",
+  "reviews.reviews": "समीक्षाएं",
+  "reviews.loading": "समीक्षाएं लोड हो रही हैं...",
+  "reviews.failed": "समीक्षाएं लोड करने में विफल",
+  "reviews.tryAgain": "पुनः प्रयास करें",
+  "reviews.verified": "सत्यापित",
+  "reviews.viewAll": "सभी समीक्षाएं देखें",
+  "reviews.noReviews": "अभी तक कोई समीक्षा उपलब्ध नहीं",
+  "reviews.daysAgo": "{count} दिन पहले | {count} दिन पहले",
+  "reviews.weeksAgo": "{count} सप्ताह पहले | {count} सप्ताह पहले",
+  "reviews.monthsAgo": "{count} महीने पहले | {count} महीने पहले"
 }

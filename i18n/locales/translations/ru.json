@@ -262,5 +262,18 @@
   "faq.subtitle": "Найдите ответы на общие вопросы о нашем сервисе проверки номеров WhatsApp",
   "faq.stillHaveQuestions": "Остались вопросы?",
   "faq.contactDescription": "Не можете найти нужный ответ? Наша команда поддержки готова помочь.",
-  "faq.contactUs": "Связаться с Поддержкой"
+  "faq.contactUs": "Связаться с Поддержкой",
+  "reviews.title": "Что Говорят Наши Пользователи",
+  "reviews.subtitle": "Настоящие отзывы от наших довольных клиентов",
+  "reviews.review": "отзыв",
+  "reviews.reviews": "отзывы",
+  "reviews.loading": "Загрузка отзывов...",
+  "reviews.failed": "Не удалось загрузить отзывы",
+  "reviews.tryAgain": "Попробовать Снова",
+  "reviews.verified": "Проверено",
+  "reviews.viewAll": "Посмотреть Все Отзывы",
+  "reviews.noReviews": "Отзывов пока нет",
+  "reviews.daysAgo": "{count} день назад | {count} дня назад | {count} дней назад",
+  "reviews.weeksAgo": "{count} неделю назад | {count} недели назад | {count} недель назад",
+  "reviews.monthsAgo": "{count} месяц назад | {count} месяца назад | {count} месяцев назад"
 }

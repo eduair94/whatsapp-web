@@ -3,10 +3,12 @@
         "Airaudo",
         "axios",
         "checkleaked",
+        "Dach",
         "faqs",
         "nuxt",
         "Nuxt",
-        "pushname"
+        "pushname",
+        "trustpilot"
     ],
     "nuxt.isNuxtApp": false
 }

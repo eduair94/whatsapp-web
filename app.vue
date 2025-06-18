@@ -150,6 +150,8 @@
         <NuxtPage />
       </v-container>
     </NuxtLayout>
+    <!-- Reviews Carousel -->
+    <ReviewsCarousel />
     <Footer></Footer>
     <!-- API Key Manager Component -->
     <ApiKeyManager />
@@ -184,6 +186,7 @@ const { user, logout } = useFirebaseAuth();
 const Footer = defineAsyncComponent(() => import("~/components/Footer.vue"));
 const LoadingOverlay = defineAsyncComponent(() => import("~/components/LoadingOverlay.vue"));
 const ApiKeyManager = defineAsyncComponent(() => import("~/components/ApiKeyManager.vue"));
+const ReviewsCarousel = defineAsyncComponent(() => import("~/components/ReviewsCarousel.vue"));
 
 // On client side request the /api/ping and in case it fails with 403 reload the page
 if (import.meta.client) {
@@ -212,7 +215,6 @@ if (import.meta.client) {
 }
 
 .v-footer {
-  max-height: 120px;
   width: 100%;
 }
 

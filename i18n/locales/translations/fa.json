@@ -258,5 +258,18 @@
   "faq.subtitle": "پاسخ‌هایی برای سوالات رایج درباره سرویس تأیید شماره واتساپ ما پیدا کنید",
   "faq.stillHaveQuestions": "هنوز سوال دارید؟",
   "faq.contactDescription": "نمی‌توانید پاسخ مورد نظرتان را پیدا کنید؟ تیم پشتیبانی ما آماده کمک است.",
-  "faq.contactUs": "تماس با پشتیبانی"
+  "faq.contactUs": "تماس با پشتیبانی",
+  "reviews.title": "آنچه کاربران ما می‌گویند",
+  "reviews.subtitle": "نظرات واقعی از مشتریان راضی ما",
+  "reviews.review": "نظر",
+  "reviews.reviews": "نظرات",
+  "reviews.loading": "بارگیری نظرات...",
+  "reviews.failed": "بارگیری نظرات ناموفق بود",
+  "reviews.tryAgain": "دوباره تلاش کنید",
+  "reviews.verified": "تأیید شده",
+  "reviews.viewAll": "مشاهده همه نظرات",
+  "reviews.noReviews": "هنوز نظری در دسترس نیست",
+  "reviews.daysAgo": "{count} روز پیش | {count} روز پیش",
+  "reviews.weeksAgo": "{count} هفته پیش | {count} هفته پیش",
+  "reviews.monthsAgo": "{count} ماه پیش | {count} ماه پیش"
 }
