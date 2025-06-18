@@ -188,6 +188,12 @@ export const usePhoneApi = (options: PhoneApiOptions = {}) => {
         throw new Error("Authentication failed. Please log in again.");
       }
 
+      // 403 error go to refresh page
+      if (err.response?.status === 403) {
+        window.location.href = "/api/refresh";
+        throw new Error("Access forbidden. Please refresh the page.");
+      }
+
       // Handle server errors with retry
       if (err.response?.status >= 500 && attempt < retryAttempts) {
         console.warn(`API request failed (attempt ${attempt}), retrying...`);
@@ -351,6 +357,10 @@ export const usePhoneApi = (options: PhoneApiOptions = {}) => {
       return response;
     } catch (err: any) {
       console.error("Failed to fetch rate limit info:", err);
+      // 403 error go to refresh page
+      if (err.response?.status === 403) {
+        window.location.href = "/api/refresh";
+      }
       return null;
     } finally {
       rateLimitLoading.value = false;
