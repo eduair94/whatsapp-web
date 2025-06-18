@@ -222,7 +222,18 @@ const getCountryCoordinates = (isoCode) => {
 const fetchStats = async () => {
   try {
     loading.value = true;
-    const response = await $fetch("/api/stats");
+    const response = await $fetch("/api/stats").catch((e) => {
+      // Handle fetch errors
+      console.error("Fetch error:", e);
+      if (e?.statusCode === 403) {
+        window.location.reload();
+      }
+      return {
+        success: false,
+        error: e.message || "An unexpected error occurred. Please try again.",
+        statusCode: e.statusCode || 500,
+      };
+    });
 
     if (response.success) {
       statsData.value = response.data;

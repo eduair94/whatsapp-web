@@ -193,12 +193,9 @@ if (import.meta.client) {
       // If we reach here, the request was successful
       console.log("Ping successful, api working:", response);
     })
-    .catch((error) => {
+    .catch((e) => {
       // $fetch throws an error for non-2xx status codes
-      if (error.statusCode === 403) {
-        window.location.reload();
-      } else {
-        console.error("Error fetching /api/ping:", error);
+      if (e?.statusCode === 403) {
         window.location.reload();
       }
     });

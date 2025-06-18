@@ -576,6 +576,17 @@ const performSearch = async (resetPage = false) => {
       headers: {
         Authorization: `Bearer ${token}`,
       },
+    }).catch((e) => {
+      // Handle fetch errors
+      console.error("Fetch error:", e);
+      if (e?.statusCode === 403) {
+        window.location.reload();
+      }
+      return {
+        success: false,
+        error: e.message || "An unexpected error occurred. Please try again.",
+        statusCode: e.statusCode || 500,
+      };
     });
     if (response.success) {
       const docs = response.data.docs || [];
@@ -831,6 +842,17 @@ watch(
             headers: {
               Authorization: `Bearer ${token}`,
             },
+          }).catch((e) => {
+            // Handle fetch errors
+            console.error("Fetch error:", e);
+            if (e?.statusCode === 403) {
+              window.location.reload();
+            }
+            return {
+              success: false,
+              error: e.message || "An unexpected error occurred. Please try again.",
+              statusCode: e.statusCode || 500,
+            };
           });
 
           if (response.success) {
