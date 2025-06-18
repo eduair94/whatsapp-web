@@ -184,6 +184,25 @@ const { user, logout } = useFirebaseAuth();
 const Footer = defineAsyncComponent(() => import("~/components/Footer.vue"));
 const LoadingOverlay = defineAsyncComponent(() => import("~/components/LoadingOverlay.vue"));
 const ApiKeyManager = defineAsyncComponent(() => import("~/components/ApiKeyManager.vue"));
+
+// On client side request the /api/ping and in case it fails with 403 reload the page
+if (import.meta.client) {
+  $fetch("/api/ping")
+    .then((response) => {
+      // $fetch automatically handles response parsing, so we don't need to check response.ok
+      // If we reach here, the request was successful
+      console.log("Ping successful, api working:", response);
+    })
+    .catch((error) => {
+      // $fetch throws an error for non-2xx status codes
+      if (error.statusCode === 403) {
+        window.location.reload();
+      } else {
+        console.error("Error fetching /api/ping:", error);
+        window.location.reload();
+      }
+    });
+}
 </script>
 
 <style>
