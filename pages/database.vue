@@ -585,7 +585,7 @@ const performSearch = async (resetPage = false) => {
       return {
         success: false,
         error: e.message || "An unexpected error occurred. Please try again.",
-        statusCode: e.statusCode || 500,
+        statusCode: e?.response?.status || 500,
       };
     });
     if (response.success) {
@@ -638,16 +638,16 @@ const performSearch = async (resetPage = false) => {
         console.warn("Authentication required for database access");
       }
     }
-  } catch (error: any) {
-    console.error("Search error:", error);
-    errorMessage.value = error.message || error.statusText || "An unexpected error occurred. Please try again.";
+  } catch (e: any) {
+    console.error("Search error:", e);
+    errorMessage.value = e.message || e?.response?.statusText || "An unexpected error occurred. Please try again.";
     searchResults.value = [];
     hasMorePages.value = false;
 
     // Handle authentication errors from fetch
-    if (error.statusCode === 401) {
+    if (e?.response?.status === 401) {
       console.warn("Authentication required for database access");
-    } else if (error.statusCode === 429) {
+    } else if (e?.response?.status === 429) {
       console.warn("Rate limit exceeded");
     }
   } finally {
@@ -851,7 +851,7 @@ watch(
             return {
               success: false,
               error: e.message || "An unexpected error occurred. Please try again.",
-              statusCode: e.statusCode || 500,
+              statusCode: e?.response?.status || 500,
             };
           });
 
@@ -878,15 +878,15 @@ watch(
               console.warn("Authentication required for database access");
             }
           }
-        } catch (error: any) {
-          console.error("Search error:", error);
-          errorMessage.value = error.message || error.statusText || "An unexpected error occurred. Please try again.";
+        } catch (e: any) {
+          console.error("Search error:", e);
+          errorMessage.value = e.message || e.statusText || "An unexpected error occurred. Please try again.";
           searchResults.value = [];
           hasMorePages.value = false;
 
-          if (error.statusCode === 401) {
+          if (e?.response?.status === 401) {
             console.warn("Authentication required for database access");
-          } else if (error.statusCode === 429) {
+          } else if (e?.response?.status === 429) {
             console.warn("Rate limit exceeded");
           }
         } finally {

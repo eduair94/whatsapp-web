@@ -231,7 +231,7 @@ const fetchStats = async () => {
       return {
         success: false,
         error: e.message || "An unexpected error occurred. Please try again.",
-        statusCode: e.statusCode || 500,
+        statusCode: e?.response?.status || 500,
       };
     });
 
