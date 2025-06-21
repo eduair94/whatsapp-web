@@ -4,28 +4,28 @@
       <v-col cols="12" md="10" lg="8">
         <!-- Header Section -->
         <div class="text-center mb-3 mb-md-6">
-          <h2 class="text-h4 font-weight-bold mb-2">{{ $t('reviews.title') }}</h2>
-          <p class="text-subtitle-1 text-medium-emphasis">{{ $t('reviews.subtitle') }}</p>
+          <h2 class="text-h4 font-weight-bold mb-2">{{ $t("reviews.title") }}</h2>
+          <p class="text-subtitle-1 text-medium-emphasis">{{ $t("reviews.subtitle") }}</p>
 
           <!-- Rating Summary -->
           <div v-if="!pending && !error && data?.data" class="d-flex align-center justify-center mt-4 mb-2">
             <v-rating :model-value="data.data.averageRating" color="amber" density="compact" half-increments readonly size="small"></v-rating>
             <span class="text-h6 ml-2">{{ data.data.averageRating }}/5</span>
-            <span class="text-body-2 text-medium-emphasis ml-2"> ({{ data.data.totalReviews }} {{ data.data.totalReviews === 1 ? $t('reviews.review') : $t('reviews.reviews') }}) </span>
+            <span class="text-body-2 text-medium-emphasis ml-2"> ({{ data.data.totalReviews }} {{ data.data.totalReviews === 1 ? $t("reviews.review") : $t("reviews.reviews") }}) </span>
           </div>
         </div>
 
         <!-- Loading State -->
         <div v-if="pending" class="text-center py-8">
           <v-progress-circular indeterminate color="primary" size="64"></v-progress-circular>
-          <p class="text-body-1 mt-4">{{ $t('reviews.loading') }}</p>
+          <p class="text-body-1 mt-4">{{ $t("reviews.loading") }}</p>
         </div>
 
         <!-- Error State -->
         <div v-else-if="error" class="text-center py-8">
           <v-icon color="error" size="64" class="mb-4">mdi-alert-circle</v-icon>
-          <p class="text-body-1 text-error">{{ $t('reviews.failed') }}</p>
-          <v-btn color="primary" variant="outlined" @click="refresh()" class="mt-2"> {{ $t('reviews.tryAgain') }} </v-btn>
+          <p class="text-body-1 text-error">{{ $t("reviews.failed") }}</p>
+          <v-btn color="primary" variant="outlined" @click="refresh()" class="mt-2"> {{ $t("reviews.tryAgain") }} </v-btn>
         </div>
 
         <!-- Reviews Carousel -->
@@ -55,7 +55,7 @@
                             <!-- Rating -->
                             <div class="d-flex align-center justify-space-between mb-3">
                               <v-rating :model-value="review.rating" color="amber" size="small" readonly density="compact"></v-rating>
-                              <v-chip v-if="review.isVerified" color="success" size="small" variant="tonal"> {{ $t('reviews.verified') }} </v-chip>
+                              <v-chip v-if="review.isVerified" color="success" size="small" variant="tonal"> {{ $t("reviews.verified") }} </v-chip>
                             </div>
 
                             <!-- Review Title -->
@@ -102,14 +102,14 @@
 
           <!-- View All Reviews Link -->
           <div class="text-center mt-4">
-            <v-btn v-if="data?.data?.trustpilotUrl" :href="data.data.trustpilotUrl" target="_blank" rel="noopener noreferrer" color="primary" variant="outlined" append-icon="mdi-open-in-new"> {{ $t('reviews.viewAll') }} </v-btn>
+            <v-btn v-if="data?.data?.trustpilotUrl" :href="data.data.trustpilotUrl" target="_blank" rel="noopener noreferrer" color="primary" variant="outlined" append-icon="mdi-open-in-new"> {{ $t("reviews.viewAll") }} </v-btn>
           </div>
         </div>
 
         <!-- No Reviews State -->
         <div v-else class="text-center py-8">
           <v-icon color="info" size="64" class="mb-4">mdi-comment-text-outline</v-icon>
-          <p class="text-body-1">{{ $t('reviews.noReviews') }}</p>
+          <p class="text-body-1">{{ $t("reviews.noReviews") }}</p>
         </div>
       </v-col>
     </v-row>
@@ -193,8 +193,13 @@ const groupedReviews = computed(() => {
   // Group into slides
   const groups = [];
   for (let i = 0; i < extendedReviews.length; i += perSlide) {
-    groups.push(extendedReviews.slice(i, i + perSlide));
+    const toAdd = extendedReviews.slice(i, i + perSlide);
+    if (toAdd.length === perSlide) {
+      groups.push(toAdd);
+    }
   }
+
+  console.log("Grouped Reviews:", groups.length);
 
   return groups;
 });
@@ -228,18 +233,10 @@ const getInitials = (name: string): string => {
 
 const getCountryName = (countryCode: string): string => {
   // Simple country code mapping - can be expanded as needed
-  const countryMap: Record<string, string> = {
-    US: "United States",
-    GB: "United Kingdom",
-    CA: "Canada",
-    AU: "Australia",
-    DE: "Germany",
-    FR: "France",
-    ES: "Spain",
-    IT: "Italy",
-  };
+  const countryObj = phoneCodes.find((c) => c.code === countryCode);
+  if (!countryObj) return countryCode;
 
-  return countryMap[countryCode.toUpperCase()] || countryCode;
+  return t(countryObj.country);
 };
 
 const formatDate = (dateString: string): string => {
@@ -248,15 +245,15 @@ const formatDate = (dateString: string): string => {
   const diffTime = Math.abs(now.getTime() - date.getTime());
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-  if (diffDays === 1) return t('reviews.daysAgo', { count: 1 });
-  if (diffDays < 7) return t('reviews.daysAgo', { count: diffDays });
+  if (diffDays === 1) return t("reviews.daysAgo", { count: 1 });
+  if (diffDays < 7) return t("reviews.daysAgo", { count: diffDays });
   if (diffDays < 30) {
     const weeks = Math.ceil(diffDays / 7);
-    return t('reviews.weeksAgo', { count: weeks });
+    return t("reviews.weeksAgo", { count: weeks });
   }
   if (diffDays < 365) {
     const months = Math.ceil(diffDays / 30);
-    return t('reviews.monthsAgo', { count: months });
+    return t("reviews.monthsAgo", { count: months });
   }
 
   return date.toLocaleDateString();

@@ -1,14 +1,14 @@
 {
-  "verification.title": "Verification Test",
-  "verification.inputLabel": "Phone Number",
-  "verification.button": "Verify / Check Status",
-  "verification.verifyLink": "Verify your number",
-  "verification.reset": "Reset Verification",
-  "verification.statusTitle": "Current Status",
-  "verification.responseTitle": "Verification Response",
-  "verification.statusResponseTitle": "Status Response",
-  "verification.infoMessage": "The button will be enabled once you input a correct phone number.",
-  "verification.status.unknown": "Unknown",
-  "meta.verification.title": "Verification Test | WhatsApp Profile API",
-  "meta.verification.description": "The button will be enabled once you input a correct phone number. Verification Test - WhatsApp Profile API."
+  "verification.title": "Uji Verifikasi",
+  "verification.inputLabel": "Nomor Telepon",
+  "verification.button": "Verifikasi / Periksa Status",
+  "verification.verifyLink": "Verifikasi nomor Anda",
+  "verification.reset": "Reset Verifikasi",
+  "verification.statusTitle": "Status Saat Ini",
+  "verification.responseTitle": "Respons Verifikasi",
+  "verification.statusResponseTitle": "Respons Status",
+  "verification.infoMessage": "Tombol akan diaktifkan setelah Anda memasukkan nomor telepon yang benar.",
+  "verification.status.unknown": "Tidak Diketahui",
+  "meta.verification.title": "Uji Verifikasi | API Profil WhatsApp",
+  "meta.verification.description": "Tombol akan diaktifkan setelah Anda memasukkan nomor telepon yang benar. Uji Verifikasi - API Profil WhatsApp."
 }

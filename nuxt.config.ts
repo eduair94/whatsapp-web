@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { locales } from "./server/utils/locales";
+import { sitemaps } from "./server/utils/sitemaps";
 import { baseUrl } from "./utils/pageUrl";
 console.log("base url", baseUrl);
 export default defineNuxtConfig({
@@ -39,7 +41,6 @@ export default defineNuxtConfig({
       },
     },
   },
-
   // Optimize runtime performance
   experimental: {
     // Disable features that might cause initialization issues
@@ -231,7 +232,7 @@ export default defineNuxtConfig({
     prerender: {
       routes: ["/sitemap.xml", "/robots.txt", "/"],
       ignore: ["/manifest.json"],
-      crawlLinks: true,
+      crawlLinks: false, // Disable crawling to prevent auto route discovery
     },
     compressPublicAssets: {
       gzip: true,
@@ -247,14 +248,13 @@ export default defineNuxtConfig({
       wasm: true,
     },
   },
-
   // Route rules for optimal caching and security
   routeRules: {
     "/": {
       ssr: true,
       prerender: false,
       headers: {
-        "cache-control": "no-cache",
+        "cache-control": "max-age=300, s-maxage=300",
         "X-Frame-Options": "DENY",
         "X-Content-Type-Options": "nosniff",
         "Referrer-Policy": "strict-origin-when-cross-origin",
@@ -262,7 +262,7 @@ export default defineNuxtConfig({
     },
     "/verification/**": {
       ssr: true, // Disable SSR for verification pages that use client-side only features
-      headers: { "cache-control": "no-cache" },
+      headers: { "cache-control": "max-age=300, s-maxage=300" },
     },
     "/api/search": {
       headers: {
@@ -270,6 +270,16 @@ export default defineNuxtConfig({
         "X-Content-Type-Options": "nosniff",
         "X-Frame-Options": "DENY",
         Vary: "Accept-Encoding, Accept-Language", // Cache varies by query parameters
+      },
+      cors: false,
+    },
+    "/api/__sitemap__/**": {
+      headers: {
+        "cache-control": "no-cache, no-store, must-revalidate, max-age=0", // Disable sitemap API caching
+        pragma: "no-cache",
+        expires: "0",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "DENY",
       },
       cors: false,
     },
@@ -294,18 +304,23 @@ export default defineNuxtConfig({
       cors: false,
     },
     "/_nuxt/**": {
+      prerender: true,
       headers: { "cache-control": "max-age=31536000, immutable" },
     },
     "/favicon.*": {
+      prerender: true,
       headers: { "cache-control": "max-age=31536000, immutable" },
     },
     "/**/*.{png,jpg,jpeg,gif,webp,svg,ico}": {
+      prerender: true,
       headers: { "cache-control": "max-age=31536000, immutable" },
     },
     "/**/*.{js,css,woff,woff2,ttf,eot}": {
+      prerender: true,
       headers: { "cache-control": "max-age=31536000, immutable" },
     },
     "/.well-known/**": {
+      prerender: true,
       headers: {
         "cache-control": "max-age=86400",
         "Content-Type": "application/json",
@@ -330,28 +345,7 @@ export default defineNuxtConfig({
     [
       "@nuxtjs/i18n",
       {
-        locales: [
-          { code: "en", iso: "en-US", name: "English", file: "en.ts" },
-          { code: "es", iso: "es-ES", name: "Español", file: "es.ts" },
-          { code: "pt", iso: "pt-PT", name: "Português", file: "pt.ts" },
-          { code: "ru", iso: "ru-RU", name: "Русский", file: "ru.ts" },
-          { code: "hi", iso: "hi-IN", name: "हिन्दी", file: "hi.ts" },
-          { code: "my", iso: "my-MM", name: "မြန်မာစာ", file: "my.ts" },
-          { code: "de", iso: "de-DE", name: "Deutsch", file: "de.ts" },
-          { code: "ur", iso: "ur-PK", name: "اردو", file: "ur.ts" },
-          { code: "th", iso: "th-TH", name: "ไทย", file: "th.ts" },
-          { code: "fa", iso: "fa-IR", name: "فارسی", file: "fa.ts" },
-          { code: "it", iso: "it-IT", name: "Italiano", file: "it.ts" },
-          { code: "fr", iso: "fr-FR", name: "Français", file: "fr.ts" },
-          { code: "zh", iso: "zh-CN", name: "中文", file: "zh.ts" },
-          { code: "ja", iso: "ja-JP", name: "日本語", file: "ja.ts" },
-          { code: "ko", iso: "ko-KR", name: "한국어", file: "ko.ts" },
-          { code: "ar", iso: "ar-SA", name: "العربية", file: "ar.ts" },
-          { code: "id", iso: "id-ID", name: "Bahasa Indonesia", file: "id.ts" },
-          { code: "vi", iso: "vi-VN", name: "Tiếng Việt", file: "vi.ts" },
-          { code: "tr", iso: "tr-TR", name: "Türkçe", file: "tr.ts" },
-          { code: "nl", iso: "nl-NL", name: "Nederlands", file: "nl.ts" },
-        ],
+        locales: locales,
         //lazy: true,
         defaultLocale: "en",
         strategy: "prefix_except_default",
@@ -361,6 +355,9 @@ export default defineNuxtConfig({
           alwaysRedirect: true,
           fallbackLocale: "en",
         },
+        // Disable route generation features
+        parsePages: false,
+        pages: {},
         // imports: false, // Disable vue-i18n composable auto-imports (removed, not supported)
       },
     ],
@@ -478,11 +475,17 @@ export default defineNuxtConfig({
         },
       },
     ],
-  ],
-
-  // Sitemap Configuration
+  ], // Sitemap Configuration
   sitemap: {
-    sources: ["/api/__sitemap__/urls"],
+    sitemaps: sitemaps,
+    autoLastmod: true,
+    exclude: [],
+    debug: true, // Enable debug mode to see chunking info
+    // Disable auto-generation features
+    discoverImages: false,
+    discoverVideos: false,
+    // Disable auto URL discovery
+    sources: [],
   },
 
   // Performance and PWA optimizations
@@ -490,4 +493,5 @@ export default defineNuxtConfig({
 
   // Optimize module loading
   modulesDir: ["node_modules"],
+  compatibilityDate: new Date().toISOString().split("T")[0] as any, // Set compatibility date to today
 });

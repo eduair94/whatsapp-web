@@ -132,15 +132,7 @@
           </v-btn>
         </template>
         <v-card class="pa-2" min-width="200">
-          <v-autocomplete
-            v-model="selectedLocale"
-            :items="localeOptions"
-            item-title="name"
-            item-value="code"
-            density="compact"
-            hide-details
-            autofocus
-          />
+          <v-autocomplete v-model="selectedLocale" :items="localeOptions" item-title="name" @click.prevent="(e:any) => e.stopPropagation()" item-value="code" density="compact" hide-details autofocus />
         </v-card>
       </v-menu>
 
@@ -165,7 +157,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useI18n, useLocalePath, useSwitchLocalePath, useRouter } from "#imports";
+import { useI18n, useLocalePath, useRouter, useSwitchLocalePath } from "#imports";
 import { computed, defineAsyncComponent, ref, watch } from "vue";
 import { useFirebaseAuth } from "~/composables/useFirebaseAuth";
 import { useGlobalApiKeyManager } from "~/composables/useGlobalApiKeyManager";

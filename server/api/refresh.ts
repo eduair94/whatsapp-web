@@ -1,17 +1,17 @@
 export default defineEventHandler(async (event) => {
   // Get the referer URL from the request
-  const referer = getHeader(event, "referer")
-  
+  const referer = getHeader(event, "referer");
+
   // Get the origin/host from the request as fallback
   const host = getHeader(event, "host");
   const protocol = getHeader(event, "x-forwarded-proto") || "https";
   const origin = `${protocol}://${host}`;
-  
+
   // Use referer if available, otherwise fallback to root
   const backUrl = referer || origin + "/";
 
   // Set content type to HTML
-  setHeader(event, 'content-type', 'text/html')
+  setHeader(event, "content-type", "text/html");
 
   // Return HTML page with go back button
   return `

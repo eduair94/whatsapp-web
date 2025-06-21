@@ -1,14 +1,14 @@
 {
-  "verification.title": "Verification Test",
-  "verification.inputLabel": "Phone Number",
-  "verification.button": "Verify / Check Status",
-  "verification.verifyLink": "Verify your number",
-  "verification.reset": "Reset Verification",
-  "verification.statusTitle": "Current Status",
-  "verification.responseTitle": "Verification Response",
-  "verification.statusResponseTitle": "Status Response",
-  "verification.infoMessage": "The button will be enabled once you input a correct phone number.",
-  "verification.status.unknown": "Unknown",
-  "meta.verification.title": "Verification Test | WhatsApp Profile API",
-  "meta.verification.description": "The button will be enabled once you input a correct phone number. Verification Test - WhatsApp Profile API."
+  "verification.title": "Test de vérification",
+  "verification.inputLabel": "Numéro de téléphone",
+  "verification.button": "Vérifier / Vérifier le statut",
+  "verification.verifyLink": "Vérifiez votre numéro",
+  "verification.reset": "Réinitialiser la vérification",
+  "verification.statusTitle": "Statut actuel",
+  "verification.responseTitle": "Réponse de vérification",
+  "verification.statusResponseTitle": "Réponse de statut",
+  "verification.infoMessage": "Le bouton sera activé une fois que vous saisissez un numéro de téléphone correct.",
+  "verification.status.unknown": "Inconnu",
+  "meta.verification.title": "Test de vérification | API Profil WhatsApp",
+  "meta.verification.description": "Le bouton sera activé une fois que vous saisissez un numéro de téléphone correct. Test de vérification - API Profil WhatsApp."
 }

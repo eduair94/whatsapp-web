@@ -1,16 +1,16 @@
 {
-  "status.currentStatus": "Current Status",
+  "status.currentStatus": "Status Saat Ini",
   "status.online": "Online",
   "status.offline": "Offline",
-  "status.isWorking": "Is Working",
-  "status.yes": "Yes",
-  "status.no": "No",
-  "status.lastChecked": "Last Checked",
-  "status.requestsPerMinute": "Requests per Minute",
-  "status.success": "Success",
-  "status.error": "Error",
-  "status.checking": "Checking API status...",
-  "status.reload": "Reload Status",
-  "status.title": "API Status - WhatsApp Profile API",
-  "status.desc": "Check the current status and uptime of the WhatsApp Profile API."
+  "status.isWorking": "Berfungsi",
+  "status.yes": "Ya",
+  "status.no": "Tidak",
+  "status.lastChecked": "Terakhir Diperiksa",
+  "status.requestsPerMinute": "Permintaan per Menit",
+  "status.success": "Berhasil",
+  "status.error": "Kesalahan",
+  "status.checking": "Memeriksa status API...",
+  "status.reload": "Muat Ulang Status",
+  "status.title": "Status API - API Profil WhatsApp",
+  "status.desc": "Periksa status saat ini dan waktu aktif API Profil WhatsApp."
 }

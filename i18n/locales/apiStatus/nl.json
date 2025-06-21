@@ -1,16 +1,16 @@
 {
-  "status.currentStatus": "Current Status",
+  "status.currentStatus": "Huidige Status",
   "status.online": "Online",
   "status.offline": "Offline",
-  "status.isWorking": "Is Working",
-  "status.yes": "Yes",
-  "status.no": "No",
-  "status.lastChecked": "Last Checked",
-  "status.requestsPerMinute": "Requests per Minute",
-  "status.success": "Success",
-  "status.error": "Error",
-  "status.checking": "Checking API status...",
-  "status.reload": "Reload Status",
-  "status.title": "API Status - WhatsApp Profile API",
-  "status.desc": "Check the current status and uptime of the WhatsApp Profile API."
+  "status.isWorking": "Werkt",
+  "status.yes": "Ja",
+  "status.no": "Nee",
+  "status.lastChecked": "Laatst Gecontroleerd",
+  "status.requestsPerMinute": "Verzoeken per Minuut",
+  "status.success": "Succesvol",
+  "status.error": "Fout",
+  "status.checking": "API status controleren...",
+  "status.reload": "Status Verversen",
+  "status.title": "API Status - WhatsApp Profiel API",
+  "status.desc": "Controleer de huidige status en uptime van de WhatsApp Profiel API."
 }

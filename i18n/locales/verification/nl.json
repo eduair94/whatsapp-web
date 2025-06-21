@@ -1,14 +1,14 @@
 {
-  "verification.title": "Verification Test",
-  "verification.inputLabel": "Phone Number",
-  "verification.button": "Verify / Check Status",
-  "verification.verifyLink": "Verify your number",
-  "verification.reset": "Reset Verification",
-  "verification.statusTitle": "Current Status",
-  "verification.responseTitle": "Verification Response",
-  "verification.statusResponseTitle": "Status Response",
-  "verification.infoMessage": "The button will be enabled once you input a correct phone number.",
-  "verification.status.unknown": "Unknown",
-  "meta.verification.title": "Verification Test | WhatsApp Profile API",
-  "meta.verification.description": "The button will be enabled once you input a correct phone number. Verification Test - WhatsApp Profile API."
+  "verification.title": "Verificatie Test",
+  "verification.inputLabel": "Telefoonnummer",
+  "verification.button": "Verifiëren / Status Controleren",
+  "verification.verifyLink": "Verifieer je nummer",
+  "verification.reset": "Verificatie Resetten",
+  "verification.statusTitle": "Huidige Status",
+  "verification.responseTitle": "Verificatie Antwoord",
+  "verification.statusResponseTitle": "Status Antwoord",
+  "verification.infoMessage": "De knop wordt ingeschakeld zodra je een correct telefoonnummer invoert.",
+  "verification.status.unknown": "Onbekend",
+  "meta.verification.title": "Verificatie Test | WhatsApp Profiel API",
+  "meta.verification.description": "De knop wordt ingeschakeld zodra je een correct telefoonnummer invoert. Verificatie Test - WhatsApp Profiel API."
 }

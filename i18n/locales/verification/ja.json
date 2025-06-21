@@ -1,14 +1,14 @@
 {
-  "verification.title": "Verification Test",
-  "verification.inputLabel": "Phone Number",
-  "verification.button": "Verify / Check Status",
-  "verification.verifyLink": "Verify your number",
-  "verification.reset": "Reset Verification",
-  "verification.statusTitle": "Current Status",
-  "verification.responseTitle": "Verification Response",
-  "verification.statusResponseTitle": "Status Response",
-  "verification.infoMessage": "The button will be enabled once you input a correct phone number.",
-  "verification.status.unknown": "Unknown",
-  "meta.verification.title": "Verification Test | WhatsApp Profile API",
-  "meta.verification.description": "The button will be enabled once you input a correct phone number. Verification Test - WhatsApp Profile API."
+  "verification.title": "検証テスト",
+  "verification.inputLabel": "電話番号",
+  "verification.button": "検証 / ステータス確認",
+  "verification.verifyLink": "番号を検証する",
+  "verification.reset": "検証をリセット",
+  "verification.statusTitle": "現在のステータス",
+  "verification.responseTitle": "検証レスポンス",
+  "verification.statusResponseTitle": "ステータスレスポンス",
+  "verification.infoMessage": "正しい電話番号を入力するとボタンが有効になります。",
+  "verification.status.unknown": "不明",
+  "meta.verification.title": "検証テスト | WhatsApp プロファイル API",
+  "meta.verification.description": "正しい電話番号を入力するとボタンが有効になります。検証テスト - WhatsApp プロファイル API。"
 }
