@@ -1,50 +1,53 @@
-import { promises as fs } from 'fs';
-import { join } from 'path';
+import { promises as fs } from "fs";
+import { join } from "path";
 
 // Function to dynamically scan pages directory
 async function getStaticPages(): Promise<Array<{ path: string; priority: number }>> {
   try {
-    const pagesDir = join(process.cwd(), 'pages');
+    const pagesDir = join(process.cwd(), "pages");
     const files = await fs.readdir(pagesDir, { recursive: true });
-    
+
     const staticPages: Array<{ path: string; priority: number }> = [];
-    
+
     for (const file of files) {
-      if (typeof file === 'string' && (file.endsWith('.vue') || file.endsWith('.ts') || file.endsWith('.js'))) {
+      if (typeof file === "string" && (file.endsWith(".vue") || file.endsWith(".ts") || file.endsWith(".js"))) {
         // Skip dynamic routes (those with brackets)
-        if (file.includes('[') || file.includes(']')) {
+        if (file.includes("[") || file.includes("]")) {
           continue;
         }
-        
+
         // Convert file path to route
         let route = file
-          .replace(/\.(vue|ts|js)$/, '') // Remove extension
-          .replace(/index$/, '') // Remove index
-          .replace(/\\/g, '/'); // Normalize slashes
-        
+          .replace(/\.(vue|ts|js)$/, "") // Remove extension
+          .replace(/index$/, "") // Remove index
+          .replace(/\\/g, "/"); // Normalize slashes
+
         // Add leading slash if not empty
-        if (route && !route.startsWith('/')) {
-          route = '/' + route;
+        if (route && !route.startsWith("/")) {
+          route = "/" + route;
         }
-        
+
         // Determine priority based on route
         let priority = 0.5;
-        if (route === '' || route === '/') priority = 1.0;
-        else if (route === '/pricing') priority = 0.9;
-        else if (route === '/api-status') priority = 0.8;
-        else if (route === '/faqs' || route === '/database') priority = 0.7;
-        else if (route === '/stats' || route === '/history') priority = 0.6;
-        else if (route === '/terms' || route === '/privacy') priority = 0.5;
-        else if (route === '/auth') priority = 0.4;
-        
+        if (route === "" || route === "/") priority = 1.0;
+        else if (route === "/pricing") priority = 0.9;
+        else if (route === "/api-status") priority = 0.8;
+        else if (route === "/faqs" || route === "/database") priority = 0.7;
+        else if (route === "/stats" || route === "/history") priority = 0.6;
+        else if (route === "/terms" || route === "/privacy") priority = 0.5;
+        else if (route === "/auth") priority = 0.4;
+
         staticPages.push({ path: route, priority });
       }
     }
-    
-    console.log(`Found ${staticPages.length} static pages:`, staticPages.map(p => p.path));
+
+    console.log(
+      `Found ${staticPages.length} static pages:`,
+      staticPages.map((p) => p.path)
+    );
     return staticPages;
   } catch (error) {
-    console.warn('Could not scan pages directory, falling back to hardcoded pages:', error);
+    console.warn("Could not scan pages directory, falling back to hardcoded pages:", error);
     // Fallback to hardcoded pages
     return [
       { path: "", priority: 1.0 },
@@ -68,7 +71,7 @@ export default defineEventHandler(async (event) => {
 
   // Initialize fresh URLs array for each request (ensure complete isolation)
   let allUrls: any[] = [];
-  
+
   // Log the request parameters for debugging
   console.log(`[SITEMAP] Starting request: lang=${requestedLang}, page=${page}`);
   try {
@@ -160,7 +163,7 @@ export default defineEventHandler(async (event) => {
   const langInfo = requestedLang ? ` for language '${requestedLang}'` : " for all languages";
   const pageInfo = page !== undefined ? ` page ${page}` : "";
   console.log(`Generated ${allUrls.length} URLs for sitemap${langInfo}${pageInfo}`);
-  
+
   // Return a fresh array to ensure no cross-contamination
   return [...allUrls];
 });
