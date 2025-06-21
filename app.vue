@@ -131,11 +131,17 @@
             <span style="font-size: 0.95em; margin-left: 4px; min-width: 2ch">{{ locale.toUpperCase() }}</span>
           </v-btn>
         </template>
-        <v-list>
-          <v-list-item v-for="locale in availableLocales" :key="locale.code" :to="switchLocalePath(locale.code)">
-            <v-list-item-title>{{ locale.name }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
+        <v-card class="pa-2" min-width="200">
+          <v-autocomplete
+            v-model="selectedLocale"
+            :items="localeOptions"
+            item-title="name"
+            item-value="code"
+            density="compact"
+            hide-details
+            autofocus
+          />
+        </v-card>
       </v-menu>
 
       <!-- LinkedIn Profile -->
@@ -159,21 +165,30 @@
 </template>
 
 <script lang="ts" setup>
-import { useI18n, useLocalePath, useSwitchLocalePath } from "#imports";
-import { computed, defineAsyncComponent, ref } from "vue";
+import { useI18n, useLocalePath, useSwitchLocalePath, useRouter } from "#imports";
+import { computed, defineAsyncComponent, ref, watch } from "vue";
 import { useFirebaseAuth } from "~/composables/useFirebaseAuth";
 import { useGlobalApiKeyManager } from "~/composables/useGlobalApiKeyManager";
 
 const localePath = useLocalePath();
 const { locale, locales, t, setLocale } = useI18n();
 const switchLocalePath = useSwitchLocalePath();
+const router = useRouter();
 const { openApiKeyManager } = useGlobalApiKeyManager();
 
 // PWA functionality
 const { canInstall, install: installPWA } = usePWAWeb();
 
-const availableLocales = computed(() => {
-  return locales.value.filter((i) => i.code !== locale.value);
+const localeOptions = computed(() => locales.value);
+const selectedLocale = ref(locale.value);
+
+watch(selectedLocale, (val) => {
+  if (val && val !== locale.value) {
+    router.push(switchLocalePath(val));
+  }
+});
+watch(locale, (val) => {
+  selectedLocale.value = val;
 });
 
 // Reactive data for mobile drawer
