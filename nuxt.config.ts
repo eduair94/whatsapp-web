@@ -325,6 +325,20 @@ export default defineNuxtConfig({
       cors: false,
     },
     "/api/phone/limits": {
+      prerender: false,
+      ssr: false,
+      headers: {
+        "cache-control": "no-cache, no-store, must-revalidate, max-age=0",
+        pragma: "no-cache",
+        expires: "0",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "DENY",
+      },
+      cors: false,
+    },
+    "/api/phone/**": {
+      prerender: false,
+      ssr: false, // Disable SSR for phone API to avoid conflicts
       headers: {
         "cache-control": "no-cache, no-store, must-revalidate, max-age=0",
         pragma: "no-cache",
@@ -335,6 +349,7 @@ export default defineNuxtConfig({
       cors: false,
     },
     "/api/**": {
+      prerender: false,
       headers: {
         "cache-control": "no-cache, no-store, must-revalidate, max-age=0",
         pragma: "no-cache",
@@ -416,14 +431,22 @@ export default defineNuxtConfig({
       "@vite-pwa/nuxt",
       {
         registerType: "autoUpdate",
+        registerWebManifestInRouteRules: true,
         workbox: {
           navigateFallback: "/",
+          navigateFallbackDenylist: [
+            /^\/api\//, // Exclude all API routes from service worker fallback
+            /^\/server\//, // Exclude server routes
+            /^\/admin\//, // Exclude admin routes
+            /\/__sitemap__\//, // Exclude sitemap routes
+          ],
           globPatterns: ["**/*.{js,css,html,png,svg,ico,json,woff2,woff}"],
           globIgnores: [
             "**/node_modules/**/*",
             "sw.js",
             "workbox-*.js",
             "**/_payload.json", // Explicitly ignore payload files to avoid warnings
+            "**/api/**/*", // Exclude API files from caching
           ],
           cleanupOutdatedCaches: true,
           skipWaiting: true,
@@ -453,14 +476,29 @@ export default defineNuxtConfig({
             },
             {
               urlPattern: /\/api\/.*/i,
-              handler: "NetworkFirst",
+              handler: "NetworkOnly", // Changed from NetworkFirst to NetworkOnly to avoid caching API responses
               options: {
-                cacheName: "api-cache",
-                networkTimeoutSeconds: 10,
-                expiration: {
-                  maxEntries: 16,
-                  maxAgeSeconds: 300, // 5 minutes
-                },
+                cacheName: "api-cache-disabled",
+                plugins: [
+                  {
+                    cacheKeyWillBeUsed: async ({ request }) => {
+                      // Don't cache API requests - always go to network
+                      return null;
+                    },
+                    requestWillFetch: async ({ request }) => {
+                      // Add headers to prevent caching at browser level
+                      const modifiedRequest = new Request(request, {
+                        headers: {
+                          ...Object.fromEntries(request.headers.entries()),
+                          'Cache-Control': 'no-cache, no-store, must-revalidate',
+                          'Pragma': 'no-cache',
+                          'Expires': '0'
+                        }
+                      });
+                      return modifiedRequest;
+                    }
+                  }
+                ]
               },
             },
           ],
@@ -472,7 +510,8 @@ export default defineNuxtConfig({
         devOptions: {
           enabled: true,
           suppressWarnings: true,
-          navigateFallbackAllowlist: [/^\/$/],
+          navigateFallbackAllowlist: [/^\/$/], // Only allow fallback for homepage
+          navigateFallbackDenylist: [/^\/api\//], // Deny fallback for API routes
           type: "module",
         },
         manifest: {

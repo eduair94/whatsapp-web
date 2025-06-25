@@ -173,7 +173,18 @@ export const usePhoneApi = (options: PhoneApiOptions = {}) => {
       const { $api } = useNuxtApp();
       const headers = await getAuthHeaders();
 
-      const response = (await Promise.race([$api.get(url, { headers }), new Promise((_, reject) => setTimeout(() => reject(new Error("Request timeout")), timeout))])) as any;
+      // Add service worker bypass headers for API requests
+      const requestHeaders = {
+        ...headers,
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'SW-Bypass': 'true'
+      };
+
+      const response = (await Promise.race([
+        $api.get(url, { headers: requestHeaders }), 
+        new Promise((_, reject) => setTimeout(() => reject(new Error("Request timeout")), timeout))
+      ])) as any;
 
       return response.data as WhatsAppProfileData;
     } catch (err: any) {
@@ -188,10 +199,44 @@ export const usePhoneApi = (options: PhoneApiOptions = {}) => {
         throw new Error("Authentication failed. Please log in again.");
       }
 
-      // 403 error go to refresh page
+      // 403 error - bypass service worker and try direct request
       if (err.response?.status === 403) {
-        window.location.href = "/api/refresh";
-        throw new Error("Access forbidden. Please refresh the page.");
+        if (attempt === 1) {
+          console.warn('403 error encountered, retrying with service worker bypass');
+          // Force a direct fetch bypass for 403 errors
+          try {
+            const headers = await getAuthHeaders();
+            const directHeaders = {
+              ...headers,
+              'Cache-Control': 'no-cache, no-store, must-revalidate',
+              'Pragma': 'no-cache',
+              'SW-Bypass': 'true',
+              'X-Bypass-Cache': 'true'
+            };
+            
+            const response = await fetch(url, {
+              method: 'GET',
+              headers: directHeaders,
+              cache: 'no-store'
+            });
+            
+            if (response.ok) {
+              const data = await response.json();
+              return data as WhatsAppProfileData;
+            } else {
+              // If direct fetch also fails with 403, redirect to refresh
+              window.location.href = "/api/refresh";
+              throw new Error("Access forbidden. Please refresh the page.");
+            }
+          } catch (directError) {
+            console.error('Direct fetch also failed:', directError);
+            window.location.href = "/api/refresh";
+            throw new Error("Access forbidden. Please refresh the page.");
+          }
+        } else {
+          window.location.href = "/api/refresh";
+          throw new Error("Access forbidden. Please refresh the page.");
+        }
       }
 
       // Handle server errors with retry
@@ -326,7 +371,15 @@ export const usePhoneApi = (options: PhoneApiOptions = {}) => {
       const url = "/api/phone/limits";
       const headers = await getAuthHeaders();
 
-      const response = (await $api.get(url, { headers })).data as RateLimitResponse;
+      // Add service worker bypass headers
+      const requestHeaders = {
+        ...headers,
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'SW-Bypass': 'true'
+      };
+
+      const response = (await $api.get(url, { headers: requestHeaders })).data as RateLimitResponse;
 
       if (response.success && response.limits) {
         rateLimitInfo.value = response.limits;
@@ -357,9 +410,52 @@ export const usePhoneApi = (options: PhoneApiOptions = {}) => {
       return response;
     } catch (err: any) {
       console.error("Failed to fetch rate limit info:", err);
-      // 403 error go to refresh page
+      // 403 error - try direct bypass before redirecting
       if (err.response?.status === 403) {
-        window.location.href = "/api/refresh";
+        try {
+          const headers = await getAuthHeaders();
+          const directHeaders = {
+            ...headers,
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache',
+            'SW-Bypass': 'true',
+            'X-Bypass-Cache': 'true'
+          };
+          
+          const response = await fetch("/api/phone/limits", {
+            method: 'GET',
+            headers: directHeaders,
+            cache: 'no-store'
+          });
+          
+          if (response.ok) {
+            const data = await response.json() as RateLimitResponse;
+            // Process the successful response same as above
+            if (data.success && data.limits) {
+              rateLimitInfo.value = data.limits;
+              if (data.apiKeyLimits) {
+                rateLimitInfoApi.value = data.apiKeyLimits;
+              } else {
+                rateLimitInfoApi.value = null;
+              }
+              hasApiKey.value = data.hasApiKey || false;
+              if (hasApiKey.value && rateLimitInfoApi.value && rateLimitInfoApi.value.requestRemaining !== undefined) {
+                rateLimited.value = rateLimitInfoApi.value.requestRemaining <= 0;
+              } else if (hasApiKey.value && !rateLimitInfoApi.value) {
+                rateLimited.value = false;
+              } else {
+                rateLimited.value = data.limits.remaining <= 0;
+              }
+            }
+            return data;
+          } else {
+            // If direct fetch also fails, redirect to refresh
+            window.location.href = "/api/refresh";
+          }
+        } catch (directError) {
+          console.error('Direct fetch for rate limits also failed:', directError);
+          window.location.href = "/api/refresh";
+        }
       }
       return null;
     } finally {
