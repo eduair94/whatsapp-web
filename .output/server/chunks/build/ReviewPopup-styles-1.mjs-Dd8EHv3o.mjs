@@ -1,2 +1,0 @@
-const r=".review-popup[data-v-9c086a6b]{border:1px solid rgba(var(--v-theme-primary),.2)}.review-popup .v-card-title[data-v-9c086a6b]{background:linear-gradient(135deg,rgba(var(--v-theme-primary),.05) 0,rgba(var(--v-theme-surface),1))}.v-theme--dark .review-popup[data-v-9c086a6b]{border:1px solid rgba(var(--v-theme-primary),.3)}.v-theme--dark .review-popup .v-card-title[data-v-9c086a6b]{background:linear-gradient(135deg,rgba(var(--v-theme-primary),.1) 0,rgba(var(--v-theme-surface),1))}";export{r as e};
-//# sourceMappingURL=ReviewPopup-styles-1.mjs-Dd8EHv3o.mjs.map
