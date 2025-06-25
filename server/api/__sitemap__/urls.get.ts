@@ -77,7 +77,7 @@ export default defineEventHandler(async (event) => {
   try {
     // Calculate the actual page number for the API call (1-based)
     const apiPage = page + 1;
-    const limit = 1000; // 1000 URLs per sitemap chunk
+    const limit = 2000; // 1000 URLs per sitemap chunk
 
     const sampleRequests = [{ limit, page: apiPage }];
 

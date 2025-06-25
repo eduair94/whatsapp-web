@@ -227,12 +227,47 @@ export default defineNuxtConfig({
         },
       ],
     },
-  }, // Nitro configuration for better performance
+  },  // Nitro configuration for better performance
   nitro: {
     prerender: {
-      routes: ["/sitemap.xml", "/robots.txt", "/"],
+      routes: (() => {
+        // Generate all sitemap routes dynamically
+        const routes = ["/sitemap.xml", "/robots.txt", "/"];
+        
+        // Add all static pages for all languages
+        const staticPages = [
+          "", "/api-status", "/pricing", "/faqs", "/terms", 
+          "/privacy", "/stats", "/database", "/history", "/auth"
+        ];
+        
+        // Add routes for each language
+        for (const locale of locales) {
+          const lang = locale.code;
+          
+          // Add static pages for each language
+          staticPages.forEach(page => {
+            if (lang === "en") {
+              routes.push(page || "/");
+            } else {
+              routes.push(`/${lang}${page}`);
+            }
+          });
+          
+          // Add sitemap routes for each language and page chunk
+          for (let i = 0; i < 10; i++) { // 10 chunks as defined in sitemaps.ts
+            routes.push(`/__sitemap__/${lang}-${i}.xml`);
+          }
+        }
+        
+        // Add main sitemap index
+        routes.push("/__sitemap__/sitemap.xml");
+        
+        console.log(`Prerendering ${routes.length} routes`);
+        return routes;
+      })(),
       ignore: ["/manifest.json"],
-      crawlLinks: false, // Disable crawling to prevent auto route discovery
+      crawlLinks: false,
+      failOnError: false, // Don't fail build if some routes fail
     },
     compressPublicAssets: {
       gzip: true,
@@ -247,12 +282,11 @@ export default defineNuxtConfig({
     experimental: {
       wasm: true,
     },
-  },
-  // Route rules for optimal caching and security
+  },  // Route rules for optimal caching and security
   routeRules: {
     "/": {
       ssr: true,
-      prerender: false,
+      prerender: true,
       headers: {
         "cache-control": "max-age=300, s-maxage=300",
         "X-Frame-Options": "DENY",
@@ -260,8 +294,41 @@ export default defineNuxtConfig({
         "Referrer-Policy": "strict-origin-when-cross-origin",
       },
     },
+    // Prerender all static pages for all languages
+    "/api-status": { prerender: true, ssr: true },
+    "/pricing": { prerender: true, ssr: true },
+    "/faqs": { prerender: true, ssr: true },
+    "/terms": { prerender: true, ssr: true },
+    "/privacy": { prerender: true, ssr: true },
+    "/stats": { prerender: true, ssr: true },
+    "/database": { prerender: true, ssr: true },
+    "/history": { prerender: true, ssr: true },
+    "/auth": { prerender: true, ssr: true },
+    // Prerender all language versions of static pages
+    "/**": { 
+      prerender: true, 
+      ssr: true,
+      headers: { "cache-control": "max-age=300, s-maxage=300" }
+    },
+    // Sitemap routes
+    "/__sitemap__/**": {
+      prerender: true,
+      headers: {
+        "cache-control": "max-age=3600, s-maxage=3600", // Cache sitemaps for 1 hour
+        "Content-Type": "application/xml",
+        "X-Content-Type-Options": "nosniff",
+      },
+    },
+    "/sitemap.xml": {
+      prerender: true,
+      headers: {
+        "cache-control": "max-age=3600, s-maxage=3600",
+        "Content-Type": "application/xml",
+      },
+    },
     "/verification/**": {
-      ssr: true, // Disable SSR for verification pages that use client-side only features
+      ssr: true,
+      prerender: true,
       headers: { "cache-control": "max-age=300, s-maxage=300" },
     },
     "/api/search": {
@@ -475,7 +542,7 @@ export default defineNuxtConfig({
         },
       },
     ],
-  ], // Sitemap Configuration
+  ],  // Sitemap Configuration
   sitemap: {
     sitemaps: sitemaps,
     autoLastmod: true,

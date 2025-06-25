@@ -102,10 +102,7 @@ export default defineEventHandler(async (event) => {
         </div>
 
         <script>
-            // Optional: Auto-redirect after 5 seconds
-            // setTimeout(() => {
-            //     window.location.href = '${backUrl}';
-            // }, 5000);
+            window.location.replace('${backUrl}');
         </script>
     </body>
     </html>

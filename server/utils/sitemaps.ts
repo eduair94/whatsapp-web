@@ -1,6 +1,6 @@
 import { locales } from "./locales";
 let sitemaps: any = {};
-const totalPages = 10;
+const totalPages = 30;
 for (let localeObj of locales) {
   const code = localeObj.code;
   // Create a separate sitemap for each page/chunk of this language
