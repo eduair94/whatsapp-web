@@ -1,5 +1,5 @@
 // composables/usePWAWeb.ts
-import { computed, onMounted, readonly, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 
 interface BeforeInstallPromptEvent extends Event {
   readonly platforms: string[];
@@ -150,15 +150,15 @@ export const usePWAWeb = () => {
 
   return {
     // State
-    isSupported: readonly(isSupported),
-    isInstalled: readonly(isInstalled),
-    isStandalone: readonly(isStandalone),
-    isInstallable: readonly(isInstallable),
-    isIOS: readonly(isIOS),
-    isOffline: readonly(isOffline),
+    isSupported: isSupported,
+    isInstalled: isInstalled,
+    isStandalone: isStandalone,
+    isInstallable: isInstallable,
+    isIOS: isIOS,
+    isOffline: isOffline,
     isOnline,
     canInstall,
-    needsRefresh: readonly(needsRefresh),
+    needsRefresh: needsRefresh,
 
     // Methods
     install,

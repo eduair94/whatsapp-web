@@ -81,7 +81,9 @@
                                 <div class="text-subtitle-2 font-weight-medium">
                                   {{ review.author }}
                                 </div>
-                                <div class="text-caption text-medium-emphasis">{{ getCountryName(review.country) }} • {{ formatDate(review.date) }}</div>
+                                <ClientOnly>
+                                  <div class="text-caption text-medium-emphasis">{{ getCountryName(review.country) }} • {{ formatDate(review.date) }}</div>
+                                </ClientOnly>
                               </div>
                               <v-chip size="x-small" variant="text" color="primary">
                                 {{ review.source }}
@@ -198,8 +200,6 @@ const groupedReviews = computed(() => {
       groups.push(toAdd);
     }
   }
-
-  console.log("Grouped Reviews:", groups.length);
 
   return groups;
 });

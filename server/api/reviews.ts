@@ -200,7 +200,6 @@ export default defineEventHandler(async (event): Promise<ReviewsResponse> => {
   // Check if we have valid cached data
   const cachedEntry = cache.get(cacheKey);
   if (cachedEntry && isCacheValid(cachedEntry)) {
-    console.log(`[REVIEWS] Returning cached data for domain: ${domain}`);
     return cachedEntry.data;
   }
 

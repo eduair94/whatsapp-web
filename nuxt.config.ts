@@ -28,7 +28,7 @@ export default defineNuxtConfig({
     build: {
       cssCodeSplit: false, // Disable CSS code splitting to avoid dependency issues
       minify: "esbuild", // Switch to esbuild for more reliable minification
-      chunkSizeWarningLimit: 1000,
+      chunkSizeWarningLimit: 2000,
       // Remove manual chunking that's causing issues
       rollupOptions: {
         external: (id) => {
@@ -447,7 +447,6 @@ export default defineNuxtConfig({
             "workbox-*.js",
             "**/_payload.json", // Explicitly ignore payload files to avoid warnings
             "**/api/**/*", // Exclude API files from caching
-            "**/api/*",
           ],
           cleanupOutdatedCaches: true,
           skipWaiting: true,

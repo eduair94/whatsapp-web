@@ -12,7 +12,6 @@
 
         <!-- PWA Install Button for Mobile -->
         <v-list-item
-          v-if="canInstall"
           prepend-icon="mdi-download"
           :title="$t('pwa.installApp')"
           @click="
@@ -109,10 +108,10 @@
             <v-divider v-if="user" />
 
             <!-- PWA Install Button for Desktop -->
-            <v-list-item v-if="canInstall" @click="installPWA" prepend-icon="mdi-download">
+            <v-list-item @click="installPWA" prepend-icon="mdi-download">
               <v-list-item-title>{{ $t("pwa.installApp") }}</v-list-item-title>
             </v-list-item>
-            <v-divider v-if="canInstall" />
+            <v-divider />
 
             <v-list-item v-if="user" @click="logout">
               <v-list-item-title>{{ $t("nav.logout") }}</v-list-item-title>
@@ -169,7 +168,7 @@ const router = useRouter();
 const { openApiKeyManager } = useGlobalApiKeyManager();
 
 // PWA functionality
-const { canInstall, install: installPWA } = usePWAWeb();
+const { canInstall, install: installPWA, isSupported, isInstalled } = usePWAWeb();
 
 const localeOptions = computed(() => locales.value);
 const selectedLocale = ref(locale.value);
