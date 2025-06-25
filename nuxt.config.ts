@@ -433,7 +433,6 @@ export default defineNuxtConfig({
         registerType: "autoUpdate",
         registerWebManifestInRouteRules: true,
         workbox: {
-          version: "6.5.3",
           navigateFallback: "/",
           navigateFallbackDenylist: [
             /^\/api\//, // Exclude all API routes from service worker fallback
