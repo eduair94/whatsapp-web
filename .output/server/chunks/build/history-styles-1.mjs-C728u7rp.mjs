@@ -1,0 +1,2 @@
+const a=".history-card[data-v-4f315b90]{box-shadow:0 8px 25px #00000026!important}.image-overlay[data-v-4f315b90]{background:linear-gradient(180deg,#0000001a,#000000b3)}.raw-data[data-v-4f315b90]{font-family:Courier New,monospace;font-size:.8rem}.text-truncate[data-v-4f315b90]{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}";export{a};
+//# sourceMappingURL=history-styles-1.mjs-C728u7rp.mjs.map

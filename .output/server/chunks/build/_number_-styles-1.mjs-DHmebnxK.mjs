@@ -1,0 +1,2 @@
+const t=".phone{margin:auto;max-width:700px}.phone .v-field{border-radius:0}.wp_output{margin:auto;max-width:800px}.wp_output .v-list-item:nth-child(2n){background-color:#80808042}.button_download{bottom:10px;position:absolute;right:5px}.search_buttons{gap:8px}.custom_btn,.link_fixed{cursor:pointer;text-decoration:none;transition:.3s ease-in-out}.custom_btn:hover,.link_fixed:hover{opacity:.8}.alert-send-button{width:-moz-fit-content;width:fit-content}";export{t};
+//# sourceMappingURL=_number_-styles-1.mjs-DHmebnxK.mjs.map

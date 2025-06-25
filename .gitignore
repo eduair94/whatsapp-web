@@ -1,5 +1,4 @@
 # Nuxt dev/build outputs
-.output
 .data
 .nuxt
 .nitro
@@ -23,3 +22,4 @@ logs
 .env.*
 !.env.example
 serviceAccount.json
+.deploy_temp

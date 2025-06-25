@@ -1,0 +1,1 @@
+{"version":3,"file":"ping.mjs","sources":["../../../../../server/api/ping.ts"],"sourcesContent":null,"names":["ping","defineEventHandler","async","event"],"mappings":"mqBAAA,MAAAA,EAAAC,GAAAC,MAAAC,GACA"}

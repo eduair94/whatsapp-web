@@ -227,45 +227,16 @@ export default defineNuxtConfig({
         },
       ],
     },
-  },  // Nitro configuration for better performance
+  }, // Nitro configuration for better performance
   nitro: {
     prerender: {
       routes: (() => {
-        // Generate all sitemap routes dynamically
-        const routes = ["/sitemap.xml", "/robots.txt", "/"];
-        
-        // Add all static pages for all languages
-        const staticPages = [
-          "", "/api-status", "/pricing", "/faqs", "/terms", 
-          "/privacy", "/stats", "/database", "/history", "/auth"
-        ];
-        
-        // Add routes for each language
-        for (const locale of locales) {
-          const lang = locale.code;
-          
-          // Add static pages for each language
-          staticPages.forEach(page => {
-            if (lang === "en") {
-              routes.push(page || "/");
-            } else {
-              routes.push(`/${lang}${page}`);
-            }
-          });
-          
-          // Add sitemap routes for each language and page chunk
-          for (let i = 0; i < 10; i++) { // 10 chunks as defined in sitemaps.ts
-            routes.push(`/__sitemap__/${lang}-${i}.xml`);
-          }
-        }
-        
-        // Add main sitemap index
-        routes.push("/__sitemap__/sitemap.xml");
-        
+        // Only prerender essential routes, not sitemaps
+        const routes = ["/robots.txt", "/"];
         console.log(`Prerendering ${routes.length} routes`);
         return routes;
       })(),
-      ignore: ["/manifest.json"],
+      ignore: ["/manifest.json", "/sitemap.xml", "/__sitemap__/**"],
       crawlLinks: false,
       failOnError: false, // Don't fail build if some routes fail
     },
@@ -282,7 +253,7 @@ export default defineNuxtConfig({
     experimental: {
       wasm: true,
     },
-  },  // Route rules for optimal caching and security
+  }, // Route rules for optimal caching and security
   routeRules: {
     "/": {
       ssr: true,
@@ -301,28 +272,30 @@ export default defineNuxtConfig({
     "/terms": { prerender: true, ssr: true },
     "/privacy": { prerender: true, ssr: true },
     "/stats": { prerender: true, ssr: true },
-    "/database": { prerender: true, ssr: true },
+    "/database": { prerender: false, ssr: true },
     "/history": { prerender: true, ssr: true },
-    "/auth": { prerender: true, ssr: true },
+    "/auth": { prerender: false, ssr: true },
     // Prerender all language versions of static pages
-    "/**": { 
-      prerender: true, 
-      ssr: true,
-      headers: { "cache-control": "max-age=300, s-maxage=300" }
-    },
-    // Sitemap routes
-    "/__sitemap__/**": {
+    "/**": {
       prerender: true,
+      ssr: true,
+      headers: { "cache-control": "max-age=300, s-maxage=300" },
+    },
+    // Sitemap routes - dynamically generated with 300s cache
+    "/__sitemap__/**": {
+      prerender: false,
+      ssr: true,
       headers: {
-        "cache-control": "max-age=3600, s-maxage=3600", // Cache sitemaps for 1 hour
+        "cache-control": "max-age=300, s-maxage=300", // 5 minute cache
         "Content-Type": "application/xml",
         "X-Content-Type-Options": "nosniff",
       },
     },
     "/sitemap.xml": {
-      prerender: true,
+      prerender: false,
+      ssr: true,
       headers: {
-        "cache-control": "max-age=3600, s-maxage=3600",
+        "cache-control": "max-age=300, s-maxage=300", // 5 minute cache
         "Content-Type": "application/xml",
       },
     },
@@ -341,10 +314,11 @@ export default defineNuxtConfig({
       cors: false,
     },
     "/api/__sitemap__/**": {
+      prerender: false,
+      ssr: true,
       headers: {
-        "cache-control": "no-cache, no-store, must-revalidate, max-age=0", // Disable sitemap API caching
-        pragma: "no-cache",
-        expires: "0",
+        "cache-control": "max-age=300, s-maxage=300", // 5 minute cache for sitemap API
+        "Content-Type": "application/json",
         "X-Content-Type-Options": "nosniff",
         "X-Frame-Options": "DENY",
       },
@@ -542,7 +516,7 @@ export default defineNuxtConfig({
         },
       },
     ],
-  ],  // Sitemap Configuration
+  ], // Sitemap Configuration
   sitemap: {
     sitemaps: sitemaps,
     autoLastmod: true,

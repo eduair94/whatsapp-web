@@ -1,3 +1,14 @@
+// Cache interface
+interface CacheEntry {
+  data: ReviewsResponse;
+  timestamp: number;
+}
+
+// In-memory cache and pending requests
+const cache = new Map<string, CacheEntry>();
+const pendingRequests = new Map<string, Promise<ReviewsResponse>>();
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
+
 // Interface definitions for Trustpilot API response
 interface TrustpilotConsumer {
   id: string;
@@ -130,13 +141,9 @@ interface ReviewsResponse {
   error?: string;
 }
 
-export default defineEventHandler(async (event): Promise<ReviewsResponse> => {
+// Helper function to fetch reviews from API
+async function fetchReviewsFromAPI(domain: string): Promise<ReviewsResponse> {
   try {
-    // Get the domain from query parameters, default to our domain
-    const query = getQuery(event);
-    const domain = "whatsapp.checkleaked.cc";
-
-    // Fetch reviews from Trustpilot API
     const trustpilotUrl = `https://trustpilot.digitalshopuy.com/?domain=${domain}`;
 
     const response = await $fetch<TrustpilotApiResponse>(trustpilotUrl, {
@@ -176,5 +183,62 @@ export default defineEventHandler(async (event): Promise<ReviewsResponse> => {
       data: null,
       error: error instanceof Error ? error.message : "Failed to fetch reviews",
     };
+  }
+}
+
+// Helper function to check if cache is valid
+function isCacheValid(cacheEntry: CacheEntry): boolean {
+  return Date.now() - cacheEntry.timestamp < CACHE_DURATION;
+}
+
+export default defineEventHandler(async (event): Promise<ReviewsResponse> => {
+  // Get the domain from query parameters, default to our domain
+  const query = getQuery(event);
+  const domain = "whatsapp.checkleaked.cc";
+  const cacheKey = `reviews:${domain}`;
+
+  // Check if we have valid cached data
+  const cachedEntry = cache.get(cacheKey);
+  if (cachedEntry && isCacheValid(cachedEntry)) {
+    console.log(`[REVIEWS] Returning cached data for domain: ${domain}`);
+    return cachedEntry.data;
+  }
+
+  // Check if there's already a pending request for this domain
+  const pendingRequest = pendingRequests.get(cacheKey);
+  if (pendingRequest) {
+    console.log(`[REVIEWS] Waiting for pending request for domain: ${domain}`);
+    return await pendingRequest;
+  }
+
+  // Create a new request promise
+  const requestPromise = fetchReviewsFromAPI(domain);
+  pendingRequests.set(cacheKey, requestPromise);
+
+  try {
+    console.log(`[REVIEWS] Fetching fresh data for domain: ${domain}`);
+    const result = await requestPromise;
+
+    // Cache the successful result (even if it contains an error)
+    const cacheEntry: CacheEntry = {
+      data: result,
+      timestamp: Date.now(),
+    };
+    cache.set(cacheKey, cacheEntry);
+
+    console.log(`[REVIEWS] Cached data for domain: ${domain}, success: ${result.success}`);
+    return result;
+  } catch (error) {
+    console.error(`[REVIEWS] Error fetching reviews for domain: ${domain}`, error);
+
+    // Return error response without caching
+    return {
+      success: false,
+      data: null,
+      error: error instanceof Error ? error.message : "Failed to fetch reviews",
+    };
+  } finally {
+    // Always clean up the pending request
+    pendingRequests.delete(cacheKey);
   }
 });

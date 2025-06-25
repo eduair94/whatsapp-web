@@ -1,0 +1,1 @@
+{"version":3,"file":"status.mjs","sources":["../../../../../server/api/status.ts"],"sourcesContent":null,"names":["status","defineEventHandler","async","event","axios","get","then","res","data"],"mappings":"wrBAEA,MAAAA,EAAAC,GAAAC,MAAAC,SAEAC,EAAAC,IADA,sCACAC,MAAAC,GAAAA,EAAAC"}

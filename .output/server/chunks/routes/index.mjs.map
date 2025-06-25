@@ -1,0 +1,1 @@
+{"version":3,"file":"index.mjs","sources":["../../../../server/api/index.ts"],"sourcesContent":null,"names":["index","defineEventHandler","async","event","message"],"mappings":"gqBACA,MAAAA,EAAAC,GAAAC,MAAAC,IACA,CAAAC,QAAA"}
