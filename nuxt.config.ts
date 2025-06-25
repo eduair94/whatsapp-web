@@ -447,6 +447,7 @@ export default defineNuxtConfig({
             "workbox-*.js",
             "**/_payload.json", // Explicitly ignore payload files to avoid warnings
             "**/api/**/*", // Exclude API files from caching
+            "**/api/*",
           ],
           cleanupOutdatedCaches: true,
           skipWaiting: true,
@@ -472,33 +473,6 @@ export default defineNuxtConfig({
                   maxEntries: 10,
                   maxAgeSeconds: 60 * 60 * 24 * 365, // 365 days
                 },
-              },
-            },
-            {
-              urlPattern: /\/api\/.*/i,
-              handler: "NetworkOnly", // Changed from NetworkFirst to NetworkOnly to avoid caching API responses
-              options: {
-                cacheName: "api-cache-disabled",
-                plugins: [
-                  {
-                    cacheKeyWillBeUsed: async ({ request }) => {
-                      // Don't cache API requests - always go to network
-                      return null;
-                    },
-                    requestWillFetch: async ({ request }) => {
-                      // Add headers to prevent caching at browser level
-                      const modifiedRequest = new Request(request, {
-                        headers: {
-                          ...Object.fromEntries(request.headers.entries()),
-                          'Cache-Control': 'no-cache, no-store, must-revalidate',
-                          'Pragma': 'no-cache',
-                          'Expires': '0'
-                        }
-                      });
-                      return modifiedRequest;
-                    }
-                  }
-                ]
               },
             },
           ],
