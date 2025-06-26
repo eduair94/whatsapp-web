@@ -462,6 +462,8 @@ export default defineNuxtConfig({
             /^\/server\//, // Exclude server routes
             /^\/admin\//, // Exclude admin routes
             /\/__sitemap__\//, // Exclude sitemap routes
+            /^\/[0-9]+$/, // Exclude phone number routes (direct numbers like /123456789)
+            /^\/[a-z]{2}\/[0-9]+$/, // Exclude localized phone number routes (e.g., /es/123456789)
           ],
           globPatterns: ["**/*.{js,css,html,png,svg,ico,json,woff2,woff}"],
           globIgnores: [
@@ -506,8 +508,15 @@ export default defineNuxtConfig({
         devOptions: {
           enabled: true,
           suppressWarnings: true,
-          navigateFallbackAllowlist: [/^\/$/], // Only allow fallback for homepage
-          navigateFallbackDenylist: [/^\/api\//], // Deny fallback for API routes
+          navigateFallbackAllowlist: [
+            /^\/$/, // Only allow fallback for homepage
+            /^\/[a-z]{2}\/$/, // Allow fallback for localized homepages (/es/, /fr/, etc.)
+          ],
+          navigateFallbackDenylist: [
+            /^\/api\//, // Deny fallback for API routes
+            /^\/[0-9]+$/, // Deny fallback for phone number routes
+            /^\/[a-z]{2}\/[0-9]+$/, // Deny fallback for localized phone number routes
+          ],
           type: "module",
         },
         manifest: {
