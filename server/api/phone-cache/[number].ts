@@ -11,12 +11,12 @@ export default defineEventHandler(async (event) => {
     // Block if request appears to be from browser
     const isBrowserRequest = userAgent.includes("Mozilla") || userAgent.includes("Chrome") || userAgent.includes("Safari") || userAgent.includes("Edge") || event.node.req.headers["sec-fetch-site"];
 
-    if (isBrowserRequest && !hasSSRHeader) {
-      throw createError({
-        statusCode: 403,
-        statusMessage: "Access denied: This endpoint is only available for server-side rendering",
-      });
-    }
+    // if (isBrowserRequest && !hasSSRHeader) {
+    //   throw createError({
+    //     statusCode: 403,
+    //     statusMessage: "Access denied: This endpoint is only available for server-side rendering",
+    //   });
+    // }
 
     const ip = event.node.req.headers["x-forwarded-for"]?.toString().split(",")[0] || event.node.req.socket.remoteAddress || "unknown";
     const number = getRouterParam(event, "number");

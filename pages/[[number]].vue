@@ -63,7 +63,7 @@
               </v-btn>
             </v-img>
             <v-list>
-              <v-list-item :class="isCachedData ? 'bg-warning' : 'bg-success'" :title="t('lookup.cache')">
+              <v-list-item :class="{ 'bg-warning': isCachedData, 'bg-success': !isCachedData }" :title="t('lookup.cache')">
                 {{ isCachedData ? $t("lookup.yes") : $t("lookup.no") }}
               </v-list-item>
               <v-list-item :title="$t('lookup.phone')">
