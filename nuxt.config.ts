@@ -266,7 +266,7 @@ export default defineNuxtConfig({
       },
     },
     // Prerender all static pages for all languages
-    "/api-status": { prerender: true, ssr: true },
+    "/api-status": { prerender: false, ssr: true },
     "/pricing": { prerender: true, ssr: true },
     "/faqs": { prerender: true, ssr: true },
     "/terms": { prerender: true, ssr: true },
@@ -281,6 +281,29 @@ export default defineNuxtConfig({
       ssr: true,
       headers: { "cache-control": "max-age=300, s-maxage=300" },
     },
+
+    // Match routes that are likely phone numbers (start with digits)
+    "/[0-9]*": {
+      prerender: false,
+      ssr: true,
+      headers: {
+        "cache-control": "no-cache, no-store, must-revalidate, max-age=0",
+        pragma: "no-cache",
+        expires: "0",
+      },
+    },
+
+    // Match multi-language phone number routes
+    "/*/[0-9]*": {
+      prerender: false,
+      ssr: true,
+      headers: {
+        "cache-control": "no-cache, no-store, must-revalidate, max-age=0",
+        pragma: "no-cache",
+        expires: "0",
+      },
+    },
+
     // Sitemap routes - dynamically generated with 300s cache
     "/__sitemap__/**": {
       prerender: false,
@@ -292,7 +315,7 @@ export default defineNuxtConfig({
       },
     },
     "/sitemap.xml": {
-      prerender: false,
+      prerender: true,
       ssr: true,
       headers: {
         "cache-control": "max-age=300, s-maxage=300", // 5 minute cache
@@ -301,7 +324,7 @@ export default defineNuxtConfig({
     },
     "/verification/**": {
       ssr: true,
-      prerender: true,
+      prerender: false,
       headers: { "cache-control": "max-age=300, s-maxage=300" },
     },
     "/api/search": {

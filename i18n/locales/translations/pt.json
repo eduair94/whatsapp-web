@@ -10,6 +10,7 @@
   "nav.home": "Início",
   "nav.tools": "Ferramentas",
   "nav.checkNumber": "Verificar Número",
+  "nav.apiKeyManager": "Gerenciador de Chave API",
   "nav.pricingFull": "Preços - $99/mês",
   "nav.pricingSubtitle": "500K requisições incluídas",
   "lookup.random": "Número aleatório",

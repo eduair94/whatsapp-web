@@ -304,5 +304,8 @@
   "reviews.noReviews": "Noch keine Bewertungen verfügbar",
   "reviews.daysAgo": "vor {count} Tag | vor {count} Tagen",
   "reviews.weeksAgo": "vor {count} Woche | vor {count} Wochen",
-  "reviews.monthsAgo": "vor {count} Monat | vor {count} Monaten"
+  "reviews.monthsAgo": "vor {count} Monat | vor {count} Monaten",
+  "pwa.installApp": "App installieren",
+  "pwa.installTitle": "WhatsApp Profil API installieren",
+  "pwa.installDescription": "Schneller Zugriff mit unserer mobilen App"
 }

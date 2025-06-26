@@ -51,6 +51,7 @@
   "country.Costa Rica": "Costa Rica",
   "country.Croatia": "Croacia",
   "country.Cuba": "Cuba",
+  "country.Curacao": "Curazao",
   "country.Cyprus": "Chipre",
   "country.Czech Republic": "República Checa",
   "country.Democratic Republic of the Congo": "República Democrática del Congo",
@@ -85,6 +86,7 @@
   "country.Guadeloupe": "Guadalupe",
   "country.Guam": "Guam",
   "country.Guatemala": "Guatemala",
+  "country.Guernsey": "Guernsey",
   "country.Guinea": "Guinea",
   "country.Guinea-Bissau": "Guinea-Bisáu",
   "country.Guyana": "Guyana",
@@ -233,5 +235,13 @@
   "country.Western Sahara": "Sáhara Occidental",
   "country.Yemen": "Yemen",
   "country.Zambia": "Zambia",
-  "country.Zimbabwe": "Zimbabue"
+  "country.Zimbabwe": "Zimbabue",
+  "country.Isle of Man": "",
+  "country.Jersey": "",
+  "country.Netherlands Antilles": "",
+  "country.Saint Barthelemy": "",
+  "country.Saint Martin": "",
+  "country.Sint Maarten": "",
+  "country.Svalbard and Jan Mayen": "",
+  "country.U.S. Virgin Islands": ""
 }

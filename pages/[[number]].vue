@@ -101,6 +101,23 @@ definePageMeta({
   layout: "phone-lookup",
 });
 
+// Server-side data fetching for SSR if there is any phone number
+const route = useRoute();
+const data = ref<WhatsAppProfileData | null>(null);
+if (route.params.number) {
+  const phone = parsePhoneNumber("+" + route.params.number);
+  if (phone && phone.isValid()) {
+    const { data: serverResponse, error: serverError } = await useFetch(`/api/phone-cache/${route.params.number}`, {
+      server: true,
+      default: () => null,
+    }).catch(() => ({ data: null, error: null }));
+    // Check serverData
+    if (serverResponse && serverResponse.value && !serverResponse.value?.error) {
+      data.value = serverResponse.value; // Reset to null if there's an error
+    }
+  }
+}
+
 const { locale, t, locales } = useI18n();
 const localePath = useLocalePath();
 const { addSearchToHistory, initializeStorage } = useSearchHistory();
@@ -108,7 +125,6 @@ const { user, loading: loadingFirebase, waitForLoadingFirebase } = useFirebaseAu
 const { openApiKeyManager, registerApiKeySavedCallback, unregisterApiKeySavedCallback } = useGlobalApiKeyManager();
 
 const router = useRouter();
-const route = useRoute();
 
 const pageUrl = computed(() => `${baseUrl}${route.path}`);
 
@@ -134,7 +150,6 @@ const phoneCode = ref({
   countryWithCode: "",
   countryTranslated: "",
 } as PhoneCode);
-const data = ref<WhatsAppProfileData | null>(null);
 const recaptchaInstance = useReCaptcha();
 const reviewPopupRef = ref<{
   open: () => void;
@@ -214,8 +229,9 @@ onBeforeMount(() => {
         phoneNumber.value = phone.nationalNumber;
         // Trigger search after values are set
         nextTick(() => {
-          console.log("Reload search");
-          search();
+          if (import.meta.client) {
+            search();
+          }
         });
       }
     } catch (error) {
@@ -323,7 +339,6 @@ const customFilter = (item: any, queryText: string): boolean => {
 const scheduleReviewPopup = (): void => {
   // Show popup after 10 seconds
   setTimeout(() => {
-    console.log("Attempting to open review popup");
     if (reviewPopupRef.value) {
       reviewPopupRef.value.open();
     }
@@ -334,13 +349,7 @@ const stringify = (data: WhatsAppProfileData | null): string => {
   return JSON.stringify(data, null, 2);
 };
 
-/**
- * Sleep for a given number of milliseconds.
- */
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
 const search = async (): Promise<void> => {
-  console.log("Search");
   // Wait for loadingFirebase to be true with timeout
   await waitForLoadingFirebase();
 
@@ -394,21 +403,11 @@ const updateUrlWithHistory = async (phoneNumber: string) => {
   const localePath = useLocalePath();
   const newUrl = localePath(`/${phoneNumber}`);
 
-  console.log("New url", newUrl);
-
   try {
     // Method 1: Update Vue Router state first, then browser history
-    await router.push({
-      path: newUrl,
-      query: route.query, // Preserve any query parameters
-    });
-
-    // Update browser history to ensure consistency
-    window.history.replaceState({ ...window.history.state, phoneNumber }, "", newUrl);
+    await router.push(newUrl);
   } catch (error) {
     console.error("Failed to update route:", error);
-    // Fallback to just history API
-    window.history.replaceState(window.history.state, "", newUrl);
   }
 };
 const submit = async (): Promise<void> => {
@@ -416,7 +415,6 @@ const submit = async (): Promise<void> => {
     // If the phone number route is the same as the current one, just search
     const phoneValue = `${phoneCode.value.code}${phoneNumber.value}`;
     if ((route.params.number as string) === phoneValue) {
-      console.log("Submit search");
       await search();
       return;
     }
@@ -446,25 +444,49 @@ const setupSEO = () => {
   const isSpecificNumber = phoneNumber && phoneNumber !== "";
 
   let title, description, keywords;
-
   if (isSpecificNumber) {
-    // SEO for specific phone number pages
-    const phoneData = data.value
-      ? {
-          number: phoneNumber,
-          country: phoneCode.value.countryTranslated || "Unknown",
-          verified: !data.value.error,
-          hasWhatsApp: !data.value.error,
-        }
-      : undefined;
+    // Use server data if available, otherwise use client data
+    const phoneData = data.value;
 
-    const phoneMeta = $seo.generatePhoneSearchMeta(phoneNumber, phoneCode.value.countryTranslated);
-    title = phoneMeta.title;
-    description = phoneMeta.description;
-    keywords = phoneMeta.keywords;
+    if (phoneData && !phoneData.error) {
+      // SEO for specific phone number pages with actual data
+      const phoneMeta = $seo.generatePhoneSearchMeta(phoneNumber, phoneCode.value.countryTranslated);
+
+      // Enhanced title and description with actual data
+      const displayName = phoneData.pushname || "N/A";
+      const businessStatus = phoneData.isBusiness ? t("lookup.yes") : t("lookup.no");
+
+      title = `${t("number.titlePrefix")} ${phoneNumber} - ${displayName}`;
+      description = `${t("number.descPrefix")} ${phoneNumber}. ${t("lookup.name")}: ${displayName}, ${t("lookup.business")}: ${businessStatus}`;
+      keywords = `${phoneMeta.keywords}, ${displayName}, ${businessStatus}`;
+    } else {
+      // Fallback to generic SEO if no data available
+      const phoneMeta = $seo.generatePhoneSearchMeta(phoneNumber, phoneCode.value.countryTranslated);
+      title = phoneMeta.title;
+      description = phoneMeta.description;
+      keywords = phoneMeta.keywords;
+    }
 
     // Enhanced structured data for phone number pages
-    const structuredData = [$seo.generateWebApplicationData(), ...(phoneData ? [$seo.generatePhoneNumberData(phoneNumber, phoneData)] : [])];
+    const phoneMetaData =
+      phoneData && !phoneData.error
+        ? {
+            number: phoneNumber,
+            country: phoneCode.value.countryTranslated || "N/A",
+            verified: true,
+            hasWhatsApp: true,
+            name: phoneData.pushname || "N/A",
+            isBusiness: phoneData.isBusiness,
+            isEnterprise: phoneData.isEnterprise,
+          }
+        : {
+            number: phoneNumber,
+            country: phoneCode.value.countryTranslated || "N/A",
+            verified: false,
+            hasWhatsApp: false,
+          };
+
+    const structuredData = [$seo.generateWebApplicationData(), $seo.generatePhoneNumberData(phoneNumber, phoneMetaData)];
 
     // Breadcrumb navigation
     const breadcrumbs = [
@@ -480,7 +502,8 @@ const setupSEO = () => {
       structuredData,
       breadcrumbs,
       phoneNumber,
-      phoneData,
+      ogImage: phoneData?.urlImage || undefined,
+      phoneData: phoneMetaData,
     });
   } else {
     // SEO for home page (when no specific number)
