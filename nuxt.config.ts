@@ -422,6 +422,12 @@ export default defineNuxtConfig({
 
   modules: [
     [
+      "nuxt-gtag",
+      {
+        id: "G-J7TCBEVNWR",
+      },
+    ],
+    [
       "@nuxtjs/i18n",
       {
         locales: locales,

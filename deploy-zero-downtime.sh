@@ -57,7 +57,7 @@ fi
 print_status "Building application in temporary directory..."
 export NUXT_OUTPUT_DIR=.output-temp
 
-if npm run build; then
+if npm run build-temp; then
     print_success "Build completed successfully!"
 else
     print_error "Build failed! Keeping current version running."

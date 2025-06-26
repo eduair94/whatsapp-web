@@ -8682,6 +8682,16 @@ nth-check@^2.0.1:
   dependencies:
     boolbase "^1.0.0"
 
+nuxt-gtag@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.npmjs.org/nuxt-gtag/-/nuxt-gtag-3.0.3.tgz"
+  integrity sha512-1XZc9I3DiF2GC07P7uQOlGN4v1cbnLwWHaQUIlayp4pg0h7wOrna5Nl733/2rXq7ktPL3fT8NBJR7OsV9BtJRA==
+  dependencies:
+    "@nuxt/kit" "^3.17.5"
+    defu "^6.1.4"
+    pathe "^2.0.3"
+    ufo "^1.6.1"
+
 nuxt-link-checker@^4.3.0:
   version "4.3.1"
   resolved "https://registry.npmjs.org/nuxt-link-checker/-/nuxt-link-checker-4.3.1.tgz"

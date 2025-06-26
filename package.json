@@ -41,6 +41,7 @@
     "leaflet": "^1.9.4",
     "libphonenumber-js": "^1.10.44",
     "mongoose": "^8.15.1",
+    "nuxt-gtag": "^3.0.3",
     "phone-number-generator-js": "^1.2.12",
     "sass": "^1.66.1",
     "vite": "^6.3.5",
