@@ -4,11 +4,13 @@
   "scripts": {
     "start": "node .output/server/index.mjs",
     "build": "nuxt build",
+    "build-temp": "NUXT_OUTPUT_DIR=.output-temp nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "deploy": "sh deploy-build.sh",
+    "deploy-zero-downtime": "bash deploy-zero-downtime.sh",
     "check-missing-translations": "node scripts/check-missing-translations.js",
     "add-missing-translations": "node scripts/add-missing-translations.js"
   },
