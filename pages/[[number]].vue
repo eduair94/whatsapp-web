@@ -54,9 +54,11 @@
         <v-col cols="12" lg="6">
           <v-card :loading="loading" :elevation="10" class="mx-auto" style="position: relative">
             <!-- Loading Overlay -->
-            <v-overlay v-model="loading" contained class="d-flex align-center justify-center">
-              <v-progress-circular indeterminate size="64" color="primary"></v-progress-circular>
-            </v-overlay>
+            <ClientOnly>
+              <v-overlay v-model="loading" contained class="d-flex align-center justify-center">
+                <v-progress-circular indeterminate size="64" color="primary"></v-progress-circular>
+              </v-overlay>
+            </ClientOnly>
             <v-img v-if="data.profilePic" @load="() => (imageLoaded = true)" class="grey" lazy-src="/placeholder.png" :src="data.profilePic" placeholder="/placeholder.jpg" width="500px" height="388px" cover>
               <v-btn v-show="imageLoaded" :loading="loadingDownloadImage" class="mx-2 button_download" fab dark link target="_blank" :href="data.profilePic" small download color="primary" @click.prevent="downloadImage">
                 <v-icon dark> mdi-download </v-icon>
