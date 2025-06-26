@@ -255,6 +255,12 @@ export default defineNuxtConfig({
     },
   }, // Route rules for optimal caching and security
   routeRules: {
+    // Prerender all language versions of static pages
+    "/**": {
+      prerender: true,
+      ssr: true,
+      headers: { "cache-control": "max-age=300, s-maxage=300" },
+    },
     "/": {
       ssr: true,
       prerender: true,
@@ -275,12 +281,6 @@ export default defineNuxtConfig({
     "/database": { prerender: false, ssr: true },
     "/history": { prerender: true, ssr: true },
     "/auth": { prerender: false, ssr: true },
-    // Prerender all language versions of static pages
-    "/**": {
-      prerender: true,
-      ssr: true,
-      headers: { "cache-control": "max-age=300, s-maxage=300" },
-    },
 
     // Match routes that are likely phone numbers (start with digits)
     "/[0-9]*": {
