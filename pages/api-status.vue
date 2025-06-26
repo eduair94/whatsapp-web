@@ -5,7 +5,7 @@
       <v-col cols="12" md="6">
         <v-card :loading="loading" class="pa-4">
           <v-card-title class="text-h5 font-semibold">
-            {{ t("status.currentStatus") }}: <span :class="apiStatus.status ? 'text-green' : 'text-red'">{{ apiStatus.status ? t("status.online") : t("status.offline") }}</span>
+            {{ t("status.currentStatus") }}: <span :class="apiStatus?.status ? 'text-green' : 'text-red'">{{ apiStatus.status ? t("status.online") : t("status.offline") }}</span>
           </v-card-title>
           <v-card-text class="text-lg font-semibold">
             <v-list>
