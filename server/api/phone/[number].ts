@@ -1,4 +1,5 @@
 import axios from "axios";
+import { parseChallengeToken, validateChallenge } from "~/utils/jsChallenge";
 import { getApiKey, updateRateLimitInfo } from "../../services/apiKeyService";
 import { IpRateLimiterService } from "../../services/ipRateLimiterService";
 import { authenticateUser } from "../../utils/auth-middleware";
@@ -16,6 +17,30 @@ export default defineEventHandler(async (event) => {
     const number = getRouterParam(event, "number");
     const query = getQuery(event);
     const token = query.token;
+    const challengeToken = query.challengeToken;
+    const challengeId = query.challengeId;
+    const challengeSolution = query.challengeSolution ? parseInt(query.challengeSolution as string) : undefined;
+
+    // Validate JavaScript challenge first (anti-bot measure)
+    if (challengeToken && challengeId && typeof challengeSolution === "number") {
+      const challengeData = parseChallengeToken(challengeToken as string);
+
+      if (!challengeData) {
+        return { error: "Invalid challenge token" };
+      }
+
+      if (challengeData.challengeId !== challengeId) {
+        return { error: "Challenge ID mismatch" };
+      }
+
+      const validation = validateChallenge(challengeData, challengeSolution);
+      if (!validation.valid) {
+        return { error: "Challenge validation failed: " + (validation.error || "Invalid solution") };
+      }
+    } else if (!authResult.success || !authResult.user) {
+      // If user is not authenticated, require JavaScript challenge
+      return { error: "JavaScript challenge required for unauthenticated requests" };
+    }
 
     // If not within rate limit, check if user has API key for fallback
     if (!isWithinLimit) {
@@ -72,7 +97,7 @@ export default defineEventHandler(async (event) => {
       if (x.success) {
         const endpoint = `http://104.234.204.107:3728/number/${number}?bypass992=true&ip=${ip}`;
         const data = await axios.get(endpoint).then((res) => res.data);
-        if (!data?.error && !data?._id) {
+        if ((!data?.error || data?.error === "Whatsapp number doesn't exist") && !data?._id) {
           await ipRateLimit.incrementSuccessfulRequest(ip);
         }
         return data;

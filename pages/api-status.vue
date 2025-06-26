@@ -79,7 +79,6 @@ useHead({
     { name: "robots", content: "index, follow" },
     { name: "language", content: computed(() => locale.value) },
   ],
-  ...getMeta(pageUrl, baseUrl, route, locales),
 });
 
 interface ApiStatus {

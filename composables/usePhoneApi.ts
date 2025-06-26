@@ -2,6 +2,7 @@ import { computed, getCurrentInstance, ref, watch } from "vue";
 import { useReCaptcha } from "vue-recaptcha-v3";
 import type { WhatsAppProfileData } from "~/utils/interfaces/phone.interface";
 import { useFirebaseAuth } from "./useFirebaseAuth";
+import { useJSChallenge } from "./useJSChallenge";
 
 interface PhoneApiOptions {
   includeAuth?: boolean;
@@ -43,7 +44,7 @@ interface RateLimitResponse {
   error?: string;
 }
 
-// State
+// State (moved inside the composable to avoid shared state)
 const loading = ref(false);
 const error = ref<string | null>(null);
 const rateLimited = ref(false);
@@ -58,6 +59,7 @@ export const usePhoneApi = (options: PhoneApiOptions = {}) => {
 
   // Dependencies
   const { user } = useFirebaseAuth();
+  const jsChallenge = useJSChallenge();
 
   // Get reCaptcha instance safely - only if we're in a component context
   let recaptchaInstance: any = null;
@@ -161,6 +163,16 @@ export const usePhoneApi = (options: PhoneApiOptions = {}) => {
       params.append("token", recaptchaToken);
     }
 
+    // Add JavaScript challenge parameters if available and user is not authenticated
+    if (!user.value) {
+      const challengeParams = jsChallenge.getChallengeParams();
+      Object.entries(challengeParams).forEach(([key, value]) => {
+        if (value !== undefined) {
+          params.append(key, value.toString());
+        }
+      });
+    }
+
     const paramString = params.toString();
     return paramString ? `${baseUrl}?${paramString}` : baseUrl;
   };
@@ -244,6 +256,24 @@ export const usePhoneApi = (options: PhoneApiOptions = {}) => {
     loading.value = true;
 
     try {
+      // For unauthenticated users, ensure JavaScript challenge is completed
+      if (!user.value) {
+        if (!jsChallenge.isReady.value || jsChallenge.isExpired.value) {
+          console.log("Completing JavaScript challenge for unauthenticated user...");
+          const challengeCompleted = await jsChallenge.completeChallenge();
+
+          if (!challengeCompleted) {
+            error.value = jsChallenge.error.value || "Failed to complete anti-bot challenge";
+            return {
+              data: null,
+              loading: false,
+              error: error.value,
+              rateLimited: false,
+            };
+          }
+        }
+      }
+
       // Get required tokens
       const recaptchaToken = await getRecaptchaToken();
 
@@ -257,7 +287,7 @@ export const usePhoneApi = (options: PhoneApiOptions = {}) => {
       lastRequestTime.value = Date.now();
 
       // Refresh rate limit info after successful request
-      fetchRateLimitInfo();
+      if (!data?._id) fetchRateLimitInfo();
 
       return {
         data,
@@ -388,13 +418,10 @@ export const usePhoneApi = (options: PhoneApiOptions = {}) => {
    * Auto-refresh rate limit info periodically
    */
   const startRateLimitMonitoring = (intervalMs: number = 30000) => {
-    // Initial fetch
-    fetchRateLimitInfo();
-
     watch(
       user,
       (newUser) => {
-        fetchRateLimitInfo();
+        if (import.meta.client) fetchRateLimitInfo();
       },
       { immediate: true }
     );
@@ -411,6 +438,9 @@ export const usePhoneApi = (options: PhoneApiOptions = {}) => {
     rateLimitLoading,
     hasApiKey,
     setApiKeyValue,
+
+    // JavaScript Challenge
+    jsChallenge,
 
     // Methods
     searchProfile,

@@ -25,6 +25,9 @@
         <v-alert v-if="!phoneValid" class="text-body-2 alert-send-button mx-auto mt-5" type="info" :text="$t('lookup.infoMessage')" density="compact"></v-alert>
         <!-- Authentication warning for users not logged in (when auth is required) -->
         <ClientOnly>
+          <!-- JavaScript Challenge Status -->
+          <JSChallengeStatus :show-for-unauthenticated="true" />
+
           <nuxt-link v-if="!loadingFirebase" class="link_fixed" :to="localePath('/auth')">
             <v-alert v-if="!phoneApi.isAuthenticated.value" max-width="100%" width="fit-content" class="text-body-2 mx-auto mt-5" type="info" density="compact">
               <v-icon left>mdi-account-alert</v-icon>
@@ -47,15 +50,22 @@
       <v-alert v-if="data.error || phoneApi.error.value" type="error">
         {{ data.error ? $t(data.error) : phoneApi.error.value }}
       </v-alert>
-      <v-row v-else>
+      <v-row v-if="data.phone">
         <v-col cols="12" lg="6">
-          <v-card :elevation="10" class="mx-auto">
-            <v-img class="grey" :src="data.profilePic" placeholder="/placeholder.jpg" width="500px" contain>
-              <v-btn v-show="data.profilePic" :loading="loadingDownloadImage" class="mx-2 button_download" fab dark link target="_blank" :href="data.profilePic" small download color="primary" @click.prevent="downloadImage">
+          <v-card :loading="loading" :elevation="10" class="mx-auto" style="position: relative">
+            <!-- Loading Overlay -->
+            <v-overlay v-model="loading" contained class="d-flex align-center justify-center">
+              <v-progress-circular indeterminate size="64" color="primary"></v-progress-circular>
+            </v-overlay>
+            <v-img v-if="data.profilePic" @load="() => (imageLoaded = true)" class="grey" lazy-src="/placeholder.png" :src="data.profilePic" placeholder="/placeholder.jpg" width="500px" height="388px" cover>
+              <v-btn v-show="imageLoaded" :loading="loadingDownloadImage" class="mx-2 button_download" fab dark link target="_blank" :href="data.profilePic" small download color="primary" @click.prevent="downloadImage">
                 <v-icon dark> mdi-download </v-icon>
               </v-btn>
             </v-img>
             <v-list>
+              <v-list-item :class="isCachedData ? 'bg-warning' : 'bg-success'" :title="t('lookup.cache')">
+                {{ isCachedData ? $t("lookup.yes") : $t("lookup.no") }}
+              </v-list-item>
               <v-list-item :title="$t('lookup.phone')">
                 <p>{{ data.phone }}</p>
               </v-list-item>
@@ -88,8 +98,9 @@
 import { useI18n, useLocalePath, useRoute, useRouter } from "#imports";
 import parsePhoneNumber from "libphonenumber-js";
 import { generatePhoneNumber } from "phone-number-generator-js";
-import { computed, nextTick, onBeforeMount, onMounted, ref, watch } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import { useReCaptcha } from "vue-recaptcha-v3";
+import JSChallengeStatus from "~/components/JSChallengeStatus.vue";
 import { useGlobalApiKeyManager } from "~/composables/useGlobalApiKeyManager";
 import { usePhoneApi } from "~/composables/usePhoneApi";
 import { useSearchHistory } from "~/composables/useSearchHistory";
@@ -103,20 +114,63 @@ definePageMeta({
 
 // Server-side data fetching for SSR if there is any phone number
 const route = useRoute();
-const data = ref<WhatsAppProfileData | null>(null);
-if (route.params.number) {
-  const phone = parsePhoneNumber("+" + route.params.number);
-  if (phone && phone.isValid()) {
-    const { data: serverResponse, error: serverError } = await useFetch(`/api/phone-cache/${route.params.number}`, {
-      server: true,
-      default: () => null,
-    }).catch(() => ({ data: null, error: null }));
-    // Check serverData
-    if (serverResponse && serverResponse.value && !serverResponse.value?.error) {
-      data.value = serverResponse.value; // Reset to null if there's an error
-    }
+
+// Use conditional useFetch for proper SSR hydration
+const routePhoneNumber = route.params.number as string;
+let isCachedData = ref(false);
+
+// Determine if we should fetch cache data
+let shouldFetch = false;
+if (routePhoneNumber) {
+  try {
+    const phone = parsePhoneNumber("+" + routePhoneNumber);
+    shouldFetch = phone ? phone.isValid() : false;
+  } catch {
+    shouldFetch = false;
   }
 }
+// Conditional fetch using useFetch with proper SSR handling
+const { data: cacheData } = shouldFetch
+  ? await useFetch<WhatsAppProfileData>(`/api/phone-cache/${routePhoneNumber}`, {
+      key: `phone-cache-${routePhoneNumber}`,
+      server: true,
+      lazy: false,
+      default: () => null as any,
+      headers: {
+        "x-ssr-request": "true",
+      },
+      onResponse({ response }) {
+        if (response._data && !response._data.error) {
+          console.log("Server-side cache data loaded for:", routePhoneNumber);
+        }
+      },
+    })
+  : { data: ref(null) };
+
+// Create reactive data ref that preserves server-side data during hydration
+// Use the cache data if available and valid, otherwise null
+const serverCacheValue = cacheData.value && !cacheData.value.error ? cacheData.value : null;
+const data = ref<WhatsAppProfileData | null>(serverCacheValue);
+const isHydrated = ref(false);
+const imageLoaded = ref(false);
+
+if (data.value) {
+  isCachedData.value = true;
+  console.log("Server data preserved:", data.value.phone);
+}
+
+// Watch for changes in cache data (important for SSR hydration)
+watch(
+  cacheData,
+  (newCacheData) => {
+    if (newCacheData && !newCacheData.error && !data.value) {
+      data.value = newCacheData;
+      isCachedData.value = true;
+      console.log("Cache data hydrated:", newCacheData.phone);
+    }
+  },
+  { immediate: true }
+);
 
 const { locale, t, locales } = useI18n();
 const localePath = useLocalePath();
@@ -168,6 +222,8 @@ const phoneApi = usePhoneApi({
   timeout: 30000,
 });
 
+const showOverlay = ref(true);
+
 // Combined loading state
 const loading = computed(() => localLoading.value || phoneApi.loading.value);
 
@@ -191,9 +247,31 @@ const phoneCodesWithCountry = computed(() =>
 );
 
 onMounted(async () => {
+  // Mark as hydrated
+  isHydrated.value = true;
+  console.log("Component hydrated, server data:", data.value?.phone || "none");
+
   // Initialize search history storage
   initializeStorage();
 
+  // Set phone number from route after hydration
+  setPhoneNumber();
+
+  // If we have a phone number in the route but no data (client-side navigation),
+  // automatically trigger a search
+  const currentNumber = route.params.number as string;
+  if (currentNumber && import.meta.client) {
+    try {
+      const phone = parsePhoneNumber("+" + currentNumber);
+      if (phone && phone.isValid()) {
+        search();
+      }
+    } catch (error) {
+      console.error("Error checking phone number on mount:", error);
+    }
+  }
+
+  // Set default phone code if no phone number is set
   if (!phoneNumber.value) {
     const defaultVal = {
       code: "598",
@@ -211,10 +289,11 @@ onMounted(async () => {
       phoneCode.value = defaultVal;
     }
   }
+
   localLoading.value = false;
 });
 
-onBeforeMount(() => {
+const setPhoneNumber = () => {
   const phoneNumberParam = route.params.number as string;
   if (phoneNumberParam) {
     try {
@@ -227,12 +306,6 @@ onBeforeMount(() => {
           countryTranslated: t(`country.${country}`) || (phone.country as string),
         };
         phoneNumber.value = phone.nationalNumber;
-        // Trigger search after values are set
-        nextTick(() => {
-          if (import.meta.client) {
-            search();
-          }
-        });
       }
     } catch (error) {
       console.error("Error parsing phone number:", error);
@@ -255,12 +328,12 @@ onBeforeMount(() => {
       }
     }
   }
-});
+};
 
 // Watch for route changes to update phone number display
 watch(
   () => route.params.number,
-  (newNumber) => {
+  async (newNumber) => {
     if (newNumber && typeof newNumber === "string") {
       try {
         const phone = parsePhoneNumber("+" + newNumber);
@@ -276,23 +349,23 @@ watch(
       } catch (error) {
         console.error("Error parsing phone number:", error);
       }
+    } else if (!newNumber) {
+      // Clear data when going to home page
+      // Only clear if we're on client side and not during initial hydration
+      if (import.meta.client && isHydrated.value) {
+        console.log("Clearing data on route change to home");
+        data.value = null;
+        isCachedData.value = false;
+      }
     }
   },
-  { immediate: true }
+  { immediate: false } // Changed to false to prevent clearing server data during hydration
 );
 
 watch(phoneCode, (val) => {
   if (!val) return;
   if (import.meta.client) localStorage.setItem("phoneCode", JSON.stringify(val));
 });
-
-watch(
-  user,
-  (val) => {
-    phoneApi.fetchRateLimitInfo();
-  },
-  { immediate: true }
-);
 
 const downloadImage = (e: Event) => {
   e.stopPropagation();
@@ -342,7 +415,7 @@ const scheduleReviewPopup = (): void => {
     if (reviewPopupRef.value) {
       reviewPopupRef.value.open();
     }
-  }, 3000); // 10 seconds
+  }, 3000); // 3 seconds
 };
 
 const stringify = (data: WhatsAppProfileData | null): string => {
@@ -350,6 +423,7 @@ const stringify = (data: WhatsAppProfileData | null): string => {
 };
 
 const search = async (): Promise<void> => {
+  console.log("Search");
   // Wait for loadingFirebase to be true with timeout
   await waitForLoadingFirebase();
 
@@ -360,13 +434,16 @@ const search = async (): Promise<void> => {
 
   // Use the phone API composable
   const result = await phoneApi.searchProfile(phoneNumberFull);
+  console.log("Search", result);
 
   // Update local data state
-  data.value = result.data;
-
-  // Refresh rate limit info after the request
-  if (!result?.data?._id) {
-    phoneApi.fetchRateLimitInfo();
+  if (result.data) {
+    if (data.value && result.data.error) data.value.error = result.data.error;
+    else data.value = result.data;
+  }
+  // Mark as not cached since this is a fresh API call
+  if (result.data && !result.data.error && !result.error) {
+    isCachedData.value = false;
   }
 
   // Handle errors and rate limiting
@@ -381,6 +458,8 @@ const search = async (): Promise<void> => {
         isEnterprise: false,
         error: result.error,
       };
+    } else {
+      data.value.error = result.error;
     }
 
     return;
@@ -396,6 +475,7 @@ const search = async (): Promise<void> => {
 
 /**
  * Update URL using History API (lightest approach)
+ *
  */
 const updateUrlWithHistory = async (phoneNumber: string) => {
   if (!import.meta.client) return;
@@ -415,7 +495,7 @@ const submit = async (): Promise<void> => {
     // If the phone number route is the same as the current one, just search
     const phoneValue = `${phoneCode.value.code}${phoneNumber.value}`;
     if ((route.params.number as string) === phoneValue) {
-      await search();
+      search();
       return;
     }
     // Store current scroll position

@@ -14,7 +14,7 @@
           variant="text"
           @click="
             expanded = true;
-            fetchLimits();
+            fetchRateLimitInfo();
           "
         >
           <v-icon>mdi-chevron-down</v-icon>
@@ -66,7 +66,7 @@
 
             <!-- Refresh button -->
             <div class="text-center mt-3">
-              <v-btn size="small" variant="text" color="primary" :loading="rateLimitLoading" @click="fetchLimits">
+              <v-btn size="small" variant="text" color="primary" :loading="rateLimitLoading" @click="fetchRateLimitInfo">
                 <v-icon left size="small">mdi-refresh</v-icon>
                 Refresh
               </v-btn>
@@ -80,17 +80,16 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from "vue";
+import { usePhoneApi } from "~/composables/usePhoneApi";
+
 const phoneApi = usePhoneApi({
   includeAuth: true,
   retryAttempts: 2,
   timeout: 30000,
 });
 
-const rateLimitInfo = phoneApi.rateLimitInfo;
-const rateLimitInfoApi = phoneApi.rateLimitInfoApi;
-const rateLimitLoading = phoneApi.rateLimitLoading;
-const hasApiKey = phoneApi.hasApiKey;
-const fetchLimits = phoneApi.fetchRateLimitInfo;
+const { rateLimitInfo, rateLimitInfoApi, rateLimitLoading, hasApiKey, fetchRateLimitInfo, startRateLimitMonitoring } = phoneApi;
+const { user } = useFirebaseAuth();
 
 const STORAGE_KEY = "rateLimitDisplay_expanded";
 
@@ -145,7 +144,7 @@ const effectiveRateLimitInfo = computed(() => {
 
 // Card styling based on rate limit status
 const cardColor = computed(() => {
-  if (!effectiveRateLimitInfo.value) return "default";
+  if (!effectiveRateLimitInfo.value) return "";
 
   const remaining = effectiveRateLimitInfo.value.remaining;
   const percentage = (remaining / effectiveRateLimitInfo.value.maximum) * 100;
@@ -200,6 +199,7 @@ const progressColor = computed(() => {
   if (percentage >= 75) return "warning";
   return "success";
 });
+startRateLimitMonitoring();
 </script>
 
 <style scoped>

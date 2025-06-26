@@ -92,12 +92,13 @@ import { onMounted, ref, watch } from "vue";
 import { useApiKeyManagement } from "~/composables/useApiKeyManagement";
 import { useFirebaseAuth } from "~/composables/useFirebaseAuth";
 import { useGlobalApiKeyManager } from "~/composables/useGlobalApiKeyManager";
+import { usePhoneApi } from "~/composables/usePhoneApi";
 
 const { t } = useI18n();
 const { user } = useFirebaseAuth();
 const { loading, error, linkApiKey, getUserApiKey, removeApiKey } = useApiKeyManagement();
 const { isApiKeyManagerOpen, closeApiKeyManager } = useGlobalApiKeyManager();
-const { setApiKeyValue } = usePhoneApi(); // Move this to the top level
+const { setApiKeyValue } = usePhoneApi();
 
 // Component state
 const confirmRemove = ref(false);
