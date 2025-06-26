@@ -11,7 +11,7 @@
             <v-list>
               <v-list-item class="pl-0">
                 <div class="text-h6">
-                  {{ t("status.isWorking") }}: <span :class="apiStatus.isBroken ? 'text-red' : 'text-green'">{{ apiStatus.isBroken ? t("status.no") : t("status.yes") }}</span>
+                  {{ t("status.isWorking") }}: <span :class="apiStatus?.isBroken ? 'text-red' : 'text-green'">{{ apiStatus.isBroken ? t("status.no") : t("status.yes") }}</span>
                 </div>
               </v-list-item>
               <v-list-item class="pl-0">

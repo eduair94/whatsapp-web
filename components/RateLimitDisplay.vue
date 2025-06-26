@@ -177,7 +177,7 @@ const statusIcon = computed(() => {
 });
 
 const remainingColor = computed(() => {
-  if (!effectiveRateLimitInfo.value) return "";
+  if (!effectiveRateLimitInfo.value) return "text-white";
 
   const remaining = effectiveRateLimitInfo.value.remaining;
   const percentage = (remaining / effectiveRateLimitInfo.value.maximum) * 100;
