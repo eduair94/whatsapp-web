@@ -9,7 +9,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "deploy": "sh deploy-build.sh",
+    "deploy": "sh deploy.sh",
     "deploy-zero-downtime": "bash deploy-zero-downtime.sh",
     "check-missing-translations": "node scripts/check-missing-translations.js",
     "add-missing-translations": "node scripts/add-missing-translations.js"

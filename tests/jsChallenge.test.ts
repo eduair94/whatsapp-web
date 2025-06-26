@@ -83,4 +83,48 @@ describe("JavaScript Challenge System", () => {
       expect(isFinite(solved)).toBe(true);
     }
   });
+
+  test("should generate valid challenges that pass security validation", () => {
+    // Test multiple challenge generations to ensure all types work
+    for (let i = 0; i < 50; i++) {
+      const challenge = generateChallenge();
+      const solved = solveChallenge(challenge.challenge);
+
+      expect(solved).not.toBeNull();
+      expect(solved).toBe(challenge.solution);
+
+      // Ensure the challenge doesn't contain dangerous operations
+      expect(challenge.challenge).not.toMatch(/eval\s*\(/);
+      expect(challenge.challenge).not.toMatch(/Function\s*\(/);
+      expect(challenge.challenge).not.toMatch(/setTimeout\s*\(/);
+      expect(challenge.challenge).not.toMatch(/document\./);
+      expect(challenge.challenge).not.toMatch(/window\./);
+    }
+  });
+
+  test("should handle all challenge types correctly", () => {
+    // Generate many challenges to ensure we hit all types
+    const challengeTypes = new Set();
+
+    for (let i = 0; i < 100; i++) {
+      const challenge = generateChallenge();
+      const solved = solveChallenge(challenge.challenge);
+
+      // Identify challenge type based on pattern
+      if (/^\d+\s*[+\-*]\s*\d+$/.test(challenge.challenge)) {
+        challengeTypes.add("arithmetic");
+      } else if (/\[.*\]\.reduce/.test(challenge.challenge)) {
+        challengeTypes.add("array");
+      } else if (/'*'\.length/.test(challenge.challenge)) {
+        challengeTypes.add("string");
+      } else if (/Math\.pow/.test(challenge.challenge)) {
+        challengeTypes.add("math");
+      }
+
+      expect(solved).toBe(challenge.solution);
+    }
+
+    // Ensure we tested all challenge types
+    expect(challengeTypes.size).toBeGreaterThanOrEqual(3);
+  });
 });

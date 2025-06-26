@@ -25,9 +25,6 @@
         <v-alert v-if="!phoneValid" class="text-body-2 alert-send-button mx-auto mt-5" type="info" :text="$t('lookup.infoMessage')" density="compact"></v-alert>
         <!-- Authentication warning for users not logged in (when auth is required) -->
         <ClientOnly>
-          <!-- JavaScript Challenge Status -->
-          <JSChallengeStatus :show-for-unauthenticated="true" />
-
           <nuxt-link v-if="!loadingFirebase" class="link_fixed" :to="localePath('/auth')">
             <v-alert v-if="!phoneApi.isAuthenticated.value" max-width="100%" width="fit-content" class="text-body-2 mx-auto mt-5" type="info" density="compact">
               <v-icon left>mdi-account-alert</v-icon>
@@ -102,7 +99,6 @@ import parsePhoneNumber from "libphonenumber-js";
 import { generatePhoneNumber } from "phone-number-generator-js";
 import { computed, onMounted, ref, watch } from "vue";
 import { useReCaptcha } from "vue-recaptcha-v3";
-import JSChallengeStatus from "~/components/JSChallengeStatus.vue";
 import { useGlobalApiKeyManager } from "~/composables/useGlobalApiKeyManager";
 import { usePhoneApi } from "~/composables/usePhoneApi";
 import { useSearchHistory } from "~/composables/useSearchHistory";

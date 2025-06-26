@@ -74,8 +74,7 @@ export const generateChallenge = (): JSChallenge => {
       // Math operations
       const base = Math.floor(Math.random() * 10) + 2;
       const power = Math.floor(Math.random() * 3) + 2;
-      challenge = `Math.pow(${base}, ${power}) + Math.floor(Math.random() * 0) + ${Math.floor(Math.random() * 20)}`;
-      const randomAdd = Math.floor(Math.random() * 20);
+      const randomAdd = Math.floor(Math.random() * 20) + 1;
       challenge = `Math.pow(${base}, ${power}) + ${randomAdd}`;
       solution = Math.pow(base, power) + randomAdd;
       break;
@@ -116,11 +115,9 @@ const generateChallengeId = (): string => {
  */
 export const solveChallenge = (challenge: string): number | null => {
   try {
-    // Basic security: only allow safe mathematical operations
-    const allowedPattern = /^[\d\s+\-*/.(),\[\]'a-zA-Z]+(?:Math\.(pow|floor|random)\([^)]*\))*(?:\.(?:reduce|length|charCodeAt)\([^)]*\))*$/;
-
-    if (!allowedPattern.test(challenge)) {
-      console.error("Challenge contains unsafe operations");
+    // Use the comprehensive validation function
+    if (!validateChallengeString(challenge)) {
+      console.error("Challenge contains unsafe operations:", challenge);
       return null;
     }
 
@@ -147,9 +144,10 @@ export const solveChallenge = (challenge: string): number | null => {
       return Math.floor(result); // Always return integer
     }
 
+    console.error("Challenge result is not a valid number:", result);
     return null;
   } catch (error) {
-    console.error("Error solving challenge:", error);
+    console.error("Error solving challenge:", error, "Challenge:", challenge);
     return null;
   }
 };
@@ -188,4 +186,59 @@ export const parseChallengeToken = (token: string): JSChallenge | null => {
   } catch (error) {
     return null;
   }
+};
+
+/**
+ * Validate challenge string for security
+ */
+const validateChallengeString = (challenge: string): boolean => {
+  // Check for common dangerous patterns
+  const dangerousPatterns = [/eval\s*\(/, /Function\s*\(/, /setTimeout\s*\(/, /setInterval\s*\(/, /import\s*\(/, /require\s*\(/, /process\./, /global\./, /window\./, /document\./, /__proto__/, /constructor/, /prototype/];
+
+  // Check for dangerous patterns
+  for (const pattern of dangerousPatterns) {
+    if (pattern.test(challenge)) {
+      return false;
+    }
+  }
+
+  // Validate specific challenge patterns
+  const validPatterns = [
+    // Simple arithmetic: "number operator number"
+    /^\d+\s*[+\-*]\s*\d+$/,
+    // Array reduce: "[numbers].reduce((a, b) => a + b, 0)"
+    /^\[\d+(?:,\s*\d+)*\]\.reduce\(\(a,\s*b\)\s*=>\s*a\s*\+\s*b,\s*0\)$/,
+    // String operations: "'word'.length + 'word'.charCodeAt(0)"
+    /^'[a-zA-Z]+'\s*\.\s*length\s*\+\s*'[a-zA-Z]+'\s*\.\s*charCodeAt\(0\)$/,
+    // Math operations: "Math.pow(number, number) + number"
+    /^Math\.pow\(\d+,\s*\d+\)\s*\+\s*\d+$/,
+  ];
+
+  // Check if challenge matches any valid pattern
+  return validPatterns.some((pattern) => pattern.test(challenge));
+};
+
+/**
+ * Test function to verify challenge generation and validation
+ */
+export const testChallengeGeneration = (): void => {
+  console.log("Testing challenge generation...");
+
+  for (let i = 0; i < 20; i++) {
+    const challenge = generateChallenge();
+    const solution = solveChallenge(challenge.challenge);
+
+    console.log(`Challenge ${i + 1}:`, {
+      challenge: challenge.challenge,
+      expectedSolution: challenge.solution,
+      computedSolution: solution,
+      valid: solution === challenge.solution,
+    });
+
+    if (solution !== challenge.solution) {
+      console.error(`Challenge ${i + 1} failed validation!`);
+    }
+  }
+
+  console.log("Challenge generation test complete.");
 };
