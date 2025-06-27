@@ -451,7 +451,7 @@ export default defineNuxtConfig({
     [
       "@nuxtjs/robots",
       {
-        disallow: ["/admin/", "/.nuxt/", "/server/"],
+        disallow: ["/admin/", "/server/"],
         sitemap: baseUrl + "/sitemap.xml",
         credits: false,
       },
