@@ -149,37 +149,12 @@
     </v-dialog>
 
     <!-- Full image dialog -->
-    <v-dialog v-model="fullImageDialog" max-width="800">
-      <v-card>
-        <v-card-title class="d-flex justify-space-between align-center">
-          <span>{{ t("history.fullImage.title") }} {{ formatPhoneNumber(fullImageData.phoneNumber) }}</span>
-          <v-btn icon variant="text" @click="fullImageDialog = false">
-            <v-icon>mdi-close</v-icon>
-          </v-btn>
-        </v-card-title>
-        <v-card-text class="pa-0">
-          <v-img :src="fullImageData.url" :alt="`Profile picture for ${fullImageData.phoneNumber}`" class="w-100" style="max-height: 70vh" contain>
-            <template v-slot:placeholder>
-              <div class="d-flex align-center justify-center fill-height">
-                <v-progress-circular indeterminate color="primary"></v-progress-circular>
-              </div>
-            </template>
-            <template v-slot:error>
-              <div class="d-flex align-center justify-center fill-height">
-                <v-icon size="64" color="grey">mdi-image-broken</v-icon>
-              </div>
-            </template>
-          </v-img>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="primary" variant="outlined" @click="downloadImage(fullImageData.url, `${fullImageData.phoneNumber}_profile.jpeg`)">
-            <v-icon left>mdi-download</v-icon>
-            {{ t("history.fullImage.download") }}
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+    <FullImageDialog 
+      v-model="fullImageDialog" 
+      :image-url="fullImageData.url" 
+      :phone-number="fullImageData.phoneNumber"
+      @download="downloadImage"
+    />
   </v-container>
 </template>
 

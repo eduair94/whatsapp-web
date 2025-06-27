@@ -467,12 +467,23 @@ export default defineNuxtConfig({
             "**/node_modules/**/*",
             "sw.js",
             "workbox-*.js",
-            "**/_payload.json", // Explicitly ignore payload files to avoid warnings
             "**/api/**/*", // Exclude API files from caching
           ],
           cleanupOutdatedCaches: true,
           skipWaiting: true,
           clientsClaim: true,
+          navigateFallback: "/",
+          navigateFallbackDenylist: [
+            /^\/api\//, // API routes
+            /^\/[0-9]+$/, // Phone number routes
+            /^\/[a-z]{2}\/[0-9]+$/, // Localized phone number routes
+            /^\/database$/, // Database page
+            /^\/[a-z]{2}\/database$/, // Localized database pages
+            /^\/auth$/, // Auth page
+            /^\/[a-z]{2}\/auth$/, // Localized auth pages
+            /^\/api-status$/, // API status page
+            /^\/[a-z]{2}\/api-status$/, // Localized API status pages
+          ],
           runtimeCaching: [
             {
               urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
@@ -496,6 +507,19 @@ export default defineNuxtConfig({
                 },
               },
             },
+            // Handle app routes with network-first strategy
+            {
+              urlPattern: /^\/(?:database|auth|api-status|pricing|faqs|terms|privacy|stats|history)(?:\/.*)?$/,
+              handler: "NetworkFirst",
+              options: {
+                cacheName: "app-pages-cache",
+                expiration: {
+                  maxEntries: 50,
+                  maxAgeSeconds: 60 * 60 * 24, // 24 hours
+                },
+                networkTimeoutSeconds: 3,
+              },
+            },
           ],
         },
         client: {
@@ -505,6 +529,7 @@ export default defineNuxtConfig({
         devOptions: {
           enabled: true,
           suppressWarnings: true,
+          navigateFallback: "/",
           navigateFallbackAllowlist: [
             /^\/$/, // Only allow fallback for homepage
             /^\/[a-z]{2}\/$/, // Allow fallback for localized homepages (/es/, /fr/, etc.)
@@ -513,6 +538,12 @@ export default defineNuxtConfig({
             /^\/api\//, // Deny fallback for API routes
             /^\/[0-9]+$/, // Deny fallback for phone number routes
             /^\/[a-z]{2}\/[0-9]+$/, // Deny fallback for localized phone number routes
+            /^\/database$/, // Don't fallback for database page
+            /^\/[a-z]{2}\/database$/, // Don't fallback for localized database pages
+            /^\/auth$/, // Don't fallback for auth page
+            /^\/[a-z]{2}\/auth$/, // Don't fallback for localized auth pages
+            /^\/api-status$/, // Don't fallback for api-status page
+            /^\/[a-z]{2}\/api-status$/, // Don't fallback for localized api-status pages
           ],
           type: "module",
         },

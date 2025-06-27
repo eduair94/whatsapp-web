@@ -125,14 +125,14 @@
           <v-data-table-server :mobile="mobile" v-model:items-per-page="itemsPerPage" v-model:page="currentPage" :headers="headers" :items="searchResults" :items-length="hasMorePages ? currentPage * itemsPerPage + 1 : (currentPage - 1) * itemsPerPage + searchResults.length" :loading="loading" class="elevation-1" item-value="_id" show-current-page @update:options="loadItems">
             <!-- Profile Picture Column -->
             <template v-slot:item.profilePic="{ item }">
-              <div class="d-flex align-center py-2">
-                <v-avatar size="40" class="mr-3">
-                  <v-img v-if="item.urlImage || item.profilePic" :src="item.urlImage || item.profilePic" :alt="item.phone" cover>
+              <div class="d-flex align-center py-2 justify-end">
+                <v-avatar :size="mobile ? 120 : 40" class="mr-3" :class="{ 'cursor-pointer': item.urlImage || item.profilePic }" @click="item.urlImage || item.profilePic ? showFullImage(item.urlImage || item.profilePic, item.phone) : null">
+                  <v-img v-if="item.urlImage || item.profilePic" :src="item.urlImage || item.profilePic" lazy-src="/placeholder.png" height="100%" :alt="item.phone" cover>
                     <template v-slot:error>
                       <v-icon>mdi-account-circle</v-icon>
                     </template>
                   </v-img>
-                  <v-icon v-else>mdi-account-circle</v-icon>
+                  <v-icon :size="mobile ? 120 : 40" v-else>mdi-account-circle</v-icon>
                 </v-avatar>
               </div>
             </template>
@@ -173,7 +173,7 @@
 
             <!-- Date Column -->
             <template v-slot:item.date="{ item }">
-              <div class="d-flex flex-column">
+              <div class="d-flex flex-column py-1">
                 <span class="text-body-2">{{ formatDate(item.date) }}</span>
                 <span class="text-caption text-medium-emphasis">{{ formatTimeAgo(item.date) }}</span>
               </div>
@@ -186,7 +186,7 @@
                   <v-icon>mdi-open-in-new</v-icon>
                   <v-tooltip activator="parent">{{ t("database.showDetails") }}</v-tooltip>
                 </v-btn>
-                <v-btn icon size="small" variant="text" @click="copyToClipboard(item.phone)">
+                <v-btn icon size="small" variant="text" @click="copyToClipboard(item.number ? '+' + item.number : item.phone)">
                   <v-icon>mdi-content-copy</v-icon>
                   <v-tooltip activator="parent">{{ t("database.copyPhone") }}</v-tooltip>
                 </v-btn>
@@ -235,7 +235,7 @@
                   <v-card variant="outlined" class="pa-4">
                     <h4 class="mb-3">{{ t("database.profilePicture") }}</h4>
                     <div v-if="selectedItem.urlImage || selectedItem.profilePic" class="mb-3">
-                      <v-img :src="selectedItem.urlImage || selectedItem.profilePic" :alt="selectedItem.phone" max-height="300" max-width="300" class="mx-auto rounded" contain>
+                      <v-img :src="selectedItem.urlImage || selectedItem.profilePic" :alt="selectedItem.phone" max-height="300" max-width="300" class="mx-auto rounded cursor-pointer" contain @click="showFullImage(selectedItem.urlImage || selectedItem.profilePic, selectedItem.phone)">
                         <template v-slot:error>
                           <div class="d-flex align-center justify-center fill-height">
                             <v-icon size="100" color="grey-lighten-2">mdi-account-circle</v-icon>
@@ -269,7 +269,7 @@
                       <v-list-item-title>{{ t("database.phoneNumber") }}</v-list-item-title>
                       <v-list-item-subtitle class="font-weight-medium"> {{ getCountryFlag(selectedItem.countryCode) }} {{ selectedItem.phone }} </v-list-item-subtitle>
                       <template v-slot:append>
-                        <v-btn icon size="small" variant="text" @click="copyToClipboard(selectedItem.phone)">
+                        <v-btn icon size="small" variant="text" @click="copyToClipboard(selectedItem.number ? '+' + selectedItem.number : selectedItem.phone)">
                           <v-icon>mdi-content-copy</v-icon>
                         </v-btn>
                       </template>
@@ -408,6 +408,9 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
+
+      <!-- Full Image Dialog -->
+      <FullImageDialog v-model="fullImageDialog" :image-url="fullImageData.url" :phone-number="fullImageData.phoneNumber" @download="downloadImage" />
     </v-container>
   </div>
 </template>
@@ -466,6 +469,10 @@ const errorMessage = ref<string | null>(null); // Track error messages
 // Details dialog
 const detailsDialog = ref(false);
 const selectedItem = ref<PhoneDataItem | null>(null);
+
+// Full image dialog
+const fullImageDialog = ref(false);
+const fullImageData = ref({ url: "", phoneNumber: "" });
 
 // Filters - initialize from query parameters
 const filters = ref({
@@ -707,19 +714,34 @@ const getCountryColor = (countryCode: string) => {
 };
 
 const formatDate = (dateString: string) => {
-  return new Date(dateString).toLocaleDateString();
+  const date = new Date(dateString);
+  return date.toLocaleDateString();
 };
 
 const formatTimeAgo = (dateString: string) => {
   const date = new Date(dateString);
   const now = new Date();
   const diffTime = Math.abs(now.getTime() - date.getTime());
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
+  const diffSeconds = Math.floor(diffTime / 1000);
+  const diffMinutes = Math.floor(diffTime / (1000 * 60));
+  const diffHours = Math.floor(diffTime / (1000 * 60 * 60));
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  const diffWeeks = Math.floor(diffDays / 7);
+  const diffMonths = Math.floor(diffDays / 30);
+  const diffYears = Math.floor(diffDays / 365);
+
+  if (diffSeconds < 60) return `${diffSeconds} seconds ago`;
+  if (diffMinutes < 60) return `${diffMinutes} minutes ago`;
+  if (diffHours < 24) return `${diffHours} hours ago`;
   if (diffDays === 1) return "1 day ago";
-  if (diffDays < 30) return `${diffDays} days ago`;
-  if (diffDays < 365) return `${Math.floor(diffDays / 30)} months ago`;
-  return `${Math.floor(diffDays / 365)} years ago`;
+  if (diffDays < 7) return `${diffDays} days ago`;
+  if (diffWeeks === 1) return "1 week ago";
+  if (diffWeeks < 4) return `${diffWeeks} weeks ago`;
+  if (diffMonths === 1) return "1 month ago";
+  if (diffMonths < 12) return `${diffMonths} months ago`;
+  if (diffYears === 1) return "1 year ago";
+  return `${diffYears} years ago`;
 };
 
 const formatNumber = (num: number) => {
@@ -739,6 +761,11 @@ const copyToClipboard = async (text: string) => {
 const showDetails = (item: PhoneDataItem) => {
   selectedItem.value = item;
   detailsDialog.value = true;
+};
+
+const showFullImage = (imageUrl: string, phoneNumber: string) => {
+  fullImageData.value = { url: imageUrl, phoneNumber };
+  fullImageDialog.value = true;
 };
 
 const downloadImage = async (imageUrl: string | undefined, fileName: string) => {
@@ -911,6 +938,15 @@ watch(
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.cursor-pointer:hover {
+  opacity: 0.8;
+  transition: opacity 0.2s;
 }
 
 .v-data-table {
