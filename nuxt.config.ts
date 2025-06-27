@@ -474,15 +474,20 @@ export default defineNuxtConfig({
           clientsClaim: true,
           navigateFallback: "/",
           navigateFallbackDenylist: [
-            /^\/api\//, // API routes
-            /^\/[0-9]+$/, // Phone number routes
-            /^\/[a-z]{2}\/[0-9]+$/, // Localized phone number routes
-            /^\/database$/, // Database page
-            /^\/[a-z]{2}\/database$/, // Localized database pages
-            /^\/auth$/, // Auth page
-            /^\/[a-z]{2}\/auth$/, // Localized auth pages
-            /^\/api-status$/, // API status page
-            /^\/[a-z]{2}\/api-status$/, // Localized API status pages
+            /^\/api\//, // Exclude all API routes from service worker fallback
+            /^\/server\//, // Exclude server routes
+            /^\/admin\//, // Exclude admin routes
+            /\/__sitemap__\//, // Exclude sitemap routes
+            /^\/api\//, // Deny fallback for API routes
+            /^\/[0-9]+$/, // Deny fallback for phone number routes
+            /^\/[a-z]{2}\/[0-9]+$/, // Deny fallback for localized phone number routes
+            /^\/database$/, // Don't fallback for database page
+            /^\/[a-z]{2}\/database$/, // Don't fallback for localized database pages
+            /^\/auth$/, // Don't fallback for auth page
+            /^\/[a-z]{2}\/auth$/, // Don't fallback for localized auth pages
+            /^\/api-status$/, // Don't fallback for api-status page
+            /^\/[a-z]{2}\/api-status$/, // Don't fallback for localized api-status pages
+            /^\/api\/refresh$/, // Exclude all API routes from service worker fallback
           ],
           runtimeCaching: [
             {
