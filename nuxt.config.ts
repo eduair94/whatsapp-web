@@ -462,15 +462,6 @@ export default defineNuxtConfig({
         registerType: "autoUpdate",
         registerWebManifestInRouteRules: true,
         workbox: {
-          navigateFallback: "/",
-          navigateFallbackDenylist: [
-            /^\/api\//, // Exclude all API routes from service worker fallback
-            /^\/server\//, // Exclude server routes
-            /^\/admin\//, // Exclude admin routes
-            /\/__sitemap__\//, // Exclude sitemap routes
-            /^\/[0-9]+$/, // Exclude phone number routes (direct numbers like /123456789)
-            /^\/[a-z]{2}\/[0-9]+$/, // Exclude localized phone number routes (e.g., /es/123456789)
-          ],
           globPatterns: ["**/*.{js,css,html,png,svg,ico,json,woff2,woff}"],
           globIgnores: [
             "**/node_modules/**/*",
@@ -508,7 +499,7 @@ export default defineNuxtConfig({
           ],
         },
         client: {
-          installPrompt: true,
+          installPrompt: false,
           periodicSyncForUpdates: 20,
         },
         devOptions: {
