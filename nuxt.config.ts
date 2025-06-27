@@ -535,6 +535,10 @@ export default defineNuxtConfig({
             /^\/[a-z]{2}\/$/, // Allow fallback for localized homepages (/es/, /fr/, etc.)
           ],
           navigateFallbackDenylist: [
+            /^\/api\//, // Exclude all API routes from service worker fallback
+            /^\/server\//, // Exclude server routes
+            /^\/admin\//, // Exclude admin routes
+            /\/__sitemap__\//, // Exclude sitemap routes
             /^\/api\//, // Deny fallback for API routes
             /^\/[0-9]+$/, // Deny fallback for phone number routes
             /^\/[a-z]{2}\/[0-9]+$/, // Deny fallback for localized phone number routes
@@ -544,6 +548,7 @@ export default defineNuxtConfig({
             /^\/[a-z]{2}\/auth$/, // Don't fallback for localized auth pages
             /^\/api-status$/, // Don't fallback for api-status page
             /^\/[a-z]{2}\/api-status$/, // Don't fallback for localized api-status pages
+            /^\/api\/refresh$/, // Exclude all API routes from service worker fallback
           ],
           type: "module",
         },
