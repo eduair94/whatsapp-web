@@ -472,22 +472,16 @@ export default defineNuxtConfig({
           cleanupOutdatedCaches: true,
           skipWaiting: true,
           clientsClaim: true,
+          // Force update by including a build timestamp
+          additionalManifestEntries: [
+            {
+              url: '/sw-version.json',
+              revision: new Date().getTime().toString(), // Force update with timestamp
+            }
+          ],
           navigateFallback: "/",
           navigateFallbackDenylist: [
-            /^\/api\//, // Exclude all API routes from service worker fallback
-            /^\/server\//, // Exclude server routes
-            /^\/admin\//, // Exclude admin routes
-            /\/__sitemap__\//, // Exclude sitemap routes
-            /^\/api\//, // Deny fallback for API routes
-            /^\/[0-9]+$/, // Deny fallback for phone number routes
-            /^\/[a-z]{2}\/[0-9]+$/, // Deny fallback for localized phone number routes
-            /^\/database$/, // Don't fallback for database page
-            /^\/[a-z]{2}\/database$/, // Don't fallback for localized database pages
-            /^\/auth$/, // Don't fallback for auth page
-            /^\/[a-z]{2}\/auth$/, // Don't fallback for localized auth pages
-            /^\/api-status$/, // Don't fallback for api-status page
-            /^\/[a-z]{2}\/api-status$/, // Don't fallback for localized api-status pages
-            /^\/api\/refresh$/, // Exclude all API routes from service worker fallback
+            /^\/(?!$)/, // Deny fallback for all routes except the exact home page "/"
           ],
           runtimeCaching: [
             {
@@ -531,6 +525,31 @@ export default defineNuxtConfig({
           installPrompt: false,
           periodicSyncForUpdates: 20,
         },
+        // Injects a simple script to reload page when SW updates
+        injectRegister: 'script-defer',
+        // Custom script to force reload on update
+        registerSW: `
+          if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js', { 
+              scope: '/',
+              updateViaCache: 'none' // Always check for updates
+            }).then((registration) => {
+              registration.addEventListener('updatefound', () => {
+                const newWorker = registration.installing;
+                if (newWorker) {
+                  newWorker.addEventListener('statechange', () => {
+                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                      // New SW is available, force reload
+                      if (confirm('New version available! Reload to get the latest features?')) {
+                        window.location.reload();
+                      }
+                    }
+                  });
+                }
+              });
+            });
+          }
+        `,
         devOptions: {
           enabled: true,
           suppressWarnings: true,
@@ -540,20 +559,7 @@ export default defineNuxtConfig({
             /^\/[a-z]{2}\/$/, // Allow fallback for localized homepages (/es/, /fr/, etc.)
           ],
           navigateFallbackDenylist: [
-            /^\/api\//, // Exclude all API routes from service worker fallback
-            /^\/server\//, // Exclude server routes
-            /^\/admin\//, // Exclude admin routes
-            /\/__sitemap__\//, // Exclude sitemap routes
-            /^\/api\//, // Deny fallback for API routes
-            /^\/[0-9]+$/, // Deny fallback for phone number routes
-            /^\/[a-z]{2}\/[0-9]+$/, // Deny fallback for localized phone number routes
-            /^\/database$/, // Don't fallback for database page
-            /^\/[a-z]{2}\/database$/, // Don't fallback for localized database pages
-            /^\/auth$/, // Don't fallback for auth page
-            /^\/[a-z]{2}\/auth$/, // Don't fallback for localized auth pages
-            /^\/api-status$/, // Don't fallback for api-status page
-            /^\/[a-z]{2}\/api-status$/, // Don't fallback for localized api-status pages
-            /^\/api\/refresh$/, // Exclude all API routes from service worker fallback
+            /^\/(?!$)/, // Deny fallback for all routes except the exact home page "/"
           ],
           type: "module",
         },
