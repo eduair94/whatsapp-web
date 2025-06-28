@@ -126,7 +126,7 @@
             <!-- Profile Picture Column -->
             <template v-slot:item.profilePic="{ item }">
               <div class="d-flex align-center py-2 justify-end">
-                <v-avatar :size="mobile ? 120 : 40" class="mr-3" :class="{ 'cursor-pointer': item.urlImage || item.profilePic }" @click="item.urlImage || item.profilePic ? showFullImage(item.urlImage || item.profilePic, item.phone) : null">
+                <v-avatar :size="mobile ? 120 : 40" class="mr-3" :class="{ 'cursor-pointer': item.urlImage || item.profilePic }" @click="item.urlImage || item.profilePic ? showFullImage(item?.urlImage || item?.profilePic, item.phone) : null">
                   <v-img v-if="item.urlImage || item.profilePic" :src="item.urlImage || item.profilePic" lazy-src="/placeholder.png" height="100%" :alt="item.phone" cover>
                     <template v-slot:error>
                       <v-icon>mdi-account-circle</v-icon>
@@ -235,7 +235,7 @@
                   <v-card variant="outlined" class="pa-4">
                     <h4 class="mb-3">{{ t("database.profilePicture") }}</h4>
                     <div v-if="selectedItem.urlImage || selectedItem.profilePic" class="mb-3">
-                      <v-img :src="selectedItem.urlImage || selectedItem.profilePic" :alt="selectedItem.phone" max-height="300" max-width="300" class="mx-auto rounded cursor-pointer" contain @click="showFullImage(selectedItem.urlImage || selectedItem.profilePic, selectedItem.phone)">
+                      <v-img :src="selectedItem.urlImage || selectedItem.profilePic" :alt="selectedItem.phone" max-height="300" max-width="300" class="mx-auto rounded cursor-pointer" contain @click="showFullImage(selectedItem?.urlImage || selectedItem?.profilePic, selectedItem.phone)">
                         <template v-slot:error>
                           <div class="d-flex align-center justify-center fill-height">
                             <v-icon size="100" color="grey-lighten-2">mdi-account-circle</v-icon>
@@ -763,7 +763,8 @@ const showDetails = (item: PhoneDataItem) => {
   detailsDialog.value = true;
 };
 
-const showFullImage = (imageUrl: string, phoneNumber: string) => {
+const showFullImage = (imageUrl: string | undefined, phoneNumber: string) => {
+  if (!imageUrl) return;
   fullImageData.value = { url: imageUrl, phoneNumber };
   fullImageDialog.value = true;
 };

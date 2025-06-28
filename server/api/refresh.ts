@@ -1,4 +1,8 @@
 export default defineEventHandler(async (event) => {
+  // Get the returnTo query parameter
+  const query = getQuery(event);
+  const returnTo = query.returnTo as string;
+
   // Get the referer URL from the request
   const referer = getHeader(event, "referer");
 
@@ -7,8 +11,8 @@ export default defineEventHandler(async (event) => {
   const protocol = getHeader(event, "x-forwarded-proto") || "https";
   const origin = `${protocol}://${host}`;
 
-  // Use referer if available, otherwise fallback to root
-  const backUrl = referer || origin + "/";
+  // Use returnTo if provided, then referer if available, otherwise fallback to root
+  const backUrl = returnTo || referer || origin + "/";
 
   // Set content type to HTML
   setHeader(event, "content-type", "text/html");

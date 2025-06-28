@@ -180,7 +180,7 @@ export const usePhoneApi = (options: PhoneApiOptions = {}) => {
   /**
    * Perform the API request with retry logic
    */
-  const performRequest = async (url: string, attempt: number = 1): Promise<WhatsAppProfileData> => {
+  const performRequest = async (url: string, attempt: number, phoneNumber: string): Promise<WhatsAppProfileData> => {
     try {
       const { $api } = useNuxtApp();
       const headers = await getAuthHeaders();
@@ -210,15 +210,16 @@ export const usePhoneApi = (options: PhoneApiOptions = {}) => {
 
       // 403 error - bypass service worker and try direct request
       if (err.response?.status === 403) {
-        window.location.href = "/api/refresh";
+        const returnTo = encodeURIComponent("/" + phoneNumber);
+        window.location.href = "/api/refresh?returnTo=" + returnTo;
         throw new Error("Access forbidden. Please refresh the page.");
       }
 
       // Handle server errors with retry
       if (err.response?.status >= 500 && attempt < retryAttempts) {
         console.warn(`API request failed (attempt ${attempt}), retrying...`);
-        await new Promise((resolve) => setTimeout(resolve, 1000 * attempt));
-        return performRequest(url, attempt + 1);
+        await new Promise((resolve) => setTimeout(resolve, 500 * attempt));
+        return performRequest(url, attempt + 1, phoneNumber);
       }
 
       // Handle other errors
@@ -281,7 +282,7 @@ export const usePhoneApi = (options: PhoneApiOptions = {}) => {
       const url = buildRequestUrl(phoneNumber, recaptchaToken);
 
       // Perform the request
-      const data = await performRequest(url);
+      const data = await performRequest(url, 1, phoneNumber);
 
       // Update last request time
       lastRequestTime.value = Date.now();
