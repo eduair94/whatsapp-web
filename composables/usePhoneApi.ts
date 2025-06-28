@@ -53,6 +53,7 @@ const rateLimitInfo = ref<RateLimitInfo | null>(null);
 const rateLimitInfoApi = ref<ApiKeyRateLimitInfo | null>(null);
 const rateLimitLoading = ref(false);
 const hasApiKey = ref(false);
+const localePath = useLocalePath();
 
 export const usePhoneApi = (options: PhoneApiOptions = {}) => {
   const { includeAuth = true, retryAttempts = 2, timeout = 30000 } = options;
@@ -210,7 +211,7 @@ export const usePhoneApi = (options: PhoneApiOptions = {}) => {
 
       // 403 error - bypass service worker and try direct request
       if (err.response?.status === 403) {
-        const returnTo = encodeURIComponent("/" + phoneNumber);
+        const returnTo = localePath("/" + phoneNumber);
         window.location.href = "/api/refresh?returnTo=" + returnTo;
         throw new Error("Access forbidden. Please refresh the page.");
       }
