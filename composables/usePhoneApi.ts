@@ -212,7 +212,8 @@ export const usePhoneApi = (options: PhoneApiOptions = {}) => {
       if (err.response?.status === 403) {
         const localePath = useLocalePath();
         const returnTo = localePath("/" + phoneNumber);
-        window.location.href = "/api/refresh?returnTo=" + returnTo;
+        const { bypassServiceWorkerRedirect } = await import("~/utils/bypassServiceWorker");
+        bypassServiceWorkerRedirect("/api/refresh?returnTo=" + returnTo);
         throw new Error("Access forbidden. Please refresh the page.");
       }
 
@@ -407,7 +408,8 @@ export const usePhoneApi = (options: PhoneApiOptions = {}) => {
       console.error("Failed to fetch rate limit info:", err);
       // 403 error - try direct bypass before redirecting
       if (err.response?.status === 403) {
-        window.location.href = "/api/refresh";
+        const { bypassServiceWorkerRedirect } = await import("~/utils/bypassServiceWorker");
+        bypassServiceWorkerRedirect("/api/refresh");
         throw new Error("Access forbidden. Please refresh the page.");
       }
       return null;

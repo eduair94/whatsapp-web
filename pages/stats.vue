@@ -222,11 +222,12 @@ const getCountryCoordinates = (isoCode) => {
 const fetchStats = async () => {
   try {
     loading.value = true;
-    const response = await $fetch("/api/stats").catch((e) => {
+    const response = await $fetch("/api/stats").catch(async (e) => {
       // Handle fetch errors
       console.error("Fetch error:", e);
       if (e?.response?.status === 403) {
-        window.location.href = "/api/refresh";
+        const { bypassServiceWorkerRedirect } = await import("~/utils/bypassServiceWorker");
+        bypassServiceWorkerRedirect("/api/refresh");
       }
       return {
         success: false,

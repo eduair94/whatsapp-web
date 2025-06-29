@@ -583,11 +583,12 @@ const performSearch = async (resetPage = false) => {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    }).catch((e) => {
+    }).catch(async (e) => {
       // Handle fetch errors
       console.error("Fetch error:", e);
       if (e?.response?.status === 403) {
-        window.location.href = "/api/refresh";
+        const { bypassServiceWorkerRedirect } = await import("~/utils/bypassServiceWorker");
+        bypassServiceWorkerRedirect("/api/refresh");
       }
       return {
         success: false,
@@ -870,11 +871,12 @@ watch(
             headers: {
               Authorization: `Bearer ${token}`,
             },
-          }).catch((e) => {
+          }).catch(async (e) => {
             // Handle fetch errors
             console.error("Fetch error:", e);
             if (e?.response?.status === 403) {
-              window.location.href = "/api/refresh";
+              const { bypassServiceWorkerRedirect } = await import("~/utils/bypassServiceWorker");
+              bypassServiceWorkerRedirect("/api/refresh");
             }
             return {
               success: false,

@@ -347,6 +347,20 @@ export default defineNuxtConfig({
       },
       cors: false,
     },
+    "/api/refresh": {
+      prerender: false,
+      ssr: false,
+      headers: {
+        "cache-control": "no-cache, no-store, must-revalidate, max-age=0, private",
+        "pragma": "no-cache",
+        "expires": "0",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "DENY",
+        "Surrogate-Control": "no-store",
+        "Vary": "*",
+      },
+      cors: false,
+    },
     "/api/phone/limits": {
       prerender: false,
       ssr: false,
@@ -467,7 +481,7 @@ export default defineNuxtConfig({
             "**/node_modules/**/*",
             "sw.js",
             "workbox-*.js",
-            "**/api/**/*", // Exclude API files from caching
+            "**/api/**/*", // Exclude ALL API files from caching
           ],
           cleanupOutdatedCaches: true,
           skipWaiting: true,
@@ -482,6 +496,7 @@ export default defineNuxtConfig({
           navigateFallback: "/",
           navigateFallbackDenylist: [
             /^\/(?!$)/, // Deny fallback for all routes except the exact home page "/"
+            /^\/api\/.*/, // Explicitly deny all API routes from fallback
           ],
           runtimeCaching: [
             {
@@ -506,7 +521,12 @@ export default defineNuxtConfig({
                 },
               },
             },
-            // Handle app routes with network-first strategy
+            // Explicitly exclude ALL API routes from caching
+            {
+              urlPattern: /^.*\/api\/.*$/,
+              handler: "NetworkOnly", // Never cache API routes
+            },
+            // Handle app routes with network-first strategy (excluding API routes)
             {
               urlPattern: /^\/(?:database|auth|api-status|pricing|faqs|terms|privacy|stats|history)(?:\/.*)?$/,
               handler: "NetworkFirst",
@@ -527,7 +547,7 @@ export default defineNuxtConfig({
         },
         // Injects a simple script to reload page when SW updates
         injectRegister: 'script-defer',
-        // Custom script to force reload on update
+        // Custom script to force reload on update and exclude API routes
         registerSW: `
           if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/sw.js', { 
@@ -547,6 +567,25 @@ export default defineNuxtConfig({
                   });
                 }
               });
+              
+              // Ensure API requests bypass service worker
+              if ('fetch' in window) {
+                const originalFetch = window.fetch;
+                window.fetch = function(...args) {
+                  const url = args[0];
+                  if (typeof url === 'string' && url.includes('/api/')) {
+                    const init = args[1] || {};
+                    init.cache = 'no-store';
+                    init.headers = {
+                      ...init.headers,
+                      'Cache-Control': 'no-cache, no-store, must-revalidate',
+                      'Pragma': 'no-cache'
+                    };
+                    args[1] = init;
+                  }
+                  return originalFetch.apply(this, args);
+                };
+              }
             });
           }
         `,
@@ -560,6 +599,7 @@ export default defineNuxtConfig({
           ],
           navigateFallbackDenylist: [
             /^\/(?!$)/, // Deny fallback for all routes except the exact home page "/"
+            /^\/api\/.*/, // Explicitly deny all API routes from fallback in dev mode
           ],
           type: "module",
         },
