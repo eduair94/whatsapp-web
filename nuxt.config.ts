@@ -352,12 +352,12 @@ export default defineNuxtConfig({
       ssr: false,
       headers: {
         "cache-control": "no-cache, no-store, must-revalidate, max-age=0, private",
-        "pragma": "no-cache",
-        "expires": "0",
+        pragma: "no-cache",
+        expires: "0",
         "X-Content-Type-Options": "nosniff",
         "X-Frame-Options": "DENY",
         "Surrogate-Control": "no-store",
-        "Vary": "*",
+        Vary: "*",
       },
       cors: false,
     },
@@ -489,14 +489,15 @@ export default defineNuxtConfig({
           // Force update by including a build timestamp
           additionalManifestEntries: [
             {
-              url: '/sw-version.json',
+              url: "/sw-version.json",
               revision: new Date().getTime().toString(), // Force update with timestamp
-            }
+            },
           ],
           navigateFallback: "/",
           navigateFallbackDenylist: [
             /^\/(?!$)/, // Deny fallback for all routes except the exact home page "/"
             /^\/api\/.*/, // Explicitly deny all API routes from fallback
+            /^.*\/api\/refresh.*/, // Explicitly deny refresh endpoint from any fallback handling
           ],
           runtimeCaching: [
             {
@@ -546,7 +547,7 @@ export default defineNuxtConfig({
           periodicSyncForUpdates: 20,
         },
         // Injects a simple script to reload page when SW updates
-        injectRegister: 'script-defer',
+        injectRegister: "script-defer",
         // Custom script to force reload on update and exclude API routes
         registerSW: `
           if ('serviceWorker' in navigator) {
@@ -567,25 +568,6 @@ export default defineNuxtConfig({
                   });
                 }
               });
-              
-              // Ensure API requests bypass service worker
-              if ('fetch' in window) {
-                const originalFetch = window.fetch;
-                window.fetch = function(...args) {
-                  const url = args[0];
-                  if (typeof url === 'string' && url.includes('/api/')) {
-                    const init = args[1] || {};
-                    init.cache = 'no-store';
-                    init.headers = {
-                      ...init.headers,
-                      'Cache-Control': 'no-cache, no-store, must-revalidate',
-                      'Pragma': 'no-cache'
-                    };
-                    args[1] = init;
-                  }
-                  return originalFetch.apply(this, args);
-                };
-              }
             });
           }
         `,

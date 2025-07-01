@@ -1,21 +1,27 @@
 export default defineEventHandler(async (event) => {
-  // Get the returnTo query parameter
-  const query = getQuery(event);
-  const returnTo = query.returnTo as string;
+  try {
+    // Get the returnTo query parameter
+    const query = getQuery(event);
+    const returnTo = query.returnTo as string;
 
-  // Get the referer URL from the request
-  const referer = getHeader(event, "referer");
+    // Get the referer URL from the request
+    const referer = getHeader(event, "referer");
 
-  // Get the origin/host from the request as fallback
-  const host = getHeader(event, "host");
-  const protocol = getHeader(event, "x-forwarded-proto") || "https";
-  const origin = `${protocol}://${host}`;
+    // Get the origin/host from the request as fallback
+    const host = getHeader(event, "host");
+    const protocol = getHeader(event, "x-forwarded-proto") || "https";
+    const origin = `${protocol}://${host}`;
 
-  // Use returnTo if provided, then referer if available, otherwise fallback to root
-  const backUrl = returnTo || referer || origin + "/";
+    // Use returnTo if provided, then referer if available, otherwise fallback to root
+    const backUrl = returnTo || referer || origin + "/";
 
-  // Set content type to HTML
-  setHeader(event, "content-type", "text/html");
+    // Set content type to HTML
+    setHeader(event, "content-type", "text/html");
+    
+    // Add headers to prevent caching and ensure proper response
+    setHeader(event, "cache-control", "no-cache, no-store, must-revalidate");
+    setHeader(event, "pragma", "no-cache");
+    setHeader(event, "expires", "0");
 
   // Return HTML page with go back button
   return `
@@ -111,4 +117,10 @@ export default defineEventHandler(async (event) => {
     </body>
     </html>
   `;
+  } catch (error) {
+    // If there's any error, return a minimal response to prevent further redirects
+    setResponseStatus(event, 200); // Always return 200 to prevent redirect loops
+    setHeader(event, "content-type", "text/plain");
+    return "Refresh completed";
+  }
 });

@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
 
     const hasSSRHeader = getHeader(event, "x-ssr-request") === "true";
     const userAgent = getHeader(event, "user-agent") || "";
-    
+
     // Get telegram parameter from query, cookies, or default to true
     let telegram = getQuery(event).telegram;
     if (telegram === undefined || telegram === null) {
@@ -34,7 +34,7 @@ export default defineEventHandler(async (event) => {
     const ip = event.node.req.headers["x-forwarded-for"]?.toString().split(",")[0] || event.node.req.socket.remoteAddress || "unknown";
     const number = getRouterParam(event, "number");
     const endpoint = `http://104.234.204.107:3728/number_cache/${number}?bypass992=true&ip=${encodeURIComponent(ip)}&telegram=${telegram}`;
-    
+
     console.log("Get Cache Data", number, "telegram:", telegram);
     const data = await axios.get(endpoint).then((res) => res.data);
     return data;
