@@ -20,6 +20,7 @@ export default defineEventHandler(async (event) => {
     const challengeToken = query.challengeToken;
     const challengeId = query.challengeId;
     const challengeSolution = query.challengeSolution ? parseInt(query.challengeSolution as string) : undefined;
+    const telegram = query.telegram;
 
     // Validate JavaScript challenge first (anti-bot measure)
     if (challengeToken && challengeId && typeof challengeSolution === "number") {
@@ -54,7 +55,7 @@ export default defineEventHandler(async (event) => {
           if (captchaVerification.success) {
             try {
               // Use RapidAPI endpoint with user's API key
-              const rapidApiUrl = `https://whatsapp-data1.p.rapidapi.com/number/${number}`;
+              const rapidApiUrl = `https://whatsapp-data1.p.rapidapi.com/number/${number}?telegram=${telegram}`;
               const rapidApiResponse = await axios.get(rapidApiUrl, {
                 headers: {
                   "x-rapidapi-host": "whatsapp-data1.p.rapidapi.com",
@@ -95,7 +96,8 @@ export default defineEventHandler(async (event) => {
       const url = `https://www.google.com/recaptcha/api/siteverify?secret=${captchaSecret}&response=${token}`;
       const x = await axios.post(url).then((res) => res.data);
       if (x.success) {
-        const endpoint = `http://104.234.204.107:3728/number/${number}?bypass992=true&ip=${ip}`;
+        const endpoint = `http://104.234.204.107:3728/number/${number}?bypass992=true&ip=${encodeURIComponent(ip)}&telegram=${telegram}`;
+        console.log("Endpoint:", endpoint);
         const data = await axios.get(endpoint).then((res) => res.data);
         if ((!data?.error || data?.error === "Whatsapp number doesn't exist") && !data?._id) {
           await ipRateLimit.incrementSuccessfulRequest(ip);

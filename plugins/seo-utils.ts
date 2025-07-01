@@ -27,6 +27,43 @@ interface PhoneData {
   country: string;
   verified: boolean;
   hasWhatsApp: boolean;
+  // WhatsApp specific data
+  isBusiness?: boolean;
+  isEnterprise?: boolean;
+  pushname?: string;
+  about?: string;
+  profilePic?: string;
+  urlImage?: string;
+  countryCode?: string;
+  phone?: string;
+  isMe?: boolean;
+  isUser?: boolean;
+  isGroup?: boolean;
+  isWAContact?: boolean;
+  isMyContact?: boolean;
+  isBlocked?: boolean;
+  labels?: string[];
+  // Telegram specific data
+  telegram?: {
+    id?: number;
+    username?: string;
+    usernames?: any;
+    first_name?: string;
+    last_name?: string;
+    fake?: boolean;
+    verified?: boolean;
+    premium?: boolean;
+    mutual_contact?: boolean;
+    bot?: boolean;
+    bot_chat_history?: boolean;
+    restricted?: boolean;
+    restriction_reason?: string | null;
+    user_was_online?: string;
+    phone?: string;
+    hasPhoto?: boolean;
+    photoUrl?: string;
+    date?: Date;
+  };
 }
 
 export default defineNuxtPlugin(() => {
@@ -132,6 +169,136 @@ export default defineNuxtPlugin(() => {
     generatePhoneNumberData(phoneNumber: string, phoneData: PhoneData): StructuredDataItem {
       const { $i18n } = useNuxtApp();
 
+      const additionalProperties = [
+        {
+          "@type": "PropertyValue",
+          name: "hasWhatsApp",
+          value: phoneData.hasWhatsApp.toString(),
+        },
+        {
+          "@type": "PropertyValue",
+          name: "verified",
+          value: phoneData.verified.toString(),
+        },
+        {
+          "@type": "PropertyValue",
+          name: "country",
+          value: phoneData.country,
+        },
+      ];
+
+      // Add WhatsApp specific properties
+      if (phoneData.isBusiness !== undefined) {
+        additionalProperties.push({
+          "@type": "PropertyValue",
+          name: "isBusiness",
+          value: phoneData.isBusiness.toString(),
+        });
+      }
+
+      if (phoneData.isEnterprise !== undefined) {
+        additionalProperties.push({
+          "@type": "PropertyValue",
+          name: "isEnterprise",
+          value: phoneData.isEnterprise.toString(),
+        });
+      }
+
+      if (phoneData.pushname) {
+        additionalProperties.push({
+          "@type": "PropertyValue",
+          name: "displayName",
+          value: phoneData.pushname,
+        });
+      }
+
+      if (phoneData.about) {
+        additionalProperties.push({
+          "@type": "PropertyValue",
+          name: "about",
+          value: phoneData.about,
+        });
+      }
+
+      if (phoneData.countryCode) {
+        additionalProperties.push({
+          "@type": "PropertyValue",
+          name: "countryCode",
+          value: phoneData.countryCode,
+        });
+      }
+
+      // Add Telegram specific properties if available
+      if (phoneData.telegram) {
+        additionalProperties.push({
+          "@type": "PropertyValue",
+          name: "hasTelegram",
+          value: "true",
+        });
+
+        if (phoneData.telegram.username) {
+          additionalProperties.push({
+            "@type": "PropertyValue",
+            name: "telegramUsername",
+            value: phoneData.telegram.username,
+          });
+        }
+
+        if (phoneData.telegram.first_name) {
+          additionalProperties.push({
+            "@type": "PropertyValue",
+            name: "telegramFirstName",
+            value: phoneData.telegram.first_name,
+          });
+        }
+
+        if (phoneData.telegram.last_name) {
+          additionalProperties.push({
+            "@type": "PropertyValue",
+            name: "telegramLastName",
+            value: phoneData.telegram.last_name,
+          });
+        }
+
+        if (phoneData.telegram.verified !== undefined) {
+          additionalProperties.push({
+            "@type": "PropertyValue",
+            name: "telegramVerified",
+            value: phoneData.telegram.verified.toString(),
+          });
+        }
+
+        if (phoneData.telegram.premium !== undefined) {
+          additionalProperties.push({
+            "@type": "PropertyValue",
+            name: "telegramPremium",
+            value: phoneData.telegram.premium.toString(),
+          });
+        }
+
+        if (phoneData.telegram.bot !== undefined) {
+          additionalProperties.push({
+            "@type": "PropertyValue",
+            name: "telegramBot",
+            value: phoneData.telegram.bot.toString(),
+          });
+        }
+
+        if (phoneData.telegram.hasPhoto !== undefined) {
+          additionalProperties.push({
+            "@type": "PropertyValue",
+            name: "telegramHasPhoto",
+            value: phoneData.telegram.hasPhoto.toString(),
+          });
+        }
+      } else {
+        additionalProperties.push({
+          "@type": "PropertyValue",
+          name: "hasTelegram",
+          value: "false",
+        });
+      }
+
       return {
         "@context": "https://schema.org",
         "@type": "ContactPoint",
@@ -140,23 +307,7 @@ export default defineNuxtPlugin(() => {
         areaServed: phoneData.country,
         availableLanguage: $i18n.t("seo.structuredData.contactPointLanguage"),
         description: $i18n.t("seo.structuredData.contactPointDescription", { phoneNumber }),
-        additionalProperty: [
-          {
-            "@type": "PropertyValue",
-            name: "hasWhatsApp",
-            value: phoneData.hasWhatsApp.toString(),
-          },
-          {
-            "@type": "PropertyValue",
-            name: "verified",
-            value: phoneData.verified.toString(),
-          },
-          {
-            "@type": "PropertyValue",
-            name: "country",
-            value: phoneData.country,
-          },
-        ],
+        additionalProperty: additionalProperties,
       };
     },
 

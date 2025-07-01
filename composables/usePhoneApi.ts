@@ -154,13 +154,18 @@ export const usePhoneApi = (options: PhoneApiOptions = {}) => {
   /**
    * Build request URL with query parameters
    */
-  const buildRequestUrl = (phoneNumber: string, recaptchaToken?: string): string => {
+  const buildRequestUrl = (phoneNumber: string, recaptchaToken?: string, includeTelegram?: boolean): string => {
     const baseUrl = `/api/phone/${phoneNumber}`;
     const params = new URLSearchParams();
 
     // Only add reCaptcha token if it's available
     if (recaptchaToken) {
       params.append("token", recaptchaToken);
+    }
+
+    // Add telegram parameter if requested
+    if (includeTelegram) {
+      params.append("telegram", "true");
     }
 
     // Add JavaScript challenge parameters if available and user is not authenticated
@@ -240,7 +245,7 @@ export const usePhoneApi = (options: PhoneApiOptions = {}) => {
   /**
    * Search for WhatsApp profile data
    */
-  const searchProfile = async (phoneNumber: string): Promise<PhoneApiResponse> => {
+  const searchProfile = async (phoneNumber: string, includeTelegram: boolean = false): Promise<PhoneApiResponse> => {
     // Reset state
     error.value = null;
     rateLimited.value = false;
@@ -281,7 +286,8 @@ export const usePhoneApi = (options: PhoneApiOptions = {}) => {
       const recaptchaToken = await getRecaptchaToken();
 
       // Build request URL (reCaptcha token is optional if not available)
-      const url = buildRequestUrl(phoneNumber, recaptchaToken);
+      const url = buildRequestUrl(phoneNumber, recaptchaToken, includeTelegram);
+      console.log("url", includeTelegram);
 
       // Perform the request
       const data = await performRequest(url, 1, phoneNumber);

@@ -12,7 +12,13 @@
         </v-autocomplete>
         <v-text-field :disabled="loading" v-model="phoneNumber" autocomplete="off" data-lpignore="true" data-form-type="other" class="phone--number" variant="outlined" tile type="tel" hide-details :label="$t('lookup.inputLabel')" required />
       </div>
-      <div class="text-center pt-5">
+
+      <!-- Telegram checkbox -->
+      <div class="mt-3 d-flex justify-center">
+        <v-checkbox v-model="includeTelegram" :disabled="loading" :label="$t('lookup.includeTelegram')" hide-details color="primary" />
+      </div>
+
+      <div class="text-center mt-3">
         <div class="search_buttons d-flex justify-center flex-wrap">
           <v-btn type="button" class="text-none" color="secondary" size="large" :loading="loading" @click.prevent="randomNumber">
             <v-icon left>mdi-dice-multiple</v-icon>
@@ -43,51 +49,8 @@
         </ClientOnly>
       </div>
     </v-form>
-    <div v-if="data" class="wp_output mt-5">
-      <v-alert v-if="data.error || phoneApi.error.value" type="error">
-        {{ data.error ? $t(data.error) : phoneApi.error.value }}
-      </v-alert>
-      <v-row v-if="data.phone">
-        <v-col cols="12" lg="6">
-          <v-card :loading="loading" :elevation="10" class="mx-auto" style="position: relative">
-            <!-- Loading Overlay -->
-            <ClientOnly>
-              <v-overlay v-model="loading" contained class="d-flex align-center justify-center">
-                <v-progress-circular indeterminate size="64" color="primary"></v-progress-circular>
-              </v-overlay>
-            </ClientOnly>
-            <v-img v-if="data.profilePic" @load="() => (imageLoaded = true)" class="grey" lazy-src="/placeholder.png" :src="data.profilePic" placeholder="/placeholder.jpg" width="500px" height="388px" cover>
-              <v-btn v-show="imageLoaded" :loading="loadingDownloadImage" class="mx-2 button_download" fab dark link target="_blank" :href="data.profilePic" small download color="primary" @click.prevent="downloadImage">
-                <v-icon dark> mdi-download </v-icon>
-              </v-btn>
-            </v-img>
-            <v-list>
-              <v-list-item :class="{ 'bg-warning': isCachedData, 'bg-success': !isCachedData }" :title="t('lookup.cache')">
-                {{ isCachedData ? $t("lookup.yes") : $t("lookup.no") }}
-              </v-list-item>
-              <v-list-item :title="$t('lookup.phone')">
-                <p>{{ data.phone }}</p>
-              </v-list-item>
-              <v-list-item :title="$t('lookup.name')">
-                <p>{{ data.pushname || "--" }}</p>
-              </v-list-item>
-              <v-list-item :title="$t('lookup.about')">
-                <p>{{ data.about || "--" }}</p>
-              </v-list-item>
-              <v-list-item :title="$t('lookup.business')">
-                <p>{{ data.isBusiness ? $t("lookup.yes") : $t("lookup.no") }}</p>
-              </v-list-item>
-              <v-list-item :title="$t('lookup.enterprise')">
-                <p>{{ data.isEnterprise ? $t("lookup.yes") : $t("lookup.no") }}</p>
-              </v-list-item>
-            </v-list>
-          </v-card>
-        </v-col>
-        <v-col cols="12" lg="6">
-          <v-textarea label="Raw Data" rows="30" :model-value="stringify(data)" readonly />
-        </v-col>
-      </v-row>
-    </div>
+    <PhoneDataDisplay v-if="data" :data="data" :loading="loading" :is-cached-data="isCachedData" />
+    <TelegramDataDisplay v-if="data?.telegram" :data="data" :loading="loading" :is-cached-data="isCachedData" class="mt-5" />
     <!-- Review Popup Component -->
     <ReviewPopup ref="reviewPopupRef" />
   </div>
@@ -150,7 +113,6 @@ const { data: cacheData } = shouldFetch
 const serverCacheValue = cacheData.value && !cacheData.value.error ? cacheData.value : null;
 const data = ref<WhatsAppProfileData | null>(serverCacheValue);
 const isHydrated = ref(false);
-const imageLoaded = ref(false);
 
 if (data.value) {
   isCachedData.value = true;
@@ -195,8 +157,13 @@ const formattedPhone = computed(() => {
 });
 
 const localLoading = ref(true);
-const loadingDownloadImage = ref(false);
 const phoneNumber = ref("");
+const includeTelegram = useCookie("includeTelegram", {
+  default: () => true, // Changed default to true
+  maxAge: 60 * 60 * 24 * 365, // 1 year
+  secure: true,
+  sameSite: "lax",
+});
 const phoneCode = ref({
   code: "",
   countryWithCode: "",
@@ -365,32 +332,6 @@ watch(phoneCode, (val) => {
   if (import.meta.client) localStorage.setItem("phoneCode", JSON.stringify(val));
 });
 
-const downloadImage = (e: Event) => {
-  e.stopPropagation();
-  e.preventDefault();
-  const url = data.value?.profilePic;
-  if (!url) {
-    throw new Error("Resource URL not provided! You need to provide one");
-  }
-  loadingDownloadImage.value = true;
-  fetch(url)
-    .then((response) => response.blob())
-    .then((blob) => {
-      const blobURL = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = blobURL;
-      a.style.display = "none";
-      a.download = "profile.jpeg";
-
-      document.body.appendChild(a);
-      a.click();
-      loadingDownloadImage.value = false;
-    })
-    .catch(() => {
-      loadingDownloadImage.value = false;
-    });
-};
-
 const recaptcha = async (): Promise<string | undefined> => {
   // optional you can await for the reCaptcha load
   await recaptchaInstance?.recaptchaLoaded();
@@ -416,10 +357,6 @@ const scheduleReviewPopup = (): void => {
   }, 3000); // 3 seconds
 };
 
-const stringify = (data: WhatsAppProfileData | null): string => {
-  return JSON.stringify(data, null, 2);
-};
-
 const search = async (): Promise<void> => {
   console.log("Search");
   // Wait for loadingFirebase to be true with timeout
@@ -431,7 +368,8 @@ const search = async (): Promise<void> => {
   phoneApi.clearError();
 
   // Use the phone API composable
-  const result = await phoneApi.searchProfile(phoneNumberFull);
+  console.log("Include telegram", includeTelegram.value);
+  const result = await phoneApi.searchProfile(phoneNumberFull, includeTelegram.value);
   console.log("Search", result);
 
   // Update local data state
@@ -553,9 +491,43 @@ const setupSEO = () => {
             country: phoneCode.value.countryTranslated || "N/A",
             verified: true,
             hasWhatsApp: true,
-            name: phoneData.pushname || "N/A",
+            // WhatsApp properties
+            pushname: phoneData.pushname,
+            about: phoneData.about,
             isBusiness: phoneData.isBusiness,
             isEnterprise: phoneData.isEnterprise,
+            profilePic: phoneData.profilePic,
+            urlImage: phoneData.urlImage,
+            countryCode: phoneData.phone ? phoneData.phone.split(' ')[0]?.replace('+', '') : undefined,
+            phone: phoneData.phone,
+            isMe: phoneData.isMe,
+            isUser: phoneData.isUser,
+            isGroup: phoneData.isGroup,
+            isWAContact: phoneData.isWAContact,
+            isMyContact: phoneData.isMyContact,
+            isBlocked: phoneData.isBlocked,
+            labels: phoneData.labels,
+            // Telegram properties (if available)
+            telegram: phoneData.telegram ? {
+              id: phoneData.telegram.id,
+              username: phoneData.telegram.username,
+              usernames: phoneData.telegram.usernames,
+              first_name: phoneData.telegram.first_name,
+              last_name: phoneData.telegram.last_name,
+              fake: phoneData.telegram.fake,
+              verified: phoneData.telegram.verified,
+              premium: phoneData.telegram.premium,
+              mutual_contact: phoneData.telegram.mutual_contact,
+              bot: phoneData.telegram.bot,
+              bot_chat_history: phoneData.telegram.bot_chat_history,
+              restricted: phoneData.telegram.restricted,
+              restriction_reason: phoneData.telegram.restriction_reason,
+              user_was_online: phoneData.telegram.user_was_online,
+              phone: phoneData.telegram.phone,
+              hasPhoto: phoneData.telegram.hasPhoto,
+              photoUrl: phoneData.telegram.photoUrl,
+              date: phoneData.telegram.date,
+            } : undefined,
           }
         : {
             number: phoneNumber,
@@ -630,12 +602,6 @@ setupSEO();
   .v-list-item:nth-child(even) {
     background-color: #80808042;
   }
-}
-
-.button_download {
-  position: absolute;
-  bottom: 10px;
-  right: 5px;
 }
 
 .search_buttons {

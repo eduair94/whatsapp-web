@@ -37,16 +37,7 @@ function getAllKeys(obj, prefix = "") {
 }
 
 function getKeyValue(obj, key) {
-  const parts = key.split(".");
-  let current = obj;
-  for (const part of parts) {
-    if (current && typeof current === "object" && part in current) {
-      current = current[part];
-    } else {
-      return undefined;
-    }
-  }
-  return current;
+  return obj[key];
 }
 
 function determineJsonFile(key) {
@@ -85,7 +76,7 @@ function main() {
     const missing = baseKeys.filter((k) => !langKeys.includes(k));
 
     if (missing.length) {
-      console.log(`\\nAdding ${missing.length} missing keys to ${lang}:`);
+      console.log(`\nAdding ${missing.length} missing keys to ${lang}:`);
 
       // Group missing keys by JSON file
       const keysByFile = {};
@@ -114,6 +105,7 @@ function main() {
         for (const key of keys) {
           const englishValue = getKeyValue(base, key);
           if (englishValue !== undefined && !fileContent[key]) {
+            console.log("english value", base, key, englishValue);
             fileContent[key] = englishValue; // Use English as fallback
             updated = true;
             console.log(`  Added ${key} to ${jsonFile}/${lang}.json`);
