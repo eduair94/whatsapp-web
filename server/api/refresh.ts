@@ -17,14 +17,14 @@ export default defineEventHandler(async (event) => {
 
     // Set content type to HTML
     setHeader(event, "content-type", "text/html");
-    
+
     // Add headers to prevent caching and ensure proper response
     setHeader(event, "cache-control", "no-cache, no-store, must-revalidate");
     setHeader(event, "pragma", "no-cache");
     setHeader(event, "expires", "0");
 
-  // Return HTML page with go back button
-  return `
+    // Return HTML page with go back button
+    return `
     <!DOCTYPE html>
     <html lang="en">
     <head>

@@ -6,8 +6,28 @@
         <!-- Tools submenu -->
         <v-list-item prepend-icon="mdi-home" :title="$t('nav.checkNumber')" :to="localePath('/')" @click="drawer = false"></v-list-item>
         <v-list-item prepend-icon="mdi-history" :title="$t('nav.searchHistory')" :to="localePath('/history')" @click="drawer = false"></v-list-item>
-        <v-list-item prepend-icon="mdi-api" :title="$t('nav.apiStatus')" :to="localePath('/api-status')" @click="drawer = false"></v-list-item> <v-list-item prepend-icon="mdi-chart-line" :title="$t('nav.stats')" :to="localePath('/stats')" @click="drawer = false"></v-list-item> <v-list-item prepend-icon="mdi-shield-check" :title="$t('nav.testVerification')" :to="localePath('/verification')" @click="drawer = false"></v-list-item>
-        <v-list-item prepend-icon="mdi-database" :title="$t('nav.database')" :to="localePath('/database')" @click="drawer = false"></v-list-item> <v-list-item prepend-icon="mdi-robot" :title="$t('nav.telegramBot')" href="https://t.me/WhatsappNumberSearch_bot" target="_blank" @click="drawer = false"></v-list-item>
+        <v-list-item prepend-icon="mdi-api" :title="$t('nav.apiStatus')" :to="localePath('/api-status')" @click="drawer = false"></v-list-item>
+        <v-list-item prepend-icon="mdi-shield-check" :title="$t('nav.testVerification')" :to="localePath('/verification')" @click="drawer = false"></v-list-item>
+        
+        <!-- WhatsApp Section -->
+        <v-list-group>
+          <template v-slot:activator="{ props }">
+            <v-list-item v-bind="props" prepend-icon="mdi-whatsapp" title="WhatsApp" class="text-whatsapp font-weight-medium"></v-list-item>
+          </template>
+          <v-list-item :to="localePath('/database')" prepend-icon="mdi-database" :title="$t('nav.database')" @click="drawer = false" class="pl-8"></v-list-item>
+          <v-list-item :to="localePath('/stats')" prepend-icon="mdi-chart-line" :title="$t('nav.stats')" @click="drawer = false" class="pl-8"></v-list-item>
+        </v-list-group>
+
+        <!-- Telegram Section -->
+        <v-list-group>
+          <template v-slot:activator="{ props }">
+            <v-list-item v-bind="props" prepend-icon="mdi-telegram" title="Telegram" class="text-telegram font-weight-medium"></v-list-item>
+          </template>
+          <v-list-item :to="localePath('/telegram/database')" prepend-icon="mdi-database" :title="$t('nav.database')" @click="drawer = false" class="pl-8"></v-list-item>
+          <v-list-item :to="localePath('/telegram/stats')" prepend-icon="mdi-chart-line" :title="$t('nav.stats')" @click="drawer = false" class="pl-8"></v-list-item>
+        </v-list-group>
+
+        <v-list-item prepend-icon="mdi-robot" :title="$t('nav.telegramBot')" href="https://t.me/WhatsappNumberSearch_bot" target="_blank" @click="drawer = false"></v-list-item>
         <v-list-item v-if="user" prepend-icon="mdi-key" :title="$t('nav.apiKeyManager')" @click="openApiKeyManager" @click.stop="drawer = false"></v-list-item>
 
         <!-- PWA Install Button for Mobile -->
@@ -65,15 +85,40 @@
             <v-list-item :to="localePath('/api-status')" prepend-icon="mdi-api">
               <v-list-item-title>{{ $t("nav.apiStatus") }}</v-list-item-title>
             </v-list-item>
-            <v-list-item :to="localePath('/stats')" prepend-icon="mdi-chart-line">
-              <v-list-item-title>{{ $t("nav.stats") }}</v-list-item-title>
-            </v-list-item>
             <v-list-item :to="localePath('/verification')" prepend-icon="mdi-shield-check">
               <v-list-item-title>{{ $t("nav.testVerification") }}</v-list-item-title>
             </v-list-item>
-            <v-list-item :to="localePath('/database')" prepend-icon="mdi-database">
+            
+            <v-divider class="my-2"></v-divider>
+            
+            <!-- WhatsApp Section -->
+            <v-list-subheader class="text-whatsapp font-weight-bold whatsapp-section">
+              <v-icon class="mr-2" color="success">mdi-whatsapp</v-icon>
+              WhatsApp
+            </v-list-subheader>
+            <v-list-item :to="localePath('/database')" prepend-icon="mdi-database" class="pl-8">
               <v-list-item-title>{{ $t("nav.database") }}</v-list-item-title>
             </v-list-item>
+            <v-list-item :to="localePath('/stats')" prepend-icon="mdi-chart-line" class="pl-8">
+              <v-list-item-title>{{ $t("nav.stats") }}</v-list-item-title>
+            </v-list-item>
+            
+            <v-divider class="my-2"></v-divider>
+            
+            <!-- Telegram Section -->
+            <v-list-subheader class="text-telegram font-weight-bold telegram-section">
+              <v-icon class="mr-2" color="info">mdi-telegram</v-icon>
+              Telegram
+            </v-list-subheader>
+            <v-list-item :to="localePath('/telegram/database')" prepend-icon="mdi-database" class="pl-8">
+              <v-list-item-title>{{ $t("nav.database") }}</v-list-item-title>
+            </v-list-item>
+            <v-list-item :to="localePath('/telegram/stats')" prepend-icon="mdi-chart-line" class="pl-8">
+              <v-list-item-title>{{ $t("nav.stats") }}</v-list-item-title>
+            </v-list-item>
+            
+            <v-divider class="my-2"></v-divider>
+            
             <v-list-item href="https://t.me/WhatsappNumberSearch_bot" target="_blank" prepend-icon="mdi-robot">
               <v-list-item-title>{{ $t("nav.telegramBot") }}</v-list-item-title>
             </v-list-item>
@@ -206,6 +251,72 @@ const ReviewsCarousel = defineAsyncComponent(() => import("~/components/ReviewsC
 
 .v-footer {
   width: 100%;
+}
+
+/* Enhanced Navigation Styles */
+.v-list-group {
+  border-radius: 8px;
+  margin: 4px 0;
+  transition: all 0.3s ease;
+}
+
+.v-list-group:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.v-list-group .v-list-item {
+  border-radius: 6px;
+  margin: 2px 8px;
+  transition: all 0.2s ease;
+}
+
+.v-list-group .v-list-item:hover {
+  background-color: rgba(0, 0, 0, 0.06);
+  transform: translateX(4px);
+}
+
+.v-list-subheader {
+  padding: 12px 16px 8px 16px;
+  font-size: 0.875rem;
+  letter-spacing: 0.025em;
+  display: flex;
+  align-items: center;
+}
+
+.v-list-item.pl-8 {
+  position: relative;
+}
+
+.v-list-item.pl-8::before {
+  content: '';
+  position: absolute;
+  left: 32px;
+  top: 50%;
+  width: 2px;
+  height: 20px;
+  background: linear-gradient(to bottom, rgba(25, 118, 210, 0.3), transparent);
+  transform: translateY(-50%);
+  border-radius: 1px;
+}
+
+/* WhatsApp brand colors */
+.text-whatsapp {
+  color: #25D366 !important;
+}
+
+.v-list-subheader.whatsapp-section {
+  background: linear-gradient(90deg, rgba(37, 211, 102, 0.1), transparent);
+  border-left: 3px solid #25D366;
+}
+
+/* Telegram brand colors */
+.text-telegram {
+  color: #0088cc !important;
+}
+
+.v-list-subheader.telegram-section {
+  background: linear-gradient(90deg, rgba(0, 136, 204, 0.1), transparent);
+  border-left: 3px solid #0088cc;
 }
 
 /* Mobile-specific styles */
