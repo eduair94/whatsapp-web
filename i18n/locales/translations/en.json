@@ -139,6 +139,8 @@
   "nav.telegramBot": "Telegram Bot",
   "nav.whatsapp": "WhatsApp",
   "nav.telegram": "Telegram",
+  "nav.otpStatus": "OTP Status",
+  "nav.telegramStatus": "Telegram Status",
   "nav.auth": "Login / Register",
   "nav.user": "User",
   "nav.logout": "Logout",

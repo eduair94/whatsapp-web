@@ -1,5 +1,5 @@
 {
-  "verification.title": "آزمون تأیید",
+  "verification.title": "تأیید کد یکبار مصرف",
   "verification.inputLabel": "شماره تلفن",
   "verification.button": "تأیید / بررسی وضعیت",
   "verification.verifyLink": "شماره خود را تأیید کنید",
@@ -7,8 +7,41 @@
   "verification.statusTitle": "وضعیت فعلی",
   "verification.responseTitle": "پاسخ تأیید",
   "verification.statusResponseTitle": "پاسخ وضعیت",
-  "verification.infoMessage": "دکمه زمانی فعال می‌شود که شماره تلفن صحیح وارد کنید.",
+  "verification.infoMessage": "پیام‌های کد یکبار مصرف را با استفاده از سرویس پیامک ما ارسال و تأیید کنید. از قالب‌های مختلف انتخاب کنید و فرآیند تأیید خود را سفارشی‌سازی کنید.",
   "verification.status.unknown": "نامشخص",
-  "meta.verification.title": "آزمون تأیید | API پروفایل واتساپ",
-  "meta.verification.description": "دکمه زمانی فعال می‌شود که شماره تلفن صحیح وارد کنید. آزمون تأیید - API پروفایل واتساپ."
+  "verification.steps.phone": "شماره تلفن",
+  "verification.steps.template": "قالب",
+  "verification.steps.verify": "تأیید کد یکبار مصرف",
+  "verification.phoneTitle": "شماره تلفن را وارد کنید",
+  "verification.selectTemplate": "انتخاب قالب",
+  "verification.templateTitle": "قالب پیام را انتخاب کنید",
+  "verification.selectTemplateLabel": "قالب پیام",
+  "verification.nameLabel": "نام شما (اختیاری)",
+  "verification.companyLabel": "نام شرکت",
+  "verification.imageLabel": "آدرس تصویر (اختیاری)",
+  "verification.languageLabel": "زبان",
+  "verification.lengthLabel": "طول کد یکبار مصرف",
+  "verification.expiryLabel": "انقضا (دقیقه)",
+  "verification.previewTitle": "پیش‌نمایش پیام",
+  "verification.sendOtp": "ارسال کد یکبار مصرف",
+  "verification.verifyTitle": "کد تأیید را وارد کنید",
+  "verification.otpSentTitle": "کد یکبار مصرف با موفقیت ارسال شد!",
+  "verification.otpSentMessage": "ما کد تأیید را به {phone} ارسال کرده‌ایم. لطفاً آن را در زیر وارد کنید.",
+  "verification.otpLabel": "کد تأیید",
+  "verification.verifyOtp": "تأیید کد",
+  "verification.startOver": "شروع مجدد",
+  "verification.resultTitle": "نتیجه تأیید",
+  "verification.success": "تأیید موفقیت‌آمیز",
+  "verification.failed": "تأیید ناموفق",
+  "verification.unknownError": "خطای نامشخصی رخ داده است",
+  "verification.technicalDetails": "جزئیات فنی",
+  "verification.errorTitle": "خطا",
+  "verification.imagePreview": "پیش‌نمایش تصویر",
+  "verification.previewNote": "این پیش‌نمایشی از نحوه نمایش پیام شما در واتساپ است. کد یکبار مصرف واقعی هنگام ارسال تولید خواهد شد.",
+  "verification.apiPromotion.title": "🚀 اپلیکیشن خود را با API کد یکبار مصرف WhatsAuth قدرتمند کنید",
+  "verification.apiPromotion.description": "دسترسی فوری به مقرون‌به‌صرفه‌ترین سرویس کد یکبار مصرف واتساپ در بازار را دریافت کنید. مناسب برای توسعه‌دهندگانی که به دنبال ادغام سیستم‌های تأیید قابل اعتماد هستند.",
+  "verification.apiPromotion.button": "دریافت دسترسی API",
+  "verification.apiPromotion.cheapest": "ارزان‌ترین در بازار",
+  "meta.verification.title": "تأیید کد یکبار مصرف | API پروفایل واتساپ",
+  "meta.verification.description": "پیام‌های کد یکبار مصرف را با استفاده از سرویس پیامک ما ارسال و تأیید کنید. از قالب‌های مختلف انتخاب کنید و فرآیند تأیید خود را سفارشی‌سازی کنید."
 }

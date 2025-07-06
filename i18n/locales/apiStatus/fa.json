@@ -9,8 +9,16 @@
   "status.requestsPerMinute": "درخواست در دقیقه",
   "status.success": "موفقیت",
   "status.error": "خطا",
+  "status.websiteRequests": "درخواست‌های وب‌سایت",
+  "status.apiRequests": "درخواست‌های API",
+  "status.rateLimitErrors": "خطاهای محدودیت درخواست",
+  "status.rateLimited": "محدودیت درخواست فعال",
   "status.checking": "در حال بررسی وضعیت API...",
   "status.reload": "بارگذاری مجدد وضعیت",
   "status.title": "وضعیت API - API پروفایل واتساپ",
-  "status.desc": "وضعیت فعلی و زمان کارکرد API پروفایل واتساپ را بررسی کنید."
+  "status.desc": "وضعیت فعلی و زمان کارکرد API پروفایل واتساپ را بررسی کنید.",
+  "status.otpTitle": "وضعیت API کد یکبار مصرف - API کد یکبار مصرف واتساپ",
+  "status.otpDesc": "وضعیت فعلی و زمان کارکرد API کد یکبار مصرف واتساپ را بررسی کنید.",
+  "status.telegramTitle": "وضعیت API تلگرام - API پروفایل تلگرام",
+  "status.telegramDesc": "وضعیت فعلی و زمان کارکرد API پروفایل تلگرام را بررسی کنید."
 }

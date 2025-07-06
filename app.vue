@@ -8,7 +8,9 @@
         <v-list-item prepend-icon="mdi-history" :title="$t('nav.searchHistory')" :to="localePath('/history')" @click="drawer = false"></v-list-item>
         <v-list-item prepend-icon="mdi-api" :title="$t('nav.apiStatus')" :to="localePath('/api-status')" @click="drawer = false"></v-list-item>
         <v-list-item prepend-icon="mdi-shield-check" :title="$t('nav.testVerification')" :to="localePath('/verification')" @click="drawer = false"></v-list-item>
-        
+        <v-list-item prepend-icon="mdi-message-check" :title="$t('nav.otpStatus')" :to="localePath('/otp-status')" @click="drawer = false"></v-list-item>
+        <v-list-item prepend-icon="mdi-telegram" :title="$t('nav.telegramStatus')" :to="localePath('/telegram-status')" @click="drawer = false"></v-list-item>
+
         <!-- WhatsApp Section -->
         <v-list-group>
           <template v-slot:activator="{ props }">
@@ -88,9 +90,15 @@
             <v-list-item :to="localePath('/verification')" prepend-icon="mdi-shield-check">
               <v-list-item-title>{{ $t("nav.testVerification") }}</v-list-item-title>
             </v-list-item>
-            
+            <v-list-item :to="localePath('/otp-status')" prepend-icon="mdi-message-check">
+              <v-list-item-title>{{ $t("nav.otpStatus") }}</v-list-item-title>
+            </v-list-item>
+            <v-list-item :to="localePath('/telegram-status')" prepend-icon="mdi-telegram">
+              <v-list-item-title>{{ $t("nav.telegramStatus") }}</v-list-item-title>
+            </v-list-item>
+
             <v-divider class="my-2"></v-divider>
-            
+
             <!-- WhatsApp Section -->
             <v-list-subheader class="text-whatsapp font-weight-bold whatsapp-section">
               <v-icon class="mr-2" color="success">mdi-whatsapp</v-icon>
@@ -102,9 +110,9 @@
             <v-list-item :to="localePath('/stats')" prepend-icon="mdi-chart-line" class="pl-8">
               <v-list-item-title>{{ $t("nav.stats") }}</v-list-item-title>
             </v-list-item>
-            
+
             <v-divider class="my-2"></v-divider>
-            
+
             <!-- Telegram Section -->
             <v-list-subheader class="text-telegram font-weight-bold telegram-section">
               <v-icon class="mr-2" color="info">mdi-telegram</v-icon>
@@ -116,9 +124,9 @@
             <v-list-item :to="localePath('/telegram/stats')" prepend-icon="mdi-chart-line" class="pl-8">
               <v-list-item-title>{{ $t("nav.stats") }}</v-list-item-title>
             </v-list-item>
-            
+
             <v-divider class="my-2"></v-divider>
-            
+
             <v-list-item href="https://t.me/WhatsappNumberSearch_bot" target="_blank" prepend-icon="mdi-robot">
               <v-list-item-title>{{ $t("nav.telegramBot") }}</v-list-item-title>
             </v-list-item>
@@ -288,7 +296,7 @@ const ReviewsCarousel = defineAsyncComponent(() => import("~/components/ReviewsC
 }
 
 .v-list-item.pl-8::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 32px;
   top: 50%;
@@ -301,12 +309,12 @@ const ReviewsCarousel = defineAsyncComponent(() => import("~/components/ReviewsC
 
 /* WhatsApp brand colors */
 .text-whatsapp {
-  color: #25D366 !important;
+  color: #25d366 !important;
 }
 
 .v-list-subheader.whatsapp-section {
   background: linear-gradient(90deg, rgba(37, 211, 102, 0.1), transparent);
-  border-left: 3px solid #25D366;
+  border-left: 3px solid #25d366;
 }
 
 /* Telegram brand colors */

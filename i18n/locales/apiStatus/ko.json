@@ -9,8 +9,16 @@
   "status.requestsPerMinute": "분당 요청 수",
   "status.success": "성공",
   "status.error": "오류",
+  "status.websiteRequests": "웹사이트 요청",
+  "status.apiRequests": "API 요청",
+  "status.rateLimitErrors": "속도 제한 오류",
+  "status.rateLimited": "속도 제한됨",
   "status.checking": "API 상태 확인 중...",
   "status.reload": "상태 새로고침",
   "status.title": "API 상태 - WhatsApp 프로필 API",
-  "status.desc": "WhatsApp 프로필 API의 현재 상태와 가동 시간을 확인하세요."
+  "status.desc": "WhatsApp 프로필 API의 현재 상태와 가동 시간을 확인하세요.",
+  "status.otpTitle": "OTP API 상태 - WhatsApp OTP API",
+  "status.otpDesc": "WhatsApp OTP API의 현재 상태와 가동 시간을 확인하세요.",
+  "status.telegramTitle": "Telegram API 상태 - Telegram 프로필 API",
+  "status.telegramDesc": "Telegram 프로필 API의 현재 상태와 가동 시간을 확인하세요."
 }

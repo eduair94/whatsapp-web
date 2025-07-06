@@ -9,8 +9,16 @@
   "status.requestsPerMinute": "每分钟请求数",
   "status.success": "成功",
   "status.error": "错误",
+  "status.websiteRequests": "网站请求",
+  "status.apiRequests": "API请求",
+  "status.rateLimitErrors": "速率限制错误",
+  "status.rateLimited": "速率受限",
   "status.checking": "正在检查API状态...",
   "status.reload": "重新加载状态",
   "status.title": "API状态 - WhatsApp资料API",
-  "status.desc": "检查WhatsApp资料API的当前状态和正常运行时间。"
+  "status.desc": "检查WhatsApp资料API的当前状态和正常运行时间。",
+  "status.otpTitle": "OTP API状态 - WhatsApp OTP API",
+  "status.otpDesc": "检查WhatsApp OTP API的当前状态和正常运行时间。",
+  "status.telegramTitle": "Telegram API状态 - Telegram资料API",
+  "status.telegramDesc": "检查Telegram资料API的当前状态和正常运行时间。"
 }

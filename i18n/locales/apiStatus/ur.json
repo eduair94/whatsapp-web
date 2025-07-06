@@ -9,8 +9,16 @@
   "status.requestsPerMinute": "درخواستیں فی منٹ",
   "status.success": "کامیابی",
   "status.error": "خرابی",
+  "status.websiteRequests": "ویب سائٹ کی درخواستیں",
+  "status.apiRequests": "API درخواستیں",
+  "status.rateLimitErrors": "ریٹ لمٹ کی خرابیاں",
+  "status.rateLimited": "ریٹ محدود",
   "status.checking": "API کی حیثیت چیک کی جا رہی ہے...",
   "status.reload": "حیثیت دوبارہ لوڈ کریں",
   "status.title": "API حیثیت - WhatsApp پروفائل API",
-  "status.desc": "WhatsApp پروفائل API کی موجودہ حیثیت اور اپ ٹائم چیک کریں۔"
+  "status.desc": "WhatsApp پروفائل API کی موجودہ حیثیت اور اپ ٹائم چیک کریں۔",
+  "status.otpTitle": "OTP API حیثیت - WhatsApp OTP API",
+  "status.otpDesc": "WhatsApp OTP API کی موجودہ حیثیت اور اپ ٹائم چیک کریں۔",
+  "status.telegramTitle": "Telegram API حیثیت - Telegram پروفائل API",
+  "status.telegramDesc": "Telegram پروفائل API کی موجودہ حیثیت اور اپ ٹائم چیک کریں۔"
 }

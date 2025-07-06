@@ -9,8 +9,16 @@
   "status.requestsPerMinute": "Dakikada İstek",
   "status.success": "Başarılı",
   "status.error": "Hata",
+  "status.websiteRequests": "Web Sitesi İstekleri",
+  "status.apiRequests": "API İstekleri",
+  "status.rateLimitErrors": "Hız Sınırı Hataları",
+  "status.rateLimited": "Hız Sınırlı",
   "status.checking": "API durumu kontrol ediliyor...",
   "status.reload": "Durumu Yenile",
   "status.title": "API Durumu - WhatsApp Profil API",
-  "status.desc": "WhatsApp Profil API'sının mevcut durumunu ve çalışma süresini kontrol edin."
+  "status.desc": "WhatsApp Profil API'sının mevcut durumunu ve çalışma süresini kontrol edin.",
+  "status.otpTitle": "OTP API Durumu - WhatsApp OTP API",
+  "status.otpDesc": "WhatsApp OTP API'sının mevcut durumunu ve çalışma süresini kontrol edin.",
+  "status.telegramTitle": "Telegram API Durumu - Telegram Profil API",
+  "status.telegramDesc": "Telegram Profil API'sının mevcut durumunu ve çalışma süresini kontrol edin."
 }

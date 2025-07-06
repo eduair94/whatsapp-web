@@ -9,8 +9,16 @@
   "status.requestsPerMinute": "คำขอต่อนาที",
   "status.success": "สำเร็จ",
   "status.error": "ข้อผิดพลาด",
+  "status.websiteRequests": "คำขอเว็บไซต์",
+  "status.apiRequests": "คำขอ API",
+  "status.rateLimitErrors": "ข้อผิดพลาดขีดจำกัดอัตรา",
+  "status.rateLimited": "ถูกจำกัดอัตรา",
   "status.checking": "กำลังตรวจสอบสถานะ API...",
   "status.reload": "โหลดสถานะใหม่",
   "status.title": "สถานะ API - WhatsApp Profile API",
-  "status.desc": "ตรวจสอบสถานะปัจจุบันและเวลาออนไลน์ของ WhatsApp Profile API"
+  "status.desc": "ตรวจสอบสถานะปัจจุบันและเวลาออนไลน์ของ WhatsApp Profile API",
+  "status.otpTitle": "สถานะ API OTP - WhatsApp OTP API",
+  "status.otpDesc": "ตรวจสอบสถานะปัจจุบันและเวลาออนไลน์ของ WhatsApp OTP API",
+  "status.telegramTitle": "สถานะ API Telegram - Telegram Profile API",
+  "status.telegramDesc": "ตรวจสอบสถานะปัจจุบันและเวลาออนไลน์ของ Telegram Profile API"
 }

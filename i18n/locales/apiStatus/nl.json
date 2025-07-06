@@ -9,8 +9,16 @@
   "status.requestsPerMinute": "Verzoeken per Minuut",
   "status.success": "Succesvol",
   "status.error": "Fout",
+  "status.websiteRequests": "Website Verzoeken",
+  "status.apiRequests": "API Verzoeken",
+  "status.rateLimitErrors": "Rate Limit Fouten",
+  "status.rateLimited": "Rate Limited",
   "status.checking": "API status controleren...",
   "status.reload": "Status Verversen",
   "status.title": "API Status - WhatsApp Profiel API",
-  "status.desc": "Controleer de huidige status en uptime van de WhatsApp Profiel API."
+  "status.desc": "Controleer de huidige status en uptime van de WhatsApp Profiel API.",
+  "status.otpTitle": "OTP API Status - WhatsApp OTP API",
+  "status.otpDesc": "Controleer de huidige status en uptime van de WhatsApp OTP API.",
+  "status.telegramTitle": "Telegram API Status - Telegram Profiel API",
+  "status.telegramDesc": "Controleer de huidige status en uptime van de Telegram Profiel API."
 }

@@ -9,8 +9,16 @@
   "status.requestsPerMinute": "Requests per Minute",
   "status.success": "Success",
   "status.error": "Error",
+  "status.websiteRequests": "Website Requests",
+  "status.apiRequests": "API Requests",
+  "status.rateLimitErrors": "Rate Limit Errors",
+  "status.rateLimited": "Rate Limited",
   "status.checking": "Checking API status...",
   "status.reload": "Reload Status",
   "status.title": "API Status - WhatsApp Profile API",
-  "status.desc": "Check the current status and uptime of the WhatsApp Profile API."
+  "status.desc": "Check the current status and uptime of the WhatsApp Profile API.",
+  "status.otpTitle": "OTP API Status - WhatsApp OTP API",
+  "status.otpDesc": "Check the current status and uptime of the WhatsApp OTP API.",
+  "status.telegramTitle": "Telegram API Status - Telegram Profile API",
+  "status.telegramDesc": "Check the current status and uptime of the Telegram Profile API."
 }

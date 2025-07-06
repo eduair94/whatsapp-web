@@ -1,6 +1,6 @@
 <template>
   <v-container class="mx-auto p-4">
-    <h1 class="mb-5 mb-md-8 text-center">{{ t("status.title") }}</h1>
+    <h1 class="mb-5 mb-md-8 text-center">{{ t("status.telegramTitle") }}</h1>
     <v-row v-if="apiStatus" class="gap-4">
       <v-col cols="12" md="6">
         <v-card :loading="loading" class="pa-4">
@@ -16,6 +16,11 @@
               </v-list-item>
               <v-list-item class="pl-0">
                 <div class="text-h6">{{ t("status.lastChecked") }}: {{ formatDistanceToNow(new Date(apiStatus.lastCheck)) }}</div>
+              </v-list-item>
+              <v-list-item v-if="apiStatus.isRateLimited" class="pl-0">
+                <div class="text-h6">
+                  {{ t("status.rateLimited") }}: <span class="text-orange">{{ t("status.yes") }}</span>
+                </div>
               </v-list-item>
             </v-list>
           </v-card-text>
@@ -41,14 +46,22 @@
           <v-row class="mt-4">
             <v-col cols="6">
               <v-card class="pa-4 text-center" color="blue lighten-4">
-                <v-card-title class="text-h4 font-bold">{{ apiStatus.websiteRequests }}</v-card-title>
+                <v-card-title class="text-h4 font-bold">{{ apiStatus.websiteRequests || 0 }}</v-card-title>
                 <v-card-subtitle>{{ t("status.websiteRequests") }}</v-card-subtitle>
               </v-card>
             </v-col>
             <v-col cols="6">
               <v-card class="pa-4 text-center" color="purple lighten-4">
-                <v-card-title class="text-h4 font-bold">{{ apiStatus.apiRequests }}</v-card-title>
+                <v-card-title class="text-h4 font-bold">{{ apiStatus.apiRequests || 0 }}</v-card-title>
                 <v-card-subtitle>{{ t("status.apiRequests") }}</v-card-subtitle>
+              </v-card>
+            </v-col>
+          </v-row>
+          <v-row class="mt-4">
+            <v-col cols="12">
+              <v-card class="pa-4 text-center" color="orange lighten-4">
+                <v-card-title class="text-h4 font-bold">{{ apiStatus.rateLimitErrors || 0 }}</v-card-title>
+                <v-card-subtitle>{{ t("status.rateLimitErrors") }}</v-card-subtitle>
               </v-card>
             </v-col>
           </v-row>
@@ -72,50 +85,53 @@ import { useNuxtApp } from "#app";
 import { useHead, useRoute } from "#imports";
 import { computed, onMounted, ref } from "vue";
 
-const { t, locale, locales } = useI18n();
+const { t, locale } = useI18n();
 
 const route = useRoute();
 const localizedPath = computed(() => `/${locale}${route.path}`);
 const pageUrl = computed(() => `${baseUrl}${localizedPath.value}`);
 
 useHead({
-  title: computed(() => t("status.title")),
+  title: computed(() => t("status.telegramTitle")),
   meta: [
-    { name: "description", content: computed(() => t("status.desc")) },
+    { name: "description", content: computed(() => t("status.telegramDesc")) },
     { property: "og:type", content: "website" },
     { property: "og:site_name", content: computed(() => t("meta.siteName")) },
-    { property: "og:title", content: computed(() => t("status.title")) },
-    { property: "og:description", content: computed(() => t("status.desc")) },
+    { property: "og:title", content: computed(() => t("status.telegramTitle")) },
+    { property: "og:description", content: computed(() => t("status.telegramDesc")) },
     { property: "og:url", content: pageUrl },
-    { name: "twitter:title", content: computed(() => t("status.title")) },
-    { name: "twitter:description", content: computed(() => t("status.desc")) },
+    { name: "twitter:title", content: computed(() => t("status.telegramTitle")) },
+    { name: "twitter:description", content: computed(() => t("status.telegramDesc")) },
     { name: "twitter:card", content: "summary_large_image" },
     { name: "robots", content: "index, follow" },
     { name: "language", content: computed(() => locale.value) },
   ],
 });
 
-interface ApiStatus {
+interface TelegramApiStatus {
   status: boolean;
   isBroken: boolean;
   lastCheck: string;
   successCount: number;
   errorCount: number;
-  websiteRequests: number;
-  apiRequests: number;
+  websiteRequests?: number;
+  apiRequests?: number;
+  rateLimitErrors?: number;
+  isRateLimited?: boolean;
+  errorsByType?: Record<string, number>;
 }
 
-const apiStatus = ref<ApiStatus | null>(null);
+const apiStatus = ref<TelegramApiStatus | null>(null);
 const loading = ref(false);
 const { $api } = useNuxtApp();
 
 const fetchApiStatus = async () => {
   loading.value = true;
   try {
-    const json = await $api.get("/api/status").then((res) => res.data);
-    apiStatus.value = json as ApiStatus;
+    const json = await $api.get("/api/telegram/status").then((res) => res.data);
+    apiStatus.value = json as TelegramApiStatus;
   } catch (error) {
-    console.error("Failed to fetch API status:", error);
+    console.error("Failed to fetch Telegram API status:", error);
   }
   loading.value = false;
 };
@@ -156,8 +172,8 @@ const setupSEO = () => {
     {
       "@context": "https://schema.org",
       "@type": "MonitoringService",
-      name: "WhatsApp API Status Monitor",
-      description: "Real-time monitoring of WhatsApp Profile API service status and performance",
+      name: "Telegram API Status Monitor",
+      description: "Real-time monitoring of Telegram API service status and performance",
       provider: {
         "@type": "Organization",
         name: "CheckLeaked",
@@ -165,21 +181,21 @@ const setupSEO = () => {
       serviceType: "API Monitoring",
       monitoredService: {
         "@type": "WebAPI",
-        name: "WhatsApp Profile API",
-        description: "WhatsApp number verification and profile lookup API",
+        name: "Telegram API",
+        description: "Telegram profile lookup and verification API",
       },
     },
   ];
 
   const breadcrumbs = [
     { name: t("nav.home"), url: "/" },
-    { name: t("nav.apiStatus"), url: route.path },
+    { name: t("nav.telegramStatus"), url: route.path },
   ];
 
   $seo.setupPageSEO({
-    title: t("seo.apiStatus.title"),
-    description: t("seo.apiStatus.description"),
-    keywords: t("seo.apiStatus.keywords"),
+    title: t("seo.telegramStatus.title"),
+    description: t("seo.telegramStatus.description"),
+    keywords: t("seo.telegramStatus.keywords"),
     canonicalUrl,
     structuredData,
     breadcrumbs,

@@ -9,8 +9,16 @@
   "status.requestsPerMinute": "طلبات في الدقيقة",
   "status.success": "نجح",
   "status.error": "خطأ",
+  "status.websiteRequests": "طلبات الموقع",
+  "status.apiRequests": "طلبات API",
+  "status.rateLimitErrors": "أخطاء حد الطلبات",
+  "status.rateLimited": "محدود بمعدل الطلبات",
   "status.checking": "جارٍ فحص حالة API...",
   "status.reload": "إعادة تحميل الحالة",
   "status.title": "حالة API - API واتساب للملف الشخصي",
-  "status.desc": "تحقق من الحالة الحالية ووقت التشغيل لـ API واتساب للملف الشخصي."
+  "status.desc": "تحقق من الحالة الحالية ووقت التشغيل لـ API واتساب للملف الشخصي.",
+  "status.otpTitle": "حالة API رمز التحقق - API رمز التحقق واتساب",
+  "status.otpDesc": "تحقق من الحالة الحالية ووقت التشغيل لـ API رمز التحقق واتساب.",
+  "status.telegramTitle": "حالة API تلغرام - API ملف تلغرام الشخصي",
+  "status.telegramDesc": "تحقق من الحالة الحالية ووقت التشغيل لـ API ملف تلغرام الشخصي."
 }

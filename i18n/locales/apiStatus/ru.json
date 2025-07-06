@@ -9,8 +9,16 @@
   "status.requestsPerMinute": "Запросов в минуту",
   "status.success": "Успех",
   "status.error": "Ошибка",
+  "status.websiteRequests": "Запросы веб-сайта",
+  "status.apiRequests": "Запросы API",
+  "status.rateLimitErrors": "Ошибки лимита скорости",
+  "status.rateLimited": "Ограничено по скорости",
   "status.checking": "Проверка статуса API...",
   "status.reload": "Обновить статус",
   "status.title": "Статус API - Профиль WhatsApp API",
-  "status.desc": "Проверьте текущий статус и аптайм Профиль WhatsApp API."
+  "status.desc": "Проверьте текущий статус и аптайм Профиль WhatsApp API.",
+  "status.otpTitle": "Статус API OTP - WhatsApp OTP API",
+  "status.otpDesc": "Проверьте текущий статус и аптайм WhatsApp OTP API.",
+  "status.telegramTitle": "Статус API Telegram - Профиль Telegram API",
+  "status.telegramDesc": "Проверьте текущий статус и аптайм Профиль Telegram API."
 }

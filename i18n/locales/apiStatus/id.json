@@ -9,8 +9,16 @@
   "status.requestsPerMinute": "Permintaan per Menit",
   "status.success": "Berhasil",
   "status.error": "Kesalahan",
+  "status.websiteRequests": "Permintaan Website",
+  "status.apiRequests": "Permintaan API",
+  "status.rateLimitErrors": "Kesalahan Batas Tingkat",
+  "status.rateLimited": "Dibatasi Tingkat",
   "status.checking": "Memeriksa status API...",
   "status.reload": "Muat Ulang Status",
   "status.title": "Status API - API Profil WhatsApp",
-  "status.desc": "Periksa status saat ini dan waktu aktif API Profil WhatsApp."
+  "status.desc": "Periksa status saat ini dan waktu aktif API Profil WhatsApp.",
+  "status.otpTitle": "Status API OTP - API OTP WhatsApp",
+  "status.otpDesc": "Periksa status saat ini dan waktu aktif API OTP WhatsApp.",
+  "status.telegramTitle": "Status API Telegram - API Profil Telegram",
+  "status.telegramDesc": "Periksa status saat ini dan waktu aktif API Profil Telegram."
 }

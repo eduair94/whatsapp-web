@@ -9,8 +9,16 @@
   "status.requestsPerMinute": "Richieste al minuto",
   "status.success": "Successo",
   "status.error": "Errore",
+  "status.websiteRequests": "Richieste del sito web",
+  "status.apiRequests": "Richieste API",
+  "status.rateLimitErrors": "Errori di limite di velocità",
+  "status.rateLimited": "Limitato dalla velocità",
   "status.checking": "Verifica dello stato dell'API...",
   "status.reload": "Ricarica stato",
   "status.title": "Stato API - API Profilo WhatsApp",
-  "status.desc": "Controlla lo stato attuale e il tempo di attività dell'API Profilo WhatsApp."
+  "status.desc": "Controlla lo stato attuale e il tempo di attività dell'API Profilo WhatsApp.",
+  "status.otpTitle": "Stato API OTP - API OTP WhatsApp",
+  "status.otpDesc": "Controlla lo stato attuale e il tempo di attività dell'API OTP WhatsApp.",
+  "status.telegramTitle": "Stato API Telegram - API Profilo Telegram",
+  "status.telegramDesc": "Controlla lo stato attuale e il tempo di attività dell'API Profilo Telegram."
 }

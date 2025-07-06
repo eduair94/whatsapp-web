@@ -1,5 +1,5 @@
 {
-  "verification.title": "تصدیق کا ٹیسٹ",
+  "verification.title": "OTP تصدیق",
   "verification.inputLabel": "فون نمبر",
   "verification.button": "تصدیق کریں / اسٹیٹس دیکھیں",
   "verification.verifyLink": "اپنا نمبر تصدیق کریں",
@@ -7,8 +7,41 @@
   "verification.statusTitle": "موجودہ حیثیت",
   "verification.responseTitle": "تصدیق کا جواب",
   "verification.statusResponseTitle": "اسٹیٹس کا جواب",
-  "verification.infoMessage": "درست فون نمبر درج کرنے پر بٹن فعال ہو جائے گا۔",
+  "verification.infoMessage": "ہماری SMS سروس استعمال کرتے ہوئے OTP پیغامات بھیجیں اور تصدیق کریں۔ مختلف ٹیمپلیٹس میں سے انتخاب کریں اور اپنے تصدیقی عمل کو اپنی پسند کے مطابق بنائیں۔",
   "verification.status.unknown": "نامعلوم",
-  "meta.verification.title": "تصدیق کا ٹیسٹ | WhatsApp پروفائل API",
-  "meta.verification.description": "درست فون نمبر درج کرنے پر بٹن فعال ہو جائے گا۔ تصدیق کا ٹیسٹ - WhatsApp پروفائل API."
+  "verification.steps.phone": "فون نمبر",
+  "verification.steps.template": "ٹیمپلیٹ",
+  "verification.steps.verify": "OTP تصدیق",
+  "verification.phoneTitle": "فون نمبر درج کریں",
+  "verification.selectTemplate": "ٹیمپلیٹ منتخب کریں",
+  "verification.templateTitle": "پیغام کا ٹیمپلیٹ منتخب کریں",
+  "verification.selectTemplateLabel": "پیغام کا ٹیمپلیٹ",
+  "verification.nameLabel": "آپ کا نام (اختیاری)",
+  "verification.companyLabel": "کمپنی کا نام",
+  "verification.imageLabel": "تصویر کا URL (اختیاری)",
+  "verification.languageLabel": "زبان",
+  "verification.lengthLabel": "OTP کی لمبائی",
+  "verification.expiryLabel": "ختم ہونے کا وقت (منٹ)",
+  "verification.previewTitle": "پیغام کا پیش منظر",
+  "verification.sendOtp": "OTP بھیجیں",
+  "verification.verifyTitle": "تصدیقی کوڈ درج کریں",
+  "verification.otpSentTitle": "OTP کامیابی سے بھیج دیا گیا!",
+  "verification.otpSentMessage": "ہم نے {phone} پر تصدیقی کوڈ بھیجا ہے۔ براہ کرم اسے نیچے درج کریں۔",
+  "verification.otpLabel": "تصدیقی کوڈ",
+  "verification.verifyOtp": "کوڈ کی تصدیق کریں",
+  "verification.startOver": "دوبارہ شروع کریں",
+  "verification.resultTitle": "تصدیق کا نتیجہ",
+  "verification.success": "تصدیق کامیاب",
+  "verification.failed": "تصدیق ناکام",
+  "verification.unknownError": "ایک نامعلوم خرابی واقع ہوئی",
+  "verification.technicalDetails": "تکنیکی تفصیلات",
+  "verification.errorTitle": "خرابی",
+  "verification.imagePreview": "تصویر کا پیش منظر",
+  "verification.previewNote": "یہ آپ کے پیغام کا پیش منظر ہے کہ یہ WhatsApp میں کیسا نظر آئے گا۔ اصل OTP کوڈ بھیجتے وقت بنایا جائے گا۔",
+  "verification.apiPromotion.title": "🚀 WhatsAuth OTP API کے ساتھ اپنی ایپ کو طاقت دیں",
+  "verification.apiPromotion.description": "مارکیٹ میں سب سے سستی WhatsApp OTP سروس تک فوری رسائی حاصل کریں۔ ڈیویلپرز کے لیے بہترین جو قابل اعتماد تصدیقی نظام کو ضم کرنا چاہتے ہیں۔",
+  "verification.apiPromotion.button": "API رسائی حاصل کریں",
+  "verification.apiPromotion.cheapest": "مارکیٹ میں سب سے سستا",
+  "meta.verification.title": "OTP تصدیق | WhatsApp پروفائل API",
+  "meta.verification.description": "ہماری SMS سروس استعمال کرتے ہوئے OTP پیغامات بھیجیں اور تصدیق کریں۔ مختلف ٹیمپلیٹس میں سے انتخاب کریں اور اپنے تصدیقی عمل کو اپنی پسند کے مطابق بنائیں۔"
 }

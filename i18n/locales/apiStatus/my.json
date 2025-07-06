@@ -9,8 +9,16 @@
   "status.requestsPerMinute": "တစ်မိနစ်လျှင်တောင်းဆိုမှုများ",
   "status.success": "အောင်မြင်သည်",
   "status.error": "အမှား",
+  "status.websiteRequests": "ဝက်ဘ်ဆိုက်တောင်းဆိုမှုများ",
+  "status.apiRequests": "API တောင်းဆိုမှုများ",
+  "status.rateLimitErrors": "နှုန်းကန့်သတ်ချက်အမှားများ",
+  "status.rateLimited": "နှုန်းကန့်သတ်ထားသည်",
   "status.checking": "API အခြေအနေ စစ်ဆေးနေသည်...",
   "status.reload": "အခြေအနေ ပြန်လည်ဖတ်ရှုမည်",
   "status.title": "API အခြေအနေ - WhatsApp ပရိုဖိုင် API",
-  "status.desc": "WhatsApp ပရိုဖိုင် API ၏ လက်ရှိအခြေအနေနှင့် အလုပ်လုပ်ချိန်ကို စစ်ဆေးပါ။"
+  "status.desc": "WhatsApp ပရိုဖိုင် API ၏ လက်ရှိအခြေအနေနှင့် အလုပ်လုပ်ချိန်ကို စစ်ဆေးပါ။",
+  "status.otpTitle": "OTP API အခြေအနေ - WhatsApp OTP API",
+  "status.otpDesc": "WhatsApp OTP API ၏ လက်ရှိအခြေအနေနှင့် အလုပ်လုပ်ချိန်ကို စစ်ဆေးပါ။",
+  "status.telegramTitle": "Telegram API အခြေအနေ - Telegram ပရိုဖိုင် API",
+  "status.telegramDesc": "Telegram ပရိုဖိုင် API ၏ လက်ရှိအခြေအနေနှင့် အလုပ်လုပ်ချိန်ကို စစ်ဆေးပါ။"
 }

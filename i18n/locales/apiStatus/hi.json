@@ -9,8 +9,16 @@
   "status.requestsPerMinute": "प्रति मिनट अनुरोध",
   "status.success": "सफलता",
   "status.error": "त्रुटि",
+  "status.websiteRequests": "वेबसाइट अनुरोध",
+  "status.apiRequests": "API अनुरोध",
+  "status.rateLimitErrors": "दर सीमा त्रुटियां",
+  "status.rateLimited": "दर सीमित",
   "status.checking": "API स्थिति की जाँच हो रही है...",
   "status.reload": "स्थिति पुनः लोड करें",
   "status.title": "API स्थिति - WhatsApp प्रोफ़ाइल API",
-  "status.desc": "WhatsApp प्रोफ़ाइल API की वर्तमान स्थिति और अपटाइम देखें।"
+  "status.desc": "WhatsApp प्रोफ़ाइल API की वर्तमान स्थिति और अपटाइम देखें।",
+  "status.otpTitle": "OTP API स्थिति - WhatsApp OTP API",
+  "status.otpDesc": "WhatsApp OTP API की वर्तमान स्थिति और अपटाइम देखें।",
+  "status.telegramTitle": "Telegram API स्थिति - Telegram प्रोफ़ाइल API",
+  "status.telegramDesc": "Telegram प्रोफ़ाइल API की वर्तमान स्थिति और अपटाइम देखें।"
 }

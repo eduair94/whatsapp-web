@@ -9,8 +9,16 @@
   "status.requestsPerMinute": "Yêu Cầu Mỗi Phút",
   "status.success": "Thành Công",
   "status.error": "Lỗi",
+  "status.websiteRequests": "Yêu Cầu Trang Web",
+  "status.apiRequests": "Yêu Cầu API",
+  "status.rateLimitErrors": "Lỗi Giới Hạn Tốc Độ",
+  "status.rateLimited": "Bị Giới Hạn Tốc Độ",
   "status.checking": "Đang kiểm tra trạng thái API...",
   "status.reload": "Tải Lại Trạng Thái",
   "status.title": "Trạng Thái API - API Hồ Sơ WhatsApp",
-  "status.desc": "Kiểm tra trạng thái hiện tại và thời gian hoạt động của API Hồ Sơ WhatsApp."
+  "status.desc": "Kiểm tra trạng thái hiện tại và thời gian hoạt động của API Hồ Sơ WhatsApp.",
+  "status.otpTitle": "Trạng Thái API OTP - API OTP WhatsApp",
+  "status.otpDesc": "Kiểm tra trạng thái hiện tại và thời gian hoạt động của API OTP WhatsApp.",
+  "status.telegramTitle": "Trạng Thái API Telegram - API Hồ Sơ Telegram",
+  "status.telegramDesc": "Kiểm tra trạng thái hiện tại và thời gian hoạt động của API Hồ Sơ Telegram."
 }

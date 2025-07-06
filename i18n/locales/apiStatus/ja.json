@@ -9,8 +9,16 @@
   "status.requestsPerMinute": "毎分リクエスト数",
   "status.success": "成功",
   "status.error": "エラー",
+  "status.websiteRequests": "ウェブサイトリクエスト",
+  "status.apiRequests": "APIリクエスト",
+  "status.rateLimitErrors": "レート制限エラー",
+  "status.rateLimited": "レート制限中",
   "status.checking": "APIステータスを確認中...",
   "status.reload": "ステータスを再読み込み",
   "status.title": "APIステータス - WhatsApp プロファイル API",
-  "status.desc": "WhatsApp プロファイル API の現在のステータスと稼働時間を確認します。"
+  "status.desc": "WhatsApp プロファイル API の現在のステータスと稼働時間を確認します。",
+  "status.otpTitle": "OTP APIステータス - WhatsApp OTP API",
+  "status.otpDesc": "WhatsApp OTP API の現在のステータスと稼働時間を確認します。",
+  "status.telegramTitle": "Telegram APIステータス - Telegram プロファイル API",
+  "status.telegramDesc": "Telegram プロファイル API の現在のステータスと稼働時間を確認します。"
 }
