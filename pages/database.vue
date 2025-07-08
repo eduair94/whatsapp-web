@@ -186,6 +186,10 @@
                   <v-icon>mdi-open-in-new</v-icon>
                   <v-tooltip activator="parent">{{ t("database.showDetails") }}</v-tooltip>
                 </v-btn>
+                <v-btn :href="formatPhoneForWhatsAppFromData(item)" target="_blank" rel="noopener noreferrer" icon size="small" variant="text" color="success">
+                  <v-icon>mdi-whatsapp</v-icon>
+                  <v-tooltip activator="parent">{{ t("lookup.contactWhatsApp") }}</v-tooltip>
+                </v-btn>
                 <v-btn icon size="small" variant="text" @click="copyToClipboard(item.number ? '+' + item.number : item.phone)">
                   <v-icon>mdi-content-copy</v-icon>
                   <v-tooltip activator="parent">{{ t("database.copyPhone") }}</v-tooltip>
@@ -269,9 +273,14 @@
                       <v-list-item-title>{{ t("database.phoneNumber") }}</v-list-item-title>
                       <v-list-item-subtitle class="font-weight-medium"> {{ getCountryFlag(selectedItem.countryCode) }} {{ selectedItem.phone }} </v-list-item-subtitle>
                       <template v-slot:append>
-                        <v-btn icon size="small" variant="text" @click="copyToClipboard(selectedItem.number ? '+' + selectedItem.number : selectedItem.phone)">
-                          <v-icon>mdi-content-copy</v-icon>
-                        </v-btn>
+                        <div class="d-flex ga-2">
+                          <v-btn :href="formatPhoneForWhatsAppFromData(selectedItem)" target="_blank" rel="noopener noreferrer" icon size="small" variant="text" color="success" :title="t('lookup.contactWhatsApp')">
+                            <v-icon>mdi-whatsapp</v-icon>
+                          </v-btn>
+                          <v-btn icon size="small" variant="text" @click="copyToClipboard(selectedItem.number ? '+' + selectedItem.number : selectedItem.phone)">
+                            <v-icon>mdi-content-copy</v-icon>
+                          </v-btn>
+                        </div>
                       </template>
                     </v-list-item>
 
@@ -318,7 +327,7 @@
                       </template>
                       <v-list-item-title>{{ t("database.accountType") }}</v-list-item-title>
                       <v-list-item-subtitle>
-                        <v-chip :color="selectedItem.isBusiness ? 'success' : 'default'" :variant="selectedItem.isBusiness ? 'flat' : 'outlined'" size="small">
+                        <v-chip class="my-1" :color="selectedItem.isBusiness ? 'success' : 'default'" :variant="selectedItem.isBusiness ? 'flat' : 'outlined'" size="small">
                           {{ selectedItem.isBusiness ? t("database.business") : t("database.personal") }}
                         </v-chip>
                       </v-list-item-subtitle>
@@ -329,24 +338,94 @@
                       <template v-slot:prepend>
                         <v-icon>mdi-briefcase-outline</v-icon>
                       </template>
-                      <v-list-item-title>{{ t("database.businessProfile") }}</v-list-item-title>
-                      <v-list-item-subtitle>
+                      <div class="businessData">
                         <div v-if="selectedItem.businessProfile.description">
-                          <strong>{{ t("database.description") }}:</strong> {{ selectedItem.businessProfile.description }}
+                          <strong>{{ t("database.description") }}: </strong>{{ selectedItem.businessProfile.description }}
                         </div>
-                        <div v-if="selectedItem.businessProfile.category">
-                          <strong>{{ t("database.category") }}:</strong> {{ selectedItem.businessProfile.category }}
+                        <div v-if="selectedItem.businessProfile.address">
+                          <strong>{{ t("database.address") }}: </strong> {{ selectedItem.businessProfile.address }}
+                        </div>
+                        <div v-if="selectedItem.businessProfile.categories?.length">
+                          <strong>{{ t("database.categories") }}: </strong>
+                          <v-chip-group class="mt-1">
+                            <v-chip v-for="category in selectedItem.businessProfile.categories" :key="category.id" size="small" variant="outlined">
+                              {{ category.localized_display_name }}
+                            </v-chip>
+                          </v-chip-group>
                         </div>
                         <div v-if="selectedItem.businessProfile.email">
-                          <strong>{{ t("database.email") }}:</strong> {{ selectedItem.businessProfile.email }}
+                          <strong>{{ t("database.email") }}: </strong>
+                          <a :href="`mailto:${selectedItem.businessProfile.email}`" class="text-primary">
+                            {{ selectedItem.businessProfile.email }}
+                          </a>
                         </div>
                         <div v-if="selectedItem.businessProfile.website?.length">
                           <strong>{{ t("database.website") }}:</strong>
-                          <a :href="selectedItem.businessProfile.website[0]" target="_blank" class="text-primary">
-                            {{ selectedItem.businessProfile.website[0] }}
-                          </a>
+                          <div v-for="site in selectedItem.businessProfile.website" :key="site.url" class="mt-1">
+                            <a :href="site.url" target="_blank" rel="noopener noreferrer" class="text-primary">
+                              <v-icon size="small" class="mr-1">mdi-open-in-new</v-icon>
+                              {{ site.url }}
+                            </a>
+                          </div>
                         </div>
-                      </v-list-item-subtitle>
+                        <div v-if="selectedItem.businessProfile.memberSinceText">
+                          <strong>{{ t("database.memberSince") }}: </strong> {{ selectedItem.businessProfile.memberSinceText }}
+                        </div>
+                        <div v-if="selectedItem.businessProfile.businessHours">
+                          <strong>{{ t("database.businessHours") }}: </strong>
+                          <div class="mt-1">
+                            <v-chip v-if="selectedItem.businessProfile.businessHours.timezone" size="small" variant="outlined" class="mr-2">
+                              <v-icon size="small" class="mr-1">mdi-clock-outline</v-icon>
+                              {{ selectedItem.businessProfile.businessHours.timezone }}
+                            </v-chip>
+                            <div v-if="selectedItem.businessProfile.businessHours.config" class="mt-2">
+                              <div v-for="(day, key) in selectedItem.businessProfile.businessHours.config" :key="key" class="text-caption">
+                                <strong>{{ key.toUpperCase() }}: </strong>
+                                <span v-if="day?.mode === 'specific_hours' && day?.hours">
+                                  {{ formatBusinessHours(day?.hours[0]) }}
+                                </span>
+                                <span v-else>
+                                  {{ day?.mode || "Not specified" }}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div v-if="selectedItem.businessProfile.profileOptions">
+                          <strong>{{ t("database.profileOptions") }}:</strong>
+                          <div class="mt-1">
+                            <v-chip v-if="selectedItem.businessProfile.profileOptions.commerceExperience" size="small" variant="outlined" class="mr-1">
+                              {{ selectedItem.businessProfile.profileOptions.commerceExperience }}
+                            </v-chip>
+                            <v-chip v-if="selectedItem.businessProfile.profileOptions.cartEnabled" size="small" variant="outlined" color="success">
+                              <v-icon size="small" class="mr-1">mdi-cart</v-icon>
+                              Cart Enabled
+                            </v-chip>
+                          </div>
+                        </div>
+                        <div v-if="selectedItem.businessProfile.isProfileLinked !== undefined || selectedItem.businessProfile.isProfileLocked !== undefined">
+                          <strong>{{ t("database.profileStatus") }}:</strong>
+                          <div class="mt-1">
+                            <v-chip v-if="selectedItem.businessProfile.isProfileLinked" size="small" variant="outlined" color="info" class="mr-1">
+                              <v-icon size="small" class="mr-1">mdi-link</v-icon>
+                              Linked
+                            </v-chip>
+                            <v-chip v-if="selectedItem.businessProfile.isProfileLocked" size="small" variant="outlined" color="warning">
+                              <v-icon size="small" class="mr-1">mdi-lock</v-icon>
+                              Locked
+                            </v-chip>
+                          </div>
+                        </div>
+                        <div v-if="selectedItem.businessProfile.latitude && selectedItem.businessProfile.longitude">
+                          <strong>{{ t("database.location") }}: </strong>
+                          <div class="mt-1">
+                            <v-chip size="small" variant="outlined" @click="openMapsLocation(selectedItem.businessProfile.latitude, selectedItem.businessProfile.longitude)">
+                              <v-icon size="small" class="mr-1">mdi-map-marker</v-icon>
+                              {{ selectedItem.businessProfile.latitude.toFixed(6) }}, {{ selectedItem.businessProfile.longitude.toFixed(6) }}
+                            </v-chip>
+                          </div>
+                        </div>
+                      </div>
                     </v-list-item>
 
                     <!-- Date Added -->
@@ -371,6 +450,11 @@
                       </v-list-item-subtitle>
                     </v-list-item>
                   </v-list>
+
+                  <!-- Contact Buttons -->
+                  <div class="mt-4">
+                    <ContactButtons :phone="selectedItem.phone" />
+                  </div>
                 </v-card>
               </v-col>
             </v-row>
@@ -418,6 +502,7 @@
 <script setup lang="ts">
 import { useDisplay } from "vuetify";
 import { phoneCodes } from "~/utils/phoneCodes";
+import { formatPhoneForWhatsAppFromData } from "~/utils/whatsapp";
 
 definePageMeta({
   title: "Database Search",
@@ -450,10 +535,60 @@ interface PhoneDataItem {
   profilePic?: string;
   date: string;
   businessProfile?: {
-    description?: string;
-    category?: string;
-    email?: string;
-    website?: string;
+    id?: {
+      server: string;
+      user: string;
+      _serialized: string;
+    };
+    dataSource?: string;
+    tag?: string;
+    description?: string | null;
+    categories?: Array<{
+      id: string;
+      localized_display_name: string;
+    }>;
+    profileOptions?: {
+      commerceExperience: string;
+      cartEnabled: boolean;
+    };
+    email?: string | null;
+    website?: Array<{
+      url: string;
+    }>;
+    latitude?: number | null;
+    longitude?: number | null;
+    businessHours?: {
+      config: {
+        sun?: { mode: string; hours: number[][] };
+        mon?: { mode: string; hours: number[][] };
+        tue?: { mode: string; hours: number[][] };
+        wed?: { mode: string; hours: number[][] };
+        thu?: { mode: string; hours: number[][] };
+        fri?: { mode: string; hours: number[][] };
+        sat?: { mode: string; hours: number[][] };
+      };
+      timezone: string;
+    } | null;
+    address?: string;
+    fbPage?: Record<string, any>;
+    igProfessional?: Record<string, any>;
+    isProfileLinked?: boolean;
+    isProfileLocked?: boolean;
+    memberSinceText?: string;
+    coverPhoto?: {
+      id: string;
+      url: Record<string, any>;
+    } | null;
+    automatedType?: string;
+    welcomeMsgProtocolMode?: string;
+    prompts?: any;
+    commandsDescription?: any;
+    commands?: any;
+    location?: {
+      type: string;
+      coordinates: [number, number];
+    };
+    locationCheck?: boolean;
   };
 }
 
@@ -802,6 +937,29 @@ const copyRawData = async () => {
   }
 };
 
+const openMapsLocation = (latitude: number, longitude: number) => {
+  const url = `https://www.google.com/maps?q=${latitude},${longitude}`;
+  window.open(url, "_blank", "noopener,noreferrer");
+};
+
+const formatBusinessHours = (hours: number[]) => {
+  if (!hours || !Array.isArray(hours) || hours.length !== 2) return "Not specified";
+
+  const [startMinutes, endMinutes] = hours;
+  const openTime = convertMinutesToTime(startMinutes);
+  const closeTime = convertMinutesToTime(endMinutes);
+
+  return `${openTime} - ${closeTime}`;
+};
+
+const convertMinutesToTime = (minutes: number) => {
+  const hours = Math.floor(minutes / 60);
+  const mins = minutes % 60;
+  const ampm = hours >= 12 ? "PM" : "AM";
+  const displayHours = hours % 12 || 12;
+  return `${displayHours}:${mins.toString().padStart(2, "0")} ${ampm}`;
+};
+
 // Initialize with a basic search on mount (only if authenticated)
 onMounted(async () => {
   // Wait for auth to be ready
@@ -979,5 +1137,16 @@ watch(
 .v-theme--dark .raw-data-pre {
   background-color: #1e1e1e;
   color: #d4d4d4;
+}
+
+.businessData {
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+.businessData {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 </style>

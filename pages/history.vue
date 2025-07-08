@@ -112,6 +112,11 @@
               </v-btn>
             </v-card-actions>
 
+            <!-- Contact Buttons -->
+            <v-card-actions v-if="!item.data.error" class="pt-0">
+              <ContactButtons :phone="item.phoneNumber" />
+            </v-card-actions>
+
             <!-- Expandable Details -->
             <v-expand-transition>
               <div v-if="showDetails[item.id]">
@@ -149,12 +154,7 @@
     </v-dialog>
 
     <!-- Full image dialog -->
-    <FullImageDialog 
-      v-model="fullImageDialog" 
-      :image-url="fullImageData.url" 
-      :phone-number="fullImageData.phoneNumber"
-      @download="downloadImage"
-    />
+    <FullImageDialog v-model="fullImageDialog" :image-url="fullImageData.url" :phone-number="fullImageData.phoneNumber" @download="downloadImage" />
   </v-container>
 </template>
 

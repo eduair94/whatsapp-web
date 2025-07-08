@@ -40,6 +40,13 @@
               <p>{{ data.date ? formatDate(data.date) : $t("lookup.now") }}</p>
             </v-list-item>
           </v-list>
+
+          <!-- WhatsApp Contact Button -->
+          <v-card-actions v-if="data.phone" class="px-4 pb-4">
+            <v-btn :href="formatPhoneForWhatsApp(data.phone)" target="_blank" rel="noopener noreferrer" color="success" variant="elevated" block prepend-icon="mdi-whatsapp" class="text-none">
+              {{ $t("lookup.contactWhatsApp") }}
+            </v-btn>
+          </v-card-actions>
         </v-card>
       </v-col>
       <v-col cols="12" lg="6">
@@ -52,6 +59,8 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import type { WhatsAppProfileData } from "~/utils/interfaces/phone.interface";
+import { formatPhoneForWhatsApp } from "~/utils/whatsapp";
+
 interface Props {
   data: WhatsAppProfileData | null;
   loading: boolean;
