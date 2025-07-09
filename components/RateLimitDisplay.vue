@@ -48,7 +48,7 @@
 
             <div v-if="effectiveRateLimitInfo && effectiveRateLimitInfo.restartsInMinutes > 0" class="d-flex justify-space-between align-center mb-2">
               <span class="text-body-2">{{ $t("lookup.rateLimitResets") }}:</span>
-              <span class="text-body-2 font-weight-bold">{{ formatTimeRemaining(effectiveRateLimitInfo?.restartsInMinutes) }} {{ $t("lookup.rateLimitMinutes") }}</span>
+              <span class="text-body-2 font-weight-bold">{{ formatTimeRemaining(effectiveRateLimitInfo?.restartsInMinutes) }}</span>
             </div>
 
             <!-- Show additional API key quota info if available -->
@@ -150,41 +150,70 @@ const effectiveRateLimitInfo = computed(() => {
 const formatTimeRemaining = (minutes: number): string => {
   if (!minutes || minutes <= 0) return "0 minutes";
 
-  const years = Math.floor(minutes / (365 * 24 * 60));
-  const months = Math.floor((minutes % (365 * 24 * 60)) / (30 * 24 * 60));
-  const days = Math.floor((minutes % (30 * 24 * 60)) / (24 * 60));
-  const hours = Math.floor((minutes % (24 * 60)) / 60);
-  const remainingMinutes = minutes % 60;
+  const { locale } = useI18n();
+  
+  try {
+    const rtf = new Intl.RelativeTimeFormat(locale.value, { 
+      numeric: 'always',
+      style: 'long' 
+    });
+    
+    // Find the most appropriate unit
+    const units = [
+      { unit: 'year' as Intl.RelativeTimeFormatUnit, divisor: 525600 },
+      { unit: 'month' as Intl.RelativeTimeFormatUnit, divisor: 43200 },
+      { unit: 'day' as Intl.RelativeTimeFormatUnit, divisor: 1440 },
+      { unit: 'hour' as Intl.RelativeTimeFormatUnit, divisor: 60 },
+      { unit: 'minute' as Intl.RelativeTimeFormatUnit, divisor: 1 }
+    ];
+    
+    for (const { unit, divisor } of units) {
+      if (minutes >= divisor) {
+        const value = Math.floor(minutes / divisor);
+        return rtf.format(value, unit);
+      }
+    }
+    
+    return rtf.format(minutes, 'minute');
+  } catch (error) {
+    // Fallback to English if locale is not supported
+    console.warn('Locale not supported for time formatting, falling back to English:', error);
+    
+    const years = Math.floor(minutes / (365 * 24 * 60));
+    const months = Math.floor((minutes % (365 * 24 * 60)) / (30 * 24 * 60));
+    const days = Math.floor((minutes % (30 * 24 * 60)) / (24 * 60));
+    const hours = Math.floor((minutes % (24 * 60)) / 60);
+    const remainingMinutes = minutes % 60;
 
-  const parts = [];
+    const parts = [];
 
-  if (years > 0) {
-    parts.push(years === 1 ? "1 year" : `${years} years`);
+    if (years > 0) {
+      parts.push(years === 1 ? "1 year" : `${years} years`);
+    }
+
+    if (months > 0) {
+      parts.push(months === 1 ? "1 month" : `${months} months`);
+    }
+
+    if (days > 0) {
+      parts.push(days === 1 ? "1 day" : `${days} days`);
+    }
+
+    if (hours > 0) {
+      parts.push(hours === 1 ? "1 hour" : `${hours} hours`);
+    }
+
+    if (remainingMinutes > 0) {
+      parts.push(remainingMinutes === 1 ? "1 minute" : `${remainingMinutes} minutes`);
+    }
+
+    // Return the most significant 2 parts to keep it readable
+    if (parts.length > 2) {
+      return parts.slice(0, 2).join(", ");
+    }
+
+    return parts.join(", ");
   }
-
-  if (months > 0) {
-    parts.push(months === 1 ? "1 month" : `${months} months`);
-  }
-
-  if (days > 0) {
-    parts.push(days === 1 ? "1 day" : `${days} days`);
-  }
-
-  if (hours > 0) {
-    parts.push(hours === 1 ? "1 hour" : `${hours} hours`);
-  }
-
-  if (remainingMinutes > 0) {
-    parts.push(remainingMinutes === 1 ? "1 minute" : `${remainingMinutes} minutes`);
-  }
-
-  // Return the most significant 2 parts to keep it readable
-  // For example: "2 days, 3 hours" instead of "2 days, 3 hours, 45 minutes"
-  if (parts.length > 2) {
-    return parts.slice(0, 2).join(", ");
-  }
-
-  return parts.join(", ");
 };
 
 // Card styling based on rate limit status

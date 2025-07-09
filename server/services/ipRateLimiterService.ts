@@ -16,7 +16,7 @@ export class IpRateLimiterService {
   public IpRequest: mongoose.Model<IIpRequest>;
 
   constructor(isAuth: boolean, collection: string = "ip_requests") {
-    this.RATE_LIMIT = isAuth ? 5 : 2;
+    this.RATE_LIMIT = isAuth ? 20 : 4;
     if (ipModels[collection]) {
       this.IpRequest = ipModels[collection];
       return;
