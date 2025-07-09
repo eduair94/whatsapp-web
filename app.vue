@@ -143,7 +143,7 @@
           <span class="d-none d-lg-block">{{ $t("nav.pricing") }}</span>
           <span class="d-block d-lg-none">{{ $t("nav.pricingShort") }}</span>
         </v-btn>
-        <v-btn class="mr-3" link color="primary" variant="elevated" href="https://rapidapi.com/airaudoeduardo/api/whatsapp-data1/" target="_blank" prepend-icon="mdi-code-tags"> {{ $t("nav.api") }} </v-btn>
+        <v-btn class="mr-3" link color="primary" variant="elevated" :to="localePath('/api')" target="_blank" prepend-icon="mdi-code-tags"> {{ $t("nav.api") }} </v-btn>
         <v-menu offset-y>
           <template #activator="{ props }">
             <v-btn v-bind="props" color="primary" class="mr-0 mr-md-5">

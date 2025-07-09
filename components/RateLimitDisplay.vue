@@ -48,7 +48,7 @@
 
             <div v-if="effectiveRateLimitInfo && effectiveRateLimitInfo.restartsInMinutes > 0" class="d-flex justify-space-between align-center mb-2">
               <span class="text-body-2">{{ $t("lookup.rateLimitResets") }}:</span>
-              <span class="text-body-2 font-weight-bold">{{ effectiveRateLimitInfo?.restartsInMinutes }} {{ $t("lookup.rateLimitMinutes") }}</span>
+              <span class="text-body-2 font-weight-bold">{{ formatTimeRemaining(effectiveRateLimitInfo?.restartsInMinutes) }} {{ $t("lookup.rateLimitMinutes") }}</span>
             </div>
 
             <!-- Show additional API key quota info if available -->
@@ -65,10 +65,14 @@
             <div class="text-caption text-center mt-1 text-medium-emphasis">{{ Math.round(progressValue) }}% used</div>
 
             <!-- Refresh button -->
-            <div class="text-center mt-3">
+            <div class="text-center mt-3 d-flex align-center ga-2 justify-center">
               <v-btn size="small" variant="text" color="primary" :loading="rateLimitLoading" @click="fetchRateLimitInfo">
-                <v-icon left size="small">mdi-refresh</v-icon>
+                <v-icon class="mr-1" left size="small">mdi-refresh</v-icon>
                 Refresh
+              </v-btn>
+              <v-btn size="small" variant="text" color="primary" @click="openApiKeyManager">
+                <v-icon class="mr-1" left size="small">mdi-key</v-icon>
+                Link Api Key
               </v-btn>
             </div>
           </div>
@@ -81,6 +85,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from "vue";
 import { usePhoneApi } from "~/composables/usePhoneApi";
+const { openApiKeyManager } = useGlobalApiKeyManager();
 
 const phoneApi = usePhoneApi({
   includeAuth: true,
@@ -141,6 +146,46 @@ const effectiveRateLimitInfo = computed(() => {
 
   return null;
 });
+
+const formatTimeRemaining = (minutes: number): string => {
+  if (!minutes || minutes <= 0) return "0 minutes";
+
+  const years = Math.floor(minutes / (365 * 24 * 60));
+  const months = Math.floor((minutes % (365 * 24 * 60)) / (30 * 24 * 60));
+  const days = Math.floor((minutes % (30 * 24 * 60)) / (24 * 60));
+  const hours = Math.floor((minutes % (24 * 60)) / 60);
+  const remainingMinutes = minutes % 60;
+
+  const parts = [];
+
+  if (years > 0) {
+    parts.push(years === 1 ? "1 year" : `${years} years`);
+  }
+
+  if (months > 0) {
+    parts.push(months === 1 ? "1 month" : `${months} months`);
+  }
+
+  if (days > 0) {
+    parts.push(days === 1 ? "1 day" : `${days} days`);
+  }
+
+  if (hours > 0) {
+    parts.push(hours === 1 ? "1 hour" : `${hours} hours`);
+  }
+
+  if (remainingMinutes > 0) {
+    parts.push(remainingMinutes === 1 ? "1 minute" : `${remainingMinutes} minutes`);
+  }
+
+  // Return the most significant 2 parts to keep it readable
+  // For example: "2 days, 3 hours" instead of "2 days, 3 hours, 45 minutes"
+  if (parts.length > 2) {
+    return parts.slice(0, 2).join(", ");
+  }
+
+  return parts.join(", ");
+};
 
 // Card styling based on rate limit status
 const cardColor = computed(() => {

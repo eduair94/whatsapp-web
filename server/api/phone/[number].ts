@@ -1,6 +1,6 @@
 import axios from "axios";
 import { parseChallengeToken, validateChallenge } from "~/utils/jsChallenge";
-import { getApiKey, updateRateLimitInfo } from "../../services/apiKeyService";
+import { getApiKey, getRateLimitInfoReq, updateRateLimitInfo } from "../../services/apiKeyService";
 import { IpRateLimiterService } from "../../services/ipRateLimiterService";
 import { authenticateUser } from "../../utils/auth-middleware";
 
@@ -62,14 +62,7 @@ export default defineEventHandler(async (event) => {
                   "x-rapidapi-key": apiKeyResult.apiKey,
                 },
               }); // Extract rate limit headers from response
-              const responseHeaders = rapidApiResponse.headers;
-              const rateLimitInfo = {
-                requestLimit: responseHeaders["x-ratelimit-request-limit"] ? parseInt(responseHeaders["x-ratelimit-request-limit"]) : undefined,
-                requestRemaining: responseHeaders["x-ratelimit-request-remaining"] ? parseInt(responseHeaders["x-ratelimit-request-remaining"]) : undefined,
-                requestReset: responseHeaders["x-ratelimit-request-reset"] ? parseInt(responseHeaders["x-ratelimit-request-reset"]) : undefined,
-                quotaRequests: responseHeaders["x-rapidapi-quota-requests"] ? parseInt(responseHeaders["x-rapidapi-quota-requests"]) : undefined,
-                quotaRequestsRemaining: responseHeaders["x-rapidapi-quota-requests-remaining"] ? parseInt(responseHeaders["x-rapidapi-quota-requests-remaining"]) : undefined,
-              };
+              const rateLimitInfo = getRateLimitInfoReq(rapidApiResponse);
 
               // Update rate limit info in database (don't wait for it to complete)
               await updateRateLimitInfo(authResult.user.uid, rateLimitInfo).catch((error) => {

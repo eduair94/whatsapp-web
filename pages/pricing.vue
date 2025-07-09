@@ -19,7 +19,7 @@
               </v-card-text>
             </v-card>
 
-            <v-btn color="primary" size="large" class="mr-4 mb-4" href="https://rapidapi.com/airaudoeduardo/api/whatsapp-data1/" target="_blank" prepend-icon="mdi-rocket-launch"> {{ t("hero.start") }} </v-btn>
+            <v-btn link color="primary" size="large" class="mr-4 mb-4" :to="localePath('/api')" target="_blank" prepend-icon="mdi-rocket-launch"> {{ t("hero.start") }} </v-btn>
             <v-btn color="secondary" size="large" variant="outlined" class="mb-4" to="/api-status" prepend-icon="mdi-speedometer"> {{ t("hero.status") }} </v-btn>
             <v-btn color="info" size="large" variant="outlined" class="mb-4 ml-2" @click="scrollToPricing" prepend-icon="mdi-currency-usd"> {{ t("hero.seePlans") }} </v-btn>
           </v-col>
@@ -132,7 +132,7 @@
                 </v-list>
               </v-card-text>
               <v-card-actions class="pa-6">
-                <v-btn color="success" size="large" block href="https://rapidapi.com/airaudoeduardo/api/whatsapp-data1/pricing" target="_blank"> {{ t("plan.basic.cta") }} </v-btn>
+                <v-btn color="success" size="large" block link :to="localePath('/api')" target="_blank"> {{ t("plan.basic.cta") }} </v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -157,7 +157,7 @@
                 </v-list>
               </v-card-text>
               <v-card-actions class="pa-6">
-                <v-btn color="blue" size="large" block href="https://rapidapi.com/airaudoeduardo/api/whatsapp-data1/pricing" target="_blank"> {{ t("plan.pro.cta") }} </v-btn>
+                <v-btn color="blue" size="large" block link :to="localePath('/api')" target="_blank"> {{ t("plan.pro.cta") }} </v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -182,7 +182,7 @@
                 </v-list>
               </v-card-text>
               <v-card-actions class="pa-6">
-                <v-btn color="purple" size="large" block href="https://rapidapi.com/airaudoeduardo/api/whatsapp-data1/pricing" target="_blank"> {{ t("plan.ultra.cta") }} </v-btn>
+                <v-btn color="purple" size="large" block link :to="localePath('/api')" target="_blank"> {{ t("plan.ultra.cta") }} </v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -211,7 +211,7 @@
                 </v-list>
               </v-card-text>
               <v-card-actions class="pa-6">
-                <v-btn color="primary" size="large" block href="https://rapidapi.com/airaudoeduardo/api/whatsapp-data1/" target="_blank"> {{ t("plan.mega.cta") }} </v-btn>
+                <v-btn color="primary" size="large" block link :to="localePath('/api')" target="_blank"> {{ t("plan.mega.cta") }} </v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -224,6 +224,7 @@
 <script setup lang="ts">
 import { useHead, useRoute, useRouter } from "#imports";
 import { computed, ref } from "vue";
+const localePath = useLocalePath();
 
 const { t, locale, locales } = useI18n();
 const router = useRouter();

@@ -1,3 +1,4 @@
+import axios, { AxiosResponse } from "axios";
 import { ApiKey } from "../models/ApiKey";
 import { decryptData, encryptData, hashData, validateApiKey } from "../utils/encryption";
 import { connectToMongoDB } from "../utils/mongodb";
@@ -36,6 +37,47 @@ export interface UpdateRateLimitResult {
   message: string;
 }
 
+const processRateLimitJson = (json: any) => {
+  for (let key in json) {
+    json[key] = json[key] ? parseInt(json[key]) : undefined;
+  }
+  return json;
+};
+
+export const getRateLimitInfoReq = (rapidApiResponse: AxiosResponse<any, any>): RateLimitInfo => {
+  const responseHeaders = rapidApiResponse.headers;
+  console.log("Headers", responseHeaders);
+  const rateLimitInfo = processRateLimitJson({
+    requestReset: responseHeaders["x-ratelimit-requests-reset"],
+    requestLimit: responseHeaders["x-ratelimit-requests-limit"],
+    requestRemaining: responseHeaders["x-ratelimit-requests-remaining"],
+  });
+  return rateLimitInfo;
+};
+
+const validateApiKeyReq = async (apiKey: string) => {
+  // Basic validation for API key doing a request.
+  const number = "123";
+  const rapidApiUrl = `https://whatsapp-data1.p.rapidapi.com/number/${number}`;
+  const rapidApiResponse = await axios
+    .get(rapidApiUrl, {
+      headers: {
+        "x-rapidapi-host": "whatsapp-data1.p.rapidapi.com",
+        "x-rapidapi-key": apiKey,
+      },
+    })
+    .catch((e) => {
+      if (e?.response.status === 403) {
+        throw new Error("invalid_key");
+      } else {
+        console.error(e);
+        throw new Error("api_error");
+      }
+    }); // Extract rate limit headers from response
+  const rateLimitInfo = getRateLimitInfoReq(rapidApiResponse);
+  return rateLimitInfo;
+};
+
 /**
  * Save or update an API key for a user
  */
@@ -60,6 +102,9 @@ export async function saveApiKey(userId: string, apiKey: string, metadata?: ApiK
 
     const now = new Date();
 
+    const validateReq = await validateApiKeyReq(apiKey.trim());
+    console.log("ValidateReq", validateReq);
+
     // Check if user already has an API key
     const existingApiKey = await ApiKey.findOne({ userId });
 
@@ -76,6 +121,10 @@ export async function saveApiKey(userId: string, apiKey: string, metadata?: ApiK
       existingApiKey.apiKeyHash = apiKeyHash;
       existingApiKey.lastSaved = now;
       existingApiKey.metadata = metadata;
+      existingApiKey.rateLimitInfo = {
+        ...validateReq,
+        lastUpdated: now,
+      };
 
       await existingApiKey.save();
 
@@ -95,6 +144,10 @@ export async function saveApiKey(userId: string, apiKey: string, metadata?: ApiK
         lastSaved: now,
         isActive: true,
         metadata,
+        rateLimitInfo: {
+          ...validateReq,
+          lastUpdated: now,
+        },
       });
 
       await newApiKey.save();
@@ -105,11 +158,15 @@ export async function saveApiKey(userId: string, apiKey: string, metadata?: ApiK
         lastSaved: newApiKey.lastSaved,
       };
     }
-  } catch (error) {
+  } catch (error: any) {
     console.error("❌ Error saving API key:", error);
+    let message = "Failed to save API key. Please try again.";
+    if (error.message === "invalid_key") {
+      message = "Invalid API key provided. Please check your key and try again.";
+    }
     return {
       success: false,
-      message: "Failed to save API key. Please try again.",
+      message,
     };
   }
 }

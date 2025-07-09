@@ -14,6 +14,8 @@
             {{ $t("apiKey.description") }}
           </p>
 
+          <v-alert class="mb-2" dense type="warning">Linking your api key will consume 1 request due to RapidApi limitations</v-alert>
+
           <!-- Error Alert -->
           <v-alert v-if="errorMessage" type="error" variant="tonal" class="mb-4" closable @click:close="errorMessage = null">
             {{ errorMessage }}
@@ -98,7 +100,7 @@ const { t } = useI18n();
 const { user } = useFirebaseAuth();
 const { loading, error, linkApiKey, getUserApiKey, removeApiKey } = useApiKeyManagement();
 const { isApiKeyManagerOpen, closeApiKeyManager } = useGlobalApiKeyManager();
-const { setApiKeyValue } = usePhoneApi();
+const { setApiKeyValue, fetchRateLimitInfo } = usePhoneApi();
 
 // Component state
 const confirmRemove = ref(false);
@@ -155,6 +157,7 @@ const handleSave = async () => {
       successMessage.value = t("apiKey.success");
       apiKeyInput.value = "";
       isEditing.value = false;
+      fetchRateLimitInfo();
       await loadCurrentApiKey();
     } else {
       errorMessage.value = response.error || t("apiKey.error");
@@ -178,6 +181,7 @@ const handleRemove = async () => {
       successMessage.value = response.message;
       currentApiKey.value = null;
       confirmRemove.value = false;
+      fetchRateLimitInfo();
     } else {
       errorMessage.value = response.error || t("apiKey.error");
     }

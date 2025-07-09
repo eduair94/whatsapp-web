@@ -207,7 +207,7 @@
       </v-card-title>
       <v-card-text>
         <p class="mb-3">{{ t("verification.apiPromotion.description") }}</p>
-        <v-btn href="https://rapidapi.com/airaudoeduardo/api/whatsauth-whatsapp-otp1" target="_blank" color="primary" size="large" prepend-icon="mdi-rocket-launch" class="mr-3">
+        <v-btn link :to="localePath('/api-otp')" target="_blank" color="primary" size="large" prepend-icon="mdi-rocket-launch" class="mr-3">
           {{ t("verification.apiPromotion.button") }}
         </v-btn>
         <v-chip color="success" size="small" class="ml-2">

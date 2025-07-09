@@ -4,7 +4,7 @@
     <h1 class="mb-5 mb-md-8 text-center">{{ $t("lookup.title") }}</h1>
 
     <!-- Cool announcement banner -->
-    <a class="announcement-container mb-6 announcement-link" href="https://rapidapi.com/airaudoeduardo/api/whatsapp-data1/" target="_blank" rel="noopener">
+    <nuxt-link class="announcement-container mb-6 announcement-link" :to="localePath('/api')" target="_blank" rel="noopener">
       <div class="announcement-banner">
         <div class="announcement-content">
           <div class="announcement-item">
@@ -18,7 +18,7 @@
           </div>
         </div>
       </div>
-    </a>
+    </nuxt-link>
 
     <!-- Rate Limit Display -->
     <ClientOnly>
@@ -36,6 +36,7 @@
 
 <script setup lang="ts">
 import RateLimitDisplay from "~/components/RateLimitDisplay.vue";
+const localePath = useLocalePath();
 
 // Import components that might be used
 </script>
