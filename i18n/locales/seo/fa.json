@@ -87,5 +87,8 @@
   "seo.map.feature3": "تجسم پروفایل کسب و کار با اطلاعات دقیق",
   "seo.apiOtp.title": "WhatsAuth OTP API - احراز هویت واتس‌اپ | RapidAPI",
   "seo.apiOtp.description": "ارسال و تأیید کدهای OTP از طریق واتس‌اپ با استفاده از WhatsAuth API ما. ایده‌آل برای سیستم‌های احراز هویت و تأیید هویت امن. سریع، قابل اعتماد و مقرون به صرفه از طریق RapidAPI.",
-  "seo.apiOtp.keywords": "واتساپ OTP، WhatsAuth API، تأیید OTP، احراز هویت واتساپ، 2FA، RapidAPI، جایگزین پیامک، API تأیید"
+  "seo.apiOtp.keywords": "واتساپ OTP، WhatsAuth API، تأیید OTP، احراز هویت واتساپ، 2FA، RapidAPI، جایگزین پیامک، API تأیید",
+  "seo.telegramStatus.title": "وضعیت API تلگرام - نظارت لحظه‌ای بر سرویس تلگرام",
+  "seo.telegramStatus.description": "وضعیت لحظه‌ای API پروفایل تلگرام ما را رصد کنید. در دسترس بودن سرویس، آمار درخواست‌ها، معیارهای عملکرد و سلامت سیستم را بررسی کنید.",
+  "seo.telegramStatus.keywords": "وضعیت api تلگرام، نظارت بر تلگرام، وضعیت سرویس، عملکرد api، api تایید تلگرام، نظارت بلادرنگ"
 }

@@ -87,5 +87,8 @@
   "seo.map.feature3": "Ayrıntılı bilgilerle işletme profili görselleştirmesi",
   "seo.apiOtp.title": "WhatsAuth OTP API - WhatsApp Kimlik Doğrulaması | RapidAPI",
   "seo.apiOtp.description": "WhatsAuth API'mizle WhatsApp üzerinden OTP kodları gönderin ve doğrulayın. Güvenli kimlik doğrulama ve doğrulama sistemleri için mükemmel. RapidAPI ile hızlı, güvenilir ve uygun fiyatlı.",
-  "seo.apiOtp.keywords": "WhatsApp OTP, WhatsAuth API, OTP doğrulama, WhatsApp kimlik doğrulaması, 2FA, RapidAPI, SMS alternatifi, doğrulama API'si"
+  "seo.apiOtp.keywords": "WhatsApp OTP, WhatsAuth API, OTP doğrulama, WhatsApp kimlik doğrulaması, 2FA, RapidAPI, SMS alternatifi, doğrulama API'si",
+  "seo.telegramStatus.title": "Telegram API Durumu - Gerçek Zamanlı Telegram Hizmet İzleme",
+  "seo.telegramStatus.description": "Telegram Profil API'mizin gerçek zamanlı durumunu izleyin. Hizmet kullanılabilirliğini, istek istatistiklerini, performans ölçümlerini ve sistem sağlığını kontrol edin.",
+  "seo.telegramStatus.keywords": "Telegram API durumu, Telegram izleme, servis durumu, API performansı, Telegram doğrulama API'si, gerçek zamanlı izleme"
 }

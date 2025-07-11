@@ -87,5 +87,8 @@
   "seo.map.feature3": "자세한 정보를 포함한 비즈니스 프로필 시각화",
   "seo.apiOtp.title": "WhatsAuth OTP API - WhatsApp 인증 | RapidAPI",
   "seo.apiOtp.description": "WhatsAuth API를 사용하여 WhatsApp으로 OTP 코드를 전송하고 인증하세요. 안전한 인증 및 확인 시스템에 이상적입니다. RapidAPI를 통해 빠르고 안정적이며 저렴하게 이용할 수 있습니다.",
-  "seo.apiOtp.keywords": "WhatsApp OTP, WhatsAuth API, OTP 검증, WhatsApp 인증, 2FA, RapidAPI, SMS 대체, 검증 API"
+  "seo.apiOtp.keywords": "WhatsApp OTP, WhatsAuth API, OTP 검증, WhatsApp 인증, 2FA, RapidAPI, SMS 대체, 검증 API",
+  "seo.telegramStatus.title": "Telegram API 상태 - 실시간 Telegram 서비스 모니터링",
+  "seo.telegramStatus.description": "Telegram 프로필 API의 실시간 상태를 모니터링하세요. 서비스 가용성, 요청 통계, 성능 지표 및 시스템 상태를 확인하세요.",
+  "seo.telegramStatus.keywords": "텔레그램 API 상태, 텔레그램 모니터링, 서비스 상태, API 성능, 텔레그램 검증 API, 실시간 모니터링"
 }

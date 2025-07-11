@@ -92,5 +92,8 @@
   "seo.map.feature3": "အသေးစိတ်အချက်အလက်များနှင့်အတူ လုပ်ငန်းပရိုဖိုင်ကို ပုံဖော်ခြင်း။",
   "seo.apiOtp.title": "WhatsAuth OTP API - WhatsApp စစ်မှန်ကြောင်းအထောက်အထားပြသခြင်း | RapidAPI",
   "seo.apiOtp.description": "ကျွန်ုပ်တို့၏ WhatsAuth API ဖြင့် WhatsApp မှတဆင့် OTP ကုဒ်များကို ပေးပို့အတည်ပြုပါ။ လုံခြုံသော စစ်မှန်ကြောင်းနှင့် အတည်ပြုခြင်းစနစ်များအတွက် ပြီးပြည့်စုံပါသည်။ RapidAPI မှတဆင့် မြန်ဆန်၊ ယုံကြည်စိတ်ချရပြီး တတ်နိုင်သည် ။",
-  "seo.apiOtp.keywords": "WhatsApp OTP၊ WhatsAuth API၊ OTP အတည်ပြုခြင်း၊ WhatsApp အထောက်အထားစိစစ်ခြင်း၊ 2FA၊ RapidAPI၊ SMS အစားထိုး၊ အတည်ပြု API"
+  "seo.apiOtp.keywords": "WhatsApp OTP၊ WhatsAuth API၊ OTP အတည်ပြုခြင်း၊ WhatsApp အထောက်အထားစိစစ်ခြင်း၊ 2FA၊ RapidAPI၊ SMS အစားထိုး၊ အတည်ပြု API",
+  "seo.telegramStatus.title": "Telegram API အခြေအနေ - အချိန်နှင့်တပြေးညီ Telegram ဝန်ဆောင်မှုကို စောင့်ကြည့်ခြင်း။",
+  "seo.telegramStatus.description": "ကျွန်ုပ်တို့၏ Telegram Profile API ၏ အချိန်နှင့်တစ်ပြေးညီ အခြေအနေကို စောင့်ကြည့်ပါ။ ဝန်ဆောင်မှုရရှိနိုင်မှု၊ စာရင်းဇယားတောင်းဆိုမှု၊ စွမ်းဆောင်ရည်တိုင်းတာမှုများနှင့် စနစ်ကျန်းမာရေးကို စစ်ဆေးပါ။",
+  "seo.telegramStatus.keywords": "ကြေးနန်း api အခြေအနေ၊ ကြေးနန်းစောင့်ကြည့်မှု၊ ဝန်ဆောင်မှုအခြေအနေ၊ api စွမ်းဆောင်ရည်၊ ကြေးနန်းအတည်ပြု api၊ အချိန်နှင့်တစ်ပြေးညီ စောင့်ကြည့်စစ်ဆေးခြင်း"
 }

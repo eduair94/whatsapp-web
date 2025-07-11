@@ -87,5 +87,8 @@
   "seo.map.feature3": "ויזואליזציה של פרופיל עסקי עם מידע מפורט",
   "seo.apiOtp.title": "WhatsAuth OTP API - אימות WhatsApp | RapidAPI",
   "seo.apiOtp.description": "שלחו ואימות קודי OTP דרך WhatsApp בעזרת ה-WhatsAuth API שלנו. מושלם למערכות אימות ואימות מאובטחות. מהיר, אמין ובמחיר סביר דרך RapidAPI.",
-  "seo.apiOtp.keywords": "OTP של WhatsApp, API של WhatsAuth, אימות OTP, אימות WhatsApp, 2FA, RapidAPI, אלטרנטיבה ל-SMS, API לאימות"
+  "seo.apiOtp.keywords": "OTP של WhatsApp, API של WhatsAuth, אימות OTP, אימות WhatsApp, 2FA, RapidAPI, אלטרנטיבה ל-SMS, API לאימות",
+  "seo.telegramStatus.title": "סטטוס API של טלגרם - ניטור שירות טלגרם בזמן אמת",
+  "seo.telegramStatus.description": "ניטור בזמן אמת של מצב ה-API של פרופיל הטלגרם שלנו. בדיקת זמינות השירות, סטטיסטיקות בקשות, מדדי ביצועים ובריאות המערכת.",
+  "seo.telegramStatus.keywords": "סטטוס API של טלגרם, ניטור טלגרם, סטטוס שירות, ביצועי API, API לאימות טלגרם, ניטור בזמן אמת"
 }

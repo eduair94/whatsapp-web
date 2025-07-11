@@ -87,5 +87,8 @@
   "seo.map.feature3": "Visualização do perfil empresarial com informações detalhadas",
   "seo.apiOtp.title": "API WhatsAuth OTP - Autenticação do WhatsApp | RapidAPI",
   "seo.apiOtp.description": "Envie e verifique códigos OTP via WhatsApp com nossa API WhatsAuth. Perfeito para sistemas de autenticação e verificação seguros. Rápido, confiável e acessível com RapidAPI.",
-  "seo.apiOtp.keywords": "WhatsApp OTP, API WhatsAuth, verificação OTP, autenticação WhatsApp, 2FA, RapidAPI, alternativa SMS, API de verificação"
+  "seo.apiOtp.keywords": "WhatsApp OTP, API WhatsAuth, verificação OTP, autenticação WhatsApp, 2FA, RapidAPI, alternativa SMS, API de verificação",
+  "seo.telegramStatus.title": "Status da API do Telegram - Monitoramento do serviço do Telegram em tempo real",
+  "seo.telegramStatus.description": "Monitore o status em tempo real da nossa API de Perfil do Telegram. Verifique a disponibilidade do serviço, estatísticas de solicitações, métricas de desempenho e a integridade do sistema.",
+  "seo.telegramStatus.keywords": "status da API do Telegram, monitoramento do Telegram, status do serviço, desempenho da API, API de verificação do Telegram, monitoramento em tempo real"
 }

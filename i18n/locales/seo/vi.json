@@ -87,5 +87,8 @@
   "seo.map.feature3": "Hình ảnh hóa hồ sơ doanh nghiệp với thông tin chi tiết",
   "seo.apiOtp.title": "API OTP WhatsAuth - Xác thực WhatsApp | RapidAPI",
   "seo.apiOtp.description": "Gửi và xác minh mã OTP qua WhatsApp với API WhatsAuth của chúng tôi. Hoàn hảo cho các hệ thống xác thực và xác minh an toàn. Nhanh chóng, đáng tin cậy và giá cả phải chăng thông qua RapidAPI.",
-  "seo.apiOtp.keywords": "WhatsApp OTP, API WhatsAuth, xác minh OTP, xác thực WhatsApp, 2FA, RapidAPI, thay thế SMS, API xác minh"
+  "seo.apiOtp.keywords": "WhatsApp OTP, API WhatsAuth, xác minh OTP, xác thực WhatsApp, 2FA, RapidAPI, thay thế SMS, API xác minh",
+  "seo.telegramStatus.title": "Trạng thái API Telegram - Giám sát dịch vụ Telegram theo thời gian thực",
+  "seo.telegramStatus.description": "Theo dõi trạng thái theo thời gian thực của API Hồ sơ Telegram. Kiểm tra tính khả dụng của dịch vụ, thống kê yêu cầu, số liệu hiệu suất và tình trạng hệ thống.",
+  "seo.telegramStatus.keywords": "trạng thái api telegram, giám sát telegram, trạng thái dịch vụ, hiệu suất api, api xác minh telegram, giám sát thời gian thực"
 }

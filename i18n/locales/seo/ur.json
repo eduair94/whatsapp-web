@@ -92,5 +92,8 @@
   "seo.map.feature3": "تفصیلی معلومات کے ساتھ کاروباری پروفائل کا تصور",
   "seo.apiOtp.title": "WhatsAuth OTP API - WhatsApp کی توثیق | RapidAPI",
   "seo.apiOtp.description": "ہمارے WhatsAuth API کے ساتھ WhatsApp کے ذریعے OTP کوڈز بھیجیں اور ان کی تصدیق کریں۔ محفوظ تصدیق اور تصدیقی نظام کے لیے بہترین۔ RapidAPI کے ذریعے تیز، قابل اعتماد، اور سستی۔",
-  "seo.apiOtp.keywords": "WhatsApp OTP، WhatsAuth API، OTP تصدیق، WhatsApp تصدیق، 2FA، RapidAPI، SMS متبادل، تصدیق API"
+  "seo.apiOtp.keywords": "WhatsApp OTP، WhatsAuth API، OTP تصدیق، WhatsApp تصدیق، 2FA، RapidAPI، SMS متبادل، تصدیق API",
+  "seo.telegramStatus.title": "ٹیلیگرام API اسٹیٹس - ریئل ٹائم ٹیلیگرام سروس مانیٹرنگ",
+  "seo.telegramStatus.description": "ہمارے ٹیلیگرام پروفائل API کی اصل وقتی حیثیت کی نگرانی کریں۔ سروس کی دستیابی، درخواست کے اعداد و شمار، کارکردگی کے میٹرکس، اور سسٹم کی صحت کی جانچ کریں۔",
+  "seo.telegramStatus.keywords": "ٹیلیگرام اے پی آئی اسٹیٹس، ٹیلیگرام مانیٹرنگ، سروس اسٹیٹس، اے پی آئی پرفارمنس، ٹیلیگرام ویری فکیشن اے پی آئی، ریئل ٹائم مانیٹرنگ"
 }

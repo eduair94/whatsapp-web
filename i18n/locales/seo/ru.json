@@ -87,5 +87,8 @@
   "seo.map.feature3": "Визуализация бизнес-профиля с подробной информацией",
   "seo.apiOtp.title": "WhatsAuth OTP API — аутентификация WhatsApp | RapidAPI",
   "seo.apiOtp.description": "Отправляйте и проверяйте одноразовые пароли (OTP) через WhatsApp с помощью нашего API WhatsAuth. Идеально подходит для безопасных систем аутентификации и верификации. Быстро, надежно и доступно благодаря RapidAPI.",
-  "seo.apiOtp.keywords": "WhatsApp OTP, WhatsAuth API, верификация OTP, аутентификация WhatsApp, 2FA, RapidAPI, альтернатива SMS, API верификации"
+  "seo.apiOtp.keywords": "WhatsApp OTP, WhatsAuth API, верификация OTP, аутентификация WhatsApp, 2FA, RapidAPI, альтернатива SMS, API верификации",
+  "seo.telegramStatus.title": "Статус API Telegram — мониторинг сервиса Telegram в режиме реального времени",
+  "seo.telegramStatus.description": "Отслеживайте состояние нашего API Telegram Profile в режиме реального времени. Проверяйте доступность сервиса, статистику запросов, показатели производительности и состояние системы.",
+  "seo.telegramStatus.keywords": "статус API Telegram, мониторинг Telegram, статус сервиса, производительность API, API проверки Telegram, мониторинг в реальном времени"
 }

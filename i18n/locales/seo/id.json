@@ -87,5 +87,8 @@
   "seo.map.feature3": "Visualisasi profil bisnis dengan informasi terperinci",
   "seo.apiOtp.title": "API OTP WhatsApp - Autentikasi WhatsApp | RapidAPI",
   "seo.apiOtp.description": "Kirim dan verifikasi kode OTP melalui WhatsApp dengan API WhatsApp kami. Sempurna untuk sistem autentikasi dan verifikasi yang aman. Cepat, andal, dan terjangkau melalui RapidAPI.",
-  "seo.apiOtp.keywords": "WhatsApp OTP, WhatsAppAuth API, verifikasi OTP, autentikasi WhatsApp, 2FA, RapidAPI, alternatif SMS, API verifikasi"
+  "seo.apiOtp.keywords": "WhatsApp OTP, WhatsAppAuth API, verifikasi OTP, autentikasi WhatsApp, 2FA, RapidAPI, alternatif SMS, API verifikasi",
+  "seo.telegramStatus.title": "Status API Telegram - Pemantauan Layanan Telegram Secara Real-Time",
+  "seo.telegramStatus.description": "Pantau status API Profil Telegram kami secara real-time. Periksa ketersediaan layanan, statistik permintaan, metrik kinerja, dan kesehatan sistem.",
+  "seo.telegramStatus.keywords": "Status API Telegram, pemantauan Telegram, status layanan, kinerja API, verifikasi API Telegram, pemantauan waktu nyata"
 }

@@ -87,5 +87,8 @@
   "seo.map.feature3": "业务概况可视化，包含详细信息",
   "seo.apiOtp.title": "WhatsAuth OTP API - WhatsApp 身份验证 | RapidAPI",
   "seo.apiOtp.description": "使用我们的 WhatsAuth API，通过 WhatsApp 发送并验证 OTP 代码。非常适合安全的身份验证和验证系统。通过 RapidAPI，快速、可靠且经济实惠。",
-  "seo.apiOtp.keywords": "WhatsApp OTP、WhatsAuth API、OTP 验证、WhatsApp 身份验证、2FA、RapidAPI、短信替代方案、验证 API"
+  "seo.apiOtp.keywords": "WhatsApp OTP、WhatsAuth API、OTP 验证、WhatsApp 身份验证、2FA、RapidAPI、短信替代方案、验证 API",
+  "seo.telegramStatus.title": "Telegram API 状态 - 实时 Telegram 服务监控",
+  "seo.telegramStatus.description": "监控 Telegram Profile API 的实时状态。检查服务可用性、请求统计、性能指标和系统健康状况。",
+  "seo.telegramStatus.keywords": "电报 API 状态、电报监控、服务状态、API 性能、电报验证 API、实时监控"
 }
