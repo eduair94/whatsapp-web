@@ -17,7 +17,7 @@
     "add-missing-translations": "node scripts/add-missing-translations.js"
   },
   "devDependencies": {
-    "@nuxt/devtools": "latest"
+    "@nuxt/devtools": "latest",
     "@types/express": "^4.17.17",
     "gh-pages": "^6.3.0",
     "npm-force-resolutions": "^0.0.10",
