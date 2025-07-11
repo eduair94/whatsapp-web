@@ -376,5 +376,16 @@
   "telegramStats.usersWithoutPhotos": "Users without Photos",
   "telegramStats.verificationStatus": "Verification Status",
   "telegramStats.withPhotos": "With Photos",
-  "telegramStats.withoutPhotos": "Without Photos"
+  "telegramStats.withoutPhotos": "Without Photos",
+  "lookup.contactWhatsApp": "واٹس ایپ سے رابطہ کریں۔",
+  "lookup.viewOnGoogleMaps": "گوگل میپس پر دیکھیں",
+  "lookup.googleSearch": "گوگل سرچ",
+  "faq.title": "اکثر پوچھے گئے سوالات",
+  "faq.subtitle": "ہماری WhatsApp نمبر تصدیقی سروس کے بارے میں عام سوالات کے جوابات تلاش کریں۔",
+  "faq.stillHaveQuestions": "اب بھی سوالات ہیں؟",
+  "faq.contactDescription": "وہ جواب نہیں مل سکتا جس کی آپ تلاش کر رہے ہیں؟ ہماری سپورٹ ٹیم مدد کے لیے حاضر ہے۔",
+  "faq.contactUs": "سپورٹ سے رابطہ کریں۔",
+  "seo.otpStatus.title": "OTP API اسٹیٹس - ریئل ٹائم WhatsApp OTP API مانیٹرنگ",
+  "seo.otpStatus.description": "ہمارے WhatsApp OTP API کی ریئل ٹائم اسٹیٹس کی نگرانی کریں۔ OTP تصدیقی خدمات کے لیے سروس کی دستیابی، درخواست کے اعدادوشمار، اور سسٹم کی کارکردگی کے میٹرکس کو چیک کریں۔",
+  "seo.otpStatus.keywords": "واٹس ایپ او ٹی پی اے پی آئی اسٹیٹس، او ٹی پی اے پی آئی مانیٹرنگ، او ٹی پی سروس اسٹیٹس، واٹس ایپ کی توثیق API، او ٹی پی اے پی آئی کی کارکردگی"
 }

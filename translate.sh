@@ -1,0 +1,1 @@
+tr_file "i18n/locales/en.json" es,pt,fr,de,ar,fa,hi,id,it,ja,ko,my,nl,ru,th,tr,ur,vi,zh -r

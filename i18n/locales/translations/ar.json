@@ -381,5 +381,11 @@
   "telegramStats.usersWithoutPhotos": "Users without Photos",
   "telegramStats.verificationStatus": "Verification Status",
   "telegramStats.withPhotos": "With Photos",
-  "telegramStats.withoutPhotos": "Without Photos"
+  "telegramStats.withoutPhotos": "Without Photos",
+  "lookup.contactWhatsApp": "تواصل معنا عبر واتساب",
+  "lookup.viewOnGoogleMaps": "عرض على خرائط جوجل",
+  "lookup.googleSearch": "بحث جوجل",
+  "seo.otpStatus.title": "حالة واجهة برمجة تطبيقات OTP - مراقبة واجهة برمجة تطبيقات WhatsApp OTP في الوقت الفعلي",
+  "seo.otpStatus.description": "تابع حالة واجهة برمجة تطبيقات WhatsApp OTP الخاصة بنا في الوقت الفعلي. تحقق من توفر الخدمة، وإحصائيات الطلبات، ومقاييس أداء النظام لخدمات التحقق من OTP.",
+  "seo.otpStatus.keywords": "حالة واجهة برمجة تطبيقات WhatsApp OTP، مراقبة واجهة برمجة تطبيقات OTP، حالة خدمة OTP، واجهة برمجة تطبيقات التحقق من WhatsApp، أداء واجهة برمجة تطبيقات OTP"
 }

@@ -381,5 +381,11 @@
   "telegramStats.usersWithoutPhotos": "Utilisateurs sans photos",
   "telegramStats.verificationStatus": "Statut de vérification",
   "telegramStats.withPhotos": "Avec photos",
-  "telegramStats.withoutPhotos": "Sans photos"
+  "telegramStats.withoutPhotos": "Sans photos",
+  "lookup.contactWhatsApp": "Contactez WhatsApp",
+  "lookup.viewOnGoogleMaps": "Voir sur Google Maps",
+  "lookup.googleSearch": "Recherche Google",
+  "seo.otpStatus.title": "État de l'API OTP - Surveillance en temps réel de l'API OTP WhatsApp",
+  "seo.otpStatus.description": "Surveillez l'état en temps réel de notre API OTP WhatsApp. Vérifiez la disponibilité du service, les statistiques de requêtes et les indicateurs de performance système pour les services de vérification OTP.",
+  "seo.otpStatus.keywords": "État de l'API OTP de WhatsApp, surveillance de l'API OTP, état du service OTP, API de vérification de WhatsApp, performances de l'API OTP"
 }

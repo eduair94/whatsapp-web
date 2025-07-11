@@ -381,5 +381,11 @@
   "telegramStats.usersWithoutPhotos": "Pengguna tanpa foto",
   "telegramStats.verificationStatus": "Status verifikasi",
   "telegramStats.withPhotos": "Dengan foto",
-  "telegramStats.withoutPhotos": "Tanpa foto"
+  "telegramStats.withoutPhotos": "Tanpa foto",
+  "lookup.contactWhatsApp": "Hubungi WhatsApp",
+  "lookup.viewOnGoogleMaps": "Lihat di Google Maps",
+  "lookup.googleSearch": "Pencarian Google",
+  "seo.otpStatus.title": "Status API OTP - Pemantauan API OTP WhatsApp secara Real-time",
+  "seo.otpStatus.description": "Pantau status real-time API OTP WhatsApp kami. Periksa ketersediaan layanan, statistik permintaan, dan metrik kinerja sistem untuk layanan verifikasi OTP.",
+  "seo.otpStatus.keywords": "Status API OTP WhatsApp, pemantauan API OTP, status layanan OTP, API verifikasi WhatsApp, kinerja API OTP"
 }

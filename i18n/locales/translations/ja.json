@@ -381,5 +381,11 @@
   "telegramStats.usersWithoutPhotos": "Users without Photos",
   "telegramStats.verificationStatus": "Verification Status",
   "telegramStats.withPhotos": "With Photos",
-  "telegramStats.withoutPhotos": "Without Photos"
+  "telegramStats.withoutPhotos": "Without Photos",
+  "lookup.contactWhatsApp": "WhatsAppで連絡する",
+  "lookup.viewOnGoogleMaps": "Googleマップで見る",
+  "lookup.googleSearch": "Google検索",
+  "seo.otpStatus.title": "OTP APIステータス - リアルタイムWhatsApp OTP APIモニタリング",
+  "seo.otpStatus.description": "WhatsApp OTP APIのリアルタイムステータスを監視します。OTP認証サービスのサービス可用性、リクエスト統計、システムパフォーマンス指標を確認できます。",
+  "seo.otpStatus.keywords": "WhatsApp OTP API ステータス、OTP API モニタリング、OTP サービス ステータス、WhatsApp 検証 API、OTP API パフォーマンス"
 }

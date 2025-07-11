@@ -384,5 +384,8 @@
   "telegramStats.usersWithoutPhotos": "Users without Photos",
   "telegramStats.verificationStatus": "Verification Status",
   "telegramStats.withPhotos": "With Photos",
-  "telegramStats.withoutPhotos": "Without Photos"
+  "telegramStats.withoutPhotos": "Without Photos",
+  "seo.otpStatus.title": "สถานะ OTP API - การตรวจสอบ OTP API ของ WhatsApp แบบเรียลไทม์",
+  "seo.otpStatus.description": "ติดตามสถานะแบบเรียลไทม์ของ WhatsApp OTP API ของเรา ตรวจสอบความพร้อมใช้งานของบริการ สถิติคำขอ และตัวชี้วัดประสิทธิภาพของระบบสำหรับบริการยืนยัน OTP",
+  "seo.otpStatus.keywords": "สถานะ otp api ของ whatsapp, การตรวจสอบ otp api, สถานะบริการ otp, api ยืนยัน whatsapp, ประสิทธิภาพของ otp api"
 }

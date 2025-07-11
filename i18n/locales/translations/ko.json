@@ -381,5 +381,11 @@
   "telegramStats.usersWithoutPhotos": "Users without Photos",
   "telegramStats.verificationStatus": "Verification Status",
   "telegramStats.withPhotos": "With Photos",
-  "telegramStats.withoutPhotos": "Without Photos"
+  "telegramStats.withoutPhotos": "Without Photos",
+  "lookup.contactWhatsApp": "WhatsApp으로 문의하세요",
+  "lookup.viewOnGoogleMaps": "Google 지도에서 보기",
+  "lookup.googleSearch": "구글 검색",
+  "seo.otpStatus.title": "OTP API 상태 - 실시간 WhatsApp OTP API 모니터링",
+  "seo.otpStatus.description": "WhatsApp OTP API의 실시간 상태를 모니터링하세요. OTP 인증 서비스의 서비스 가용성, 요청 통계 및 시스템 성능 지표를 확인하세요.",
+  "seo.otpStatus.keywords": "WhatsApp OTP API 상태, OTP API 모니터링, OTP 서비스 상태, WhatsApp 확인 API, OTP API 성능"
 }

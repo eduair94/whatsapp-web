@@ -381,5 +381,11 @@
   "telegramStats.usersWithoutPhotos": "Users without Photos",
   "telegramStats.verificationStatus": "Verification Status",
   "telegramStats.withPhotos": "With Photos",
-  "telegramStats.withoutPhotos": "Without Photos"
+  "telegramStats.withoutPhotos": "Without Photos",
+  "lookup.contactWhatsApp": "संपर्क करें WhatsApp",
+  "lookup.viewOnGoogleMaps": "गूगल मानचित्र पर देखें",
+  "lookup.googleSearch": "गूगल खोज",
+  "seo.otpStatus.title": "ओटीपी एपीआई स्थिति - वास्तविक समय व्हाट्सएप ओटीपी एपीआई निगरानी",
+  "seo.otpStatus.description": "हमारे WhatsApp OTP API की रीयल-टाइम स्थिति पर नज़र रखें। OTP सत्यापन सेवाओं के लिए सेवा उपलब्धता, अनुरोध आँकड़े और सिस्टम प्रदर्शन मीट्रिक देखें।",
+  "seo.otpStatus.keywords": "व्हाट्सएप ओटीपी एपीआई स्थिति, ओटीपी एपीआई निगरानी, ओटीपी सेवा स्थिति, व्हाट्सएप सत्यापन एपीआई, ओटीपी एपीआई प्रदर्शन"
 }

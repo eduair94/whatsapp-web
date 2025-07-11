@@ -381,5 +381,11 @@
   "telegramStats.usersWithoutPhotos": "Users without Photos",
   "telegramStats.verificationStatus": "Verification Status",
   "telegramStats.withPhotos": "With Photos",
-  "telegramStats.withoutPhotos": "Without Photos"
+  "telegramStats.withoutPhotos": "Without Photos",
+  "lookup.contactWhatsApp": "WhatsApp ile iletişime geçin",
+  "lookup.viewOnGoogleMaps": "Google Haritalar'da görüntüle",
+  "lookup.googleSearch": "Google Arama",
+  "seo.otpStatus.title": "OTP API Durumu - Gerçek zamanlı WhatsApp OTP API İzleme",
+  "seo.otpStatus.description": "WhatsApp OTP API'mizin gerçek zamanlı durumunu izleyin. OTP doğrulama hizmetleri için hizmet kullanılabilirliğini, istek istatistiklerini ve sistem performans ölçümlerini kontrol edin.",
+  "seo.otpStatus.keywords": "whatsapp otp api durumu, otp api izleme, otp servis durumu, whatsapp doğrulama api'si, otp api performansı"
 }

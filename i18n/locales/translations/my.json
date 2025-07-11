@@ -376,5 +376,16 @@
   "telegramStats.usersWithoutPhotos": "Users without Photos",
   "telegramStats.verificationStatus": "Verification Status",
   "telegramStats.withPhotos": "With Photos",
-  "telegramStats.withoutPhotos": "Without Photos"
+  "telegramStats.withoutPhotos": "Without Photos",
+  "lookup.contactWhatsApp": "WhatsApp ကို ဆက်သွယ်ပါ။",
+  "lookup.viewOnGoogleMaps": "Google Maps တွင်ကြည့်ရှုပါ။",
+  "lookup.googleSearch": "Google Search",
+  "faq.title": "အမေးများသောမေးခွန်းများ",
+  "faq.subtitle": "ကျွန်ုပ်တို့၏ WhatsApp နံပါတ်အတည်ပြုခြင်းဝန်ဆောင်မှုနှင့်ပတ်သက်သည့် ဘုံမေးခွန်းများအတွက် အဖြေများကို ရှာပါ။",
+  "faq.stillHaveQuestions": "မေးစရာရှိသေးလား။",
+  "faq.contactDescription": "သင်ရှာနေသော အဖြေကို ရှာမတွေ့ပါ။ ကျွန်ုပ်တို့၏ ပံ့ပိုးကူညီမှုအဖွဲ့သည် ဤနေရာတွင် ရှိနေပါသည်။",
+  "faq.contactUs": "ပံ့ပိုးကူညီမှုထံ ဆက်သွယ်ပါ။",
+  "seo.otpStatus.title": "OTP API အခြေအနေ - အချိန်နှင့်တပြေးညီ WhatsApp OTP API စောင့်ကြည့်ရေး",
+  "seo.otpStatus.description": "ကျွန်ုပ်တို့၏ WhatsApp OTP API ၏ အချိန်နှင့်တစ်ပြေးညီ အခြေအနေကို စောင့်ကြည့်ပါ။ OTP အတည်ပြုခြင်းဝန်ဆောင်မှုများအတွက် ဝန်ဆောင်မှုရရှိနိုင်မှု၊ စာရင်းဇယားတောင်းဆိုမှုနှင့် စနစ်စွမ်းဆောင်ရည်မက်ထရစ်များကို စစ်ဆေးပါ။",
+  "seo.otpStatus.keywords": "whatsapp otp api အခြေအနေ၊ otp api စောင့်ကြည့်မှု၊ otp ဝန်ဆောင်မှုအခြေအနေ၊ whatsapp အတည်ပြု api၊ otp api စွမ်းဆောင်ရည်"
 }

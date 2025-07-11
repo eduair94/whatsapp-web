@@ -381,5 +381,11 @@
   "telegramStats.usersWithoutPhotos": "Users without Photos",
   "telegramStats.verificationStatus": "Verification Status",
   "telegramStats.withPhotos": "With Photos",
-  "telegramStats.withoutPhotos": "Without Photos"
+  "telegramStats.withoutPhotos": "Without Photos",
+  "lookup.contactWhatsApp": "Liên hệ WhatsApp",
+  "lookup.viewOnGoogleMaps": "Xem trên Google Maps",
+  "lookup.googleSearch": "Tìm kiếm Google",
+  "seo.otpStatus.title": "Trạng thái API OTP - Giám sát API OTP WhatsApp theo thời gian thực",
+  "seo.otpStatus.description": "Theo dõi trạng thái theo thời gian thực của WhatsApp OTP API. Kiểm tra tính khả dụng của dịch vụ, thống kê yêu cầu và số liệu hiệu suất hệ thống cho các dịch vụ xác minh OTP.",
+  "seo.otpStatus.keywords": "Trạng thái API OTP WhatsApp, giám sát API OTP, trạng thái dịch vụ OTP, API xác minh WhatsApp, hiệu suất API OTP"
 }

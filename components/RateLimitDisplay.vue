@@ -151,34 +151,34 @@ const formatTimeRemaining = (minutes: number): string => {
   if (!minutes || minutes <= 0) return "0 minutes";
 
   const { locale } = useI18n();
-  
+
   try {
-    const rtf = new Intl.RelativeTimeFormat(locale.value, { 
-      numeric: 'always',
-      style: 'long' 
+    const rtf = new Intl.RelativeTimeFormat(locale.value, {
+      numeric: "always",
+      style: "long",
     });
-    
+
     // Find the most appropriate unit
     const units = [
-      { unit: 'year' as Intl.RelativeTimeFormatUnit, divisor: 525600 },
-      { unit: 'month' as Intl.RelativeTimeFormatUnit, divisor: 43200 },
-      { unit: 'day' as Intl.RelativeTimeFormatUnit, divisor: 1440 },
-      { unit: 'hour' as Intl.RelativeTimeFormatUnit, divisor: 60 },
-      { unit: 'minute' as Intl.RelativeTimeFormatUnit, divisor: 1 }
+      { unit: "year" as Intl.RelativeTimeFormatUnit, divisor: 525600 },
+      { unit: "month" as Intl.RelativeTimeFormatUnit, divisor: 43200 },
+      { unit: "day" as Intl.RelativeTimeFormatUnit, divisor: 1440 },
+      { unit: "hour" as Intl.RelativeTimeFormatUnit, divisor: 60 },
+      { unit: "minute" as Intl.RelativeTimeFormatUnit, divisor: 1 },
     ];
-    
+
     for (const { unit, divisor } of units) {
       if (minutes >= divisor) {
         const value = Math.floor(minutes / divisor);
         return rtf.format(value, unit);
       }
     }
-    
-    return rtf.format(minutes, 'minute');
+
+    return rtf.format(minutes, "minute");
   } catch (error) {
     // Fallback to English if locale is not supported
-    console.warn('Locale not supported for time formatting, falling back to English:', error);
-    
+    console.warn("Locale not supported for time formatting, falling back to English:", error);
+
     const years = Math.floor(minutes / (365 * 24 * 60));
     const months = Math.floor((minutes % (365 * 24 * 60)) / (30 * 24 * 60));
     const days = Math.floor((minutes % (30 * 24 * 60)) / (24 * 60));

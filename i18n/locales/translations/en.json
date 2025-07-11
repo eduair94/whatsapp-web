@@ -375,5 +375,8 @@
   "faq.subtitle": "Find answers to common questions about our WhatsApp number verification service",
   "faq.stillHaveQuestions": "Still have questions?",
   "faq.contactDescription": "Can't find the answer you're looking for? Our support team is here to help.",
-  "faq.contactUs": "Contact Support"
+  "faq.contactUs": "Contact Support",
+  "seo.otpStatus.title": "OTP API Status - Real-time WhatsApp OTP API Monitoring",
+  "seo.otpStatus.description": "Monitor the real-time status of our WhatsApp OTP API. Check service availability, request statistics, and system performance metrics for OTP verification services.",
+  "seo.otpStatus.keywords": "whatsapp otp api status, otp api monitoring, otp service status, whatsapp verification api, otp api performance"
 }

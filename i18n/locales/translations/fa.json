@@ -381,5 +381,11 @@
   "telegramStats.usersWithoutPhotos": "کاربران بدون عکس",
   "telegramStats.verificationStatus": "وضعیت تأیید",
   "telegramStats.withPhotos": "با عکس",
-  "telegramStats.withoutPhotos": "بدون عکس"
+  "telegramStats.withoutPhotos": "بدون عکس",
+  "lookup.contactWhatsApp": "تماس با واتساپ",
+  "lookup.viewOnGoogleMaps": "مشاهده در نقشه‌های گوگل",
+  "lookup.googleSearch": "جستجوی گوگل",
+  "seo.otpStatus.title": "وضعیت API OTP - نظارت لحظه‌ای بر API OTP واتس‌اپ",
+  "seo.otpStatus.description": "وضعیت لحظه‌ای API واتساپ OTP ما را رصد کنید. در دسترس بودن سرویس، آمار درخواست‌ها و معیارهای عملکرد سیستم را برای سرویس‌های تأیید OTP بررسی کنید.",
+  "seo.otpStatus.keywords": "وضعیت API otp واتساپ، نظارت بر API otp، وضعیت سرویس otp، API تأیید واتساپ، عملکرد API otp"
 }

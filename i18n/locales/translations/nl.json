@@ -423,5 +423,11 @@
   "verification.result.status": "Status",
   "verification.result.verified": "Geverifieerd",
   "verification.subheading": "Verifieer telefoonnummers voor WhatsApp",
-  "verification.title": "Telefoonnummer Verificatie - WhatsApp Profiel API"
+  "verification.title": "Telefoonnummer Verificatie - WhatsApp Profiel API",
+  "lookup.contactWhatsApp": "Contact WhatsApp",
+  "lookup.viewOnGoogleMaps": "Bekijk op Google Maps",
+  "lookup.googleSearch": "Google Zoeken",
+  "seo.otpStatus.title": "OTP API-status - Realtime WhatsApp OTP API-bewaking",
+  "seo.otpStatus.description": "Volg de realtime status van onze WhatsApp OTP API. Controleer de beschikbaarheid van de service, verzoekstatistieken en systeemprestatiegegevens voor OTP-verificatieservices.",
+  "seo.otpStatus.keywords": "WhatsApp OTP API-status, OTP API-bewaking, OTP-servicestatus, WhatsApp-verificatie-API, OTP API-prestaties"
 }
