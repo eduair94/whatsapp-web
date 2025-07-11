@@ -3,11 +3,12 @@
   "private": true,
   "scripts": {
     "start": "node .output/server/index.mjs",
-    "prebuild": "node --max-old-space-size=4096 -e \"console.log('Pre-build cleanup...'); require('fs').rmSync('.nuxt', {recursive: true, force: true}); require('fs').rmSync('.output', {recursive: true, force: true}); console.log('Cleanup completed.')\"",
-    "build": "NODE_OPTIONS='--max-old-space-size=4096' nuxt build",
-    "build-temp": "NODE_OPTIONS='--max-old-space-size=4096' NUXT_OUTPUT_DIR=.output-temp nuxt build",
+    "prebuild": "node --max-old-space-size=8192 -e \"console.log('Pre-build cleanup...'); try { require('fs').rmSync('.nuxt', {recursive: true, force: true}); } catch(e) {} try { require('fs').rmSync('.output', {recursive: true, force: true}); } catch(e) {} console.log('Cleanup completed.')\"",
+    "build": "nuxt build",
+    "build-optimized": "bash build-optimized.sh",
+    "build-temp": "NUXT_OUTPUT_DIR=.output-temp nuxt build",
     "dev": "nuxt dev",
-    "generate": "NODE_OPTIONS='--max-old-space-size=4096' nuxt generate",
+    "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "deploy": "sh deploy.sh",
@@ -16,7 +17,7 @@
     "add-missing-translations": "node scripts/add-missing-translations.js"
   },
   "devDependencies": {
-    "@nuxt/devtools": "latest",
+    "@nuxt/devtools": "latest"
     "@types/express": "^4.17.17",
     "gh-pages": "^6.3.0",
     "npm-force-resolutions": "^0.0.10",

@@ -200,7 +200,9 @@
     </v-app-bar>
 
     <!-- Language Alert positioned under the menu -->
-    <LanguageAlert />
+    <ClientOnly>
+      <LanguageAlert />
+    </ClientOnly>
 
     <NuxtLayout>
       <LoadingOverlay />

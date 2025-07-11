@@ -8,8 +8,8 @@ set -e  # Exit on any error
 echo "🚀 Starting deployment process..."
 
 # Step 1: Build the project
-echo "📦 Building the project with increased memory..."
-NODE_OPTIONS='--max-old-space-size=4096' npm run build
+echo "📦 Building the project with memory optimization..."
+bash build-optimized.sh
 
 # Check if build was successful
 if [ ! -d ".output" ]; then

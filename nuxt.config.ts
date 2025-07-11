@@ -65,6 +65,8 @@ export default defineNuxtConfig({
     treeshakeClientOnly: false,
     // Reduce memory usage during build
     payloadExtraction: false,
+    // Disable other experimental features to reduce memory usage
+    watcher: 'chokidar',
   },
 
   // SEO and Performance optimizations
@@ -266,13 +268,20 @@ export default defineNuxtConfig({
       brotli: true,
     },
     minify: true,
+    // Optimize build performance and memory usage
+    rollupConfig: {
+      external: ['firebase-admin', 'firebase-functions'],
+      output: {
+        manualChunks: undefined, // Disable manual chunks in nitro to reduce memory usage
+      },
+    },
     storage: {
       redis: {
         driver: "memory", // Use memory storage for development
       },
     },
     experimental: {
-      wasm: true,
+      wasm: false, // Disable WASM to save memory
     },
   }, // Route rules for optimal caching and security
   routeRules: {
