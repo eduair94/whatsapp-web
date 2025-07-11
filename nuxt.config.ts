@@ -42,17 +42,17 @@ export default defineNuxtConfig({
           // Optimize chunk splitting to reduce memory pressure
           manualChunks: (id) => {
             // Split large node_modules into separate chunks
-            if (id.includes('node_modules')) {
-              if (id.includes('vue') || id.includes('nuxt')) {
-                return 'vendor-vue';
+            if (id.includes("node_modules")) {
+              if (id.includes("vue") || id.includes("nuxt")) {
+                return "vendor-vue";
               }
-              if (id.includes('firebase')) {
-                return 'vendor-firebase';
+              if (id.includes("firebase")) {
+                return "vendor-firebase";
               }
-              if (id.includes('vuetify')) {
-                return 'vendor-vuetify';
+              if (id.includes("vuetify")) {
+                return "vendor-vuetify";
               }
-              return 'vendor-other';
+              return "vendor-other";
             }
           },
         },
@@ -66,7 +66,7 @@ export default defineNuxtConfig({
     // Reduce memory usage during build
     payloadExtraction: false,
     // Disable other experimental features to reduce memory usage
-    watcher: 'chokidar',
+    watcher: "chokidar",
   },
 
   // SEO and Performance optimizations
@@ -270,7 +270,7 @@ export default defineNuxtConfig({
     minify: true,
     // Optimize build performance and memory usage
     rollupConfig: {
-      external: ['firebase-admin', 'firebase-functions'],
+      external: ["firebase-admin", "firebase-functions"],
       output: {
         manualChunks: undefined, // Disable manual chunks in nitro to reduce memory usage
       },

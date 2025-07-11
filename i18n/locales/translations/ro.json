@@ -430,5 +430,14 @@
   "languageAlert.title": "Nepotrivire de limbă detectată",
   "languageAlert.message": "Limba browserului dvs. nu se potrivește cu limba curentă a site-ului. Doriți să o schimbați pentru a se potrivi cu limba browserului dvs.?",
   "languageAlert.switch": "Schimbare limbă",
-  "languageAlert.dismiss": "Închide"
+  "languageAlert.dismiss": "Închide",
+  "map.filterByCategory": "Filtrare după categorie",
+  "map.filterByCategoryHint": "Selectați categorii pentru a filtra rezultatele",
+  "map.downloadCSV": "Descărcați fișierul CSV",
+  "map.others": "alţii",
+  "map.total": "total",
+  "map.noCategoriesAvailable": "Nu sunt disponibile categorii",
+  "map.addYourBusiness": "Adaugă afacerea ta",
+  "map.addYourBusinessDescription": "Înregistrează-ți afacerea pe platforma noastră și fii descoperit de mai mulți clienți",
+  "nav.businessMap": "Harta afacerilor"
 }

@@ -439,5 +439,14 @@
   "languageAlert.title": "Dil Uyuşmazlığı Algılandı",
   "languageAlert.message": "Tarayıcınızın dili mevcut site diliyle eşleşmiyor. Tarayıcınızın diline geçmek ister misiniz?",
   "languageAlert.switch": "Dil Değiştir",
-  "languageAlert.dismiss": "Azletmek"
+  "languageAlert.dismiss": "Azletmek",
+  "map.filterByCategory": "Kategoriye Göre Filtrele",
+  "map.filterByCategoryHint": "Sonuçları filtrelemek için kategorileri seçin",
+  "map.downloadCSV": "CSV'yi indirin",
+  "map.others": "diğerleri",
+  "map.total": "toplam",
+  "map.noCategoriesAvailable": "Hiçbir kategori mevcut değil",
+  "map.addYourBusiness": "İşletmenizi ekleyin",
+  "map.addYourBusinessDescription": "İşletmenizi platformumuzda listeleyin ve daha fazla müşteri tarafından keşfedilin",
+  "nav.businessMap": "İş Haritası"
 }

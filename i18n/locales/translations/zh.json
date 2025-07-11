@@ -439,5 +439,14 @@
   "languageAlert.title": "检测到语言不匹配",
   "languageAlert.message": "您的浏览器语言与当前网站语言不匹配。是否要切换以匹配浏览器的语言？",
   "languageAlert.switch": "切换语言",
-  "languageAlert.dismiss": "解雇"
+  "languageAlert.dismiss": "解雇",
+  "map.filterByCategory": "按类别过滤",
+  "map.filterByCategoryHint": "选择类别来过滤结果",
+  "map.downloadCSV": "下载 CSV",
+  "map.others": "其他的",
+  "map.total": "全部的",
+  "map.noCategoriesAvailable": "没有可用的类别",
+  "map.addYourBusiness": "添加您的业务",
+  "map.addYourBusinessDescription": "在我们的平台上列出您的业务并让更多客户发现",
+  "nav.businessMap": "商业地图"
 }

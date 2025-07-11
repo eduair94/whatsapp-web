@@ -439,5 +439,14 @@
   "languageAlert.title": "भाषा बेमेल का पता चला",
   "languageAlert.message": "आपकी ब्राउज़र भाषा वर्तमान साइट की भाषा से मेल नहीं खाती। क्या आप अपनी ब्राउज़र भाषा से मेल खाने के लिए स्विच करना चाहेंगे?",
   "languageAlert.switch": "भाषा बदलें",
-  "languageAlert.dismiss": "नकार देना"
+  "languageAlert.dismiss": "नकार देना",
+  "map.filterByCategory": "श्रेणी के अनुसार फ़िल्टर करें",
+  "map.filterByCategoryHint": "परिणाम फ़िल्टर करने के लिए श्रेणियाँ चुनें",
+  "map.downloadCSV": "CSV डाउनलोड करें",
+  "map.others": "अन्य",
+  "map.total": "कुल",
+  "map.noCategoriesAvailable": "कोई श्रेणी उपलब्ध नहीं है",
+  "map.addYourBusiness": "अपना व्यवसाय जोड़ें",
+  "map.addYourBusinessDescription": "अपने व्यवसाय को हमारे प्लेटफ़ॉर्म पर सूचीबद्ध करें और अधिक ग्राहकों द्वारा खोजे जाएँ",
+  "nav.businessMap": "व्यवसाय मानचित्र"
 }

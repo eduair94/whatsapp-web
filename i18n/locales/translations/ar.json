@@ -439,5 +439,14 @@
   "languageAlert.title": "تم اكتشاف عدم تطابق اللغة",
   "languageAlert.message": "لغة متصفحك لا تتطابق مع لغة الموقع الحالية. هل ترغب في تغيير لغة متصفحك؟",
   "languageAlert.switch": "تبديل اللغة",
-  "languageAlert.dismiss": "رفض"
+  "languageAlert.dismiss": "رفض",
+  "map.filterByCategory": "تصفية حسب الفئة",
+  "map.filterByCategoryHint": "حدد الفئات لتصفية النتائج",
+  "map.downloadCSV": "تنزيل ملف CSV",
+  "map.others": "آحرون",
+  "map.total": "المجموع",
+  "map.noCategoriesAvailable": "لا توجد فئات متاحة",
+  "map.addYourBusiness": "أضف عملك",
+  "map.addYourBusinessDescription": "قم بإدراج عملك على منصتنا واكتشفه المزيد من العملاء",
+  "nav.businessMap": "خريطة الأعمال"
 }

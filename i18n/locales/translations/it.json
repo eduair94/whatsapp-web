@@ -439,5 +439,14 @@
   "languageAlert.title": "Rilevata mancata corrispondenza della lingua",
   "languageAlert.message": "La lingua del tuo browser non corrisponde alla lingua attuale del sito. Vuoi cambiare la lingua per adattarla a quella del tuo browser?",
   "languageAlert.switch": "Cambia lingua",
-  "languageAlert.dismiss": "Congedare"
+  "languageAlert.dismiss": "Congedare",
+  "map.filterByCategory": "Filtra per categoria",
+  "map.filterByCategoryHint": "Seleziona le categorie per filtrare i risultati",
+  "map.downloadCSV": "Scarica CSV",
+  "map.others": "altri",
+  "map.total": "totale",
+  "map.noCategoriesAvailable": "Nessuna categoria disponibile",
+  "map.addYourBusiness": "Aggiungi la tua attività",
+  "map.addYourBusinessDescription": "Inserisci la tua attività sulla nostra piattaforma e fatti scoprire da più clienti",
+  "nav.businessMap": "Mappa aziendale"
 }

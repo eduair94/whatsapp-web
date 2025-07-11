@@ -439,5 +439,14 @@
   "languageAlert.title": "言語の不一致が検出されました",
   "languageAlert.message": "ブラウザの言語が現在のサイトの言語と一致していません。ブラウザの言語に合わせて切り替えますか？",
   "languageAlert.switch": "言語を切り替える",
-  "languageAlert.dismiss": "却下する"
+  "languageAlert.dismiss": "却下する",
+  "map.filterByCategory": "カテゴリーで絞り込む",
+  "map.filterByCategoryHint": "結果をフィルタリングするにはカテゴリを選択してください",
+  "map.downloadCSV": "CSVをダウンロード",
+  "map.others": "その他",
+  "map.total": "合計",
+  "map.noCategoriesAvailable": "利用可能なカテゴリはありません",
+  "map.addYourBusiness": "ビジネスを追加する",
+  "map.addYourBusinessDescription": "当社のプラットフォームにあなたのビジネスを掲載し、より多くの顧客に見つけてもらいましょう",
+  "nav.businessMap": "ビジネスマップ"
 }

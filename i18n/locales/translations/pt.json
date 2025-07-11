@@ -439,5 +439,14 @@
   "languageAlert.title": "Incompatibilidade de idioma detectada",
   "languageAlert.message": "O idioma do seu navegador não corresponde ao idioma atual do site. Deseja alterar para corresponder ao idioma do seu navegador?",
   "languageAlert.switch": "Mudar idioma",
-  "languageAlert.dismiss": "Liberar"
+  "languageAlert.dismiss": "Liberar",
+  "map.filterByCategory": "Filtrar por categoria",
+  "map.filterByCategoryHint": "Selecione categorias para filtrar os resultados",
+  "map.downloadCSV": "Baixar CSV",
+  "map.others": "outros",
+  "map.total": "total",
+  "map.noCategoriesAvailable": "Nenhuma categoria disponível",
+  "map.addYourBusiness": "Adicione seu negócio",
+  "map.addYourBusinessDescription": "Cadastre sua empresa em nossa plataforma e seja descoberto por mais clientes",
+  "nav.businessMap": "Mapa de Negócios"
 }

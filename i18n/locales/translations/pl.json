@@ -430,5 +430,14 @@
   "languageAlert.title": "Wykryto niezgodność językową",
   "languageAlert.message": "Język Twojej przeglądarki nie jest zgodny z obecnym językiem witryny. Czy chcesz zmienić język, aby odpowiadał językowi Twojej przeglądarki?",
   "languageAlert.switch": "Zmień język",
-  "languageAlert.dismiss": "Odrzucać"
+  "languageAlert.dismiss": "Odrzucać",
+  "map.filterByCategory": "Filtruj według kategorii",
+  "map.filterByCategoryHint": "Wybierz kategorie, aby filtrować wyniki",
+  "map.downloadCSV": "Pobierz plik CSV",
+  "map.others": "inni",
+  "map.total": "całkowity",
+  "map.noCategoriesAvailable": "Brak dostępnych kategorii",
+  "map.addYourBusiness": "Dodaj swoją firmę",
+  "map.addYourBusinessDescription": "Dodaj swoją firmę do naszej platformy i zyskaj sławę wśród większej liczby klientów",
+  "nav.businessMap": "Mapa biznesowa"
 }

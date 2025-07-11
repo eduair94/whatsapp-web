@@ -10,13 +10,30 @@
             <v-card-text>
               <v-row>
                 <v-col cols="12" md="8">
-                  <v-text-field v-model="addressInput" :label="t('map.searchAddress')" :placeholder="t('map.searchAddressPlaceholder')" variant="outlined" density="compact" :loading="geocodingLoading" @keyup.enter="geocodeAddress" append-inner-icon="mdi-magnify" @click:append-inner="geocodeAddress" />
+                  <v-text-field hide-details v-model="addressInput" :label="t('map.searchAddress')" :placeholder="t('map.searchAddressPlaceholder')" variant="outlined" density="compact" :loading="geocodingLoading" @keyup.enter="geocodeAddress" append-inner-icon="mdi-magnify" @click:append-inner="geocodeAddress" />
                 </v-col>
                 <v-col cols="12" md="2">
-                  <v-text-field v-model="searchParams.radius" :label="t('map.radius')" type="number" :rules="[rules.required, rules.radius]" variant="outlined" density="compact" />
+                  <v-text-field hide-details v-model="searchParams.radius" :label="t('map.radius')" type="number" :rules="[rules.required, rules.radius]" variant="outlined" density="compact" />
                 </v-col>
                 <v-col cols="12" md="2">
-                  <v-btn @click="searchPhoneNumbers" color="primary" :loading="loading" :disabled="!isFormValid" size="large" block> {{ t("map.search") }} </v-btn>
+                  <v-btn class="w-100" @click="searchPhoneNumbers" color="primary" :loading="loading" :disabled="!isFormValid" size="large" block> {{ t("map.search") }} </v-btn>
+                </v-col>
+              </v-row>
+
+              <!-- Category Filter and CSV Download -->
+              <v-row v-if="searchResults && searchResults.data && searchResults.data.resultCount > 0">
+                <v-col cols="12" md="6">
+                  <v-autocomplete v-model="selectedCategories" :items="availableCategories" :label="t('map.filterByCategory')" multiple chips clearable variant="outlined" density="compact" :hint="t('map.filterByCategoryHint')" persistent-hint closable-chips :no-data-text="t('map.noCategoriesAvailable')">
+                    <template v-slot:selection="{ item, index }">
+                      <v-chip v-if="index < 2" size="small" closable @click:close="removeCategory(item.value)">
+                        {{ item.title }}
+                      </v-chip>
+                      <span v-if="index === 2" class="text-grey text-caption align-self-center"> (+{{ selectedCategories.length - 2 }} {{ t("map.others") }}) </span>
+                    </template>
+                  </v-autocomplete>
+                </v-col>
+                <v-col cols="12" md="6" class="d-flex align-top">
+                  <v-btn @click="downloadCSV" color="success" prepend-icon="mdi-download" variant="outlined" :loading="csvLoading" size="large" block> {{ t("map.downloadCSV") }} ({{ filteredPhoneNumbers.length }}) </v-btn>
                 </v-col>
               </v-row>
               <v-row>
@@ -38,9 +55,9 @@
         <v-col cols="12" md="8">
           <v-card>
             <v-card-title>
-              <span class="text-h6">Map View</span>
+              <span class="text-h6">{{ t("map.mapView") }}</span>
               <v-spacer></v-spacer>
-              <v-btn @click="getCurrentLocation" color="primary" variant="text" size="small" :loading="locationLoading" prepend-icon="mdi-crosshairs-gps"> My Location </v-btn>
+              <v-btn @click="getCurrentLocation" color="primary" variant="text" size="small" :loading="locationLoading" prepend-icon="mdi-crosshairs-gps"> {{ t("map.myLocation") }} </v-btn>
             </v-card-title>
             <v-card-text>
               <div class="map-wrapper">
@@ -49,7 +66,7 @@
                   <template #fallback>
                     <div style="height: 500px; width: 100%; display: flex; align-items: center; justify-content: center; background: #f5f5f5">
                       <v-progress-circular indeterminate color="primary" />
-                      <span class="ml-2">Loading map...</span>
+                      <span class="ml-2">{{ t("map.loadingMap") }}</span>
                     </div>
                   </template>
                 </ClientOnly>
@@ -61,7 +78,7 @@
         <v-col cols="12" md="4">
           <v-card v-if="selectedBusiness">
             <v-card-title class="d-flex align-center ga-3">
-              <span class="text-h6">Business Details</span>
+              <span class="text-h6">{{ t("map.businessDetails") }}</span>
               <v-spacer></v-spacer>
               <v-btn @click="selectedBusiness = null" icon="mdi-close" variant="text" size="small" />
             </v-card-title>
@@ -75,7 +92,7 @@
                   <div>
                     <h3>{{ selectedBusiness.number }}</h3>
                     <p class="text-caption">{{ selectedBusiness.countryCode }}</p>
-                    <v-chip v-if="selectedBusiness.isBusiness" size="small" color="success" class="mt-1"> Business </v-chip>
+                    <v-chip v-if="selectedBusiness.isBusiness" size="small" color="success" class="mt-1"> {{ t("map.business") }} </v-chip>
                   </div>
                 </div>
 
@@ -84,22 +101,22 @@
                 <div class="business-info">
                   <v-row>
                     <v-col cols="12" v-if="selectedBusiness.about">
-                      <h4>About</h4>
+                      <h4>{{ t("map.about") }}</h4>
                       <p>{{ selectedBusiness.about }}</p>
                     </v-col>
 
                     <v-col cols="12" v-if="selectedBusiness.businessProfile.description">
-                      <h4>Description</h4>
+                      <h4>{{ t("map.description") }}</h4>
                       <p>{{ selectedBusiness.businessProfile.description }}</p>
                     </v-col>
 
                     <v-col cols="12" v-if="selectedBusiness.businessProfile.address">
-                      <h4>Address</h4>
+                      <h4>{{ t("map.address") }}</h4>
                       <p>{{ selectedBusiness.businessProfile.address }}</p>
                     </v-col>
 
                     <v-col cols="12" v-if="selectedBusiness.businessProfile.categories.length > 0">
-                      <h4>Categories</h4>
+                      <h4>{{ t("map.categories") }}</h4>
                       <v-chip-group>
                         <v-chip v-for="category in selectedBusiness.businessProfile.categories" :key="category.id" size="small" variant="outlined">
                           {{ category.localized_display_name }}
@@ -108,12 +125,12 @@
                     </v-col>
 
                     <v-col cols="12">
-                      <h4>Distance</h4>
-                      <p>{{ selectedBusiness.distance.toFixed(2) }} meters from search center</p>
+                      <h4>{{ t("map.distance") }}</h4>
+                      <p>{{ selectedBusiness.distance.toFixed(2) }} {{ t("map.distanceFromCenter") }}</p>
                     </v-col>
 
                     <v-col cols="12">
-                      <h4>Member Since</h4>
+                      <h4>{{ t("map.memberSince") }}</h4>
                       <p>{{ selectedBusiness.businessProfile.memberSinceText }}</p>
                     </v-col>
                   </v-row>
@@ -143,7 +160,10 @@
 
               <div v-else-if="searchResults">
                 <div v-if="searchResults.data && searchResults.data.resultCount > 0">
-                  <v-chip color="primary" class="mb-3"> {{ searchResults.data.resultCount }} {{ t("map.resultsFound") }} </v-chip>
+                  <v-chip color="primary" class="mb-3">
+                    {{ filteredPhoneNumbers.length }} {{ t("map.resultsFound") }}
+                    <span v-if="filteredPhoneNumbers.length !== searchResults.data.resultCount"> / {{ searchResults.data.resultCount }} {{ t("map.total") }} </span>
+                  </v-chip>
 
                   <div class="mb-3" v-if="searchResults.data.distanceRange">
                     <small> {{ t("map.distanceRange") }}: {{ searchResults.data.distanceRange.closest || 0 }}m - {{ searchResults.data.distanceRange.farthest?.toFixed(2) || 0 }}m </small>
@@ -151,7 +171,7 @@
 
                   <div class="phone-list-container">
                     <v-list>
-                      <v-list-item v-for="phone in phoneNumbers" :key="phone._id" class="phone-item" @click="selectBusiness(phone)">
+                      <v-list-item v-for="phone in filteredPhoneNumbers" :key="phone._id" class="phone-item" @click="selectBusiness(phone)">
                         <template v-slot:prepend>
                           <v-avatar size="40">
                             <v-img v-if="phone.urlImage || phone.profilePic" :src="phone.urlImage || phone.profilePic" />
@@ -163,11 +183,11 @@
                         <v-list-item-subtitle>
                           <div>{{ phone.countryCode }}</div>
                           <div v-if="phone.businessProfile.address">{{ phone.businessProfile.address }}</div>
-                          <div class="text-caption">{{ phone.distance.toFixed(2) }}m away</div>
+                          <div class="text-caption">{{ phone.distance.toFixed(2) }}m {{ t("map.distanceAway") }}</div>
                         </v-list-item-subtitle>
 
                         <template v-slot:append>
-                          <v-chip v-if="phone.isBusiness" size="small" color="success"> Business </v-chip>
+                          <v-chip v-if="phone.isBusiness" size="small" color="success"> {{ t("map.business") }} </v-chip>
                         </template>
                       </v-list-item>
                     </v-list>
@@ -176,24 +196,27 @@
 
                 <div v-else class="text-center text-grey">
                   <v-icon size="48" class="mb-2">mdi-phone-off</v-icon>
-                  <p>No phone numbers found in this area</p>
-                  <p class="text-caption">Try increasing the search radius or moving to a different location</p>
+                  <p>{{ t("map.noPhoneNumbers") }}</p>
+                  <p class="text-caption">{{ t("map.noPhoneNumbersCaption") }}</p>
                 </div>
               </div>
 
               <div v-else-if="hasSearched && !searchResults" class="text-center text-grey">
                 <v-icon size="48" class="mb-2">mdi-alert-circle</v-icon>
-                <p>No phone numbers found in this area</p>
-                <p class="text-caption">Try increasing the search radius or moving to a different location</p>
+                <p>{{ t("map.noResults") }}</p>
+                <p class="text-caption">{{ t("map.noResultsCaption") }}</p>
               </div>
 
               <div v-else class="text-center text-grey">
                 <v-icon size="48" class="mb-2">mdi-map-search</v-icon>
-                <p>Click on the map or search an address to find phone numbers</p>
-                <p class="text-caption">Or move the red marker to set your search center</p>
+                <p>{{ t("map.clickToSearch") }}</p>
+                <p class="text-caption">{{ t("map.moveMarker") }}</p>
               </div>
             </v-card-text>
           </v-card>
+        </v-col>
+        <v-col cols="12">
+          <AddYourBusiness />
         </v-col>
       </v-row>
     </v-container>
@@ -202,6 +225,7 @@
 
 <script setup lang="ts">
 import { computed, reactive, ref, watch } from "vue";
+import AddYourBusiness from "~/components/AddYourBusiness.vue";
 import type { PhoneNumberDoc, PhoneProximitySearchResponse } from "~/utils/interfaces/phoneProximity";
 
 // Types for Google Geocoding API
@@ -224,12 +248,6 @@ interface GeocodeResponse {
 // Leaflet types (imported but not executed on server)
 type LeafletModule = typeof import("leaflet");
 let L: LeafletModule;
-
-// Page meta
-definePageMeta({
-  title: "Phone Proximity Map",
-  description: "Search and visualize phone numbers by location",
-});
 
 // Router and route
 const router = useRouter();
@@ -288,6 +306,8 @@ const locationInfo = ref("");
 const loading = ref(false);
 const searchResults = ref<PhoneProximitySearchResponse | null>(null);
 const selectedBusiness = ref<PhoneNumberDoc | null>(null);
+const selectedCategories = ref<string[]>([]);
+const csvLoading = ref(false);
 const mapContainer = ref<HTMLElement>();
 const map = ref<L.Map>();
 const markersLayer = ref<L.LayerGroup>();
@@ -323,6 +343,44 @@ const mapCenter = computed(() => [searchParams.latitude, searchParams.longitude]
 
 const phoneNumbers = computed(() => {
   return searchResults.value?.data.docs || [];
+});
+
+// Filtered phone numbers based on selected categories
+const filteredPhoneNumbers = computed(() => {
+  if (!searchResults.value?.data.docs) return [];
+
+  const phones = searchResults.value.data.docs;
+
+  if (selectedCategories.value.length === 0) {
+    return phones;
+  }
+
+  return phones.filter((phone) => {
+    const phoneCategoryIds = phone.businessProfile.categories.map((cat) => cat.id);
+    return selectedCategories.value.some((selectedCatId) => phoneCategoryIds.includes(selectedCatId));
+  });
+});
+
+// Available categories from search results
+const availableCategories = computed(() => {
+  if (!searchResults.value?.data.docs) return [];
+
+  const categoriesMap = new Map<string, string>();
+
+  searchResults.value.data.docs.forEach((phone) => {
+    phone.businessProfile.categories.forEach((category) => {
+      if (category.id && category.localized_display_name && category.localized_display_name.trim() !== "") {
+        categoriesMap.set(category.id, category.localized_display_name);
+      }
+    });
+  });
+
+  return Array.from(categoriesMap.entries())
+    .sort((a, b) => a[1].localeCompare(b[1])) // Sort by display name
+    .map(([id, name]) => ({
+      title: name,
+      value: id,
+    }));
 });
 
 // Form validation
@@ -573,8 +631,8 @@ const updateMapMarkers = (skipAutoBounds = false) => {
     }
 
     if (searchResults.value && searchResults.value.data && searchResults.value.data.docs && !isDestroyed.value) {
-      // Add phone number markers
-      phoneNumbers.value.forEach((phone) => {
+      // Add phone number markers - use filtered results
+      filteredPhoneNumbers.value.forEach((phone) => {
         if (isDestroyed.value) return;
 
         const lat = phone.businessProfile.location.coordinates[1];
@@ -630,10 +688,10 @@ const updateMapMarkers = (skipAutoBounds = false) => {
       });
 
       // Fit map to show all markers only if we have results and user is not interacting
-      if (phoneNumbers.value.length > 0 && !isDestroyed.value && !skipAutoBounds && !userIsInteracting.value) {
+      if (filteredPhoneNumbers.value.length > 0 && !isDestroyed.value && !skipAutoBounds && !userIsInteracting.value) {
         const bounds = L.latLngBounds([]);
         bounds.extend([searchParams.latitude, searchParams.longitude]);
-        phoneNumbers.value.forEach((phone) => {
+        filteredPhoneNumbers.value.forEach((phone) => {
           bounds.extend([phone.businessProfile.location.coordinates[1], phone.businessProfile.location.coordinates[0]]);
         });
 
@@ -890,6 +948,81 @@ const updateSearchCenterMarker = () => {
 };
 
 // Methods
+const removeCategory = (categoryId: string) => {
+  const index = selectedCategories.value.indexOf(categoryId);
+  if (index > -1) {
+    selectedCategories.value.splice(index, 1);
+  }
+};
+
+const downloadCSV = async () => {
+  if (isDestroyed.value || !filteredPhoneNumbers.value.length) return;
+
+  csvLoading.value = true;
+
+  try {
+    // Prepare CSV data
+    const csvData = filteredPhoneNumbers.value.map((phone) => ({
+      "Phone Number": phone.number,
+      "Country Code": phone.countryCode,
+      "Is Business": phone.isBusiness ? "Yes" : "No",
+      About: phone.about || "",
+      Description: phone.businessProfile.description || "",
+      Address: phone.businessProfile.address || "",
+      Categories: phone.businessProfile.categories.map((cat) => cat.localized_display_name).join(", "),
+      "Distance (meters)": phone.distance.toFixed(2),
+      "Member Since": phone.businessProfile.memberSinceText || "",
+      Latitude: phone.businessProfile.location.coordinates[1],
+      Longitude: phone.businessProfile.location.coordinates[0],
+      "Search Center Lat": searchParams.latitude,
+      "Search Center Lng": searchParams.longitude,
+      "Search Radius (meters)": searchParams.radius,
+    }));
+
+    // Convert to CSV
+    const headers = Object.keys(csvData[0]);
+    const csvContent = [
+      headers.join(","),
+      ...csvData.map((row) =>
+        headers
+          .map((header) => {
+            const value = row[header as keyof typeof row];
+            // Escape quotes and wrap in quotes if contains comma or quote
+            const stringValue = String(value);
+            if (stringValue.includes(",") || stringValue.includes('"')) {
+              return `"${stringValue.replace(/"/g, '""')}"`;
+            }
+            return stringValue;
+          })
+          .join(",")
+      ),
+    ].join("\n");
+
+    // Create and download file
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    link.setAttribute("href", url);
+
+    // Generate filename with current date and location info
+    const now = new Date();
+    const dateStr = now.toISOString().split("T")[0];
+    const timeStr = now.toTimeString().split(" ")[0].replace(/:/g, "-");
+    const filename = `phone-numbers-${dateStr}_${timeStr}.csv`;
+
+    link.setAttribute("download", filename);
+    link.style.visibility = "hidden";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  } catch (error) {
+    console.error("Error downloading CSV:", error);
+  } finally {
+    csvLoading.value = false;
+  }
+};
+
 const selectBusiness = (business: PhoneNumberDoc) => {
   if (isDestroyed.value) return;
 
@@ -936,6 +1069,9 @@ const searchPhoneNumbers = async () => {
     console.log("Response", response);
 
     searchResults.value = response;
+
+    // Reset category filter when new search is performed
+    selectedCategories.value = [];
 
     // Ensure map is initialized before updating markers
     if (!mapInitialized.value && !isDestroyed.value) {
@@ -1022,6 +1158,17 @@ watch(
       updateURL();
     }
   }
+);
+
+// Watch for category filter changes to update map markers
+watch(
+  selectedCategories,
+  () => {
+    if (!isDestroyed.value && mapInitialized.value) {
+      debouncedUpdateMarkers(true); // Skip auto bounds when filtering
+    }
+  },
+  { deep: true }
 );
 
 onUnmounted(() => {

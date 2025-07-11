@@ -430,5 +430,14 @@
   "languageAlert.title": "Se detectó una discrepancia de idioma",
   "languageAlert.message": "El idioma de tu navegador no coincide con el idioma actual del sitio. ¿Quieres cambiarlo para que coincida con el idioma de tu navegador?",
   "languageAlert.switch": "Cambiar idioma",
-  "languageAlert.dismiss": "Despedir"
+  "languageAlert.dismiss": "Despedir",
+  "map.filterByCategory": "Filtrar por categoría",
+  "map.filterByCategoryHint": "Seleccione categorías para filtrar los resultados",
+  "map.downloadCSV": "Descargar CSV",
+  "map.others": "otros",
+  "map.total": "total",
+  "map.noCategoriesAvailable": "No hay categorías disponibles",
+  "map.addYourBusiness": "Añade tu negocio",
+  "map.addYourBusinessDescription": "Incluya su negocio en nuestra plataforma y sea descubierto por más clientes",
+  "nav.businessMap": "Mapa de negocios"
 }

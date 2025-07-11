@@ -439,5 +439,14 @@
   "languageAlert.title": "ตรวจพบความไม่ตรงกันของภาษา",
   "languageAlert.message": "ภาษาเบราว์เซอร์ของคุณไม่ตรงกับภาษาเว็บไซต์ปัจจุบัน คุณต้องการสลับภาษาให้ตรงกับภาษาเบราว์เซอร์ของคุณหรือไม่",
   "languageAlert.switch": "สลับภาษา",
-  "languageAlert.dismiss": "อนุญาตให้ออกไป"
+  "languageAlert.dismiss": "อนุญาตให้ออกไป",
+  "map.filterByCategory": "กรองตามหมวดหมู่",
+  "map.filterByCategoryHint": "เลือกหมวดหมู่เพื่อกรองผลลัพธ์",
+  "map.downloadCSV": "ดาวน์โหลด CSV",
+  "map.others": "คนอื่น",
+  "map.total": "ทั้งหมด",
+  "map.noCategoriesAvailable": "ไม่มีหมวดหมู่ให้เลือก",
+  "map.addYourBusiness": "เพิ่มธุรกิจของคุณ",
+  "map.addYourBusinessDescription": "ลงรายชื่อธุรกิจของคุณบนแพลตฟอร์มของเราและให้ลูกค้าค้นพบมากขึ้น",
+  "nav.businessMap": "แผนที่ธุรกิจ"
 }

@@ -430,5 +430,14 @@
   "languageAlert.title": "Виявлено невідповідність мови",
   "languageAlert.message": "Мова вашого браузера не відповідає поточній мові сайту. Бажаєте переключитися на мову вашого браузера?",
   "languageAlert.switch": "Перемикання мови",
-  "languageAlert.dismiss": "Відхилити"
+  "languageAlert.dismiss": "Відхилити",
+  "map.filterByCategory": "Фільтрувати за категорією",
+  "map.filterByCategoryHint": "Виберіть категорії для фільтрації результатів",
+  "map.downloadCSV": "Завантажити CSV-файл",
+  "map.others": "інші",
+  "map.total": "загальна сума",
+  "map.noCategoriesAvailable": "Немає доступних категорій",
+  "map.addYourBusiness": "Додайте свій бізнес",
+  "map.addYourBusinessDescription": "Розмістіть свій бізнес на нашій платформі та зробіть його доступнішим для більшої кількості клієнтів",
+  "nav.businessMap": "Бізнес-мапа"
 }

@@ -439,5 +439,14 @@
   "languageAlert.title": "زبان کی مماثلت کا پتہ چلا",
   "languageAlert.message": "آپ کے براؤزر کی زبان موجودہ سائٹ کی زبان سے مماثل نہیں ہے۔ کیا آپ اپنے براؤزر کی زبان سے ملنے کے لیے سوئچ کرنا چاہیں گے؟",
   "languageAlert.switch": "زبان سوئچ کریں۔",
-  "languageAlert.dismiss": "برطرف کرنا"
+  "languageAlert.dismiss": "برطرف کرنا",
+  "map.filterByCategory": "زمرہ کے لحاظ سے فلٹر کریں۔",
+  "map.filterByCategoryHint": "نتائج کو فلٹر کرنے کے لیے زمرے منتخب کریں۔",
+  "map.downloadCSV": "CSV ڈاؤن لوڈ کریں۔",
+  "map.others": "دوسرے",
+  "map.total": "کل",
+  "map.noCategoriesAvailable": "کوئی زمرہ جات دستیاب نہیں ہیں۔",
+  "map.addYourBusiness": "اپنا کاروبار شامل کریں۔",
+  "map.addYourBusinessDescription": "ہمارے پلیٹ فارم پر اپنے کاروبار کی فہرست بنائیں اور مزید گاہکوں کے ذریعے دریافت کریں۔",
+  "nav.businessMap": "کاروبار کا نقشہ"
 }

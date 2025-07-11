@@ -481,5 +481,14 @@
   "languageAlert.title": "Taalmismatch gedetecteerd",
   "languageAlert.message": "De taal van uw browser komt niet overeen met de huidige taal van de site. Wilt u overschakelen naar de taal van uw browser?",
   "languageAlert.switch": "Taal wijzigen",
-  "languageAlert.dismiss": "Afwijzen"
+  "languageAlert.dismiss": "Afwijzen",
+  "map.filterByCategory": "Filteren op categorie",
+  "map.filterByCategoryHint": "Selecteer categorieën om resultaten te filteren",
+  "map.downloadCSV": "CSV downloaden",
+  "map.others": "anderen",
+  "map.total": "totaal",
+  "map.noCategoriesAvailable": "Geen categorieën beschikbaar",
+  "map.addYourBusiness": "Voeg uw bedrijf toe",
+  "map.addYourBusinessDescription": "Vermeld uw bedrijf op ons platform en word ontdekt door meer klanten",
+  "nav.businessMap": "Bedrijfskaart"
 }

@@ -439,5 +439,14 @@
   "languageAlert.title": "Đã phát hiện sự không phù hợp về ngôn ngữ",
   "languageAlert.message": "Ngôn ngữ trình duyệt của bạn không khớp với ngôn ngữ hiện tại của trang web. Bạn có muốn chuyển sang ngôn ngữ phù hợp với trình duyệt của mình không?",
   "languageAlert.switch": "Chuyển đổi ngôn ngữ",
-  "languageAlert.dismiss": "Miễn nhiệm"
+  "languageAlert.dismiss": "Miễn nhiệm",
+  "map.filterByCategory": "Lọc theo danh mục",
+  "map.filterByCategoryHint": "Chọn danh mục để lọc kết quả",
+  "map.downloadCSV": "Tải xuống CSV",
+  "map.others": "người khác",
+  "map.total": "tổng cộng",
+  "map.noCategoriesAvailable": "Không có danh mục nào có sẵn",
+  "map.addYourBusiness": "Thêm doanh nghiệp của bạn",
+  "map.addYourBusinessDescription": "Liệt kê doanh nghiệp của bạn trên nền tảng của chúng tôi và được nhiều khách hàng biết đến hơn",
+  "nav.businessMap": "Bản đồ doanh nghiệp"
 }

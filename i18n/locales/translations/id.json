@@ -439,5 +439,14 @@
   "languageAlert.title": "Ketidakcocokan Bahasa Terdeteksi",
   "languageAlert.message": "Bahasa peramban Anda tidak sesuai dengan bahasa situs saat ini. Ingin beralih agar sesuai dengan bahasa peramban Anda?",
   "languageAlert.switch": "Ganti Bahasa",
-  "languageAlert.dismiss": "Membubarkan"
+  "languageAlert.dismiss": "Membubarkan",
+  "map.filterByCategory": "Filter berdasarkan Kategori",
+  "map.filterByCategoryHint": "Pilih kategori untuk memfilter hasil",
+  "map.downloadCSV": "Unduh CSV",
+  "map.others": "yang lain",
+  "map.total": "total",
+  "map.noCategoriesAvailable": "Tidak ada kategori yang tersedia",
+  "map.addYourBusiness": "Tambahkan bisnis Anda",
+  "map.addYourBusinessDescription": "Daftarkan bisnis Anda di platform kami dan ditemukan oleh lebih banyak pelanggan",
+  "nav.businessMap": "Peta Bisnis"
 }

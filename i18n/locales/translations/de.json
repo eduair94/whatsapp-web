@@ -439,5 +439,14 @@
   "languageAlert.title": "Sprachkonflikt erkannt",
   "languageAlert.message": "Die Sprache Ihres Browsers entspricht nicht der aktuellen Website-Sprache. Möchten Sie die Sprache Ihres Browsers ändern?",
   "languageAlert.switch": "Sprache wechseln",
-  "languageAlert.dismiss": "Zurückweisen"
+  "languageAlert.dismiss": "Zurückweisen",
+  "map.filterByCategory": "Filtern nach Kategorie",
+  "map.filterByCategoryHint": "Wählen Sie Kategorien aus, um die Ergebnisse zu filtern",
+  "map.downloadCSV": "CSV herunterladen",
+  "map.others": "andere",
+  "map.total": "gesamt",
+  "map.noCategoriesAvailable": "Keine Kategorien verfügbar",
+  "map.addYourBusiness": "Fügen Sie Ihr Unternehmen hinzu",
+  "map.addYourBusinessDescription": "Tragen Sie Ihr Unternehmen auf unserer Plattform ein und werden Sie von mehr Kunden entdeckt",
+  "nav.businessMap": "Geschäftskarte"
 }

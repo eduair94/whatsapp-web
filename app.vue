@@ -18,7 +18,7 @@
           </template>
           <v-list-item :to="localePath('/database')" prepend-icon="mdi-database" :title="$t('nav.database')" @click="drawer = false" class="pl-8"></v-list-item>
           <v-list-item :to="localePath('/stats')" prepend-icon="mdi-chart-line" :title="$t('nav.stats')" @click="drawer = false" class="pl-8"></v-list-item>
-          <v-list-item :to="localePath('/business/map')" prepend-icon="mdi-map-marker" title="Business Map" @click="drawer = false" class="pl-8"></v-list-item>
+          <v-list-item :to="localePath('/business/map')" prepend-icon="mdi-map-marker" :title="$t('nav.businessMap')" @click="drawer = false" class="pl-8"></v-list-item>
         </v-list-group>
 
         <!-- Telegram Section -->
@@ -112,7 +112,7 @@
               <v-list-item-title>{{ $t("nav.stats") }}</v-list-item-title>
             </v-list-item>
             <v-list-item :to="localePath('/business/map')" prepend-icon="mdi-map-marker" class="pl-8">
-              <v-list-item-title>Business Map</v-list-item-title>
+              <v-list-item-title>{{ $t("nav.businessMap") }}</v-list-item-title>
             </v-list-item>
 
             <v-divider class="my-2"></v-divider>

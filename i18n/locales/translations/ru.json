@@ -439,5 +439,14 @@
   "languageAlert.title": "Обнаружено несоответствие языка",
   "languageAlert.message": "Язык вашего браузера не соответствует текущему языку сайта. Хотите изменить язык на язык вашего браузера?",
   "languageAlert.switch": "Переключить язык",
-  "languageAlert.dismiss": "Увольнять"
+  "languageAlert.dismiss": "Увольнять",
+  "map.filterByCategory": "Фильтр по категории",
+  "map.filterByCategoryHint": "Выберите категории для фильтрации результатов",
+  "map.downloadCSV": "Загрузить CSV-файл",
+  "map.others": "другие",
+  "map.total": "общий",
+  "map.noCategoriesAvailable": "Нет доступных категорий",
+  "map.addYourBusiness": "Добавьте свой бизнес",
+  "map.addYourBusinessDescription": "Разместите свою компанию на нашей платформе и привлеките больше клиентов",
+  "nav.businessMap": "Бизнес-карта"
 }

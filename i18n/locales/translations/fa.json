@@ -439,5 +439,14 @@
   "languageAlert.title": "عدم تطابق زبان شناسایی شد",
   "languageAlert.message": "زبان مرورگر شما با زبان فعلی سایت مطابقت ندارد. آیا مایلید زبان مرورگر خود را تغییر دهید؟",
   "languageAlert.switch": "تغییر زبان",
-  "languageAlert.dismiss": "رد کردن"
+  "languageAlert.dismiss": "رد کردن",
+  "map.filterByCategory": "فیلتر بر اساس دسته بندی",
+  "map.filterByCategoryHint": "انتخاب دسته‌ها برای فیلتر کردن نتایج",
+  "map.downloadCSV": "دانلود CSV",
+  "map.others": "دیگران",
+  "map.total": "مجموع",
+  "map.noCategoriesAvailable": "هیچ دسته بندی موجود نیست",
+  "map.addYourBusiness": "کسب و کار خود را اضافه کنید",
+  "map.addYourBusinessDescription": "کسب و کار خود را در پلتفرم ما ثبت کنید و توسط مشتریان بیشتری کشف شوید",
+  "nav.businessMap": "نقشه کسب و کار"
 }

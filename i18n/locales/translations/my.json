@@ -439,5 +439,14 @@
   "languageAlert.title": "ဘာသာစကား မတူညီမှုကို တွေ့ရှိခဲ့သည်။",
   "languageAlert.message": "သင့်ဘရောက်ဆာဘာသာစကားသည် လက်ရှိဆိုက်ဘာသာစကားနှင့် မကိုက်ညီပါ။ သင့်ဘရောက်ဆာ၏ ဘာသာစကားနှင့် ကိုက်ညီရန် ပြောင်းလိုပါသလား။",
   "languageAlert.switch": "ဘာသာစကားပြောင်းပါ။",
-  "languageAlert.dismiss": "ပယ်ရန်"
+  "languageAlert.dismiss": "ပယ်ရန်",
+  "map.filterByCategory": "အမျိုးအစားအလိုက် စစ်ထုတ်ပါ။",
+  "map.filterByCategoryHint": "ရလဒ်များကို စစ်ထုတ်ရန် အမျိုးအစားများကို ရွေးချယ်ပါ။",
+  "map.downloadCSV": "CSV ကိုဒေါင်းလုဒ်လုပ်ပါ။",
+  "map.others": "အခြားသူများ",
+  "map.total": "စုစုပေါင်း",
+  "map.noCategoriesAvailable": "အမျိုးအစားများ မရရှိနိုင်ပါ။",
+  "map.addYourBusiness": "သင့်လုပ်ငန်းကို ထည့်ပါ။",
+  "map.addYourBusinessDescription": "ကျွန်ုပ်တို့၏ပလပ်ဖောင်းပေါ်တွင် သင့်လုပ်ငန်းကို စာရင်းပြုစုပြီး ဖောက်သည်များ ပိုမိုရှာဖွေတွေ့ရှိပါ။",
+  "nav.businessMap": "စီးပွားရေးမြေပုံ"
 }

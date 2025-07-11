@@ -430,5 +430,14 @@
   "languageAlert.title": "זוהתה אי התאמה בשפה",
   "languageAlert.message": "שפת הדפדפן שלך אינה תואמת לשפת האתר הנוכחית. האם ברצונך להתאים אותה לשפת הדפדפן שלך?",
   "languageAlert.switch": "החלפת שפה",
-  "languageAlert.dismiss": "לְפַטֵר"
+  "languageAlert.dismiss": "לְפַטֵר",
+  "map.filterByCategory": "סנן לפי קטגוריה",
+  "map.filterByCategoryHint": "בחר קטגוריות כדי לסנן תוצאות",
+  "map.downloadCSV": "הורד קובץ CSV",
+  "map.others": "אחרים",
+  "map.total": "סַך הַכֹּל",
+  "map.noCategoriesAvailable": "אין קטגוריות זמינות",
+  "map.addYourBusiness": "הוסף את העסק שלך",
+  "map.addYourBusinessDescription": "רשום את העסק שלך בפלטפורמה שלנו ותתגלה על ידי יותר לקוחות",
+  "nav.businessMap": "מפת עסקים"
 }

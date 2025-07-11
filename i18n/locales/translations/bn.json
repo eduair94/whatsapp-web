@@ -430,5 +430,14 @@
   "languageAlert.title": "ভাষার অমিল শনাক্ত হয়েছে",
   "languageAlert.message": "আপনার ব্রাউজারের ভাষা বর্তমান সাইটের ভাষার সাথে মেলে না। আপনি কি আপনার ব্রাউজারের ভাষার সাথে মেলে পরিবর্তন করতে চান?",
   "languageAlert.switch": "ভাষা পরিবর্তন করুন",
-  "languageAlert.dismiss": "খারিজ করুন"
+  "languageAlert.dismiss": "খারিজ করুন",
+  "map.filterByCategory": "বিভাগ অনুসারে ফিল্টার করুন",
+  "map.filterByCategoryHint": "ফলাফল ফিল্টার করার জন্য বিভাগ নির্বাচন করুন",
+  "map.downloadCSV": "সিএসভি ডাউনলোড করুন",
+  "map.others": "অন্যান্য",
+  "map.total": "মোট",
+  "map.noCategoriesAvailable": "কোনও বিভাগ উপলব্ধ নেই",
+  "map.addYourBusiness": "আপনার ব্যবসা যোগ করুন",
+  "map.addYourBusinessDescription": "আমাদের প্ল্যাটফর্মে আপনার ব্যবসা তালিকাভুক্ত করুন এবং আরও গ্রাহকদের দ্বারা আবিষ্কৃত হন",
+  "nav.businessMap": "ব্যবসার মানচিত্র"
 }
