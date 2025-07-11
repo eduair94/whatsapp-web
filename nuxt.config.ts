@@ -28,8 +28,8 @@ export default defineNuxtConfig({
     build: {
       cssCodeSplit: false, // Disable CSS code splitting to avoid dependency issues
       minify: "esbuild", // Switch to esbuild for more reliable minification
-      chunkSizeWarningLimit: 2000,
-      // Remove manual chunking that's causing issues
+      chunkSizeWarningLimit: 3000, // Increase from 2000 to 3000 to match our new cache limit
+      // Optimize chunk splitting to reduce memory usage
       rollupOptions: {
         external: (id) => {
           // Don't externalize these in the browser build
@@ -38,6 +38,24 @@ export default defineNuxtConfig({
           }
           return false;
         },
+        output: {
+          // Optimize chunk splitting to reduce memory pressure
+          manualChunks: (id) => {
+            // Split large node_modules into separate chunks
+            if (id.includes('node_modules')) {
+              if (id.includes('vue') || id.includes('nuxt')) {
+                return 'vendor-vue';
+              }
+              if (id.includes('firebase')) {
+                return 'vendor-firebase';
+              }
+              if (id.includes('vuetify')) {
+                return 'vendor-vuetify';
+              }
+              return 'vendor-other';
+            }
+          },
+        },
       },
     },
   },
@@ -45,6 +63,8 @@ export default defineNuxtConfig({
   experimental: {
     // Disable features that might cause initialization issues
     treeshakeClientOnly: false,
+    // Reduce memory usage during build
+    payloadExtraction: false,
   },
 
   // SEO and Performance optimizations
@@ -239,6 +259,7 @@ export default defineNuxtConfig({
       ignore: ["/manifest.json", "/sitemap.xml", "/__sitemap__/**"],
       crawlLinks: false,
       failOnError: false, // Don't fail build if some routes fail
+      concurrency: 1, // Reduce concurrency to save memory
     },
     compressPublicAssets: {
       gzip: true,
