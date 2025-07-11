@@ -483,6 +483,7 @@ export default defineNuxtConfig({
             "workbox-*.js",
             "**/api/**/*", // Exclude ALL API files from caching
           ],
+          maximumFileSizeToCacheInBytes: 3 * 1024 * 1024, // 3 MB limit instead of default 2 MB
           cleanupOutdatedCaches: true,
           skipWaiting: true,
           clientsClaim: true,
