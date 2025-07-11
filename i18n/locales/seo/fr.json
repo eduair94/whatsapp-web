@@ -78,5 +78,14 @@
   "seo.faq.keywords": "faq vérification whatsapp, questions vérificateur whatsapp, aide vérification numéros téléphone, réponses recherche whatsapp, support vérification whatsapp",
   "seo.faqs.title": "Questions Fréquemment Posées - Vérificateur WhatsApp",
   "seo.faqs.description": "Trouvez des réponses aux questions fréquemment posées sur notre service de vérification de numéros WhatsApp, l'utilisation de la base de données, la tarification et les fonctionnalités de l'API.",
-  "seo.faqs.keywords": "faq whatsapp, questions vérification téléphone, aide vérificateur whatsapp, guide utilisation plateforme, support recherche numéros"
+  "seo.faqs.keywords": "faq whatsapp, questions vérification téléphone, aide vérificateur whatsapp, guide utilisation plateforme, support recherche numéros",
+  "seo.map.title": "Carte de proximité des numéros de téléphone - Recherche WhatsApp basée sur la localisation",
+  "seo.map.description": "Outil de cartographie interactif pour trouver des numéros WhatsApp à proximité de lieux spécifiques. Recherchez des numéros de téléphone par proximité, visualisez les emplacements des entreprises et découvrez des contacts locaux grâce à notre fonction de recherche géolocalisée.",
+  "seo.map.keywords": "Carte des numéros de téléphone, recherche par localisation, recherche de proximité WhatsApp, carte de recherche de numéros de téléphone, recherche d'emplacement d'entreprise, numéros de téléphone locaux, recherche géographique de téléphone",
+  "seo.map.feature1": "Recherche de numéro de téléphone basée sur une carte interactive",
+  "seo.map.feature2": "Filtrage de proximité de localisation avec rayon personnalisable",
+  "seo.map.feature3": "Visualisation du profil d'entreprise avec des informations détaillées",
+  "seo.apiOtp.title": "API OTP WhatsAuth - Authentification WhatsApp | RapidAPI",
+  "seo.apiOtp.description": "Envoyez et vérifiez des codes OTP via WhatsApp grâce à notre API WhatsAuth. Idéal pour les systèmes d'authentification et de vérification sécurisés. Rapide, fiable et abordable grâce à RapidAPI.",
+  "seo.apiOtp.keywords": "WhatsApp OTP, API WhatsAuth, vérification OTP, authentification WhatsApp, 2FA, RapidAPI, alternative SMS, API de vérification"
 }

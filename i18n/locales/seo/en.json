@@ -78,5 +78,14 @@
   "seo.faq.keywords": "whatsapp verification faq, whatsapp checker questions, phone number verification help, whatsapp lookup answers, whatsapp verification support",
   "seo.faqs.title": "Frequently Asked Questions - WhatsApp Checker",
   "seo.faqs.description": "Find answers to frequently asked questions about our WhatsApp number verification service, database usage, pricing, and API features.",
-  "seo.faqs.keywords": "whatsapp faq, phone verification questions, whatsapp checker help, platform usage guide, number search support"
+  "seo.faqs.keywords": "whatsapp faq, phone verification questions, whatsapp checker help, platform usage guide, number search support",
+  "seo.map.title": "Phone Number Proximity Map - Location-Based WhatsApp Search",
+  "seo.map.description": "Interactive map tool for finding WhatsApp numbers near specific locations. Search phone numbers by proximity, visualize business locations, and discover local contacts with our location-based search feature.",
+  "seo.map.keywords": "phone number map, location based search, whatsapp proximity search, phone number finder map, business location search, local phone numbers, geographic phone search",
+  "seo.map.feature1": "Interactive map-based phone number search",
+  "seo.map.feature2": "Location proximity filtering with customizable radius",
+  "seo.map.feature3": "Business profile visualization with detailed information",
+  "seo.apiOtp.title": "WhatsAuth OTP API - WhatsApp Authentication | RapidAPI",
+  "seo.apiOtp.description": "Send and verify OTP codes via WhatsApp with our WhatsAuth API. Perfect for secure authentication and verification systems. Fast, reliable, and affordable through RapidAPI.",
+  "seo.apiOtp.keywords": "WhatsApp OTP, WhatsAuth API, OTP verification, WhatsApp authentication, 2FA, RapidAPI, SMS alternative, verification API"
 }

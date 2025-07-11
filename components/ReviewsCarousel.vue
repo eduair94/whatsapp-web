@@ -162,8 +162,19 @@ interface ReviewsResponse {
   error?: string;
 }
 
-// Data fetching
-const { data, pending, error, refresh } = await useLazyFetch<ReviewsResponse>("/api/reviews");
+// Data fetching - server-side first, then client-side updates
+const { data, pending, error, refresh } = await useLazyFetch<ReviewsResponse>("/api/reviews", {
+  server: true, // Enable server-side rendering for prerendered pages
+  default: () => null, // Default value while loading
+});
+
+// Client-side refresh to get latest data after initial load
+onMounted(() => {
+  // Refresh data on client-side to ensure fresh content
+  if (import.meta.client) {
+    refresh();
+  }
+});
 
 // Reactive data
 const currentSlide = ref(0);

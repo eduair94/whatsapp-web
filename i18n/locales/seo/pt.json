@@ -78,5 +78,14 @@
   "seo.faq.keywords": "faq verificação whatsapp, perguntas verificador whatsapp, ajuda verificação números telefône, respostas busca whatsapp, suporte verificação whatsapp",
   "seo.faqs.title": "Perguntas Frequentes - Verificador WhatsApp",
   "seo.faqs.description": "Encontre respostas para perguntas frequentes sobre nosso serviço de verificação de números WhatsApp, uso da base de dados, preços e recursos da API.",
-  "seo.faqs.keywords": "faq whatsapp, perguntas verificação telefones, ajuda verificador whatsapp, guia uso plataforma, suporte busca números"
+  "seo.faqs.keywords": "faq whatsapp, perguntas verificação telefones, ajuda verificador whatsapp, guia uso plataforma, suporte busca números",
+  "seo.map.title": "Mapa de proximidade de números de telefone - Pesquisa do WhatsApp baseada em localização",
+  "seo.map.description": "Ferramenta de mapa interativo para encontrar números do WhatsApp perto de locais específicos. Pesquise números de telefone por proximidade, visualize a localização de empresas e descubra contatos locais com nosso recurso de busca baseado em localização.",
+  "seo.map.keywords": "mapa de números de telefone, pesquisa baseada em localização, pesquisa de proximidade do WhatsApp, mapa localizador de números de telefone, pesquisa de localização de empresas, números de telefone locais, pesquisa geográfica de telefones",
+  "seo.map.feature1": "Pesquisa interativa de números de telefone baseada em mapa",
+  "seo.map.feature2": "Filtragem de proximidade de localização com raio personalizável",
+  "seo.map.feature3": "Visualização do perfil empresarial com informações detalhadas",
+  "seo.apiOtp.title": "API WhatsAuth OTP - Autenticação do WhatsApp | RapidAPI",
+  "seo.apiOtp.description": "Envie e verifique códigos OTP via WhatsApp com nossa API WhatsAuth. Perfeito para sistemas de autenticação e verificação seguros. Rápido, confiável e acessível com RapidAPI.",
+  "seo.apiOtp.keywords": "WhatsApp OTP, API WhatsAuth, verificação OTP, autenticação WhatsApp, 2FA, RapidAPI, alternativa SMS, API de verificação"
 }

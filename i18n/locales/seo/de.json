@@ -78,5 +78,14 @@
   "seo.faq.keywords": "whatsapp verifizierung faq, whatsapp checker fragen, telefonnummern verifizierung hilfe, whatsapp lookup antworten, whatsapp verifizierung support",
   "seo.faqs.title": "Häufig Gestellte Fragen - WhatsApp Checker",
   "seo.faqs.description": "Finden Sie Antworten auf häufig gestellte Fragen zu unserem WhatsApp-Nummern-Verifizierungsservice, Datenbanknutzung, Preisen und API-Features.",
-  "seo.faqs.keywords": "whatsapp faq, telefon verifizierung fragen, whatsapp checker hilfe, plattform nutzungsanleitung, nummernsuche support"
+  "seo.faqs.keywords": "whatsapp faq, telefon verifizierung fragen, whatsapp checker hilfe, plattform nutzungsanleitung, nummernsuche support",
+  "seo.map.title": "Telefonnummer-Umgebungskarte – Standortbasierte WhatsApp-Suche",
+  "seo.map.description": "Interaktives Kartentool zum Auffinden von WhatsApp-Nummern in der Nähe bestimmter Orte. Suchen Sie Telefonnummern nach Nähe, visualisieren Sie Geschäftsstandorte und entdecken Sie lokale Kontakte mit unserer standortbasierten Suchfunktion.",
+  "seo.map.keywords": "Telefonnummernkarte, standortbasierte Suche, WhatsApp-Umgebungssuche, Telefonnummernfinderkarte, Geschäftsstandortsuche, lokale Telefonnummern, geografische Telefonsuche",
+  "seo.map.feature1": "Interaktive kartenbasierte Telefonnummernsuche",
+  "seo.map.feature2": "Filterung der Standortnähe mit anpassbarem Radius",
+  "seo.map.feature3": "Unternehmensprofil-Visualisierung mit detaillierten Informationen",
+  "seo.apiOtp.title": "WhatsAuth OTP API - WhatsApp-Authentifizierung | RapidAPI",
+  "seo.apiOtp.description": "Senden und verifizieren Sie OTP-Codes über WhatsApp mit unserer WhatsAuth API. Perfekt für sichere Authentifizierungs- und Verifizierungssysteme. Schnell, zuverlässig und günstig dank RapidAPI.",
+  "seo.apiOtp.keywords": "WhatsApp OTP, WhatsAuth API, OTP-Verifizierung, WhatsApp-Authentifizierung, 2FA, RapidAPI, SMS-Alternative, Verifizierungs-API"
 }

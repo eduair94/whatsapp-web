@@ -78,5 +78,14 @@
   "seo.faq.keywords": "faq verifikasi whatsapp, pertanyaan checker whatsapp, bantuan verifikasi nomor telepon, jawaban pencarian whatsapp, dukungan verifikasi whatsapp",
   "seo.faqs.title": "Pertanyaan yang Sering Diajukan - Checker WhatsApp",
   "seo.faqs.description": "Temukan jawaban untuk pertanyaan yang sering diajukan tentang layanan verifikasi nomor WhatsApp, penggunaan database, harga, dan fitur API kami.",
-  "seo.faqs.keywords": "faq whatsapp, pertanyaan verifikasi telepon, bantuan checker whatsapp, panduan penggunaan platform, dukungan pencarian nomor"
+  "seo.faqs.keywords": "faq whatsapp, pertanyaan verifikasi telepon, bantuan checker whatsapp, panduan penggunaan platform, dukungan pencarian nomor",
+  "seo.map.title": "Peta Kedekatan Nomor Telepon - Pencarian WhatsApp Berbasis Lokasi",
+  "seo.map.description": "Alat peta interaktif untuk menemukan nomor WhatsApp di dekat lokasi tertentu. Cari nomor telepon berdasarkan jarak, visualisasikan lokasi bisnis, dan temukan kontak lokal dengan fitur pencarian berbasis lokasi kami.",
+  "seo.map.keywords": "peta nomor telepon, pencarian berbasis lokasi, pencarian jarak dekat WhatsApp, peta pencari nomor telepon, pencarian lokasi bisnis, nomor telepon lokal, pencarian telepon geografis",
+  "seo.map.feature1": "Pencarian nomor telepon berbasis peta interaktif",
+  "seo.map.feature2": "Penyaringan kedekatan lokasi dengan radius yang dapat disesuaikan",
+  "seo.map.feature3": "Visualisasi profil bisnis dengan informasi terperinci",
+  "seo.apiOtp.title": "API OTP WhatsApp - Autentikasi WhatsApp | RapidAPI",
+  "seo.apiOtp.description": "Kirim dan verifikasi kode OTP melalui WhatsApp dengan API WhatsApp kami. Sempurna untuk sistem autentikasi dan verifikasi yang aman. Cepat, andal, dan terjangkau melalui RapidAPI.",
+  "seo.apiOtp.keywords": "WhatsApp OTP, WhatsAppAuth API, verifikasi OTP, autentikasi WhatsApp, 2FA, RapidAPI, alternatif SMS, API verifikasi"
 }

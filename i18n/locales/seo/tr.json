@@ -78,5 +78,14 @@
   "seo.faq.keywords": "whatsapp doğrulama sss, whatsapp kontrol soruları, telefon numarası doğrulama yardımı, whatsapp sorgulama cevapları, whatsapp doğrulama desteği",
   "seo.faqs.title": "Sık Sorulan Sorular - WhatsApp Kontrol",
   "seo.faqs.description": "WhatsApp numara doğrulama hizmetimiz, veritabanı kullanımı, fiyatlandırma ve API özellikleri hakkında sık sorulan soruların cevaplarını bulun.",
-  "seo.faqs.keywords": "whatsapp sss, telefon doğrulama soruları, whatsapp kontrol yardımı, platform kullanım kılavuzu, numara arama desteği"
+  "seo.faqs.keywords": "whatsapp sss, telefon doğrulama soruları, whatsapp kontrol yardımı, platform kullanım kılavuzu, numara arama desteği",
+  "seo.map.title": "Telefon Numarası Yakınlık Haritası - Konum Tabanlı WhatsApp Araması",
+  "seo.map.description": "Belirli konumların yakınındaki WhatsApp numaralarını bulmak için etkileşimli harita aracı. Konum tabanlı arama özelliğimizle telefon numaralarını yakınlıklarına göre arayın, işletme konumlarını görselleştirin ve yerel kişileri keşfedin.",
+  "seo.map.keywords": "telefon numarası haritası, konuma dayalı arama, WhatsApp yakınlık araması, telefon numarası bulucu haritası, işletme konumu araması, yerel telefon numaraları, coğrafi telefon araması",
+  "seo.map.feature1": "Etkileşimli harita tabanlı telefon numarası araması",
+  "seo.map.feature2": "Özelleştirilebilir yarıçaplı konum yakınlık filtrelemesi",
+  "seo.map.feature3": "Ayrıntılı bilgilerle işletme profili görselleştirmesi",
+  "seo.apiOtp.title": "WhatsAuth OTP API - WhatsApp Kimlik Doğrulaması | RapidAPI",
+  "seo.apiOtp.description": "WhatsAuth API'mizle WhatsApp üzerinden OTP kodları gönderin ve doğrulayın. Güvenli kimlik doğrulama ve doğrulama sistemleri için mükemmel. RapidAPI ile hızlı, güvenilir ve uygun fiyatlı.",
+  "seo.apiOtp.keywords": "WhatsApp OTP, WhatsAuth API, OTP doğrulama, WhatsApp kimlik doğrulaması, 2FA, RapidAPI, SMS alternatifi, doğrulama API'si"
 }

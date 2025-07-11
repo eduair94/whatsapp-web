@@ -78,5 +78,14 @@
   "seo.faq.keywords": "faq verificación whatsapp, preguntas checker whatsapp, ayuda verificación números, respuestas búsqueda whatsapp, soporte verificación whatsapp",
   "seo.faqs.title": "Preguntas Frecuentes - WhatsApp Checker",
   "seo.faqs.description": "Encuentra respuestas a preguntas frecuentes sobre nuestro servicio de verificación de números WhatsApp, uso de la base de datos, precios y funcionalidades de la API.",
-  "seo.faqs.keywords": "preguntas frecuentes whatsapp, faq verificación números, ayuda whatsapp checker, guía uso plataforma, soporte búsqueda números"
+  "seo.faqs.keywords": "preguntas frecuentes whatsapp, faq verificación números, ayuda whatsapp checker, guía uso plataforma, soporte búsqueda números",
+  "seo.map.title": "Mapa de proximidad de números de teléfono: búsqueda de WhatsApp basada en la ubicación",
+  "seo.map.description": "Herramienta de mapa interactivo para encontrar números de WhatsApp cerca de ubicaciones específicas. Busca números de teléfono por proximidad, visualiza ubicaciones de negocios y descubre contactos locales con nuestra función de búsqueda basada en la ubicación.",
+  "seo.map.keywords": "Mapa de números de teléfono, búsqueda basada en ubicación, búsqueda de proximidad de WhatsApp, mapa de búsqueda de números de teléfono, búsqueda de ubicación comercial, números de teléfono locales, búsqueda geográfica de teléfonos",
+  "seo.map.feature1": "Búsqueda interactiva de números de teléfono basada en mapas",
+  "seo.map.feature2": "Filtrado de proximidad de ubicación con radio personalizable",
+  "seo.map.feature3": "Visualización del perfil empresarial con información detallada",
+  "seo.apiOtp.title": "API de OTP de WhatsAuth: Autenticación de WhatsApp | RapidAPI",
+  "seo.apiOtp.description": "Envía y verifica códigos OTP por WhatsApp con nuestra API de WhatsAuth. Ideal para sistemas seguros de autenticación y verificación. Rápido, fiable y económico gracias a RapidAPI.",
+  "seo.apiOtp.keywords": "WhatsApp OTP, API de WhatsAuth, verificación OTP, autenticación de WhatsApp, 2FA, RapidAPI, alternativa a SMS, API de verificación"
 }

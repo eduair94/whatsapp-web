@@ -78,5 +78,14 @@
   "seo.faq.keywords": "whatsapp verificatie veelgestelde vragen, whatsapp checker vragen, telefoonnummer verificatie hulp, whatsapp opzoek antwoorden, whatsapp verificatie ondersteuning",
   "seo.faqs.title": "Veelgestelde Vragen - WhatsApp Checker",
   "seo.faqs.description": "Vind antwoorden op veelgestelde vragen over onze WhatsApp nummer verificatie service, database gebruik, prijzen en API functies.",
-  "seo.faqs.keywords": "whatsapp veelgestelde vragen, telefoon verificatie vragen, whatsapp checker hulp, platform gebruik gids, nummer zoek ondersteuning"
+  "seo.faqs.keywords": "whatsapp veelgestelde vragen, telefoon verificatie vragen, whatsapp checker hulp, platform gebruik gids, nummer zoek ondersteuning",
+  "seo.map.title": "Telefoonnummer-nabijheidskaart - Locatiegebaseerde WhatsApp-zoekopdracht",
+  "seo.map.description": "Interactieve kaarttool om WhatsApp-nummers in de buurt van specifieke locaties te vinden. Zoek telefoonnummers op nabijheid, visualiseer bedrijfslocaties en ontdek lokale contacten met onze locatiegebaseerde zoekfunctie.",
+  "seo.map.keywords": "Telefoonnummerkaart, locatiegebaseerd zoeken, WhatsApp-zoekfunctie voor nabijheid, telefoonnummerzoekerkaart, zoeken naar bedrijfslocaties, lokale telefoonnummers, geografische telefoonzoekfunctie",
+  "seo.map.feature1": "Interactieve kaartgebaseerde zoekopdracht naar telefoonnummers",
+  "seo.map.feature2": "Locatie-nabijheidsfiltering met aanpasbare straal",
+  "seo.map.feature3": "Visualisatie van bedrijfsprofielen met gedetailleerde informatie",
+  "seo.apiOtp.title": "WhatsAuth OTP API - WhatsApp-authenticatie | RapidAPI",
+  "seo.apiOtp.description": "Verstuur en verifieer OTP-codes via WhatsApp met onze WhatsAuth API. Perfect voor veilige authenticatie- en verificatiesystemen. Snel, betrouwbaar en betaalbaar via RapidAPI.",
+  "seo.apiOtp.keywords": "WhatsApp OTP, WhatsAuth API, OTP-verificatie, WhatsApp-authenticatie, 2FA, RapidAPI, SMS-alternatief, verificatie-API"
 }

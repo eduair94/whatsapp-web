@@ -83,5 +83,14 @@
   "seo.twitter.site": "@checkleaked",
   "seo.verification.description": "ایڈوانس WhatsApp نمبر تصدیقی سروس۔ فون نمبرز کی تصدیق کریں، کاروباری حالت چیک کریں اور پروفائل کی صداقت کو تصدیق کریں۔",
   "seo.verification.keywords": "whatsapp نمبر تصدیق, فون تصدیق سروس, کاروباری تصدیق, پروفائل توثیق",
-  "seo.verification.title": "WhatsApp نمبر تصدیق"
+  "seo.verification.title": "WhatsApp نمبر تصدیق",
+  "seo.map.title": "فون نمبر قربت کا نقشہ - مقام پر مبنی WhatsApp تلاش",
+  "seo.map.description": "مخصوص مقامات کے قریب واٹس ایپ نمبر تلاش کرنے کے لیے انٹرایکٹو میپ ٹول۔ قربت کے لحاظ سے فون نمبر تلاش کریں، کاروباری مقامات کا تصور کریں، اور ہماری مقام پر مبنی تلاش کی خصوصیت کے ساتھ مقامی رابطے دریافت کریں۔",
+  "seo.map.keywords": "فون نمبر کا نقشہ، مقام پر مبنی تلاش، واٹس ایپ کی قربت کی تلاش، فون نمبر تلاش کرنے والا نقشہ، کاروباری مقام کی تلاش، مقامی فون نمبرز، جغرافیائی فون کی تلاش",
+  "seo.map.feature1": "انٹرایکٹو میپ پر مبنی فون نمبر کی تلاش",
+  "seo.map.feature2": "حسب ضرورت رداس کے ساتھ مقام کی قربت کی فلٹرنگ",
+  "seo.map.feature3": "تفصیلی معلومات کے ساتھ کاروباری پروفائل کا تصور",
+  "seo.apiOtp.title": "WhatsAuth OTP API - WhatsApp کی توثیق | RapidAPI",
+  "seo.apiOtp.description": "ہمارے WhatsAuth API کے ساتھ WhatsApp کے ذریعے OTP کوڈز بھیجیں اور ان کی تصدیق کریں۔ محفوظ تصدیق اور تصدیقی نظام کے لیے بہترین۔ RapidAPI کے ذریعے تیز، قابل اعتماد، اور سستی۔",
+  "seo.apiOtp.keywords": "WhatsApp OTP، WhatsAuth API، OTP تصدیق، WhatsApp تصدیق، 2FA، RapidAPI، SMS متبادل، تصدیق API"
 }

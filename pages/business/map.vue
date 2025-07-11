@@ -5,18 +5,18 @@
         <v-col cols="12">
           <v-card>
             <v-card-title>
-              <span class="text-h5">Phone Numbers Proximity Search</span>
+              <span class="text-h5">{{ t("map.title") }}</span>
             </v-card-title>
             <v-card-text>
               <v-row>
                 <v-col cols="12" md="8">
-                  <v-text-field v-model="addressInput" label="Search Address" placeholder="Enter an address or click on the map" variant="outlined" density="compact" :loading="geocodingLoading" @keyup.enter="geocodeAddress" append-inner-icon="mdi-magnify" @click:append-inner="geocodeAddress" />
+                  <v-text-field v-model="addressInput" :label="t('map.searchAddress')" :placeholder="t('map.searchAddressPlaceholder')" variant="outlined" density="compact" :loading="geocodingLoading" @keyup.enter="geocodeAddress" append-inner-icon="mdi-magnify" @click:append-inner="geocodeAddress" />
                 </v-col>
                 <v-col cols="12" md="2">
-                  <v-text-field v-model="searchParams.radius" label="Radius (m)" type="number" :rules="[rules.required, rules.radius]" variant="outlined" density="compact" />
+                  <v-text-field v-model="searchParams.radius" :label="t('map.radius')" type="number" :rules="[rules.required, rules.radius]" variant="outlined" density="compact" />
                 </v-col>
                 <v-col cols="12" md="2">
-                  <v-btn @click="searchPhoneNumbers" color="primary" :loading="loading" :disabled="!isFormValid" size="large" block> Search </v-btn>
+                  <v-btn @click="searchPhoneNumbers" color="primary" :loading="loading" :disabled="!isFormValid" size="large" block> {{ t("map.search") }} </v-btn>
                 </v-col>
               </v-row>
               <v-row>
@@ -131,22 +131,22 @@
 
           <v-card v-else>
             <v-card-title>
-              <span class="text-h6">Search Results</span>
+              <span class="text-h6">{{ t("map.searchResults") }}</span>
               <v-spacer></v-spacer>
-              <v-btn v-if="hasSearched" @click="searchPhoneNumbers" color="primary" variant="text" size="small" :loading="loading" prepend-icon="mdi-refresh"> Refresh </v-btn>
+              <v-btn v-if="hasSearched" @click="searchPhoneNumbers" color="primary" variant="text" size="small" :loading="loading" prepend-icon="mdi-refresh"> {{ t("map.refresh") }} </v-btn>
             </v-card-title>
             <v-card-text>
               <div v-if="loading" class="text-center">
                 <v-progress-circular indeterminate color="primary" />
-                <p class="mt-2">Searching...</p>
+                <p class="mt-2">{{ t("map.searching") }}</p>
               </div>
 
               <div v-else-if="searchResults">
                 <div v-if="searchResults.data && searchResults.data.resultCount > 0">
-                  <v-chip color="primary" class="mb-3"> {{ searchResults.data.resultCount }} results found </v-chip>
+                  <v-chip color="primary" class="mb-3"> {{ searchResults.data.resultCount }} {{ t("map.resultsFound") }} </v-chip>
 
                   <div class="mb-3" v-if="searchResults.data.distanceRange">
-                    <small> Distance range: {{ searchResults.data.distanceRange.closest || 0 }}m - {{ searchResults.data.distanceRange.farthest?.toFixed(2) || 0 }}m </small>
+                    <small> {{ t("map.distanceRange") }}: {{ searchResults.data.distanceRange.closest || 0 }}m - {{ searchResults.data.distanceRange.farthest?.toFixed(2) || 0 }}m </small>
                   </div>
 
                   <div class="phone-list-container">
@@ -237,10 +237,11 @@ const route = useRoute();
 
 // SEO setup
 const { $seo } = useNuxtApp();
+const { t } = useI18n();
 $seo.setupPageSEO({
-  title: "Phone Numbers Proximity Search - Interactive Map",
-  description: "Search and visualize phone numbers by location using our interactive map. Find businesses and phone numbers within a specific radius of any location.",
-  keywords: "phone numbers, proximity search, location map, business finder, phone lookup, geographic search",
+  title: t("seo.map.title"),
+  description: t("seo.map.description"),
+  keywords: t("seo.map.keywords"),
   canonicalUrl: "/business/map",
   ogImage: "/placeholder.png",
 });

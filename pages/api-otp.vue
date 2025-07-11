@@ -8,24 +8,24 @@
             <div v-if="!redirected">
               <v-progress-circular indeterminate color="primary" size="64" class="mb-6"></v-progress-circular>
 
-              <h1 class="text-h4 mb-4 text-primary">Redirecting to WhatsAuth OTP API</h1>
+              <h1 class="text-h4 mb-4 text-primary">{{ t("apiOtp.redirecting") }}</h1>
 
-              <p class="text-h6 text-medium-emphasis mb-6">You're being redirected to our WhatsAuth OTP API on RapidAPI...</p>
+              <p class="text-h6 text-medium-emphasis mb-6">{{ t("apiOtp.redirectingText") }}</p>
 
-              <p class="text-body-1 text-medium-emphasis">Send and verify OTP codes via WhatsApp. Perfect for authentication and verification systems.</p>
+              <p class="text-body-1 text-medium-emphasis">{{ t("apiOtp.description") }}</p>
             </div>
 
             <!-- Fallback if redirect doesn't work -->
             <div v-else>
               <v-icon size="64" color="primary" class="mb-6">mdi-shield-check</v-icon>
 
-              <h1 class="text-h4 mb-4 text-primary">WhatsAuth OTP API</h1>
+              <h1 class="text-h4 mb-4 text-primary">{{ t("apiOtp.title") }}</h1>
 
-              <p class="text-h6 mb-6 text-medium-emphasis">Access our powerful WhatsAuth OTP API on RapidAPI</p>
+              <p class="text-h6 mb-6 text-medium-emphasis">{{ t("apiOtp.subtitle") }}</p>
 
               <v-btn color="primary" size="large" :href="apiUrl" target="_blank" rel="noopener noreferrer" @click="trackManualClick" class="mt-4">
                 <v-icon start>mdi-open-in-new</v-icon>
-                Go to RapidAPI
+                {{ t("apiOtp.goToRapidAPI") }}
               </v-btn>
             </div>
           </v-card-text>
@@ -38,14 +38,15 @@
 <script lang="ts" setup>
 const apiUrl = "https://rapidapi.com/airaudoeduardo/api/whatsauth-whatsapp-otp1";
 const redirected = ref(false);
+const { t } = useI18n();
 
 // SEO setup
 const { $seo } = useNuxtApp();
 
 $seo.setupPageSEO({
-  title: "WhatsAuth OTP API - WhatsApp Authentication | RapidAPI",
-  description: "Send and verify OTP codes via WhatsApp with our WhatsAuth API. Perfect for secure authentication and verification systems. Fast, reliable, and affordable through RapidAPI.",
-  keywords: "WhatsApp OTP, WhatsAuth API, OTP verification, WhatsApp authentication, 2FA, RapidAPI, SMS alternative, verification API",
+  title: t("seo.apiOtp.title"),
+  description: t("seo.apiOtp.description"),
+  keywords: t("seo.apiOtp.keywords"),
   ogImage: "https://whatsapp.checkleaked.cc/screenshot.png",
   canonicalUrl: "https://whatsapp.checkleaked.cc/api-otp",
   structuredData: [

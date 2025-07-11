@@ -78,5 +78,14 @@
   "seo.faq.keywords": "whatsapp認証faq, whatsappチェッカー質問, 電話番号認証ヘルプ, whatsapp検索回答, whatsapp認証サポート",
   "seo.faqs.title": "よくある質問 - WhatsAppチェッカー",
   "seo.faqs.description": "WhatsApp番号認証サービス、データベース使用、料金、API機能に関するよくある質問への回答を見つけます。",
-  "seo.faqs.keywords": "whatsapp faq, 電話認証質問, whatsappチェッカーヘルプ, プラットフォーム使用ガイド, 番号検索サポート"
+  "seo.faqs.keywords": "whatsapp faq, 電話認証質問, whatsappチェッカーヘルプ, プラットフォーム使用ガイド, 番号検索サポート",
+  "seo.map.title": "電話番号の近接マップ - 位置情報に基づくWhatsApp検索",
+  "seo.map.description": "特定の場所の近くにあるWhatsApp番号を見つけるためのインタラクティブマップツール。電話番号を近さで検索したり、ビジネス拠点を視覚化したり、位置情報に基づいた検索機能で地元の連絡先を見つけたりできます。",
+  "seo.map.keywords": "電話番号マップ、位置情報検索、WhatsApp 近接検索、電話番号検索マップ、ビジネス所在地検索、市内電話番号、地理的電話検索",
+  "seo.map.feature1": "インタラクティブな地図ベースの電話番号検索",
+  "seo.map.feature2": "カスタマイズ可能な半径による位置情報の近接フィルタリング",
+  "seo.map.feature3": "詳細情報を含むビジネスプロフィールの視覚化",
+  "seo.apiOtp.title": "WhatsAuth OTP API - WhatsApp認証 | RapidAPI",
+  "seo.apiOtp.description": "WhatsAuth APIを使えば、WhatsApp経由でOTPコードの送信と検証が可能です。安全な認証・検証システムに最適です。RapidAPIなら、高速、信頼性、そして手頃な価格を実現できます。",
+  "seo.apiOtp.keywords": "WhatsApp OTP、WhatsAuth API、OTP検証、WhatsApp認証、2FA、RapidAPI、SMS代替、検証API"
 }

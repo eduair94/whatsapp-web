@@ -78,5 +78,14 @@
   "seo.faq.keywords": "whatsapp 인증 faq, whatsapp 검사기 질문, 전화번호 인증 도움말, whatsapp 조회 답변, whatsapp 인증 지원",
   "seo.faqs.title": "자주 묻는 질문 - WhatsApp 검사기",
   "seo.faqs.description": "WhatsApp 번호 인증 서비스, 데이터베이스 사용, 요금제 및 API 기능에 대한 자주 묻는 질문의 답변을 찾아보세요.",
-  "seo.faqs.keywords": "whatsapp faq, 전화 인증 질문, whatsapp 검사기 도움말, 플랫폼 사용 가이드, 번호 검색 지원"
+  "seo.faqs.keywords": "whatsapp faq, 전화 인증 질문, whatsapp 검사기 도움말, 플랫폼 사용 가이드, 번호 검색 지원",
+  "seo.map.title": "전화번호 근접 지도 - 위치 기반 WhatsApp 검색",
+  "seo.map.description": "특정 위치 근처의 WhatsApp 번호를 찾을 수 있는 대화형 지도 도구입니다. 위치 기반 검색 기능을 통해 인접 지역으로 전화번호를 검색하고, 사업장 위치를 시각화하고, 지역 연락처를 찾아보세요.",
+  "seo.map.keywords": "전화번호 지도, 위치 기반 검색, WhatsApp 근접 검색, 전화번호 찾기 지도, 사업장 위치 검색, 지역 전화번호, 지리적 전화 검색",
+  "seo.map.feature1": "대화형 지도 기반 전화번호 검색",
+  "seo.map.feature2": "사용자 정의 가능한 반경을 통한 위치 근접 필터링",
+  "seo.map.feature3": "자세한 정보를 포함한 비즈니스 프로필 시각화",
+  "seo.apiOtp.title": "WhatsAuth OTP API - WhatsApp 인증 | RapidAPI",
+  "seo.apiOtp.description": "WhatsAuth API를 사용하여 WhatsApp으로 OTP 코드를 전송하고 인증하세요. 안전한 인증 및 확인 시스템에 이상적입니다. RapidAPI를 통해 빠르고 안정적이며 저렴하게 이용할 수 있습니다.",
+  "seo.apiOtp.keywords": "WhatsApp OTP, WhatsAuth API, OTP 검증, WhatsApp 인증, 2FA, RapidAPI, SMS 대체, 검증 API"
 }

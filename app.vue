@@ -198,6 +198,10 @@
         <span class="d-none d-lg-inline ml-1">Eduardo Airaudo</span>
       </v-btn>
     </v-app-bar>
+
+    <!-- Language Alert positioned under the menu -->
+    <LanguageAlert />
+
     <NuxtLayout>
       <LoadingOverlay />
       <v-container fluid class="pa-0">
@@ -250,6 +254,7 @@ const Footer = defineAsyncComponent(() => import("~/components/Footer.vue"));
 const LoadingOverlay = defineAsyncComponent(() => import("~/components/LoadingOverlay.vue"));
 const ApiKeyManager = defineAsyncComponent(() => import("~/components/ApiKeyManager.vue"));
 const ReviewsCarousel = defineAsyncComponent(() => import("~/components/ReviewsCarousel.vue"));
+const LanguageAlert = defineAsyncComponent(() => import("~/components/LanguageAlert.vue"));
 </script>
 
 <style>

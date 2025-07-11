@@ -1,1 +1,1 @@
-tr_file "i18n/locales/en.json" es,pt,fr,de,ar,fa,hi,id,it,ja,ko,my,nl,ru,th,tr,ur,vi,zh -r
+tr_file "i18n/locales/en.json" ar,bn,de,es,fa,fr,he,hi,id,it,ja,ko,my,nl,pl,pt,ro,ru,th,tr,uk,ur,vi,zh,bn,he,pl,ro,uk -r

@@ -78,5 +78,14 @@
   "seo.faq.keywords": "whatsapp验证常见问题, whatsapp检查器问题, 电话号码验证帮助, whatsapp查询答案, whatsapp验证支持",
   "seo.faqs.title": "常见问题 - WhatsApp检查器",
   "seo.faqs.description": "找到关于我们WhatsApp号码验证服务、数据库使用、定价和API功能的常见问题答案。",
-  "seo.faqs.keywords": "whatsapp常见问题, 电话验证问题, whatsapp检查器帮助, 平台使用指南, 号码搜索支持"
+  "seo.faqs.keywords": "whatsapp常见问题, 电话验证问题, whatsapp检查器帮助, 平台使用指南, 号码搜索支持",
+  "seo.map.title": "电话号码邻近地图 - 基于位置的 WhatsApp 搜索",
+  "seo.map.description": "交互式地图工具，用于查找特定位置附近的 WhatsApp 号码。使用我们基于位置的搜索功能，按距离搜索电话号码、查看营业地点并发现本地联系人。",
+  "seo.map.keywords": "电话号码地图、基于位置的搜索、WhatsApp 邻近搜索、电话号码查找器地图、商业位置搜索、本地电话号码、地理电话搜索",
+  "seo.map.feature1": "基于交互式地图的电话号码搜索",
+  "seo.map.feature2": "可自定义半径的位置接近度过滤",
+  "seo.map.feature3": "业务概况可视化，包含详细信息",
+  "seo.apiOtp.title": "WhatsAuth OTP API - WhatsApp 身份验证 | RapidAPI",
+  "seo.apiOtp.description": "使用我们的 WhatsAuth API，通过 WhatsApp 发送并验证 OTP 代码。非常适合安全的身份验证和验证系统。通过 RapidAPI，快速、可靠且经济实惠。",
+  "seo.apiOtp.keywords": "WhatsApp OTP、WhatsAuth API、OTP 验证、WhatsApp 身份验证、2FA、RapidAPI、短信替代方案、验证 API"
 }

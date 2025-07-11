@@ -19,4 +19,9 @@ export const locales = [
   { code: "vi", iso: "vi-VN", name: "Tiếng Việt", file: "vi.ts" },
   { code: "tr", iso: "tr-TR", name: "Türkçe", file: "tr.ts" },
   { code: "nl", iso: "nl-NL", name: "Nederlands", file: "nl.ts" },
+  { code: "bn", iso: "bn-BD", name: "বাংলা", file: "bn.ts" },
+  { code: "he", iso: "he-IL", name: "עברית", file: "he.ts" },
+  { code: "pl", iso: "pl-PL", name: "Polski", file: "pl.ts" },
+  { code: "ro", iso: "ro-RO", name: "Română", file: "ro.ts" },
+  { code: "uk", iso: "uk-UA", name: "Українська", file: "uk.ts" },
 ];

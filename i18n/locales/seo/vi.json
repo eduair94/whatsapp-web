@@ -78,5 +78,14 @@
   "seo.faq.keywords": "faq xác minh whatsapp, câu hỏi trình kiểm tra whatsapp, trợ giúp xác minh số điện thoại, câu trả lời tra cứu whatsapp, hỗ trợ xác minh whatsapp",
   "seo.faqs.title": "Câu Hỏi Thường Gặp - Trình Kiểm Tra WhatsApp",
   "seo.faqs.description": "Tìm câu trả lời cho các câu hỏi thường gặp về dịch vụ xác minh số WhatsApp, sử dụng cơ sở dữ liệu, giá cả và tính năng API của chúng tôi.",
-  "seo.faqs.keywords": "faq whatsapp, câu hỏi xác minh điện thoại, trợ giúp trình kiểm tra whatsapp, hướng dẫn sử dụng nền tảng, hỗ trợ tìm kiếm số"
+  "seo.faqs.keywords": "faq whatsapp, câu hỏi xác minh điện thoại, trợ giúp trình kiểm tra whatsapp, hướng dẫn sử dụng nền tảng, hỗ trợ tìm kiếm số",
+  "seo.map.title": "Bản đồ vị trí số điện thoại - Tìm kiếm WhatsApp dựa trên vị trí",
+  "seo.map.description": "Công cụ bản đồ tương tác giúp tìm số điện thoại WhatsApp gần các địa điểm cụ thể. Tìm kiếm số điện thoại theo khoảng cách, trực quan hóa vị trí doanh nghiệp và khám phá các liên hệ địa phương với tính năng tìm kiếm dựa trên vị trí của chúng tôi.",
+  "seo.map.keywords": "bản đồ số điện thoại, tìm kiếm dựa trên vị trí, tìm kiếm gần WhatsApp, bản đồ tìm số điện thoại, tìm kiếm vị trí doanh nghiệp, số điện thoại địa phương, tìm kiếm số điện thoại theo địa lý",
+  "seo.map.feature1": "Tìm kiếm số điện thoại dựa trên bản đồ tương tác",
+  "seo.map.feature2": "Lọc vị trí gần với bán kính có thể tùy chỉnh",
+  "seo.map.feature3": "Hình ảnh hóa hồ sơ doanh nghiệp với thông tin chi tiết",
+  "seo.apiOtp.title": "API OTP WhatsAuth - Xác thực WhatsApp | RapidAPI",
+  "seo.apiOtp.description": "Gửi và xác minh mã OTP qua WhatsApp với API WhatsAuth của chúng tôi. Hoàn hảo cho các hệ thống xác thực và xác minh an toàn. Nhanh chóng, đáng tin cậy và giá cả phải chăng thông qua RapidAPI.",
+  "seo.apiOtp.keywords": "WhatsApp OTP, API WhatsAuth, xác minh OTP, xác thực WhatsApp, 2FA, RapidAPI, thay thế SMS, API xác minh"
 }
